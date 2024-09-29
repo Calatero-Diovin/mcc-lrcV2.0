@@ -6,3 +6,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
+
+SetEnv EMAIL_USERNAME mcc-lrc@mcclawis.edu.php
+SetEnv EMAIL_PASSWORD mann1234!?
