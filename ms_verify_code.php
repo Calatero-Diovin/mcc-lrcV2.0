@@ -98,13 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host       = 'smtp.office365.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('EMAIL_USERNAME'); // Your Office 365 email
-        $mail->Password   = getenv('EMAIL_PASSWORD'); // Your email password
+        $mail->Username   = 'mcc-lrc@mcclawis.edu.ph'; // Your Office 365 email
+        $mail->Password   = 'mann1234!?'; // Your email password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom(getenv('EMAIL_USERNAME'), 'MCC LEARNING RESOURCE CENTER'); // Your email and name
+        $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC LEARNING RESOURCE CENTER'); // Your email and name
         $mail->addAddress($email); // Add recipient
 
         // Content
