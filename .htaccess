@@ -7,6 +7,8 @@ RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
-RewriteCond %{REQUEST_URI} ^/(about.php|about) [NC,OR]
+RewriteCond %{REQUEST_URI} ^/about.php [NC,OR]
+RewriteCond %{REQUEST_URI} ^/about [NC]
+
 RewriteCond %{REQUEST_URI} \.php$ [NC]
 RewriteRule ^ - [R=404,L]
