@@ -2,12 +2,6 @@
 include('includes/header.php');
 include('includes/navbar.php');
 
-if (strpos($_SERVER['REQUEST_URI'], 'about.php') !== false || $_SERVER['REQUEST_URI'] == '/about') {
-     http_response_code(404);
-     include('404.php'); // or simply show a 404 error
-     exit();
- }
- 
 ?>
 <div class="jumbutron" style="background-color: #0D4C92">
      <div class="clearfix p-3 ">
