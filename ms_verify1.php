@@ -11,8 +11,8 @@ session_start();
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MS 365 Verification</title>
      
-     <!-- Alertify JS link -->
-     <link rel="stylesheet" href="assets/css/alertify.min.css" />
+        <!-- Alertify JS link -->
+        <link rel="stylesheet" href="assets/css/alertify.min.css" />
      <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
      <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
@@ -61,10 +61,11 @@ session_start();
                          <div class="col-sm-12 col-md-6 px-5 " style="margin-top: 60px;">
                               <div class="mt-3 mb-4">
                                    <center>
-                                        <h4 class="m-0">
-                                             MS365 Account Verification
+                                        <h2 class="m-0 fw-semibold text-primary">
+                                             MS 365 Account Verification
                                         </h4>
-                                        <p class="fs-4 fw-semibold text-primary">Enter your MS365 Username account to receive a registration link.</p>
+                                        <br>
+                                        <p class="fs-5 fw-semibold">Enter your MS 365 Username account to receive a registration link.</p>
                                    </center>
                               </div>
                               <form action="ms_verify_code.php" method="POST" class="needs-validation" novalidate
@@ -72,15 +73,15 @@ session_start();
                                    <div class="col-md-12">
                                         <div class="form-floating mb-3">
                                              <input type="email" id="email" class="form-control"
-                                                  name="email" placeholder="MS365 Email" required>
-                                             <label for="email">MS365 Email</label>
+                                                  name="email" placeholder="MS 365 Email" required>
+                                             <label for="email">MS 365 Email</label>
                                              <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                                  Please enter your MS365 Email.
+                                                  Please enter your MS 365 Email.
                                              </div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
-                                        <button type="submit" name="password_reset_link"
+                                        <button type="submit" name="registration_link"
                                              class="btn btn-primary text-light font-weight-bolder btn-lg">Send Registration Link</button>
                                    </div>
                               </form>
