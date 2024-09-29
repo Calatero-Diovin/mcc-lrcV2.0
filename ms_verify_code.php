@@ -78,7 +78,7 @@ if (isset($_POST['registration_link'])) {
 
     if ($stmt->execute()) {
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = 0; // Set to 2 for detailed debug output
+        $mail->SMTPDebug = 2; // Set to 2 for detailed debug output
         try {
             $mail->isSMTP();
             $mail->Host       = 'smtp.office365.com';
