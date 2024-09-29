@@ -68,16 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['verification_code'] = $verification_code; // Store the code in session for later verification
     $_SESSION['email'] = $email; // Store email in session for later use
 
-    // Update the verification code in the database
-    $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
-    if (!$stmt) {
-        error_log("MySQL prepare error: " . $con->error);
-        $_SESSION['status'] = "Database error. Please try again later.";
-        $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
-        exit(0);
-    }
-
     $stmt->bind_param("ss", $verification_code, $email);
     if (!$stmt->execute()) {
         error_log("MySQL execute error: " . $stmt->error);
