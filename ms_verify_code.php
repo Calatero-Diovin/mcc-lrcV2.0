@@ -4,6 +4,7 @@ session_start();
 include('./admin/config/dbcon.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
