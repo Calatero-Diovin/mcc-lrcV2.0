@@ -6,6 +6,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
+RewriteRule ^portal/about$ about.php [L]
 
 # Redirect to 404 if trying to access /about directly (but allow links)
 RewriteCond %{REQUEST_URI} \s/about\s [NC]
