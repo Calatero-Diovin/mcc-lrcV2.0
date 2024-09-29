@@ -9,6 +9,12 @@ session_start();
 //}
 
 include('./admin/config/dbcon.php');
+
+if (strpos($_SERVER['REQUEST_URI'], 'login.php') !== false || $_SERVER['REQUEST_URI'] == '/login') {
+     http_response_code(404);
+     include('404.php'); // or simply show a 404 error
+     exit();
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
