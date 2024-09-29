@@ -38,8 +38,8 @@ include('admin/config/dbcon.php');
                               href=".">Homes</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
-                              href="about">About</a>
+                         <a class="nav-link  text-white <?=$page == 'portal.php?portal=about' ? 'active': '' ?> fw-semibold"
+                              href="portal.php?portal=about">About</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'services' ? 'active': '' ?> fw-semibold"
