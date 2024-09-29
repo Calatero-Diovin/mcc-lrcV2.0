@@ -35,7 +35,7 @@ include('admin/config/dbcon.php');
                     <?php else :?>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == '.' ? 'active': '' ?> fw-semibold"
-                              href=".">Home</a>
+                              href=".">Homes</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
