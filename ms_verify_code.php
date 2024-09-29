@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-include('./admin/config/db.php');
+include('./admin/config/dbcon.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
