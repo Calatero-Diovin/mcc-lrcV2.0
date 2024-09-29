@@ -9,7 +9,5 @@ RewriteRule ^index$ index.php [L]
 
 # Redirect to 404 if trying to access /about directly (but allow links)
 RewriteCond %{REQUEST_URI} \s/about\s [NC]
-RewriteRule ^ - [R=404,L]
-
 RewriteCond %{REQUEST_URI} \.php$ [NC]
 RewriteRule ^ - [R=404,L]
