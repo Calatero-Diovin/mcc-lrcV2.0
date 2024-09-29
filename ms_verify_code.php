@@ -79,12 +79,12 @@ if (isset($_POST['registration_link'])) {
             $mail->isSMTP();
             $mail->Host       = 'smtp.office365.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'richmann4321@outlook.com';
-            $mail->Password   = 'mann4321!?'; 
+            $mail->Username   = 'mcc-lrc@mcclawis.edu.ph';
+            $mail->Password   = 'mann1234!?'; 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
             $mail->Port       = 587;
 
-            $mail->setFrom('richmann4321@outlook.com', 'MCC-LRC ADMIN');
+            $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC-LRC ADMIN');
             $mail->addAddress($email); 
 
             $mail->isHTML(true);
