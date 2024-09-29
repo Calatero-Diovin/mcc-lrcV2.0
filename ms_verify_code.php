@@ -92,18 +92,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
     try {
         // Server settings
-
+        $mail->SMTPDebug = 2; // Set to 2 for more verbose output
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ));
+            
         $mail->isSMTP();
         $mail->Host       = 'smtp.office365.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'richmann4321@outlook.com'; // Your Office 365 email
-        $mail->Password   = 'mann4321!?'; // Your email password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Keep using STARTTLS
-        $mail->Port       = 587; // Use 587 for TLS
-        $mail->SMTPDebug  = 2; // Enable verbose debug output
+        $mail->Username   = 'mcc-lrc@mcclawis.edu.ph'; // Your Office 365 email
+        $mail->Password   = 'mann1234!?'; // Your email password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom('richmann4321@outlook.com', 'MCC LEARNING RESOURCE CENTER'); // Your email and name
+        $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC LEARNING RESOURCE CENTER'); // Your email and name
         $mail->addAddress($email); // Add recipient
 
         // Content
