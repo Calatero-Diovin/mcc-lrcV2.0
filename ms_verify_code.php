@@ -99,8 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->SMTPAuth   = true;
         $mail->Username   = 'mcc-lrc@mcclawis.edu.ph'; // Your Office 365 email
         $mail->Password   = 'mann1234!?'; // Your email password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
 
         // Recipients
         $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC LEARNING RESOURCE CENTER'); // Your email and name
