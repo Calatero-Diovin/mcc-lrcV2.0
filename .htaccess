@@ -1,11 +1,21 @@
 RewriteEngine On
 
+# Check if the requested file is not an actual file or directory
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+# Redirect to 404 if trying to access about.php or about
+RewriteCond %{REQUEST_URI} ^/about.php [NC,OR]
+RewriteCond %{REQUEST_URI} ^/about [NC]
+RewriteRule ^ - [R=404,L]
+
+# Handle requests for .php files
 RewriteRule ^(.*)$ $1.php [L]
+
+# Default rules
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
+# Environment variables for email configuration
 SetEnv EMAIL_USERNAME mcc-lrc@mcclawis.edu.php
-SetEnv EMAIL_PASSWORD mann1234!?
+SetEnv EMAIL_PASSWORD mann1234!
