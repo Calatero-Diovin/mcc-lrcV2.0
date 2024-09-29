@@ -6,8 +6,7 @@ include('./admin/config/dbcon.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
-require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
