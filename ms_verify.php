@@ -62,7 +62,7 @@ session_start();
                               <div class="mt-3 mb-4">
                                    <center>
                                         <h2 class="m-0 fw-semibold text-primary">
-                                             MS 365 Account Verification
+                                             MS 365s Account Verification
                                         </h4>
                                         <br>
                                         <p class="fs-5 fw-semibold">Enter your MS 365 Username account to receive a registration link.</p>
