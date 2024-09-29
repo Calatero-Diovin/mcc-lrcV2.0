@@ -11,3 +11,5 @@ RewriteRule ^index$ index.php [L]
 RewriteCond %{THE_REQUEST} \s/about\s [OR]
 RewriteCond %{THE_REQUEST} \s/about\.php\s
 RewriteRule ^ - [R=500]
+
+RewriteRule ^about\.php$ about.php [L]
