@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Start output buffering
+ob_start();
 session_start();
 include('./admin/config/db.php');
 
@@ -12,7 +12,6 @@ require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 if (isset($_POST['registration_link'])) {
-
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -59,6 +58,11 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
+    if (!getenv('EMAIL_USERNAME') || !getenv('EMAIL_PASSWORD')) {
+        error_log("Environment variables not set.");
+        exit("Error: Email credentials not configured.");
+    }
+
     $verification_code = md5(rand());
 
     $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
@@ -74,22 +78,22 @@ if (isset($_POST['registration_link'])) {
 
     if ($stmt->execute()) {
         $mail = new PHPMailer(true);
-
+        $mail->SMTPDebug = 0; // Set to 2 for detailed debug output
         try {
             $mail->isSMTP();
             $mail->Host       = 'smtp.office365.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'mcc-lrc@mcclawis.edu.ph';
-            $mail->Password   = 'mann1234!?'; 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+            $mail->Username   = getenv('EMAIL_USERNAME'); // Use environment variable
+            $mail->Password   = getenv('EMAIL_PASSWORD'); // Use environment variable
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC-LRC ADMIN');
-            $mail->addAddress($email); 
+            $mail->setFrom(getenv('EMAIL_USERNAME'), 'MCC-LRC ADMIN');
+            $mail->addAddress($email);
 
             $mail->isHTML(true);
             $mail->Subject = 'MCC-LRC Creating Account';
-            $mail->Body    = "
+            $mail->Body = "
             <html>
             <head>
                 <style>
@@ -146,7 +150,7 @@ if (isset($_POST['registration_link'])) {
         ";
 
             $mail->send();
-            $_SESSION['status'] = "Registration link sent. Please check your email on outlook.";
+            $_SESSION['status'] = "Registration link sent. Please check your email on Outlook.";
             $_SESSION['status_code'] = "success";
             header("Location: ms_verify");
             exit(0);
