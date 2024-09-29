@@ -13,7 +13,7 @@ RewriteRule ^ - [R=404,L]
 RewriteRule ^(.*)$ $1.php [L]
 
 # Default rules
-RewriteRule ^$ home.php [L]
+RewriteRule ^.$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
 # Environment variables for email configuration
