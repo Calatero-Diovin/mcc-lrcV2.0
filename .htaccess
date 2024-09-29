@@ -8,6 +8,5 @@ RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
 # Redirect direct access to about and about.php to a 500 error
-RewriteCond %{THE_REQUEST} \s/about\s [OR]
-RewriteCond %{THE_REQUEST} \s/about\.php\s
+RewriteCond %{REQUEST_URI} \.php [NC]
 RewriteRule ^ - [R=500]
