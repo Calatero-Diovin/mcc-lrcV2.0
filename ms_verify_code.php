@@ -92,15 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
     try {
         // Server settings
-        $mail->SMTPDebug = 2; // Set to 2 for more verbose output
 
         $mail->isSMTP();
         $mail->Host       = 'smtp.office365.com';
         $mail->SMTPAuth   = true;
         $mail->Username   = 'mcc-lrc@mcclawis.edu.ph'; // Your Office 365 email
         $mail->Password   = 'mann1234!?'; // Your email password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Keep using STARTTLS
+        $mail->Port       = 587; // Use 587 for TLS
+        $mail->SMTPDebug  = 2; // Enable verbose debug output
 
         // Recipients
         $mail->setFrom('mcc-lrc@mcclawis.edu.ph', 'MCC LEARNING RESOURCE CENTER'); // Your email and name
