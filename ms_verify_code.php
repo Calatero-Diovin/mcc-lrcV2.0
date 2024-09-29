@@ -1,7 +1,7 @@
 <?php
 ob_start(); // Start output buffering
 session_start();
-include('./admin/config/dbcon.php');
+include('./admin/authentication.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
