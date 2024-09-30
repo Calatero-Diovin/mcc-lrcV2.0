@@ -687,6 +687,8 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const role = document.getElementById('role').value; // Get the role value
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
+    const xssPattern = /<[^>]*>/; // XSS tag pattern
 
     if (!studentId || !password || !confirmPassword) {
         Swal.fire({
@@ -713,6 +715,24 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     if (password.length < 8) {
         Swal.fire({
             title: "Password must be at least 8 characters long.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
+    if (xssPattern.test(password)) {
+        Swal.fire({
+            title: "Password cannot contain XSS tags.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
+    if (!passwordPattern.test(password)) {
+        Swal.fire({
+            title: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
             icon: "error",
             confirmButtonText: "OK"
         });
