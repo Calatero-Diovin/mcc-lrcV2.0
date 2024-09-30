@@ -530,7 +530,7 @@ nextBtnSec.addEventListener("click", function (event) {
 
     if (!addressPattern.test(address)) {
         Swal.fire({
-            title: "Address must be in the format: Patao, Bantayan, Cebu.",
+            title: "Address must be in the format: Brgy, Municipality, Province.",
             icon: "error",
             confirmButtonText: "OK"
         });
