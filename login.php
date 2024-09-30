@@ -11,6 +11,7 @@ include('./admin/config/dbcon.php');
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -102,6 +103,9 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
+                                   </div>
+                                   <div class="col-md-12">
+                                   <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
                                         <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
