@@ -1,4 +1,7 @@
 <?php
+if (!defined('Myabout')){
+     exit('STOP DOING THAT!!!');
+}
 include('includes/header.php');
 include('includes/navbar.php');
 
