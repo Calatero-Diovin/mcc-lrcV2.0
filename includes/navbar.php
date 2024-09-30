@@ -18,17 +18,11 @@ include('admin/config/dbcon.php');
     left: 0; /* Show sidebar */
 }
 
-.navbar-toggler-icon {
-        background-color: white; /* Change to your desired color */
-        /* Optionally set dimensions */
-        width: 30px; /* Adjust width */
-        height: 30px; /* Adjust height */
-    }
 </style>
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
-    <button id="menu-toggle" class="toggle square ms-3" style="border:none;" type="button" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="color:white;"></span>
+    <button id="menu-toggle" class="ms-3" style="border:none;" type="button" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
         <a class="navbar-brand text-white fw-bold fs-5" href="#">MCC-LRC</a>
