@@ -387,8 +387,8 @@ $code_row = $code_result->fetch_assoc();
                         <p id="error_cpassword"></p>
                     </div>
 
-                    <div class="field d-flex align-items-center">
-                        <div class="label" style="margin-left:8px;">
+                    <div class="field">
+                        <div class="label">
                             <input type="checkbox" id="termsCheckbox"  class="text-start" required>
                             <span style="font-size:15px;">I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
                         </div>
