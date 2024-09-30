@@ -31,22 +31,6 @@ include('includes/navbar.php');
 </div>
 
 
-    <!-- Services -->
-    <div class="container bg-white mt-3">
-        <h3 class="fs-3"><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
-        <h4 class="text-center fs-2">MCCLRC OPENING DAY AND TIME</h4>
-        <div class="row">
-            <div class="col-md-6 p-5">
-                <h4 class="fs-1">Monday - Saturdays:</h4>
-                <h4 class="fs-3">8:00 AM 5:00 PM (No Noon Break)</h4>
-            </div>
-            <div class="col-md-6">
-                <img src="assets/img/A.gif" class="img-fluid" alt="Responsive GIF">
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Footer -->
 <div class="jumbotron">
     <footer class="text-center text-lg-start text-white" style="background-color: #0D4C92">
