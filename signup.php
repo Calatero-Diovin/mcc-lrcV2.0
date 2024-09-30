@@ -242,7 +242,7 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="form-check" style="margin-top:-30px;">
+                    <div class="form-check" style="margin-left:10px;margin-top:-30px;">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#" target="_blank">Terms and Conditions</a></label>
                     </div>
