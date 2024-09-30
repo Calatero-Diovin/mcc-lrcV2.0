@@ -240,12 +240,12 @@ $code_row = $code_result->fetch_assoc();
                     <div class="field">
                         <div class="label">Middle Name <span style="font-weight:200;color:gray;font-size:13px;">(optional)</span></div>
                         <input type="text" name="middlename" id="middlename" />
-                        <br>
-                        <input type="checkbox" id="termsCheckbox" required>
                     </div>
 
                     <div class="field">
-                            <span style="font-size:15px;">I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
+                        <div class="label">
+                            <input type="checkbox" id="termsCheckbox" required>
+                        </div>
                     </div>
 
                     <div class="field option">
