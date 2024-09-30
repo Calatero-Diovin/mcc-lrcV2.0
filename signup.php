@@ -242,8 +242,10 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <input type="checkbox" id="termsCheckbox" required class="text-start">
-
+                    <div class="text-start">
+                        <input type="checkbox" id="termsCheckbox" required class="text-start">
+                    </div>
+                    
                     <div class="field option">
                         <button class="firstNext next">Next</button>
                         <p>Already have an account? <a href="login">Login</a></p>
