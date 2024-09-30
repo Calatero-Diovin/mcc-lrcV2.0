@@ -49,7 +49,7 @@ include('./admin/config/dbcon.php');
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
                     <a href="." class="back">
-                              <i class="bi bi-arrow-left-circle-fill ml-3"></i>
+                              <i class="bi bi-arrow-left-circle-fill m-3"></i>
                          </a>
                          <div class="col-md-6 ">
                               <div class="">
