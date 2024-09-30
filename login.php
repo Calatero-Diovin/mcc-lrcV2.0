@@ -48,9 +48,6 @@ include('./admin/config/dbcon.php');
 
 <body>
      <section class="d-flex mt-1 flex-column justify-content-center align-items-center">
-          <a href="." class="back">
-               <i class="bi bi-arrow-left-circle-fill"></i>
-          </a>
           <div class="container-xl">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
@@ -61,6 +58,9 @@ include('./admin/config/dbcon.php');
                               </div>
                          </div>
                          <div class="col-sm-12 col-md-6 px-5 ">
+                         <a href="." class="back">
+                              <i class="bi bi-arrow-left-circle-fill"></i>
+                         </a>
                               <div class="mt-3 mb-4">
                                    <center>
                                         <h1 class="m-0"><strong>MCC</strong></h1>
