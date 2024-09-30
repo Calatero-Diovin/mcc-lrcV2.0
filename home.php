@@ -2,7 +2,7 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
-<div class="jumbotron h-50" style="background-color: #0D4C92">
+<div class="jumbotron h-100" style="background-color: #0D4C92">
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
