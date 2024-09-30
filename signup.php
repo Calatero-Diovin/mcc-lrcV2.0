@@ -723,7 +723,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
 
     if (xssPattern.test(password)) {
         Swal.fire({
-            title: "Password cannot contain XSS tags.",
+            title: "Don't try that or else I get your IP Address.",
             icon: "error",
             confirmButtonText: "OK"
         });
