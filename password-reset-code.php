@@ -15,15 +15,15 @@ function send_password_reset($get_name, $get_email, $token) {
     try {
         // SMTP server configuration
         $mail->isSMTP();
-            $mail->Host       = 'smtp.office365.com'; // Outlook/Microsoft 365 SMTP server
+            $mail->Host       = 'smtp.gmail.com'; // Outlook/Microsoft 365 SMTP server
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'richmann4321@outlook.com'; // Your Outlook/Microsoft 365 email address
-            $mail->Password   = 'mann4321!?'; // Your email account password or app password
+            $mail->Username   = 'mcclearningresourcecenter@gmail.com'; // Your Outlook/Microsoft 365 email address
+            $mail->Password   = 'qxbi jqnf hgfn lkih'; // Your email account password or app password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS encryption
             $mail->Port       = 587; // Port for TLS
 
             //Recipients
-            $mail->setFrom('richmann4321@outlook.com', 'MCC-LRC ADMIN');
+            $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
             $mail->addAddress($get_email, $get_name); // Recipient's email address
 
         // Email content settings

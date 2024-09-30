@@ -12,14 +12,14 @@ function sendEmail($student_email, $subject, $message) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-            $mail->Host       = 'smtp.office365.com'; 
+            $mail->Host       = 'smtp.gmail.com'; 
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'richmann4321@outlook.com';
-            $mail->Password   = 'mann4321!?'; 
+            $mail->Username   = 'mcclearningresourcecenter@gmail.com';
+            $mail->Password   = 'qxbi jqnf hgfn lkih'; 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
             $mail->Port       = 587;
 
-            $mail->setFrom('richmann4321@outlook.com', 'MCC-LRC ADMIN');
+            $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
             $mail->addAddress($student_email); 
 
         $mail->isHTML(true);
