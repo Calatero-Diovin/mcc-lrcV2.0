@@ -31,6 +31,7 @@ include('config/dbcon.php');
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
+
 </head>
 
 <body>
@@ -65,7 +66,7 @@ include('config/dbcon.php');
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required>
+                                    <select class="form-select" id="admin_type" name="admin_type" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -76,14 +77,14 @@ include('config/dbcon.php');
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
                                         Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                     <label for="password">Password</label>
                                     <span class="password-show-toggle js-password-show-toggle">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -94,7 +95,7 @@ include('config/dbcon.php');
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
+                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
                             </div>
                             <div class="text-end mb-3">
                                 <p>
