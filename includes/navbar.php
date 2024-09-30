@@ -18,6 +18,12 @@ include('admin/config/dbcon.php');
     left: 0; /* Show sidebar */
 }
 
+.navbar-toggler-icon {
+        background-color: white; /* Change to your desired color */
+        /* Optionally set dimensions */
+        width: 30px; /* Adjust width */
+        height: 30px; /* Adjust height */
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
