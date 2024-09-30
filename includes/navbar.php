@@ -5,7 +5,7 @@ include('admin/config/dbcon.php');
 <style>
      .sidebar {
     position: fixed;
-    top: 20px;
+    top: 50px;
     left: -250px; /* Start hidden */
     height: 100%;
     width: 250px;
