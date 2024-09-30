@@ -108,7 +108,7 @@ include('./admin/config/dbcon.php');
                                                   <a href="password-reset" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
                                              <p>
-                                                  <a href="admin/admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                                  <a href="admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                              </p>
                                         </div>
                                    </div>
