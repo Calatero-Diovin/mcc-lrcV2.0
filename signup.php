@@ -690,12 +690,13 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const password = document.getElementById('passwordInput').value;
     const confirmPassword = document.getElementById('confirmPasswordInput').value;
     const role = document.getElementById('role').value; // Get the role value
+    const exampleCheck1 = document.getElementById('exampleCheck1').value;
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
     const xssPattern = /<[^>]*>/; // XSS tag pattern
 
-    if (!studentId || !password || !confirmPassword) {
+    if (!studentId || !password || !confirmPassword || !exampleCheck1) {
         Swal.fire({
             title: "Please fill all fields.",
             icon: "error",
