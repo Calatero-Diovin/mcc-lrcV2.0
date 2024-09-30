@@ -242,7 +242,7 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="field d-flex justify-content-between align-items-center">
+                    <div class="field">
                         <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
                             <span>I agree to the</span>
