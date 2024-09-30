@@ -243,10 +243,8 @@ $code_row = $code_result->fetch_assoc();
                     </div>
 
                     <div class="field">
-                        <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
                             <label for="termsCheckbox">I agree to the</label>
-                        </div>
                     </div>
 
                     <div class="field option">
