@@ -56,7 +56,7 @@ include('./admin/config/dbcon.php');
                          </div>
                          <div class="col-sm-12 col-md-6 px-5 ">
                          <a href="." class="back">
-                              <i class="bi bi-arrow-left-circle-fill"></i>
+                              <i class="bi bi-arrow-left-circle-fill text-start"></i>
                          </a>
                               <div class="mt-3 mb-4">
                                    <center>
