@@ -631,10 +631,20 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
+  const namePattern = /^[A-Za-z\s]+$/; // Regex for alphabetic characters and spaces
 
-  if(!cellphone || !contactPerson || !personCellNo){
+  if (!cellphone || !contactPerson || !personCellNo) {
     Swal.fire({
       title: "Please fill this field.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  if (!namePattern.test(contactPerson)) {
+    Swal.fire({
+      title: "Contact Person's name must only contain letters and spaces.",
       icon: "error",
       confirmButtonText: "OK"
     });
@@ -659,11 +669,11 @@ nextBtnFourth.addEventListener("click", async function (event) {
     return;
   }
 
-    slidePage.style.marginLeft = "-100%";
-    bullet[current - 1].classList.add("active");
-    progressCheck[current - 1].classList.add("active");
-    progressText[current - 1].classList.add("active");
-    current += 1;
+  slidePage.style.marginLeft = "-100%";
+  bullet[current - 1].classList.add("active");
+  progressCheck[current - 1].classList.add("active");
+  progressText[current - 1].classList.add("active");
+  current += 1;
 });
 // nextBtnFourth End
 
