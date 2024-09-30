@@ -5,24 +5,33 @@ include('includes/header.php');
 include('./includes/sidebar.php'); 
 
 // Fetch all holds
-$query_alls = "SELECT 
-                    u.user_id, u.firstname AS user_firstname, u.lastname AS user_lastname, 
-                    f.faculty_id, f.firstname AS faculty_firstname, f.lastname AS faculty_lastname,
-                    COUNT(h.hold_id) AS num_hold_books
-                FROM holds h
-                LEFT JOIN user u ON u.user_id = h.user_id
-                LEFT JOIN faculty f ON f.faculty_id = h.faculty_id
-                WHERE h.hold_status = 'Hold'
-                GROUP BY u.user_id, f.faculty_id
-                ORDER BY h.hold_id DESC";
-$query_alls_run = mysqli_query($con, $query_alls);
+$query_alls = "
+    SELECT 
+        u.user_id, u.firstname AS user_firstname, u.lastname AS user_lastname, 
+        f.faculty_id, f.firstname AS faculty_firstname, f.lastname AS faculty_lastname,
+        COUNT(h.hold_id) AS num_hold_books
+    FROM holds h
+    LEFT JOIN user u ON u.user_id = h.user_id
+    LEFT JOIN faculty f ON f.faculty_id = h.faculty_id
+    WHERE h.hold_status = 'Hold'
+    GROUP BY u.user_id, f.faculty_id
+    ORDER BY h.hold_id DESC";
 
-// Fetch all pending users and faculty
+$query_alls_stmt = $con->prepare($query_alls);
+$query_alls_stmt->execute();
+$query_alls_run = $query_alls_stmt->get_result();
+
+// Fetch all pending users
 $pending_users_sql = "SELECT user_id, firstname, lastname, profile_image FROM user WHERE status = 'pending'";
-$pending_users_result = mysqli_query($con, $pending_users_sql);
+$pending_users_stmt = $con->prepare($pending_users_sql);
+$pending_users_stmt->execute();
+$pending_users_result = $pending_users_stmt->get_result();
 
+// Fetch all pending faculty
 $pending_faculty_sql = "SELECT faculty_id, firstname, lastname, profile_image FROM faculty WHERE status = 'pending'";
-$pending_faculty_result = mysqli_query($con, $pending_faculty_sql);
+$pending_faculty_stmt = $con->prepare($pending_faculty_sql);
+$pending_faculty_stmt->execute();
+$pending_faculty_result = $pending_faculty_stmt->get_result();
 ?>
 
 <main id="main" class="main">

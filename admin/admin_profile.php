@@ -24,9 +24,22 @@ if (isset($_SESSION['auth_admin']['admin_id']))
      <section class="section profile">
           <div class="row">
                <?php
-               $query = "SELECT * FROM admin WHERE admin_id = '$id_session'";
-               $query_run = mysqli_query($con, $query);
-               $row = mysqli_fetch_array($query_run);
+               $query = "SELECT * FROM admin WHERE admin_id = ?";
+               $stmt = $con->prepare($query);
+               $stmt->bind_param("s", $id_session);
+               $stmt->execute();
+               $query_run = $stmt->get_result();
+               
+               if ($query_run->num_rows > 0) {
+                   $row = $query_run->fetch_array(MYSQLI_ASSOC);
+                   // Continue with your code to use $row...
+               } else {
+                   // Handle case where no admin is found
+                   $_SESSION['status'] = 'Admin not found';
+                   $_SESSION['status_code'] = "error";
+                   header("Location: admin_profile");
+                   exit(0);
+               }
                 
                ?>
                <div class="col-xl-4">

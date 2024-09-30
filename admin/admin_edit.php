@@ -25,14 +25,17 @@ include('./includes/sidebar.php');
                               <?php
                               if(isset($_GET['id']))
                               {
-                                   $admin_id = mysqli_real_escape_string($con, $_GET['id']);
+                                   $admin_id = $_GET['id'];
 
-                                   $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
-                                   $query_run = mysqli_query($con, $query);
+                                   $query = "SELECT * FROM admin WHERE admin_id = ?";
+                                   $stmt = $con->prepare($query);
+                                   $stmt->bind_param("s", $admin_id);
+                                   $stmt->execute();
+                                   $query_run = $stmt->get_result();
 
-                                   if(mysqli_num_rows($query_run) > 0)
+                                   if ($query_run->num_rows > 0) 
                                    {
-                                       $admin = mysqli_fetch_array($query_run);
+                                        $admin = $query_run->fetch_array(MYSQLI_ASSOC);
                                         ?>
                               <form action="admin_code.php" method="POST" enctype="multipart/form-data" onsubmit="return validatePhoneNumber()">
 
@@ -131,13 +134,14 @@ include('./includes/sidebar.php');
                          </div>
                          </form>
                          <?php
-                              }
-                              else
-                              {
-                                   echo "No such ID found";
-                              }
-
-                         }  
+                             } else {
+                              // Handle case where no admin is found
+                              $_SESSION['status'] = 'Admin not found';
+                              $_SESSION['status_code'] = "error";
+                              header("Location: admin_edit");
+                              exit(0);
+                          }
+                      }
                          ?>
 
                     </div>
@@ -146,13 +150,29 @@ include('./includes/sidebar.php');
      </section>
 </main>
 <script>
-function validatePhoneNumber() {
+function sanitizeInput(input) {
+    const tempDiv = document.createElement('div');
+    tempDiv.textContent = input;
+    return tempDiv.innerHTML; // Converts any HTML to plain text
+}
+
+function validateForm() {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+    
+    inputs.forEach(input => {
+        input.value = sanitizeInput(input.value); // Sanitize input value
+    });
+
     const phoneInput = document.getElementById('phone_number');
     const phoneNumber = phoneInput.value;
     const phonePattern = /^09\d{9}$/;
 
     if (!phonePattern.test(phoneNumber)) {
-        alert('Invalid phone number. Please ensure it starts with 09 and is 11 digits long.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Phone Number',
+            text: 'Please ensure it starts with 09 and is 11 digits long.'
+        });
         return false;
     }
     return true;

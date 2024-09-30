@@ -27,16 +27,17 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-body">
                               <?php
-                              if(isset($_GET['id']))
-                              {
-                                   $admin_id = mysqli_real_escape_string($con, $_GET['id']);
-
-                                   $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
-                                   $query_run = mysqli_query($con, $query);
-
-                                   if(mysqli_num_rows($query_run) > 0)
-                                   {
-                                       $admin = mysqli_fetch_array($query_run);
+                              if (isset($_GET['id'])) {
+                                   $admin_id = $_GET['id']; // No need to escape when using prepared statements
+                               
+                                   $query = "SELECT * FROM admin WHERE admin_id = ?";
+                                   $stmt = $con->prepare($query);
+                                   $stmt->bind_param("s", $admin_id);
+                                   $stmt->execute();
+                                   $query_run = $stmt->get_result();
+                               
+                                   if ($query_run->num_rows > 0) {
+                                       $admin = $query_run->fetch_array(MYSQLI_ASSOC);
                                         ?>
 
 
@@ -106,13 +107,14 @@ include('./includes/sidebar.php');
 
 
                               <?php
-                              }
-                              else
-                              {
-                                   echo "No such ID found";
-                              }
-
-                         }  
+                              } else {
+                                   // Handle case where no admin is found
+                                   $_SESSION['status'] = 'Admin not found';
+                                   $_SESSION['status_code'] = "error";
+                                   header("Location: admin_view");
+                                   exit(0);
+                               }
+                           }
                          ?>
                          </div>
                     </div>
