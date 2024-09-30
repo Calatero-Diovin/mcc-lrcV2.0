@@ -390,7 +390,7 @@ $code_row = $code_result->fetch_assoc();
                     <div class="field">
                         <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
-                            I agree to the <a href="#" target="_blank">Terms and Conditions</a>
+                            <span class="fs-5">I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
                         </div>
                     </div>
 
