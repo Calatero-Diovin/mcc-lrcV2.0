@@ -16,7 +16,6 @@ include('admin/config/dbcon.php');
 
 .sidebar.active {
     left: 0; /* Show sidebar */
-    margin: 5px 5px;
 }
 
 </style>
