@@ -88,7 +88,7 @@ if (isset($_SESSION['auth_stud']['stud_id']))
      unset($_SESSION['auth_stud']);
  
      $_SESSION['message_success'] = "Logout Successfully";
-     header("Location: admin_login");
+     header("Location: ../admin_login");
      exit(0);
  }
 ?>
