@@ -49,6 +49,12 @@ $faculty_row = $faculty_result->fetch_assoc();
     <!-- Custom CSS Styling -->
     <link rel="stylesheet" href="assets/css/login.css">
 
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
     <style>
         .back {
             position: fixed;
@@ -118,6 +124,21 @@ $faculty_row = $faculty_result->fetch_assoc();
             var password = document.getElementById("passwordInput").value;
             var cpassword = document.getElementById("confirmPasswordInput").value;
             var isValid = true;
+
+            // Check for XSS in password fields
+            var xssPattern = /<[^>]*>/; // Simple pattern to detect HTML tags
+            if (xssPattern.test(password) || xssPattern.test(cpassword)) {
+                swal("Invalid Input", "I got your IP Address.", "error");
+                isValid = false;
+            }
+
+            // Regular expression for strong password
+            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!strongPasswordPattern.test(password)) {
+                swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
+                isValid = false;
+            }
 
             if (password.length < 8) {
                 document.getElementById("passwordLengthFeedback").style.display = "block";
