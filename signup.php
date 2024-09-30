@@ -245,7 +245,7 @@ $code_row = $code_result->fetch_assoc();
                     <div class="field d-flex justify-content-between align-items-center">
                         <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
-                            <p>I agree to the</p>
+                            <span>I agree to the</span>
                         </div>
                     </div>
 
