@@ -388,9 +388,9 @@ $code_row = $code_result->fetch_assoc();
                     </div>
 
                     <div class="field d-flex align-items-center">
-                        <div class="label">
-                            <input type="checkbox" id="termsCheckbox" required>
-                            <span style="font-size:10px;">I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
+                        <div class="label" style="margin-left:8px;">
+                            <input type="checkbox" id="termsCheckbox" style="margin:0;" required>
+                            <span style="font-size:17px;">I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
                         </div>
                     </div>
 
