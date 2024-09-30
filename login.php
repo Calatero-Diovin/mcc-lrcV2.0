@@ -1,13 +1,5 @@
 <?php 
 session_start();
-
-// Check if user is already authenticated
-//if(isset($_SESSION['auth'])) {
-//    $_SESSION['message_error'] = "You are already logged in";
-//    header("Location: index.php");
-//    exit(0);
-//}
-
 include('./admin/config/dbcon.php');
 
 ?>
