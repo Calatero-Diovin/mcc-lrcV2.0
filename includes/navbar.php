@@ -4,7 +4,7 @@ include('admin/config/dbcon.php');
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
      <?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+ 1); ?>
-     <div class="container-fluid">
+     <div class="container-fluid mx-5">
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                aria-label="Toggle navigation">
