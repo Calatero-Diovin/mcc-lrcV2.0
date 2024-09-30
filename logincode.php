@@ -2,13 +2,29 @@
 session_start();
 include('./admin/config/dbcon.php');
 
-if(isset($_POST['login_btn'])) {
+// Initialize session variables if not already set
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+    $_SESSION['lockout_time'] = null;
+}
+
+// Check if user is locked out
+if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
+    $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+    $minutes_remaining = ceil($lockout_time_remaining / 60);
+    $_SESSION['status'] = "Too many failed attempts. Please try again in $minutes_remaining minute(s).";
+    $_SESSION['status_code'] = "error";
+    header("Location: login");
+    exit(0);
+}
+
+if (isset($_POST['login_btn'])) {
     $user_id = $_POST['student_id'];
     $password = $_POST['password'];
     $role = $_POST['role_as'];
 
     // Determine the login query based on role
-    if($role == 'student') {
+    if ($role == 'student') {
         $login_query = "SELECT * FROM user WHERE student_id_no = ? LIMIT 1";
     } elseif ($role == 'faculty' || $role == 'staff') {
         $login_query = "SELECT * FROM faculty WHERE username = ? LIMIT 1";
@@ -26,12 +42,16 @@ if(isset($_POST['login_btn'])) {
         mysqli_stmt_execute($stmt);
         $login_query_run = mysqli_stmt_get_result($stmt);
 
-        if(mysqli_num_rows($login_query_run) == 1) {
+        if (mysqli_num_rows($login_query_run) == 1) {
             $data = mysqli_fetch_assoc($login_query_run);
             $hashed_password = $data['password'];
 
             // Verify the password
             if (password_verify($password, $hashed_password)) {
+                // Reset login attempts on successful login
+                $_SESSION['login_attempts'] = 0;
+                $_SESSION['lockout_time'] = null;
+
                 if ($role == 'student') {
                     $user_id = $data['user_id'];  
                 } else {
@@ -59,20 +79,35 @@ if(isset($_POST['login_btn'])) {
                     $_SESSION['status'] = "Your account is still pending for approval! Please wait..";
                 } elseif ($status == 'blocked') {
                     $_SESSION['status'] = "Your account has been blocked!";
-                }
-                else {
+                } else {
                     $_SESSION['status'] = "Your account is inactive or disabled";
                 }
             } else {
-                $_SESSION['status'] = "Incorrect ID no. or Password";
+                // Increment login attempts on failure
+                $_SESSION['login_attempts']++;
+                if ($_SESSION['login_attempts'] >= 3) {
+                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                    $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+                } else {
+                    $_SESSION['status'] = "Incorrect ID no. or Password";
+                }
+                $_SESSION['status_code'] = "error";
             }
         } else {
-            $_SESSION['status'] = "Incorrect ID no. or Password";
+            // Increment login attempts on failure
+            $_SESSION['login_attempts']++;
+            if ($_SESSION['login_attempts'] >= 3) {
+                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+            } else {
+                $_SESSION['status'] = "Incorrect ID no. or Password";
+            }
+            $_SESSION['status_code'] = "error";
         }
     } else {
         $_SESSION['status'] = "Database error: Could not prepare statement";
+        $_SESSION['status_code'] = "error";
     }
-    $_SESSION['status_code'] = "error";
     header("Location: login");
     exit(0);
 } else {

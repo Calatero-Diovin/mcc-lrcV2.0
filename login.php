@@ -67,6 +67,16 @@ include('./admin/config/dbcon.php');
                                         <p class="m-0 fw-semibold">Login Form</p>
                                    </center>
                               </div>
+
+                              <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                                   <?php
+                                   $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                                   $minutes_remaining = ceil($lockout_time_remaining / 60);
+                                   ?>
+                                   <div class="alert alert-danger">
+                                        Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).
+                                   </div>
+                              <?php endif; ?>
                               <form action="logincode.php" method="POST" class="needs-validation" novalidate>
                                    <div class="col-md-12 mb-3">
                                         <label for="role_as" class="form-label">Login As:</label>
