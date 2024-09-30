@@ -6,7 +6,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
-
-# Redirect direct access to about and about.php to a 500 error
-RewriteCond %{REQUEST_URI} \.php [NC]
-RewriteRule ^ - [R=500]
