@@ -68,7 +68,7 @@ include('./admin/config/dbcon.php');
                                         <p class="m-0 fw-semibold">Login Form</p>
                                    </center>
                               </div>
-                              <form id="loginForm" method="POST" class="needs-validation" novalidate>
+                              <form action="logincode.php" method="POST" class="needs-validation" novalidate>
                                    <div class="col-md-12 mb-3">
                                         <label for="role_as" class="form-label">Login As:</label>
                                         <select class="form-select" id="role_as" name="role_as" required>
@@ -97,7 +97,7 @@ include('./admin/config/dbcon.php');
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
-                                        <button type="submit" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
+                                        <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
                                         <div class="text-center mb-3">
                                              <p>
                                                   Don't have an account?
@@ -161,25 +161,6 @@ include('./admin/config/dbcon.php');
             studentIdInput.value = value.replace(/[^0-9-]/g, '');
         }
     }
-});
-
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent default form submission
-    
-    // Collect form data
-    const formData = new FormData(this);
-    
-    fetch('logincode.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        // Handle the response from the server
-        console.log(data);
-        // Optionally, update the page with the response
-    })
-    .catch(error => console.error('Error:', error));
 });
      </script>
 
