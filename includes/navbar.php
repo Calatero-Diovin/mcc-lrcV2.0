@@ -21,7 +21,7 @@ include('admin/config/dbcon.php');
 </style>
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
-    <button id="menu-toggle" class="btn btn-secondary ms-3" type="button" aria-label="Toggle navigation">
+    <button id="menu-toggle" class="btn btn-white ms-3" type="button" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
