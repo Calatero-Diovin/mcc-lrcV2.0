@@ -709,6 +709,16 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
             });
             return;
         }
+    } else if (role === 'faculty' || role === 'staff') {
+        // Check for XSS tags in studentId for faculty and staff roles
+        if (xssPattern.test(studentId)) {
+            Swal.fire({
+                title: "Don't try that or else I get your IP Address.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
     }
     
     // Additional password validations
