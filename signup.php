@@ -242,12 +242,12 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="form-check">
+                    <div class="form-check" style="margin-left:-40px;">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
 
-                    <div class="field option" style="margin-left:-40px;">
+                    <div class="field option">
                         <button class="firstNext next">Next</button>
                         <p>Already have an account? <a href="login">Login</a></p>
                     </div>
