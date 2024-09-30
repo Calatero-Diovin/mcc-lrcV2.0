@@ -705,6 +705,15 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
         return;
     }
 
+    if (!exampleCheck1) {
+        Swal.fire({
+            title: "Please check the box",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
     if (role === 'student') {
         // Validate student ID only if role is 'student'
         if (!studentIdPattern.test(studentId)) {
