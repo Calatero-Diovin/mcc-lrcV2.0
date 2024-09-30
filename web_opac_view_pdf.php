@@ -1,5 +1,9 @@
 <?php
 include('admin/config/dbcon.php');
+if (!isset($_SESSION['auth'])) {
+     header('Location: .');
+     exit(0);
+ }
 if(isset($_GET['id']))
 {
      $book_id = mysqli_real_escape_string($con, $_GET['id']);

@@ -1,6 +1,10 @@
 <?php
 session_start();
 include('admin/config/dbcon.php');   
+if (!isset($_SESSION['auth'])) {
+     header('Location: .');
+     exit(0);
+ }
           
           if(isset($_POST['login_btn']))
           {

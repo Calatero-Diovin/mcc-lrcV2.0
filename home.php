@@ -1,12 +1,6 @@
 <?php
 include('includes/header.php');
 include('includes/navbar.php');
-
-if (strpos($_SERVER['REQUEST_URI'], 'home.php') !== false || $_SERVER['REQUEST_URI'] == '/home') {
-    http_response_code(404);
-    include('404.php'); // or simply show a 404 error
-    exit();
-}
 ?>
 <div class="jumbotron h-50" style="background-color: #0D4C92">
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">

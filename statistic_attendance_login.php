@@ -2,6 +2,10 @@
 session_start();
 include('includes/header.php');  
 include('admin/config/dbcon.php');  
+if (!isset($_SESSION['auth'])) {
+     header('Location: .');
+     exit(0);
+ }
 ?>
 <style>
 body {
