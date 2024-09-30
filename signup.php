@@ -242,7 +242,7 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="field row">
+                    <div class="field">
                         <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
                         </div>
