@@ -449,17 +449,28 @@ nextBtnFirst.addEventListener("click", function (event) {
     const firstname = document.getElementById('firstname').value;
     const middlename = document.getElementById('middlename').value;
 
-    if (!lastname) {
+    // Regular expression to check for alphabetic characters only
+    const nameRegex = /^[A-Za-z\s]*$/;
+
+    if (!lastname || !nameRegex.test(lastname)) {
         Swal.fire({
-            title: "Please fill lastname field.",
+            title: "Please fill lastname field with letters only.",
             icon: "error",
             confirmButtonText: "OK"
         });
         return;
     }
-    if (!firstname) {
+    if (!firstname || !nameRegex.test(firstname)) {
         Swal.fire({
-            title: "Please fill firstname field.",
+            title: "Please fill firstname field with letters only.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+    if (middlename && !nameRegex.test(middlename)) {
+        Swal.fire({
+            title: "Please fill middlename field with letters only.",
             icon: "error",
             confirmButtonText: "OK"
         });
