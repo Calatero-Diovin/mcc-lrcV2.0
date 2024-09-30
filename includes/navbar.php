@@ -22,12 +22,11 @@ include('admin/config/dbcon.php');
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
     <div class="container-fluid mx-5">
-        <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
-        <a class="navbar-brand text-white fw-bold fs-5" href="#">MCC-LRC</a>
-        
-        <button id="menu-toggle" class="toggle square" type="button" aria-label="Toggle navigation">
+    <button id="menu-toggle" class="toggle square" type="button" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
+        <a class="navbar-brand text-white fw-bold fs-5" href="#">MCC-LRC</a>
     </div>
 </nav>
 
