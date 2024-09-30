@@ -24,8 +24,8 @@ include('admin/config/dbcon.php');
     <a href="#" id="menu-toggle" class="ms-3" style="margin-top:-10px;" aria-label="Toggle navigation">
                <i class="bi bi-list" style="color:#fff;font-size:30px;font-weight:bold;"></i>
         </a>
-        <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
         <a class="navbar-brand text-white fw-bold fs-5" href="#">MCC-LRC</a>
+        <img src="assets/img/mcc-logo.png" alt="logo" class="mx-2" height="40px" width="40px" />
 </nav>
 
 <!-- Sidebar -->
