@@ -242,10 +242,7 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="field">
-                            <input type="checkbox" id="termsCheckbox" required>
-                            <label for="termsCheckbox">I agree to the</label>
-                    </div>
+                    <input type="checkbox" id="termsCheckbox">
 
                     <div class="field option">
                         <button class="firstNext next">Next</button>
