@@ -1,5 +1,4 @@
 <?php
-define('Myabout', TRUE);
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
