@@ -32,6 +32,15 @@ include('./admin/config/dbcon.php');
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
 
+     <style>
+          .back {
+               font-size: 30px;
+               color: black;
+          }
+          .back:hover {
+               color: gray;
+          }
+     </style>
 </head>
 
 <body>
