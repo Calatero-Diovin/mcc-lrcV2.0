@@ -166,6 +166,19 @@ $code_row = $code_result->fetch_assoc();
                 flex: 1 1 30%;
             }
         }
+
+        .terms-field {
+            display: flex;
+            align-items: center; /* Aligns items vertically */
+        }
+
+        .terms-field .label {
+            margin-left: 8px; /* Space between checkbox and text */
+        }
+
+        .terms-field input[type="checkbox"] {
+            margin: 0; /* Remove default margin */
+        }
     </style>
 </head>
 
@@ -387,8 +400,8 @@ $code_row = $code_result->fetch_assoc();
                         <p id="error_cpassword"></p>
                     </div>
 
-                    <div class="field">
-                        <div class="row">
+                    <div class="field terms-field">
+                        <div class="label">
                             <input type="checkbox" id="termsCheckbox" required>
                             <span>I agree to the <a href="#" target="_blank">Terms and Conditions</a></span>
                         </div>
