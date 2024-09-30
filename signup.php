@@ -242,11 +242,6 @@ $code_row = $code_result->fetch_assoc();
                         <input type="text" name="middlename" id="middlename" />
                     </div>
 
-                    <div class="form-check" style="margin-left:-20px;margin-top:-30px;">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                        <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#" target="_blank">Terms and Conditions</a></label>
-                    </div>
-
                     <div class="field option">
                         <button class="firstNext next">Next</button>
                         <p>Already have an account? <a href="login">Login</a></p>
@@ -390,6 +385,11 @@ $code_row = $code_result->fetch_assoc();
                             <i class="fas fa-eye toggle-password-icon"></i>
                         </span>
                         <p id="error_cpassword"></p>
+                    </div>
+
+                    <div class="form-check" style="margin-left:-20px;margin-top:-30px;">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                        <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#" target="_blank">Terms and Conditions</a></label>
                     </div>
 
                     <div class="field btns">
