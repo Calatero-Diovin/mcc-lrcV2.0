@@ -387,6 +387,13 @@ $code_row = $code_result->fetch_assoc();
                         <p id="error_cpassword"></p>
                     </div>
 
+                    <div class="field">
+                        <div class="label">
+                            <input type="checkbox" id="termsCheckbox" required>
+                            I agree to the <a href="#" target="_blank">Terms and Conditions</a>
+                        </div>
+                    </div>
+
                     <div class="field btns">
                         <button class="prev-4 prev">Previous</button>
                         <button type="button" class="next-4 next" id="reviewBtn">Next</button>
