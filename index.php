@@ -16,6 +16,12 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
 }
 ?>
 
+<!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+<!-- SweetAlert JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -30,10 +36,10 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
                 <h3 class="fw-semibold">Madridejos Community College</h3>
                 <h4 class="fw-semibold">Learning Resource Center</h4>
               </center>
-              <form method="GET">
+              <form method="GET" onsubmit="return validateSearch();">
                 <div class="d-flex">
                   <div class="input-group mb-3 me-6">
-                    <input type="text" name="search" value="<?php if (isset($_GET['search'])) { echo htmlspecialchars($_GET['search']); } ?>" class="form-control" placeholder="Type here to search" required>
+                    <input type="text" name="search" id="searchInput" value="<?php if (isset($_GET['search'])) { echo htmlspecialchars($_GET['search']); } ?>" class="form-control" placeholder="Type here to search" required>
                     <button class="btn btn-primary px-md-5 px-sm-1">Search</button>
                   </div>
                 </div>
@@ -53,7 +59,7 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
           <div id="new_books" class="row row-cols-1 row-cols-md-12 g-4">
             <?php 
             if (isset($_GET['search'])) { 
-              $filtervalues = mysqli_real_escape_string($con, $_GET['search']);
+              $filtervalues = strip_tags(trim(mysqli_real_escape_string($con, $_GET['search'])));
               $query = "SELECT book.*, COUNT(book.accession_number) AS copy_count,
                         SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
                         FROM book 
@@ -132,6 +138,28 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
     </div>
   </div>
 </div>
+
+<script>
+function validateSearch() {
+    const searchInput = document.getElementById('searchInput').value;
+    
+    // Regular expression to detect HTML tags
+    const regex = /<[^>]*>/;
+    
+    // Check if the input contains any HTML tags
+    if (regex.test(searchInput)) {
+        // Show SweetAlert
+        swal({
+            title: "Invalid Input!",
+            text: "Stop that!",
+            icon: "warning",
+            button: "OK",
+        });
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
+</script>
 
 <?php
 include('includes/footer.php');
