@@ -247,7 +247,7 @@ $code_row = $code_result->fetch_assoc();
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
 
-                    <div class="field option">
+                    <div class="field option" style="margin-left:-40px;">
                         <button class="firstNext next">Next</button>
                         <p>Already have an account? <a href="login">Login</a></p>
                     </div>
