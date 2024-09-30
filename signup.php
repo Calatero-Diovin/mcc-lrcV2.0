@@ -690,7 +690,8 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const password = document.getElementById('passwordInput').value;
     const confirmPassword = document.getElementById('confirmPasswordInput').value;
     const role = document.getElementById('role').value; // Get the role value
-    const exampleCheck1 = document.getElementById('exampleCheck1').value;
+    const exampleCheck1 = document.getElementById('exampleCheck1');
+    const isChecked = exampleCheck1.checked;
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
@@ -705,7 +706,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
         return;
     }
 
-    if (!exampleCheck1) {
+    if (!isChecked) {
         Swal.fire({
             title: "Please check the box",
             icon: "error",
