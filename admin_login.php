@@ -7,30 +7,27 @@ include('config/dbcon.php');
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="./assets/img/mcc-logo.png">
-     <title>MCC Learning Resource Center</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/mcc-logo.png">
+    <title>MCC Learning Resource Center</title>
 
-     <!-- Alertify JS link -->
-     <link rel="stylesheet" href="assets/css/alertify.min.css" />
-     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-     <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <!-- Alertify JS link -->
+    <link rel="stylesheet" href="assets/css/alertify.min.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
-     <!-- Iconscout cdn link -->
-     <link rel="stylesheet" href="assets/css/line.css">
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-     
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
+    <!-- Iconscout cdn link -->
+    <link rel="stylesheet" href="assets/css/line.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-     <!-- Bootstrap Icon -->
-     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
 
-     <!-- Custom CSS Styling -->
-     <link rel="stylesheet" href="assets/css/login.css">
+    <!-- Custom CSS Styling -->
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 
 <body>
@@ -40,7 +37,7 @@ include('config/dbcon.php');
                 <div class="row">
                     <div class="col-md-6">
                         <div class="">
-                            <img src="assets/img/mcc-logo.png" alt="logo" class="img-fluid d-none d-md-block  p-5" />
+                            <img src="assets/img/mcc-logo.png" alt="logo" class="img-fluid d-none d-md-block p-5" />
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6 px-5">
@@ -51,6 +48,16 @@ include('config/dbcon.php');
                                 <p class="m-0 fw-semibold">Admin Login</p>
                             </center>
                         </div>
+
+                        <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                            <?php
+                            $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                            $minutes_remaining = ceil($lockout_time_remaining / 60);
+                            ?>
+                            <div class="alert alert-danger">
+                                Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).
+                            </div>
+                        <?php endif; ?>
 
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
@@ -87,11 +94,10 @@ include('config/dbcon.php');
                                 <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
                             </div>
                             <div class="text-end mb-3">
-                                             <p>
-                                                  <a href="../login" class="text-primary text-decoration-none fw-semibold">User Login</a>
-                                             </p>
-                                             
-                                        </div>
+                                <p>
+                                    <a href="../login" class="text-primary text-decoration-none fw-semibold">User Login</a>
+                                </p>
+                            </div>
                         </form>
                     </div>
                 </div>
