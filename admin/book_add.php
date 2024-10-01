@@ -163,7 +163,7 @@ include('../message.php');
 
 <script>
 function searchTitles() {
-    const query = document.getElementById('title_search').value;
+    const query = sanitizeInput(document.getElementById('title_search').value);
     const resultsContainer = document.getElementById('title_results');
 
     if (query.length < 3) {
@@ -178,8 +178,8 @@ function searchTitles() {
         success: function(response) {
             const data = JSON.parse(response);
             resultsContainer.innerHTML = data.results.map(book => `
-                <div class="search-result" onclick="selectTitle('${book.title}', '${book.author}', '${book.copyright_date}', '${book.publisher}', '${book.isbn}', '${book.place_publication}', '${book.call_number}', '${book.category_id}', '${book.book_image}', '${book.subject}', '${book.subject1}', '${book.subject2}')">
-                    ${book.title}
+                <div class="search-result" onclick="selectTitle('${sanitizeInput(book.title)}', '${sanitizeInput(book.author)}', '${sanitizeInput(book.copyright_date)}', '${sanitizeInput(book.publisher)}', '${sanitizeInput(book.isbn)}', '${sanitizeInput(book.place_publication)}', '${sanitizeInput(book.call_number)}', '${sanitizeInput(book.category_id)}', '${sanitizeInput(book.book_image)}', '${sanitizeInput(book.subject)}', '${sanitizeInput(book.subject1)}', '${sanitizeInput(book.subject2)}')">
+                    ${sanitizeInput(book.title)}
                 </div>
             `).join('');
         }
@@ -187,22 +187,21 @@ function searchTitles() {
 }
 
 function selectTitle(title, author, copyright_date, publisher, isbn, place_publication, call_number, category_id, book_image, subject, subject1, subject2) {
-    document.getElementById('title').value = title;
-    document.getElementsByName('author')[0].value = author;
-    document.getElementsByName('copyright_date')[0].value = copyright_date;
-    document.getElementsByName('publisher')[0].value = publisher;
-    document.getElementsByName('isbn')[0].value = isbn;
-    document.getElementsByName('place_publication')[0].value = place_publication;
-    document.getElementsByName('call_number')[0].value = call_number;
-    document.getElementsByName('lrc_location')[0].value = category_id;
-    document.getElementsByName('subject')[0].value = subject;
-    document.getElementsByName('subject1')[0].value = subject1;
-    document.getElementsByName('subject2')[0].value = subject2;
+    document.getElementById('title').value = sanitizeInput(title);
+    document.getElementsByName('author')[0].value = sanitizeInput(author);
+    document.getElementsByName('copyright_date')[0].value = sanitizeInput(copyright_date);
+    document.getElementsByName('publisher')[0].value = sanitizeInput(publisher);
+    document.getElementsByName('isbn')[0].value = sanitizeInput(isbn);
+    document.getElementsByName('place_publication')[0].value = sanitizeInput(place_publication);
+    document.getElementsByName('call_number')[0].value = sanitizeInput(call_number);
+    document.getElementsByName('lrc_location')[0].value = sanitizeInput(category_id);
+    document.getElementsByName('subject')[0].value = sanitizeInput(subject);
+    document.getElementsByName('subject1')[0].value = sanitizeInput(subject1);
+    document.getElementsByName('subject2')[0].value = sanitizeInput(subject2);
 
     // Set the image if available
-    document.getElementById('book_image_name').value = book_image;
-    document.getElementById('existing_image').value = book_image;
-
+    document.getElementById('book_image_name').value = sanitizeInput(book_image);
+    document.getElementById('existing_image').value = sanitizeInput(book_image);
 
     document.getElementById('title_results').innerHTML = '';
 }
@@ -314,6 +313,11 @@ function checkAccessionNumberExists(accessionNumber) {
     });
     
     return exists;
+}
+
+// Sanitize input: remove any HTML tags
+function sanitizeInput(input) {
+    return input.replace(/<\/?[^>]+(>|$)/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 </script>
 
