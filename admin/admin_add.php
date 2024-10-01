@@ -30,7 +30,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">First Name</label>
-                                                  <input type="text" name="firstname" class="form-control" required>
+                                                  <input type="text" name="firstname" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -40,14 +40,14 @@ include('./includes/sidebar.php');
                                                        <label for="">Middle Name</label>
                                                        <span class=" text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="text" name="middlename" class="form-control">
+                                                  <input type="text" name="middlename" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Last Name</label>
-                                                  <input type="text" name="lastname" class="form-control" required>
+                                                  <input type="text" name="lastname" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -58,7 +58,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
-                                                  <input type="email" name="email" class="form-control" required>
+                                                  <input type="email" name="email" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -66,7 +66,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Phone Number</label>
                                                   <input type="tel" id="phone_number" name="phone_number"
-                                                       placeholder="09xxxxxxxxx" class="form-control format_number" maxlength="11" oninput="validatePhoneNumber()" required>
+                                                       placeholder="09xxxxxxxxx" class="form-control format_number" maxlength="11" oninput="validatePhoneNumber()" required onblur="sanitizeInput(this)">
                                                   <small id="phone_warning" class="text-danger"></small>
                                              </div>
                                         </div>
@@ -78,16 +78,17 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" name="address" class="form-control" required>
+                                                  <input type="text" name="address" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
                                              <div class="mb-3 mt-2">
                                                   <div class="d-flex justify-content-between">
                                                        <label for="">Profile Image</label>
-                                                       <span class=" text-muted"><small>(Optional)</small></span>
+                                                       <span class="text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="file" name="admin_image" class="form-control">
+                                                  <input type="file" name="admin_image" class="form-control" id="admin_image_input">
+                                                  <small class="text-muted" id="file_error" style="display: none; color: red;">Only JPG, JPEG, and PNG files are allowed.</small>
                                              </div>
                                         </div>
 
@@ -97,7 +98,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required>
+                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required onblur="sanitizeInput(this)">
                                                   <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                   <label class="form-check-label" for="showPassword">Show Password</label>
                                                   <small id="password_warning" class="text-danger"></small>
@@ -172,6 +173,26 @@ function validateForm() {
     }
     
     return true;
+}
+
+document.getElementById('admin_image_input').addEventListener('change', function() {
+    const file = this.files[0];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const errorMessage = document.getElementById('file_error');
+    
+    if (file) {
+        if (!allowedTypes.includes(file.type)) {
+            errorMessage.style.display = 'block'; // Show error message
+            this.value = ''; // Clear the input
+        } else {
+            errorMessage.style.display = 'none'; // Hide error message
+        }
+    }
+});
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
 }
 </script>
 <?php 
