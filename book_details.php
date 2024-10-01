@@ -1,4 +1,5 @@
 <?php
+ini_set('session.cookie_httponly', 1);
 ob_start(); // Start output buffering
 include('includes/header.php');
 include('includes/navbar.php');
