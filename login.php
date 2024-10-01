@@ -101,10 +101,7 @@ include('./admin/config/dbcon.php');
                                              </div>
                                         </div>
                                         <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg" id="reCaptcha"></div>
-                                             <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                                  Please complete the reCAPTCHA.
-                                             </div>
+                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
