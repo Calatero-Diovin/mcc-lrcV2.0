@@ -209,10 +209,11 @@ function loadStudentData(userId) {
     fetch('user_student_code.php?id=' + userId)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('editStudentId').value = data.user_id;
-            document.getElementById('editLName').value = data.lastname;
-            document.getElementById('editFName').value = data.firstname;
-            document.getElementById('editMName').value = data.middlename;
+            // Sanitize data to remove any potential XSS tags
+            document.getElementById('editStudentId').value = sanitizeInput(data.user_id);
+            document.getElementById('editLName').value = sanitizeInput(data.lastname);
+            document.getElementById('editFName').value = sanitizeInput(data.firstname);
+            document.getElementById('editMName').value = sanitizeInput(data.middlename);
 
             var myModal = new bootstrap.Modal(document.getElementById('editStudentModal'));
             myModal.show();
@@ -220,6 +221,11 @@ function loadStudentData(userId) {
         .catch(error => {
             console.error('Error fetching student data:', error);
         });
+}
+
+// Sanitize input: remove any HTML tags
+function sanitizeInput(input) {
+    return input.replace(/<\/?[^>]+(>|$)/g, "");
 }
 
 function confirmBlock(userId) {
