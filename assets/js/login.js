@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	$error_result = $('<center><label class = "text-danger">Invalid username or password</label></center>');
 	$error_result2 = $('<center><label class = "text-danger">Please complete the required field</label></center>');
 	$loading = $('<center><img src = "images/499.gif" height = "15px" /></center>');
