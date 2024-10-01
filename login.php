@@ -101,11 +101,12 @@ include('./admin/config/dbcon.php');
                                              </div>
                                         </div>
                                         <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
+                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg" id="recaptcha"></div>
+                                             <small id="recaptcha_error" style="color: red; display: none;">Please complete the reCAPTCHA.</small>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
-                                        <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
+                                        <button type="submit" name="login_btn" id="submit_button" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
                                         <div class="text-center mb-3">
                                              <p>
                                                   Don't have an account?
@@ -168,6 +169,23 @@ include('./admin/config/dbcon.php');
         if (/[^0-9-]/.test(value)) {
             studentIdInput.value = value.replace(/[^0-9-]/g, '');
         }
+    }
+});
+
+document.getElementById('submit_button').addEventListener('click', function(event) {
+    // Prevent default form submission
+    event.preventDefault();
+
+    const recaptchaResponse = grecaptcha.getResponse();
+    const errorMessage = document.getElementById('recaptcha_error');
+
+    if (!recaptchaResponse) {
+        errorMessage.style.display = 'block'; // Show error message
+    } else {
+        errorMessage.style.display = 'none'; // Hide error message
+        // If reCAPTCHA is completed, submit the form
+        // You can use the form ID here to submit it
+        document.forms[0].submit(); // Adjust if your form isn't the first one
     }
 });
      </script>
