@@ -91,14 +91,14 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="firstname" type="text"
                                                             class="form-control" id="firstname"
-                                                            value="<?=$admin['firstname']?>"></div>
+                                                            value="<?=$admin['firstname']?>" onblur="sanitizeInput(this)"></div>
                                              </div>
 
                                              <div class="row mb-3">
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="middlename" type="text"
-                                                            class="form-control" value="<?=$admin['middlename']?>">
+                                                            class="form-control" value="<?=$admin['middlename']?>" onblur="sanitizeInput(this)">
                                                   </div>
                                              </div>
                                              <div class="row mb-3">
@@ -106,7 +106,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Lastname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="lastname" type="text"
                                                             class="form-control" id="lastname"
-                                                            value="<?=$admin['lastname']?>">
+                                                            value="<?=$admin['lastname']?>" onblur="sanitizeInput(this)">
                                                   </div>
                                              </div>
 
@@ -114,7 +114,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="Address"
                                                        class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="address" type="text"
-                                                            class="form-control" id="Address" value="address"></div>
+                                                            class="form-control" id="Address" value="address" onblur="sanitizeInput(this)"></div>
                                              </div>
                                              <div class="row mb-3">
                                                   <label for="Phone"
@@ -122,7 +122,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <div class="col-md-8 col-lg-9"> <input name="phone" type="tel"
                                                             class="form-control" id="Phone"
                                                             maxlength="11"
-                                                            value="<?=$admin['phone_number']?>">
+                                                            value="<?=$admin['phone_number']?>" onblur="sanitizeInput(this)">
                                                             <div class="invalid-feedback">
                                                                       Phone number must start with "09" and be exactly 11 digits long.
                                                                  </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Email</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="email" type="email"
                                                             class="form-control" id="Email"
-                                                            value="<?=$admin['email']?>"></div>
+                                                            value="<?=$admin['email']?>" onblur="sanitizeInput(this)"></div>
                                              </div>
                                              <?php
                                                   }
@@ -240,6 +240,11 @@ if (isset($_SESSION['auth_admin']['admin_id']))
             document.getElementById('renewPassword').setCustomValidity('');
         }
     });
+
+    function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
 </script>
 
 <?php
