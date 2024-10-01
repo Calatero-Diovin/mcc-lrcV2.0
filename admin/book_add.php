@@ -171,20 +171,27 @@ function searchTitles() {
         return;
     }
 
+    console.log('Search Query:', query); // Debugging
+
     $.ajax({
         url: 'search_titles.php',
         type: 'POST',
         data: { query: query },
         success: function(response) {
             const data = JSON.parse(response);
+            console.log('Response Data:', data); // Debugging
             resultsContainer.innerHTML = data.results.map(book => `
                 <div class="search-result" onclick="selectTitle('${sanitizeInput(book.title)}', '${sanitizeInput(book.author)}', '${sanitizeInput(book.copyright_date)}', '${sanitizeInput(book.publisher)}', '${sanitizeInput(book.isbn)}', '${sanitizeInput(book.place_publication)}', '${sanitizeInput(book.call_number)}', '${sanitizeInput(book.category_id)}', '${sanitizeInput(book.book_image)}', '${sanitizeInput(book.subject)}', '${sanitizeInput(book.subject1)}', '${sanitizeInput(book.subject2)}')">
                     ${sanitizeInput(book.title)}
                 </div>
             `).join('');
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
         }
     });
 }
+
 
 function selectTitle(title, author, copyright_date, publisher, isbn, place_publication, call_number, category_id, book_image, subject, subject1, subject2) {
     document.getElementById('title').value = sanitizeInput(title);
@@ -315,9 +322,8 @@ function checkAccessionNumberExists(accessionNumber) {
     return exists;
 }
 
-// Sanitize input: remove any HTML tags
 function sanitizeInput(input) {
-    return input.replace(/<\/?[^>]+(>|$)/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return input.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
 }
 </script>
 
