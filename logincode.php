@@ -23,6 +23,29 @@ if (isset($_POST['login_btn'])) {
     $password = $_POST['password'];
     $role = $_POST['role_as'];
 
+    // Verify reCAPTCHA
+    $recaptcha_secret = '6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg'; // Replace with your actual secret key
+    $recaptcha_response = $_POST['g-recaptcha-response'];
+
+    // Make sure the reCAPTCHA response is present
+    if (empty($recaptcha_response)) {
+        $_SESSION['status'] = "Please complete the reCAPTCHA.";
+        $_SESSION['status_code'] = "error";
+        header("Location: login");
+        exit(0);
+    }
+
+    // Verify reCAPTCHA response
+    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptcha_secret}&response={$recaptcha_response}");
+    $responseKeys = json_decode($response, true);
+
+    if (intval($responseKeys["success"]) !== 1) {
+        $_SESSION['status'] = "reCAPTCHA verification failed. Please try again.";
+        $_SESSION['status_code'] = "error";
+        header("Location: login");
+        exit(0);
+    }
+
     // Determine the login query based on role
     if ($role == 'student') {
         $login_query = "SELECT * FROM user WHERE student_id_no = ? LIMIT 1";

@@ -100,9 +100,17 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
-                                        <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
-                                        </div>
+
+                                        <?php if (isset($_SESSION['message'])): ?>
+                                             <div class="alert alert-danger">
+                                                  <?php echo $_SESSION['message']; ?>
+                                             </div>
+                                             <div class="mb-3">
+                                                  <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
+                                                  <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
+                                             </div>
+                                             <?php unset($_SESSION['message']); ?>
+                                        <?php endif; ?>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
                                         <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
