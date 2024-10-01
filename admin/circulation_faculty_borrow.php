@@ -27,7 +27,7 @@ include('./includes/sidebar.php');
                             <div class="col-12 col-md-4 mt-4">
                                 <form action="" method="GET">
                                     <div class="input-group mb-3 input-group-sm">
-                                        <input type="text" name="firstname" value="<?php if(isset($_GET['firstname'])){echo $_GET['firstname'];}?>" class="form-control" placeholder="Enter Faculty/Staff First Name" aria-label="Firstname" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="text" name="firstname" value="<?php if(isset($_GET['firstname'])){echo $_GET['firstname'];}?>" class="form-control" placeholder="Enter Faculty/Staff First Name" aria-label="Firstname" aria-describedby="basic-addon1" autofocus required onblur="sanitizeInput(this)">
                                         <button type="submit" class="input-group-text bg-primary text-white" id="basic-addon1">Search</button>
                                     </div>
                                 </form>
@@ -163,4 +163,9 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
 </script>
