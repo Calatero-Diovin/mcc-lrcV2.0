@@ -44,7 +44,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                             <form action="" method="POST">
                                 <div class="input-group mb-3 input-group-sm">
                                     <span class="input-group-text bg-primary text-white" id="basic-addon1">ACCESSION NO.</span>
-                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required onblur="sanitizeInput(this)">
                                 </div>
                             </form>
                         </div>
@@ -257,6 +257,11 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
 </script>
 </body>
 </html>
