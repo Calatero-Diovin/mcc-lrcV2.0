@@ -183,8 +183,8 @@ function searchTitles() {
         success: function(response) {
             const data = JSON.parse(response);
             resultsContainer.innerHTML = data.results.map(book => `
-                <div class="search-result" onclick="selectTitle('${sanitizeInput(book.title)}', '${sanitizeInput(book.author)}', '${sanitizeInput(book.copyright_date)}', '${sanitizeInput(book.publisher)}', '${sanitizeInput(book.isbn)}', '${sanitizeInput(book.place_publication)}', '${sanitizeInput(book.call_number)}', '${sanitizeInput(book.category_id)}', '${sanitizeInput(book.book_image)}', '${sanitizeInput(book.subject)}', '${sanitizeInput(book.subject1)}', '${sanitizeInput(book.subject2)}')">
-                    ${sanitizeInput(book.title)}
+                <div class="search-result" onclick="selectTitle('${book.title}', '${book.author}', '${book.copyright_date}', '${book.publisher}', '${book.isbn}', '${book.place_publication}', '${book.call_number}', '${book.category_id}', '${book.book_image}', '${book.subject}', '${book.subject1}', '${book.subject2}')">
+                    ${book.title}
                 </div>
             `).join('');
         }
@@ -204,8 +204,10 @@ function selectTitle(title, author, copyright_date, publisher, isbn, place_publi
     document.getElementsByName('subject1')[0].value = subject1;
     document.getElementsByName('subject2')[0].value = subject2;
 
+    // Set the image if available
     document.getElementById('book_image_name').value = book_image;
     document.getElementById('existing_image').value = book_image;
+
 
     document.getElementById('title_results').innerHTML = '';
 }
@@ -273,7 +275,7 @@ function checkDuplicateAccessionNumbers() {
     const inputs = document.querySelectorAll('[name^="accession_number_"]');
     
     for (let input of inputs) {
-        const accessionNumber = sanitizeInput(input.value);
+        const accessionNumber = input.value;
         if (accessionNumbers.includes(accessionNumber)) {
             Swal.fire({
                 icon: 'error',
