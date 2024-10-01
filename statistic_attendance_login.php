@@ -1,4 +1,5 @@
 <?php 
+ini_set('session.cookie_httponly', 1);
 session_start();
 include('includes/header.php');  
 include('admin/config/dbcon.php');  
