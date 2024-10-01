@@ -11,8 +11,13 @@ if (isset($_SESSION['auth_admin']['admin_id'])) {
 
 $student_id = $_GET['student_id'];
 
-$user_query = mysqli_query($con, "SELECT * FROM user WHERE student_id_no = '$student_id'");
-$user_row = mysqli_fetch_array($user_query);
+$stmt = $con->prepare("SELECT * FROM user WHERE student_id_no = ?");
+$stmt->bind_param("s", $student_id); 
+$stmt->execute();
+$result = $stmt->get_result();
+$user_row = $result->fetch_array(MYSQLI_ASSOC);
+$stmt->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +50,7 @@ $user_row = mysqli_fetch_array($user_query);
                             <form action="" method="POST">
                                 <div class="input-group mb-3 input-group-sm">
                                     <span class="input-group-text bg-primary text-white" id="basic-addon1">ACCESSION NO.</span>
-                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required oninput="sanitizeInput(this)">
                                 </div>
                             </form>
                         </div>
@@ -257,6 +262,11 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function sanitizeInput(input) {
+    // Remove any potential XSS tags from the input
+    input.value = input.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 </script>
 </body>
 </html>
