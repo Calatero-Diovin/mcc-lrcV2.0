@@ -31,15 +31,15 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="title">Title</label>
-                                        <input type="text" id="title_search" class="form-control" placeholder="Search for a title" oninput="searchTitles()" autocomplete="off">
+                                        <input type="text" id="title_search" class="form-control" placeholder="Search for a title" oninput="searchTitles()" autocomplete="off" onblur="sanitizeInput(this)">
                                         <div id="title_results" class="search-results"></div>
-                                        <input type="text" name="title" id="title" class="form-control mt-2" placeholder="Or type a new title" required>
+                                        <input type="text" name="title" id="title" class="form-control mt-2" placeholder="Or type a new title" required onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="author">Author</label>
-                                        <input type="text" name="author" class="form-control">
+                                        <input type="text" name="author" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                             </div>
@@ -47,13 +47,13 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="isbn">ISBN</label>
-                                        <input type="text" name="isbn" class="form-control">
+                                        <input type="text" name="isbn" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="publisher">Publisher</label>
-                                        <input type="text" name="publisher" class="form-control">
+                                        <input type="text" name="publisher" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                             </div>
@@ -61,13 +61,13 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="copyright_date">Copyright Year</label>
-                                        <input type="text" id="copyright_date" name="copyright_date" class="form-control" autocomplete="off" pattern="\d{4}">
+                                        <input type="text" id="copyright_date" name="copyright_date" onblur="sanitizeInput(this)" class="form-control" autocomplete="off" pattern="\d{4}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="place_publication">Place of Publication</label>
-                                        <input type="text" name="place_publication" class="form-control">
+                                        <input type="text" name="place_publication" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="call_number">Call Number</label>
-                                        <input type="text" name="call_number" id="book_call_number" class="form-control">
+                                        <input type="text" name="call_number" id="book_call_number" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
@@ -120,9 +120,9 @@ include('./includes/sidebar.php');
                                         ?>
                                         <br>
                                         <label for="subject">Subject/s</label>
-                                        <input type="text" name="subject" class="form-control mb-2">
-                                        <input type="text" name="subject1" class="form-control mb-2">
-                                        <input type="text" name="subject2" class="form-control">
+                                        <input type="text" name="subject" class="form-control mb-2" onblur="sanitizeInput(this)">
+                                        <input type="text" name="subject1" class="form-control mb-2" onblur="sanitizeInput(this)">
+                                        <input type="text" name="subject2" class="form-control" onblur="sanitizeInput(this)">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
