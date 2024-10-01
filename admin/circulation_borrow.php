@@ -36,7 +36,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
-                                                       required>
+                                                       required oninput="sanitizeInput(this)">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -213,4 +213,9 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function sanitizeInput(input) {
+    // Remove any potential XSS tags from the input
+    input.value = input.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 </script>
