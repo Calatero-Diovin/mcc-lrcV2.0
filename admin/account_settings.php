@@ -81,8 +81,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             <input type="hidden" name="old_admin_image"
                                                                  value="<?=$admin['admin_image'];?>">
                                                             <input type="file" name="admin_image" class="form-control"
-                                                                 autocomplete="off">
-
+                                                                 autocomplete="off" id="admin_image_input">
+                                                                 <small class="text-muted" id="file_error" style="display: none; color: red;">Only JPG, JPEG, and PNG files are allowed.</small>
                                                        </div>
                                                   </div>
                                              </div>
@@ -240,6 +240,21 @@ if (isset($_SESSION['auth_admin']['admin_id']))
             document.getElementById('renewPassword').setCustomValidity('');
         }
     });
+
+    document.getElementById('admin_image_input').addEventListener('change', function() {
+    const file = this.files[0];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const errorMessage = document.getElementById('file_error');
+    
+    if (file) {
+        if (!allowedTypes.includes(file.type)) {
+            errorMessage.style.display = 'block'; // Show error message
+            this.value = ''; // Clear the input
+        } else {
+            errorMessage.style.display = 'none'; // Hide error message
+        }
+    }
+});
 
     function sanitizeInput(element) {
     const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
