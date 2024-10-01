@@ -155,7 +155,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="current_password" type="password" class="form-control" id="currentPassword">
+                                                            <input name="current_password" type="password" class="form-control" id="currentPassword" onblur="sanitizeInput(this)">
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                   </div>
@@ -164,7 +164,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required>
+                                                            <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required onblur="sanitizeInput(this)">
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                        <div id="newPasswordWarning" class="text-danger"></div>
@@ -174,7 +174,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required>
+                                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required onblur="sanitizeInput(this)">
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('renewPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                        <div id="renewPasswordWarning" class="text-danger"></div>
