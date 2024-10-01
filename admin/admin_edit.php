@@ -46,7 +46,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Firstname</label>
                                                   <input type="text" value="<?=$admin['firstname'];?>" name="firstname"
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -54,7 +54,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Middlename</label>
                                                   <input type="text" value="<?=$admin['middlename'];?>"
-                                                       name="middlename" class="form-control" autocomplete="off">
+                                                       name="middlename" class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -62,7 +62,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Lastname</label>
                                                   <input type="text" value="<?=$admin['lastname'];?>" name="lastname"
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -74,7 +74,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
                                                   <input type="text" value="<?=$admin['address'];?>" name="address"
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -85,7 +85,7 @@ include('./includes/sidebar.php');
                                                        value="<?=$admin['phone_number'];?>" name="phone_number"
                                                        placeholder="09xxxxxxxxx" id="phone_number"
                                                        class="form-control format_number" autocomplete="off"
-                                                       maxlength="11" pattern="09[0-9]{9}">
+                                                       maxlength="11" pattern="09[0-9]{9}" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -97,17 +97,16 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
                                                   <input type="email" value="<?=$admin['email'];?>" name="email"
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
                                         <div class="col-12 col-md-4">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Profile Image</label>
-                                                  <input type="hidden" name="old_admin_image"
-                                                       value="<?=$admin['admin_image'];?>">
-                                                  <input type="file" name="admin_image" class="form-control"
-                                                       autocomplete="off">
+                                                  <input type="hidden" name="old_admin_image" value="<?=$admin['admin_image'];?>">
+                                                  <input type="file" name="admin_image" class="form-control" id="admin_image_input" autocomplete="off">
+                                                  <small class="text-muted" id="file_error" style="display: none; color: red;">Only JPG, JPEG, and PNG files are allowed.</small>
                                              </div>
                                         </div>
                                    </div>
@@ -176,6 +175,26 @@ function validateForm() {
         return false;
     }
     return true;
+}
+
+document.getElementById('admin_image_input').addEventListener('change', function() {
+    const file = this.files[0];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const errorMessage = document.getElementById('file_error');
+    
+    if (file) {
+        if (!allowedTypes.includes(file.type)) {
+            errorMessage.style.display = 'block'; // Show error message
+            this.value = ''; // Clear the input
+        } else {
+            errorMessage.style.display = 'none'; // Hide error message
+        }
+    }
+});
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
 }
 </script>
 <?php 
