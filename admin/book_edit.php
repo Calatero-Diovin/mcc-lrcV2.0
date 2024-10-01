@@ -39,13 +39,13 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Title</label>
-                                                  <input type="text" name="title" value="<?=$book['title'];?>" class="form-control">
+                                                  <input type="text" name="title" value="<?=$book['title'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Author</label>
-                                                  <input type="text" name="author" value="<?=$book['author'];?>" class="form-control">
+                                                  <input type="text" name="author" value="<?=$book['author'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                    </div>
@@ -59,13 +59,13 @@ include('./includes/sidebar.php');
                                                        class="form-control"
                                                        autocomplete="off"
                                                        pattern="\d{4}"
-                                                       required>
+                                                       required onblur="sanitizeInput(this)">
                                         </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Publisher</label>
-                                                  <input type="text" name="publisher" value="<?=$book['publisher'];?>" class="form-control">
+                                                  <input type="text" name="publisher" value="<?=$book['publisher'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                    </div>
@@ -73,13 +73,13 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">ISBN</label>
-                                                  <input type="text" name="isbn" value="<?=$book['isbn'];?>" class="form-control">
+                                                  <input type="text" name="isbn" value="<?=$book['isbn'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Place of Publication</label>
-                                                  <input type="text" name="place_publication" value="<?=$book['place_publication'];?>" class="form-control">
+                                                  <input type="text" name="place_publication" value="<?=$book['place_publication'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                    </div>
@@ -89,14 +89,14 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Call Number</label>
-                                                  <input type="text" name="call_number" id="book_call_number_edit" value="<?=$book['call_number'];?>" class="form-control">
+                                                  <input type="text" name="call_number" id="book_call_number_edit" value="<?=$book['call_number'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Image</label>
                                                   <input type="hidden" name="old_book_image" value="<?=$book['book_image'];?>">
-                                                  <input type="file" name="book_image" class="form-control" autocomplete="off">
+                                                  <input type="file" name="book_image" class="form-control" autocomplete="off" accept=".jpg,.jpeg,.png" onchange="validateImage(this)">
                                              </div>
                                         </div>
                                    </div>
@@ -104,9 +104,9 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="subject">Subject/s</label>
-                                                  <input type="text" id="subject" name="subject" value="<?=$book['subject'];?>" class="form-control mb-2">
-                                                  <input type="text" id="subject" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2">
-                                                  <input type="text" id="subject" name="subject2" value="<?=$book['subject2'];?>" class="form-control">
+                                                  <input type="text" id="subject" name="subject" value="<?=$book['subject'];?>" class="form-control mb-2" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="subject" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="subject" name="subject2" value="<?=$book['subject2'];?>" class="form-control" onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                    </div>
@@ -168,4 +168,21 @@ include('../message.php');
         }
         return true; // Allow form submission
     }
+
+    function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
+
+function validateImage(input) {
+    const file = input.files[0];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    
+    if (file) {
+        if (!allowedTypes.includes(file.type)) {
+            alert('Invalid file type! Please upload an image file (JPG, JPEG, or PNG).');
+            input.value = ''; // Clear the input
+        }
+    }
+}
 </script>
