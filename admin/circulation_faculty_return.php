@@ -31,7 +31,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['firstname'])){echo $_GET['firstname'];}?>"
                                                        class="form-control" placeholder="Enter Faculty/Staff First Name"
                                                        aria-label="firstname" aria-describedby="basic-addon1" autofocus
-                                                       required>
+                                                       required onblur="sanitizeInput(this)">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -191,4 +191,9 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
 </script>
