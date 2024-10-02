@@ -35,7 +35,6 @@ include('./includes/sidebar.php');
                                    <table id="myDataTable" class="table table-bordered table-striped table-sm">
                                         <thead>
                                              <tr>
-                                                  <th>ID</th>
                                                   <th>QR Code</th>
                                                   <th>Full Name</th>
                                                   <th>Department</th>
@@ -53,7 +52,6 @@ include('./includes/sidebar.php');
                                                   {
                                                        ?>
                                              <tr>
-                                             <td class="auto-id" style="text-align: center;"></td>
                                                   <td>
                                                        <center>
                                                        <?php if($user['profile_image'] != ""): ?>
