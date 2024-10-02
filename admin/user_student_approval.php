@@ -84,7 +84,7 @@ include('./includes/sidebar.php');
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
                                                             <input type="submit" name="approved" value="Approve" class="btn btn-success">
-                                                            <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['user_id']; ?>">Deny</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['user_id']; ?>">Deny</button>
                                                        </form>
                                                        </center>
                                                   </td>
@@ -114,7 +114,7 @@ include('./includes/sidebar.php');
             </div>
             <div class="modal-body">
                 <form id="denyForm" action="user_student_code.php" method="POST">
-                    <input type="text" name="user_id" id="denyUserId">
+                    <input type="hidden" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
                     <div class="mb-3">
                         <label for="denyReason" class="form-label">Reason for Denial</label>
                         <textarea class="form-control" id="denyReason" name="deny_reason" rows="4" required></textarea>
@@ -149,12 +149,12 @@ document.addEventListener('DOMContentLoaded', function () {
      });
 
      // Handle Deny button click to set user_id in the modal form
-    document.querySelectorAll('button[data-bs-target="#denyModal"]').forEach(button => {
-        button.addEventListener('click', function () {
-            let userId = this.getAttribute('data-userid');
-            document.getElementById('denyUserId').value = userId;  // Set the correct user ID
-        });
-    });
+     document.querySelectorAll('button[data-bs-target="#denyModal"]').forEach(button => {
+          button.addEventListener('click', function () {
+               let userId = this.getAttribute('data-userid');
+               document.getElementById('denyUserId').value = userId;
+          });
+     });
 });
 </script>
 
