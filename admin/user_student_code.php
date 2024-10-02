@@ -34,10 +34,10 @@ function sendEmail($student_email, $subject, $message) {
 
 if (isset($_POST['deny'])) {
 
-    $student_id = $_POST['user_id'];
+    $student_id = $_POST['student_id_no'];
     $deny_reason = mysqli_real_escape_string($con, $_POST['deny_reason']);
 
-    $email_query = "SELECT email FROM user WHERE user_id=?";
+    $email_query = "SELECT email FROM user WHERE student_id_no=?";
     $stmt = mysqli_prepare($con, $email_query);
     mysqli_stmt_bind_param($stmt, 'i', $student_id);
     mysqli_stmt_execute($stmt);
@@ -52,7 +52,7 @@ if (isset($_POST['deny'])) {
         mysqli_stmt_bind_param($stmt, 's', $student_email);
         mysqli_stmt_execute($stmt);
 
-        $query = "DELETE FROM user WHERE user_id=?";
+        $query = "DELETE FROM user WHERE student_id_no=?";
         $stmt = mysqli_prepare($con, $query);
         mysqli_stmt_bind_param($stmt, 'i', $student_id);
         $query_run = mysqli_stmt_execute($stmt);
