@@ -41,7 +41,7 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $query = "SELECT * FROM user WHERE status = 'pending' ORDER BY user_id ASC";
+                                             $query = "SELECT * FROM user WHERE status = 'pending'";
                                              $query_run = mysqli_query($con, $query);
                                              
                                              if(mysqli_num_rows($query_run))
