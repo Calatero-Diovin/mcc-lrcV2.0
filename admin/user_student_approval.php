@@ -84,7 +84,7 @@ include('./includes/sidebar.php');
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
                                                             <input type="submit" name="approved" value="Approve" class="btn btn-success">
-                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['user_id']; ?>">Deny</button>
+                                                            <input type="submit" name="deny" value="Deny" class="btn btn-danger">
                                                        </form>
                                                        </center>
                                                   </td>
@@ -103,28 +103,6 @@ include('./includes/sidebar.php');
           </div>
      </section>
 </main>
-
-<!-- Deny Reason Modal -->
-<div class="modal fade" id="denyModal" tabindex="-1" aria-labelledby="denyModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="denyModalLabel">Deny Reason</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="denyForm" action="user_student_code.php" method="POST">
-                    <input type="text" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
-                    <div class="mb-3">
-                        <label for="denyReason" class="form-label">Reason for Denial</label>
-                        <textarea class="form-control" id="denyReason" name="deny_reason" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" name="deny" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php 
 include('./includes/footer.php');
@@ -146,14 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
      let ebookRows = ebooksTable.querySelectorAll('tr');
      ebookRows.forEach((row, index) => {
           row.querySelector('.auto-id').textContent = index + 1;
-     });
-
-     // Handle Deny button click to set user_id in the modal form
-     document.querySelectorAll('button[data-bs-target="#denyModal"]').forEach(button => {
-          button.addEventListener('click', function () {
-               let userId = this.getAttribute('data-userid');
-               document.getElementById('denyUserId').value = userId;
-          });
      });
 });
 </script>
