@@ -1,12 +1,12 @@
 <?php
 include('authentication.php');
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
-require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 function sendEmail($student_email, $subject, $message) {
     $mail = new PHPMailer(true);
@@ -33,11 +33,12 @@ function sendEmail($student_email, $subject, $message) {
 }
 
 if (isset($_POST['deny'])) {
+    global $con; 
 
-    $student_id = $_POST['student_id_no'];
+    $student_id = mysqli_real_escape_string($con, $_POST['user_id']);
     $deny_reason = mysqli_real_escape_string($con, $_POST['deny_reason']);
 
-    $email_query = "SELECT email FROM user WHERE student_id_no=?";
+    $email_query = "SELECT email FROM user WHERE user_id=?";
     $stmt = mysqli_prepare($con, $email_query);
     mysqli_stmt_bind_param($stmt, 'i', $student_id);
     mysqli_stmt_execute($stmt);
@@ -52,7 +53,7 @@ if (isset($_POST['deny'])) {
         mysqli_stmt_bind_param($stmt, 's', $student_email);
         mysqli_stmt_execute($stmt);
 
-        $query = "DELETE FROM user WHERE student_id_no=?";
+        $query = "DELETE FROM user WHERE user_id=?";
         $stmt = mysqli_prepare($con, $query);
         mysqli_stmt_bind_param($stmt, 'i', $student_id);
         $query_run = mysqli_stmt_execute($stmt);

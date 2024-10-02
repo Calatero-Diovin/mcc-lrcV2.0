@@ -31,6 +31,7 @@ include('./includes/sidebar.php');
                                    <table id="myDataTable" class="table table-bordered table-striped table-sm">
                                         <thead>
                                              <tr>
+                                                  <th><center>ID</center></th>
                                                   <th><center>Student Profile</center></th>
                                                   <th><center>Full Name</center></th>
                                                   <th><center>Student No</center></th>
@@ -49,6 +50,7 @@ include('./includes/sidebar.php');
                                                   {
                                                        ?>
                                              <tr>
+                                                  <td class="auto-id" style="text-align: center;"></td>
                                                   <td>
                                                        <center>
                                                             <?php if($user['profile_image'] != ""): ?>
@@ -82,7 +84,7 @@ include('./includes/sidebar.php');
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
                                                             <input type="submit" name="approved" value="Approve" class="btn btn-success">
-                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['student_id_no']; ?>">Deny</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['user_id']; ?>">Deny</button>
                                                        </form>
                                                        </center>
                                                   </td>
@@ -112,7 +114,7 @@ include('./includes/sidebar.php');
             </div>
             <div class="modal-body">
                 <form id="denyForm" action="user_student_code.php" method="POST">
-                    <input type="text" readonly value="<?=$user['student_id_no'];?>" name="user_id" id="denyUserId">
+                    <input type="hidden" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
                     <div class="mb-3">
                         <label for="denyReason" class="form-label">Reason for Denial</label>
                         <textarea class="form-control" id="denyReason" name="deny_reason" rows="4" required></textarea>
