@@ -33,34 +33,44 @@ function sendEmail($student_email, $subject, $message) {
 }
 
 if (isset($_POST['deny'])) {
-    global $con; 
+    global $con;
 
+    // Sanitize and validate inputs
     $student_id = mysqli_real_escape_string($con, $_POST['user_id']);
     $deny_reason = mysqli_real_escape_string($con, $_POST['deny_reason']);
+    if (empty($deny_reason) || strlen($deny_reason) > 255) {
+        $_SESSION['status'] = 'Invalid reason provided.';
+        $_SESSION['status_code'] = "error";
+        header("Location: user_student_approval");
+        exit(0);
+    }
 
+    // Fetch email
     $email_query = "SELECT email FROM user WHERE user_id=?";
-    $stmt = mysqli_prepare($con, $email_query);
-    mysqli_stmt_bind_param($stmt, 'i', $student_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $email_row = mysqli_fetch_assoc($result);
-
-    if ($email_row) {
-        $student_email = $email_row['email'];
-
-        $used_query = "UPDATE ms_account SET used=0 WHERE username=?";
-        $stmt = mysqli_prepare($con, $used_query);
-        mysqli_stmt_bind_param($stmt, 's', $student_email);
-        mysqli_stmt_execute($stmt);
-
-        $query = "DELETE FROM user WHERE user_id=?";
-        $stmt = mysqli_prepare($con, $query);
+    if ($stmt = mysqli_prepare($con, $email_query)) {
         mysqli_stmt_bind_param($stmt, 'i', $student_id);
-        $query_run = mysqli_stmt_execute($stmt);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $email_row = mysqli_fetch_assoc($result);
 
-        if ($query_run) {
-            $subject = "Account Denied Notification";
-            $message = " <html>
+        if ($email_row) {
+            $student_email = $email_row['email'];
+
+            // Update account status
+            $used_query = "UPDATE ms_account SET used=0 WHERE username=?";
+            if ($stmt = mysqli_prepare($con, $used_query)) {
+                mysqli_stmt_bind_param($stmt, 's', $student_email);
+                mysqli_stmt_execute($stmt);
+            }
+
+            // Delete user account
+            $query = "DELETE FROM user WHERE user_id=?";
+            if ($stmt = mysqli_prepare($con, $query)) {
+                mysqli_stmt_bind_param($stmt, 'i', $student_id);
+                if (mysqli_stmt_execute($stmt)) {
+                    // Prepare email
+                    $subject = "Account Denied Notification";
+                    $message = " <html>
                 <head>
                     <style>
                         body {
@@ -100,44 +110,51 @@ if (isset($_POST['deny'])) {
                     </style>
                 </head>
                 <body>
-                    <div class='container'>
-                        <div class='header'>
-                            <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
-                        </div>
-                        <div class='content'>
-                            <h1 style='color:#dc3545;text-align:center;'>Your Account has been Denied!!!</h1>
-                            <p>Dear Student,</p>
-                            <p>Your MCC-LRC account registration has been denied. Below is the reason for denial:</p>
-                            <p><strong>Reason:</strong> {$deny_reason}</p>
-                            <p>Please contact the library for more details.</p>
-                            <p>You can also contact us on our facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
-                            <p>Thank you.</p>
-                        </div>
-                    </div>
-                </body>
-            </html>
-            ";
+                            <div class='container'>
+                                <div class='header'>
+                                    <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                                </div>
+                                <div class='content'>
+                                    <h1 style='color:#dc3545;text-align:center;'>Your Account has been Denied!!!</h1>
+                                    <p>Dear Student,</p>
+                                    <p>Your MCC-LRC account registration has been denied. Below is the reason for denial:</p>
+                                    <p><strong>Reason:</strong> {$deny_reason}</p>
+                                    <p>Please contact the library for more details.</p>
+                                    <p>You can also contact us on our facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
+                                    <p>Thank you.</p>
+                                </div>
+                            </div>
+                        </body>
+                    </html>";
 
-            if (sendEmail($student_email, $subject, $message)) {
-                $_SESSION['status'] = 'Student Denied Successfully';
-                $_SESSION['status_code'] = "success";
+                    // Send email
+                    if (sendEmail($student_email, $subject, $message)) {
+                        $_SESSION['status'] = 'Student Denied Successfully';
+                        $_SESSION['status_code'] = "success";
+                    } else {
+                        $_SESSION['status'] = 'Unable to send notification email.';
+                        $_SESSION['status_code'] = "error";
+                    }
+                } else {
+                    $_SESSION['status'] = 'Student not Denied';
+                    $_SESSION['status_code'] = "error";
+                }
             } else {
-                $_SESSION['status'] = 'Unable to deny this moment.';
+                $_SESSION['status'] = 'Error preparing delete statement.';
                 $_SESSION['status_code'] = "error";
             }
         } else {
-            $_SESSION['status'] = 'Student not Denied';
+            $_SESSION['status'] = 'Student Not Found';
             $_SESSION['status_code'] = "error";
         }
-
-        header("Location: user_student_approval");
-        exit(0);
     } else {
-        $_SESSION['status'] = 'Student Not Found';
+        $_SESSION['status'] = 'Error preparing email query.';
         $_SESSION['status_code'] = "error";
-        header("Location: user_student_approval");
-        exit(0);
     }
+
+    // Redirect at the end
+    header("Location: user_student_approval");
+    exit(0);
 }
 
 // Student Approval

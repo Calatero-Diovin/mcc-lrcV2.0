@@ -84,7 +84,7 @@ include('./includes/sidebar.php');
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
                                                             <input type="submit" name="approved" value="Approve" class="btn btn-success">
-                                                            <input type="submit" name="deny" value="Deny" class="btn btn-danger">
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyReasonModal" onclick="setUserId(<?= $user['user_id']; ?>)">Deny</button>
                                                        </form>
                                                        </center>
                                                   </td>
@@ -103,6 +103,31 @@ include('./includes/sidebar.php');
           </div>
      </section>
 </main>
+
+<!-- Deny Reason Modal -->
+<div class="modal fade" id="denyReasonModal" tabindex="-1" aria-labelledby="denyReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="denyReasonModalLabel">Reason for Denial</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="denyForm" action="user_student_code.php" method="POST">
+                    <input type="text" name="user_id" id="user_id">
+                    <div class="mb-3">
+                        <label for="deny_reason" class="form-label">Enter Reason for Denial</label>
+                        <textarea class="form-control" id="deny_reason" name="deny_reason" rows="3" required></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Deny</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
 
 <?php 
 include('./includes/footer.php');
@@ -126,6 +151,11 @@ document.addEventListener('DOMContentLoaded', function () {
           row.querySelector('.auto-id').textContent = index + 1;
      });
 });
+
+function setUserId(userId) {
+    document.getElementById('user_id').value = userId;
+}
+
 </script>
 
 <!-- Bootstrap CSS -->
