@@ -33,9 +33,8 @@ function sendEmail($student_email, $subject, $message) {
 }
 
 if (isset($_POST['deny'])) {
-    global $con; 
 
-    $student_id = mysqli_real_escape_string($con, $_POST['user_id']);
+    $student_id = $_POST['user_id'];
     $deny_reason = mysqli_real_escape_string($con, $_POST['deny_reason']);
 
     $email_query = "SELECT email FROM user WHERE user_id=?";
