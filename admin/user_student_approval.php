@@ -82,7 +82,7 @@ include('./includes/sidebar.php');
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
                                                             <input type="submit" name="approved" value="Approve" class="btn btn-success">
-                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['user_id']; ?>">Deny</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyModal" data-userid="<?= $user['student_id_no']; ?>">Deny</button>
                                                        </form>
                                                        </center>
                                                   </td>
