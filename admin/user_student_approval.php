@@ -41,7 +41,7 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $query = "SELECT * FROM user WHERE status = 'pending'";
+                                             $query = "SELECT * FROM user WHERE status = 'pending' ORDER BY user_id ASC";
                                              $query_run = mysqli_query($con, $query);
                                              
                                              if(mysqli_num_rows($query_run))
@@ -114,7 +114,7 @@ include('./includes/sidebar.php');
             </div>
             <div class="modal-body">
                 <form id="denyForm" action="user_student_code.php" method="POST">
-                    <input type="text" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
+                    <input type="hidden" name="user_id" id="denyUserId">
                     <div class="mb-3">
                         <label for="denyReason" class="form-label">Reason for Denial</label>
                         <textarea class="form-control" id="denyReason" name="deny_reason" rows="4" required></textarea>
@@ -149,12 +149,12 @@ document.addEventListener('DOMContentLoaded', function () {
      });
 
      // Handle Deny button click to set user_id in the modal form
-     document.querySelectorAll('button[data-bs-target="#denyModal"]').forEach(button => {
-          button.addEventListener('click', function () {
-               let userId = this.getAttribute('data-userid');
-               document.getElementById('denyUserId').value = userId;
-          });
-     });
+    document.querySelectorAll('button[data-bs-target="#denyModal"]').forEach(button => {
+        button.addEventListener('click', function () {
+            let userId = this.getAttribute('data-userid');
+            document.getElementById('denyUserId').value = userId;  // Set the correct user ID
+        });
+    });
 });
 </script>
 
