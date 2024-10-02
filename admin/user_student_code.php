@@ -1,12 +1,12 @@
 <?php
 include('authentication.php');
 use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
-    require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-    require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 function sendEmail($student_email, $subject, $message) {
     $mail = new PHPMailer(true);
@@ -119,11 +119,11 @@ if (isset($_POST['deny'])) {
             ";
 
             if (sendEmail($student_email, $subject, $message)) {
-                $_SESSION['status'] = 'Student Denied and Email Sent';
+                $_SESSION['status'] = 'Student Denied Successfully';
                 $_SESSION['status_code'] = "success";
             } else {
-                $_SESSION['status'] = 'Student Denied and Email Sent';
-                $_SESSION['status_code'] = "success";
+                $_SESSION['status'] = 'Unable to deny this moment.';
+                $_SESSION['status_code'] = "error";
             }
         } else {
             $_SESSION['status'] = 'Student not Denied';
