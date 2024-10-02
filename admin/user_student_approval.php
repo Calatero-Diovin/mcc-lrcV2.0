@@ -114,7 +114,7 @@ include('./includes/sidebar.php');
             </div>
             <div class="modal-body">
                 <form id="denyForm" action="user_student_code.php" method="POST">
-                    <input type="hidden" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
+                    <input type="text" value="<?= $user['user_id']; ?>" name="user_id" id="denyUserId">
                     <div class="mb-3">
                         <label for="denyReason" class="form-label">Reason for Denial</label>
                         <textarea class="form-control" id="denyReason" name="deny_reason" rows="4" required></textarea>
