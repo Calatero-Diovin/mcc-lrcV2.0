@@ -122,7 +122,7 @@ include('./includes/sidebar.php');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Deny</button>
+                <button type="submit" name="deny" class="btn btn-danger">Deny</button>
             </div>
                 </form>
         </div>
