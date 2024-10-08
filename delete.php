@@ -122,7 +122,7 @@
                                                                  <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                             <!-- Edit Admin Action-->
-                                                            <a href="admin_edit?id=<?= $admin['admin_id']; ?>"
+                                                            <a href="delete_add?id=<?= $admin['admin_id']; ?>"
                                                                  name="update_admin"
                                                                  class="btn btn-sm  border text-success"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"
