@@ -30,7 +30,7 @@ if (isset($_POST['delete_admin'])) {
         $_SESSION['status'] = 'Admin Not Deleted';
         $_SESSION['status_code'] = "error";
     }
-    header("Location: admin");
+    header("Location: .");
     exit(0);
 }
 
