@@ -122,7 +122,7 @@
                                                                  <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                             <!-- Edit Admin Action-->
-                                                            <a href="delete_add?id=<?= $admin['admin_id']; ?>"
+                                                            <a href="delete_edit?id=<?= $admin['admin_id']; ?>"
                                                                  name="update_admin"
                                                                  class="btn btn-sm  border text-success"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -149,7 +149,7 @@
                                              ?>
                                         </tbody>
                                    </table>
-                                   <form id="delete-form" action="admin_code.php" method="POST" style="display: none;">
+                                   <form id="delete-form" action="delete_add.php" method="POST" style="display: none;">
                                         <input type="hidden" name="delete_admin" id="delete-admin-id">
                                    </form>
                               </div>
