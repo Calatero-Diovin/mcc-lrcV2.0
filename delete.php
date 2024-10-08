@@ -82,6 +82,7 @@
                                         </thead>
                                         <tbody>
                                              <?php
+                                             include('./admin/config/dbcon.php');
                                              $query = "SELECT * FROM admin";
                                              $query_run = mysqli_query($con, $query);
                                              
