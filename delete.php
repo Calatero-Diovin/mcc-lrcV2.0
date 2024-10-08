@@ -1,9 +1,56 @@
 <?php 
-include('admin/config/dbcon.php');
+ini_set('session.cookie_httponly', 1);
+session_start();
+include('./admin/config/dbcon.php');
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <title>MS 365 Verification</title>
+     
+        <!-- Alertify JS link -->
+        <link rel="stylesheet" href="assets/css/alertify.min.css" />
+     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+     <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
+     <!-- Iconscout cdn link -->
+     <link rel="stylesheet" href="assets/css/line.css">
+     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+     
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
+
+     <!-- Bootstrap Icon -->
+     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+
+     <!-- Custom CSS Styling -->
+     <link rel="stylesheet" href="assets/css/login.css">
+
+     
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <style>
+          .back{
+               position: fixed;
+               left:20px;
+               top:10px;
+               font-size: 30px;
+               color: black;
+          }
+          .back:hover{
+               color: gray;
+          }
+     </style>
+</head>
+
+<body>
 
 <main id="main" class="main">
      <div class="pagetitle">
@@ -117,9 +164,7 @@ include('admin/config/dbcon.php');
      </section>
 </main>
 <?php 
-include('includes/footer.php');
 include('includes/script.php');
-include('message.php');   
 ?>
 
 <script>
