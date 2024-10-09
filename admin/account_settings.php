@@ -133,7 +133,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Email</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="email" type="email"
                                                             class="form-control" id="Email"
-                                                            value="<?=$admin['email']?>" readonly disabled></div>
+                                                            value="<?=$admin['email']?>" readonly></div>
                                              </div>
                                              <?php
                                                   }
