@@ -183,6 +183,14 @@ function validateForm() {
                 text: 'XSS tags are not allowed.',
                 icon: 'error',
                 confirmButtonText: 'Okay'
+               }).then(() => {
+                // Clear the input fields
+                document.getElementById('firstname').value = '';
+                document.getElementById('middlename').value = '';
+                document.getElementById('lastname').value = '';
+
+                // Optionally, refresh the page after clearing the inputs
+                location.reload();
             });
             return true; // Return true if XSS is found
         }
