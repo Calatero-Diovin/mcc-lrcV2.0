@@ -25,17 +25,14 @@ include('./includes/sidebar.php');
                               <?php
                               if(isset($_GET['id']))
                               {
-                                   $admin_id = $_GET['id'];
+                                   $admin_id = mysqli_real_escape_string($con, $_GET['id']);
 
-                                   $query = "SELECT * FROM admin WHERE admin_id = ?";
-                                   $stmt = $con->prepare($query);
-                                   $stmt->bind_param("s", $admin_id);
-                                   $stmt->execute();
-                                   $query_run = $stmt->get_result();
+                                   $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
+                                   $query_run = mysqli_query($con, $query);
 
-                                   if ($query_run->num_rows > 0) 
+                                   if(mysqli_num_rows($query_run) > 0)
                                    {
-                                        $admin = $query_run->fetch_array(MYSQLI_ASSOC);
+                                       $admin = mysqli_fetch_array($query_run);
                                         ?>
                               <form action="admin_code.php" method="POST" enctype="multipart/form-data" onsubmit="return validatePhoneNumber()">
 
@@ -44,28 +41,24 @@ include('./includes/sidebar.php');
 
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
-                                                  <label for="">Firstname</label>
-                                                  <input type="text" value="<?=$admin['firstname'];?>" name="firstname"
-                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
+                                                  <label for="firstname">Firstname</label>
+                                                  <input type="text" id="firstname" value="<?=$admin['firstname'];?>" name="firstname" class="form-control" autocomplete="off" required>
                                              </div>
-                                        </div>
+                                             </div>
 
-                                        <div class="col-12 col-md-3">
+                                             <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
-                                                  <label for="">Middlename</label>
-                                                  <input type="text" value="<?=$admin['middlename'];?>"
-                                                       name="middlename" class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
+                                                  <label for="middlename">Middlename</label>
+                                                  <input type="text" id="middlename" value="<?=$admin['middlename'];?>" name="middlename" class="form-control" autocomplete="off" required>
                                              </div>
-                                        </div>
+                                             </div>
 
-                                        <div class="col-12 col-md-3">
+                                             <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
-                                                  <label for="">Lastname</label>
-                                                  <input type="text" value="<?=$admin['lastname'];?>" name="lastname"
-                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
+                                                  <label for="lastname">Lastname</label>
+                                                  <input type="text" id="lastname" value="<?=$admin['lastname'];?>" name="lastname" class="form-control" autocomplete="off" required>
                                              </div>
                                         </div>
-
                                    </div>
 
                                    <div class="row d-flex justify-content-center">
@@ -73,8 +66,8 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" value="<?=$admin['address'];?>" name="address"
-                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="address" value="<?=$admin['address'];?>" name="address"
+                                                       class="form-control" autocomplete="off">
                                              </div>
                                         </div>
 
@@ -85,7 +78,7 @@ include('./includes/sidebar.php');
                                                        value="<?=$admin['phone_number'];?>" name="phone_number"
                                                        placeholder="09xxxxxxxxx" id="phone_number"
                                                        class="form-control format_number" autocomplete="off"
-                                                       maxlength="11" pattern="09[0-9]{9}" onblur="sanitizeInput(this)">
+                                                       maxlength="11" pattern="09[0-9]{9}">
                                              </div>
                                         </div>
 
@@ -97,16 +90,17 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
                                                   <input type="email" value="<?=$admin['email'];?>" name="email"
-                                                       class="form-control" autocomplete="off" onblur="sanitizeInput(this)">
+                                                       class="form-control" autocomplete="off">
                                              </div>
                                         </div>
 
                                         <div class="col-12 col-md-4">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Profile Image</label>
-                                                  <input type="hidden" name="old_admin_image" value="<?=$admin['admin_image'];?>">
-                                                  <input type="file" name="admin_image" class="form-control" id="admin_image_input" autocomplete="off">
-                                                  <small class="text-muted" id="file_error" style="display: none; color: red;">Only JPG, JPEG, and PNG files are allowed.</small>
+                                                  <input type="hidden" name="old_admin_image"
+                                                       value="<?=$admin['admin_image'];?>">
+                                                  <input type="file" name="admin_image" class="form-control"
+                                                       autocomplete="off">
                                              </div>
                                         </div>
                                    </div>
@@ -133,14 +127,13 @@ include('./includes/sidebar.php');
                          </div>
                          </form>
                          <?php
-                             } else {
-                              // Handle case where no admin is found
-                              $_SESSION['status'] = 'Admin not found';
-                              $_SESSION['status_code'] = "error";
-                              header("Location: admin_edit");
-                              exit(0);
-                          }
-                      }
+                              }
+                              else
+                              {
+                                   echo "No such ID found";
+                              }
+
+                         }  
                          ?>
 
                     </div>
@@ -149,53 +142,65 @@ include('./includes/sidebar.php');
      </section>
 </main>
 <script>
-function sanitizeInput(input) {
-    const tempDiv = document.createElement('div');
-    tempDiv.textContent = input;
-    return tempDiv.innerHTML; // Converts any HTML to plain text
-}
+ function validateNameInput(inputField) {
+        const value = inputField.value;
+        const xssPattern = /<[^>]*>/; // Regex pattern to detect HTML tags
 
-function validateForm() {
-    const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
-    
-    inputs.forEach(input => {
-        input.value = sanitizeInput(input.value); // Sanitize input value
+        // Check for XSS tags
+        if (xssPattern.test(value)) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Your name cannot contain HTML tags.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            inputField.value = ''; // Clear the input field
+            inputField.focus(); // Refocus on the input field
+        }
+    }
+
+    // Attach event listeners to the input fields
+    document.getElementById('firstname').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('middlename').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('lastname').addEventListener('input', function() {
+        validateNameInput(this);
     });
 
+function validatePhoneNumber() {
     const phoneInput = document.getElementById('phone_number');
     const phoneNumber = phoneInput.value;
     const phonePattern = /^09\d{9}$/;
 
     if (!phonePattern.test(phoneNumber)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Invalid Phone Number',
-            text: 'Please ensure it starts with 09 and is 11 digits long.'
-        });
+        alert('Invalid phone number. Please ensure it starts with 09 and is 11 digits long.');
         return false;
     }
     return true;
 }
 
-document.getElementById('admin_image_input').addEventListener('change', function() {
-    const file = this.files[0];
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    const errorMessage = document.getElementById('file_error');
-    
-    if (file) {
-        if (!allowedTypes.includes(file.type)) {
-            errorMessage.style.display = 'block'; // Show error message
-            this.value = ''; // Clear the input
-        } else {
-            errorMessage.style.display = 'none'; // Hide error message
-        }
-    }
-});
+function validateAddress() {
+        const addressInput = document.getElementById('address').value;
+        const addressPattern = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*[A-Za-z\s]+$/; // Regex for "City, Municipality, Province"
 
-function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
-}
+        if (!addressPattern.test(addressInput)) {
+            Swal.fire({
+                title: 'Invalid Address Format!',
+                text: 'Please enter the address in the format: "Patao, Bantayan, Cebu".',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                document.getElementById('address').value = ''; // Clear the input
+            });
+        }
+        // No success message for valid addresses
+    }
+
+    // Attach event listener to the address input field for the blur event
+    document.getElementById('address').addEventListener('blur', validateAddress);
 </script>
 <?php 
 include('./includes/footer.php');
