@@ -98,7 +98,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required onblur="sanitizeInput(this)">
+                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required>
                                                   <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                   <label class="form-check-label" for="showPassword">Show Password</label>
                                                   <small id="password_warning" class="text-danger"></small>
