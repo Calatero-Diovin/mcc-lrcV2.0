@@ -3,6 +3,16 @@ include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 ?>
+
+<style>
+    .progress {
+        background-color: #e9ecef;
+    }
+    .progress-bar {
+        transition: width 0.4s ease;
+    }
+</style>
+
 <main id="main" class="main">
      <div class="pagetitle">
           <h1>Add Admin</h1>
@@ -97,10 +107,13 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required>
+                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
                                                   <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                   <label class="form-check-label" for="showPassword">Show Password</label>
                                                   <small id="password_warning" class="text-danger"></small>
+                                                  <div id="password_strength" class="progress mt-2" style="height: 5px; display: none;">
+                                                       <div id="strength_bar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                                  </div>
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
@@ -289,6 +302,58 @@ function validatePhoneNumber() {
             }).then(() => {
                 fileInput.value = ''; // Clear the input
             });
+        }
+    }
+
+    function checkPasswordStrength() {
+        const password = document.getElementById('password').value;
+        const strengthBar = document.getElementById('strength_bar');
+        const passwordStrength = document.getElementById('password_strength');
+        const warning = document.getElementById('password_warning');
+
+        // Show the progress bar when typing
+        passwordStrength.style.display = 'block';
+
+        let strength = 0;
+
+        // Check password strength criteria
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++; // special characters
+
+        // Update the progress bar width and color based on strength
+        switch (strength) {
+            case 0:
+                strengthBar.style.width = '0%';
+                strengthBar.className = 'progress-bar bg-danger';
+                warning.textContent = '';
+                break;
+            case 1:
+                strengthBar.style.width = '25%';
+                strengthBar.className = 'progress-bar bg-danger';
+                warning.textContent = 'Very Weak';
+                break;
+            case 2:
+                strengthBar.style.width = '50%';
+                strengthBar.className = 'progress-bar bg-warning';
+                warning.textContent = 'Weak';
+                break;
+            case 3:
+                strengthBar.style.width = '75%';
+                strengthBar.className = 'progress-bar bg-info';
+                warning.textContent = 'Moderate';
+                break;
+            case 4:
+                strengthBar.style.width = '100%';
+                strengthBar.className = 'progress-bar bg-success';
+                warning.textContent = 'Strong';
+                break;
+            default:
+                strengthBar.style.width = '0%';
+                strengthBar.className = 'progress-bar bg-danger';
+                warning.textContent = '';
         }
     }
 </script>
