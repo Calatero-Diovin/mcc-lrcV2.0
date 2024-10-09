@@ -58,7 +58,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
-                                                  <input type="email" name="email" class="form-control" required>
+                                                  <input type="email" name="email" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
 
@@ -78,7 +78,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" name="address" class="form-control" required>
+                                                  <input type="text" name="address" class="form-control" required onblur="sanitizeInput(this)">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
@@ -98,7 +98,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required>
+                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required onblur="sanitizeInput(this)">
                                                   <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                   <label class="form-check-label" for="showPassword">Show Password</label>
                                                   <small id="password_warning" class="text-danger"></small>
@@ -189,6 +189,11 @@ document.getElementById('admin_image_input').addEventListener('change', function
         }
     }
 });
+
+function sanitizeInput(element) {
+    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
+    element.value = sanitizedValue;
+}
 </script>
 <?php 
 include('./includes/footer.php');
