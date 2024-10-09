@@ -173,6 +173,22 @@ function validateForm() {
     
     return true;
 }
+
+document.getElementById('submitBtn').addEventListener('click', function() {
+        const input = document.getElementById('firstname').value;
+
+        // Regex pattern to check for common XSS tags
+        const xssPattern = /<[^>]*>/;
+
+        if (xssPattern.test(input)) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'XSS tags are not allowed.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+        }
+    });
 </script>
 <?php 
 include('./includes/footer.php');
