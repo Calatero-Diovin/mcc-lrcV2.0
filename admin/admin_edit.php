@@ -170,17 +170,44 @@ include('./includes/sidebar.php');
         validateNameInput(this);
     });
 
-function validatePhoneNumber() {
-    const phoneInput = document.getElementById('phone_number');
-    const phoneNumber = phoneInput.value;
-    const phonePattern = /^09\d{9}$/;
+    function validatePhoneNumber() {
+        const phoneInput = document.getElementById('phone_number');
+        const warning = document.getElementById('phone_warning');
 
-    if (!phonePattern.test(phoneNumber)) {
-        alert('Invalid phone number. Please ensure it starts with 09 and is 11 digits long.');
-        return false;
+        // Remove non-numeric characters
+        const cleanedInput = phoneInput.value.replace(/\D/g, '');
+
+        // Check if the input starts with "09"
+        if (cleanedInput.length > 09 && !cleanedInput.startsWith('09')) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number must start with "09".',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = ''; // Clear the input
+            });
+            return;
+        } else {
+            warning.textContent = ''; // Clear the warning if valid
+        }
+
+        // Ensure the maximum length of 11 digits
+        if (cleanedInput.length > 11) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number cannot exceed 11 digits.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = cleanedInput.substring(0, 11); // Trim to 11 digits
+            });
+            return;
+        }
+
+        // Set the cleaned input back to the input field
+        phoneInput.value = cleanedInput;
     }
-    return true;
-}
 
 function validateAddress() {
         const addressInput = document.getElementById('address').value;
