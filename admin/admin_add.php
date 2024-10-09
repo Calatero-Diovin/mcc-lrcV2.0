@@ -256,22 +256,23 @@ function validatePhoneNumber() {
 
     function validateAddress() {
         const addressInput = document.getElementById('address').value;
-        const addressPattern = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*[A-Za-z\s]+$/;
+        const addressPattern = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*[A-Za-z\s]+$/; // Regex for "City, Municipality, Province"
 
         if (!addressPattern.test(addressInput)) {
             Swal.fire({
                 title: 'Invalid Address Format!',
-                text: 'Please enter the address in the format: "Patao, Bantayan, Cebu".',
+                text: 'Please enter the address in the format: "City, Municipality, Province".',
                 icon: 'error',
                 confirmButtonText: 'Okay'
             }).then(() => {
                 document.getElementById('address').value = ''; // Clear the input
             });
         }
+        // No success message for valid addresses
     }
 
-    // Attach event listener to the address input field
-    document.getElementById('address').addEventListener('input', validateAddress);
+    // Attach event listener to the address input field for the blur event
+    document.getElementById('address').addEventListener('blur', validateAddress);
 </script>
 <?php 
 include('./includes/footer.php');
