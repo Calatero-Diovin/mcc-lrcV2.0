@@ -355,8 +355,20 @@ function validatePhoneNumber() {
                 strengthBar.className = 'progress-bar bg-danger';
                 warning.textContent = '';
         }
+    }
 
-        // Show SweetAlert if the password is not strong and has more than 0 characters
+    function validatePasswordStrength() {
+        const password = document.getElementById('password').value;
+        let strength = 0;
+
+        // Check password strength criteria
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++; // special characters
+
+        // Show SweetAlert if the password is not strong
         if (strength < 4 && password.length > 0) {
             Swal.fire({
                 title: 'Weak Password!',
@@ -366,6 +378,9 @@ function validatePhoneNumber() {
             });
         }
     }
+
+    // Add event listener for the password input
+    document.getElementById('password').addEventListener('blur', validatePasswordStrength);
 </script>
 <?php 
 include('./includes/footer.php');
