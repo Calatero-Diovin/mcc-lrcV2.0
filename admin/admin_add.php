@@ -355,6 +355,16 @@ function validatePhoneNumber() {
                 strengthBar.className = 'progress-bar bg-danger';
                 warning.textContent = '';
         }
+
+        // Show SweetAlert if the password is not strong
+        if (strength < 4 && password.length > 0) {
+            Swal.fire({
+                title: 'Weak Password!',
+                text: 'Your password must be stronger. Include uppercase letters, lowercase letters, numbers, and special characters.',
+                icon: 'warning',
+                confirmButtonText: 'Okay'
+            });
+        }
     }
 </script>
 <?php 
