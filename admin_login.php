@@ -13,6 +13,7 @@ include('config/dbcon.php');
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -93,6 +94,9 @@ include('config/dbcon.php');
                                     <div id="validationServerUsernameFeedback" class="invalid-feedback">
                                         Please enter your password.
                                     </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
