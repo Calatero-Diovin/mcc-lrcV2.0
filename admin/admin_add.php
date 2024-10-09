@@ -58,7 +58,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
-                                                  <input type="email" name="email" class="form-control" required onblur="sanitizeInput(this)">
+                                                  <input type="email" name="email" class="form-control" required>
                                              </div>
                                         </div>
 
@@ -78,7 +78,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" name="address" class="form-control" required onblur="sanitizeInput(this)">
+                                                  <input type="text" name="address" class="form-control" required>
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
