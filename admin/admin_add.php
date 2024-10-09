@@ -146,7 +146,7 @@ function validatePhoneNumber() {
         const cleanedInput = phoneInput.value.replace(/\D/g, '');
 
         // Check if the input starts with "09"
-        if (cleanedInput.length > 0 && !cleanedInput.startsWith('09')) {
+        if (cleanedInput.length > 09 && !cleanedInput.startsWith('09')) {
             Swal.fire({
                 title: 'Invalid Input!',
                 text: 'Phone number must start with "09".',
