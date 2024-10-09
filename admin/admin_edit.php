@@ -278,9 +278,7 @@ function validateAddress() {
     }
 
     // Attach event listener to the email input field
-    document.getElementById('email').addEventListener('input', function() {
-        validateEmail(this.value);
-    });
+    document.getElementById('email').addEventListener('blur', validateEmail);
 
     function validateImage() {
         const fileInput = document.getElementById('admin_image');
