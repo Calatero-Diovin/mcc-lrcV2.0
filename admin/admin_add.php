@@ -78,7 +78,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" name="address" class="form-control" required>
+                                                  <input type="text" id="address" name="address" class="form-control" required>
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
@@ -253,6 +253,25 @@ function validatePhoneNumber() {
     document.getElementById('email').addEventListener('input', function() {
         validateEmail(this.value);
     });
+
+    function validateAddress() {
+        const addressInput = document.getElementById('address').value;
+        const addressPattern = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*[A-Za-z\s]+$/;
+
+        if (!addressPattern.test(addressInput)) {
+            Swal.fire({
+                title: 'Invalid Address Format!',
+                text: 'Please enter the address in the format: "Patao, Bantayan, Cebu".',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                document.getElementById('address').value = ''; // Clear the input
+            });
+        }
+    }
+
+    // Attach event listener to the address input field
+    document.getElementById('address').addEventListener('input', validateAddress);
 </script>
 <?php 
 include('./includes/footer.php');
