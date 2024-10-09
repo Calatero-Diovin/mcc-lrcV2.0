@@ -90,7 +90,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
                                                   <input type="email" value="<?=$admin['email'];?>" name="email"
-                                                       class="form-control" autocomplete="off" id="email">
+                                                       class="form-control" autocomplete="off" id="email" readonly>
                                              </div>
                                         </div>
 
@@ -278,7 +278,9 @@ function validateAddress() {
     }
 
     // Attach event listener to the email input field
-    document.getElementById('email').addEventListener('blur', validateEmail);
+    document.getElementById('email').addEventListener('input', function() {
+        validateEmail(this.value);
+    });
 
     function validateImage() {
         const fileInput = document.getElementById('admin_image');
