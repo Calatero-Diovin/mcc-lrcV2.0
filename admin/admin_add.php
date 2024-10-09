@@ -104,18 +104,18 @@ include('./includes/sidebar.php');
                                    </div>
 
                                    <div class="row d-flex justify-content-center">
-                                        <div class="col-12 col-md-5">
-                                             <div class="mb-3 mt-2">
-                                                  <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
-                                                  <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
-                                                  <label class="form-check-label" for="showPassword">Show Password</label>
-                                                  <small id="password_warning" class="text-danger"></small>
-                                                  <div id="password_strength" class="progress mt-2" style="height: 5px; display: none;">
-                                                       <div id="strength_bar" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                                                  </div>
-                                             </div>
-                                        </div>
+                                   <div class="col-12 col-md-5">
+    <div class="mb-3 mt-2">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
+        <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
+        <label class="form-check-label" for="showPassword">Show Password</label>
+        <small id="password_warning" class="text-danger"></small>
+        <div id="password_strength" class="progress mt-2" style="height: 5px; display: none;">
+            <div id="strength_bar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+        </div>
+    </div>
+</div>
                                         <div class="col-12 col-md-4">
                                              <div class="mb-3 mt-2">
                                                   <label for="admin_type">Admin Type</label>
@@ -356,8 +356,8 @@ function validatePhoneNumber() {
                 warning.textContent = '';
         }
 
-        // Show SweetAlert if the password is not strong
-        if (strength < 4 && password.length > 8) {
+        // Show SweetAlert if the password is not strong and has more than 0 characters
+        if (strength < 4 && password.length > 0) {
             Swal.fire({
                 title: 'Weak Password!',
                 text: 'Your password must be stronger. Include uppercase letters, lowercase letters, numbers, and special characters.',
