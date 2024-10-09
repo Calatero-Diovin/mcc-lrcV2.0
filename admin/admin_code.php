@@ -81,6 +81,7 @@ if (isset($_POST['edit_admin'])) {
 
 // Add Admin
 if (isset($_POST['add_admin'])) {
+
     $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
     $middlename = mysqli_real_escape_string($con, $_POST['middlename']);
     $lastname = mysqli_real_escape_string($con, $_POST['lastname']);
@@ -91,6 +92,7 @@ if (isset($_POST['add_admin'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $admin_type = mysqli_real_escape_string($con, $_POST['admin_type']);
     $admin_image = $_FILES['admin_image']['name'];
+    $admin_image_tmp = $_FILES['admin_image']['tmp_name'];
 
     // Check if the email is from @mcclawis.edu.ph domain
     if (strpos($email, '@mcclawis.edu.ph') === false) {
@@ -128,11 +130,30 @@ if (isset($_POST['add_admin'])) {
         exit(0);
     }
 
+    // Handle file upload
     if ($admin_image != "") {
-        // Rename the Image
-        $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
+        // Check for file upload errors
+        if ($_FILES['admin_image']['error'] !== UPLOAD_ERR_OK) {
+            $_SESSION['status'] = 'Error uploading image.';
+            $_SESSION['status_code'] = "error";
+            header("Location: admin_add");
+            exit(0);
+        }
+
+        // Validate image type (optional)
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+        $admin_extension = strtolower(pathinfo($admin_image, PATHINFO_EXTENSION));
+        if (!in_array($admin_extension, $allowed_extensions)) {
+            $_SESSION['status'] = 'Invalid image type. Only JPG, PNG, and GIF allowed.';
+            $_SESSION['status_code'] = "error";
+            header("Location: admin_add");
+            exit(0);
+        }
+
+        // Rename the image
         $admin_filename = time() . '.' . $admin_extension;
 
+        // Insert data into the database
         $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $con->prepare($query);
@@ -140,7 +161,7 @@ if (isset($_POST['add_admin'])) {
         $query_run = $stmt->execute();
 
         if ($query_run) {
-            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
+            move_uploaded_file($admin_image_tmp, '../uploads/admin_profile/' . $admin_filename);
             $_SESSION['status'] = 'Admin Added successfully';
             $_SESSION['status_code'] = "success";
         } else {
@@ -148,6 +169,7 @@ if (isset($_POST['add_admin'])) {
             $_SESSION['status_code'] = "error";
         }
     } else {
+        // Insert data without an image
         $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, NOW())";
         $stmt = $con->prepare($query);
@@ -165,4 +187,5 @@ if (isset($_POST['add_admin'])) {
     header("Location: admin");
     exit(0);
 }
+
 ?>
