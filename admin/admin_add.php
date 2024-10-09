@@ -30,7 +30,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">First Name</label>
-                                                  <input type="text" name="firstname" class="form-control" required>
+                                                  <input type="text" id="firstname" name="firstname" class="form-control" required>
                                              </div>
                                         </div>
 
