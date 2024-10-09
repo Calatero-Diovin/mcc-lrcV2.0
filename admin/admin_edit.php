@@ -75,10 +75,10 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Phone Number</label>
                                                   <input type="tel"
-                                                       value="<?=$admin['phone_number'];?>" name="phone_number"
+                                                       value="<?=$admin['phone_number'];?>" id="phone_number" name="phone_number"
                                                        placeholder="09xxxxxxxxx" id="phone_number"
                                                        class="form-control format_number" autocomplete="off"
-                                                       maxlength="11" pattern="09[0-9]{9}">
+                                                       maxlength="11" oninput="validatePhoneNumber()">
                                              </div>
                                         </div>
 
@@ -90,7 +90,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
                                                   <input type="email" value="<?=$admin['email'];?>" name="email"
-                                                       class="form-control" autocomplete="off">
+                                                       class="form-control" autocomplete="off" id="email">
                                              </div>
                                         </div>
 
@@ -100,7 +100,7 @@ include('./includes/sidebar.php');
                                                   <input type="hidden" name="old_admin_image"
                                                        value="<?=$admin['admin_image'];?>">
                                                   <input type="file" name="admin_image" class="form-control"
-                                                       autocomplete="off">
+                                                       autocomplete="off" id="admin_image">
                                              </div>
                                         </div>
                                    </div>
@@ -201,6 +201,105 @@ function validateAddress() {
 
     // Attach event listener to the address input field for the blur event
     document.getElementById('address').addEventListener('blur', validateAddress);
+
+    function validatePhoneNumber() {
+        const phoneInput = document.getElementById('phone_number');
+        const warning = document.getElementById('phone_warning');
+
+        // Remove non-numeric characters
+        const cleanedInput = phoneInput.value.replace(/\D/g, '');
+
+        // Check if the input starts with "09"
+        if (cleanedInput.length > 09 && !cleanedInput.startsWith('09')) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number must start with "09".',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = ''; // Clear the input
+            });
+            return;
+        } else {
+            warning.textContent = ''; // Clear the warning if valid
+        }
+
+        // Ensure the maximum length of 11 digits
+        if (cleanedInput.length > 11) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number cannot exceed 11 digits.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = cleanedInput.substring(0, 11); // Trim to 11 digits
+            });
+            return;
+        }
+
+        // Set the cleaned input back to the input field
+        phoneInput.value = cleanedInput;
+    }
+
+     // Function to check for XSS tags and email domain
+     function validateEmail(input) {
+        const xssPattern = /<[^>]*>/;
+        const validDomain = /@mcclawis\.edu\.ph$/; // Regex for the valid domain
+
+        // Check for XSS tags
+        if (xssPattern.test(input)) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'XSS tags are not allowed.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                // Clear the input field
+                document.getElementById('email').value = '';
+            });
+            return true; // Return true if XSS is found
+        }
+
+        // Check for valid email domain
+        if (!validDomain.test(input)) {
+            Swal.fire({
+                title: 'Invalid Email!',
+                text: 'Please use an email address ending with @mcclawis.edu.ph.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                // Clear the input field
+                document.getElementById('email').value = '';
+            });
+            return true; // Return true if invalid email
+        }
+
+        return false; // Return false if everything is valid
+    }
+
+    // Attach event listener to the email input field
+    document.getElementById('email').addEventListener('input', function() {
+        validateEmail(this.value);
+    });
+
+    function validateImage() {
+        const fileInput = document.getElementById('admin_image');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+
+        // Check if the file extension is valid
+        if (!allowedExtensions.exec(filePath)) {
+            Swal.fire({
+                title: 'Invalid File Format!',
+                text: 'Please upload an image in JPEG, JPG, or PNG format.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                fileInput.value = ''; // Clear the input
+            });
+        }
+    }
+    document.getElementById('admin_image').addEventListener('blur', validateImage);
 </script>
 <?php 
 include('./includes/footer.php');
