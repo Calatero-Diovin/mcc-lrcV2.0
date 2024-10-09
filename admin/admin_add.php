@@ -261,7 +261,7 @@ function validatePhoneNumber() {
         if (!addressPattern.test(addressInput)) {
             Swal.fire({
                 title: 'Invalid Address Format!',
-                text: 'Please enter the address in the format: "City, Municipality, Province".',
+                text: 'Please enter the address in the format: "Patao, Bantayan, Cebu".',
                 icon: 'error',
                 confirmButtonText: 'Okay'
             }).then(() => {
