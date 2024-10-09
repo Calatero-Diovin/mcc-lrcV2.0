@@ -8,27 +8,31 @@ include('config/dbcon.php');
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/img/mcc-logo.png">
-    <title>MCC Learning Resource Center</title>
+<meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <title>MCC Learning Resource Center</title>
 
-    <!-- Alertify JS link -->
-    <link rel="stylesheet" href="assets/css/alertify.min.css" />
-    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-    <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+     <!-- Alertify JS link -->
+     <link rel="stylesheet" href="assets/css/alertify.min.css" />
+     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+     <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
-    <!-- Iconscout cdn link -->
-    <link rel="stylesheet" href="assets/css/line.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+     <!-- Iconscout cdn link -->
+     <link rel="stylesheet" href="assets/css/line.css">
+     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+     
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
+     <!-- Bootstrap Icon -->
+     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
 
-    <!-- Custom CSS Styling -->
-    <link rel="stylesheet" href="assets/css/login.css">
+     <!-- Custom CSS Styling -->
+     <link rel="stylesheet" href="assets/css/login.css">
+
 </head>
 
 <body>
@@ -105,35 +109,7 @@ include('config/dbcon.php');
             </div>
         </div>
     </section>
-
-    <!-- Verification Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="verificationModalLabel">Enter Verification Code</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>A verification code has been sent to your email. Please enter it below:</p>
-                    <form id="verificationForm" method="POST" action="verify_code.php">
-                        <div class="mb-3">
-                            <label for="verification_code" class="form-label">Verification Code</label>
-                            <input type="text" class="form-control" id="verification_code" name="verification_code" required>
-                        </div>
-                        <div class="invalid-feedback">Please enter the verification code.</div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" form="verificationForm" class="btn btn-primary">Verify</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <?php include('includes/script.php'); include('message.php'); ?>
-    
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
             const password = document.getElementById('password');
@@ -141,14 +117,6 @@ include('config/dbcon.php');
             password.setAttribute('type', type);
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
-        });
-
-        // Show the verification modal if login is successful
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-                <?php unset($_SESSION['login_success']); // Clear session variable ?>
-                $('#verificationModal').modal('show'); // Show the verification modal
-            <?php endif; ?>
         });
     </script>
 </body>

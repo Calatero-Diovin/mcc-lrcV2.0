@@ -19,19 +19,6 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
     exit(0);
 }
 
-// Check if a verification code was submitted
-if (isset($_POST['verification_code'])) {
-    if ($_POST['verification_code'] === $_SESSION['verification_code']) {
-        // Verification successful, proceed to login
-        unset($_SESSION['verification_code']); // Clear the verification code
-    } else {
-        $_SESSION['status'] = "Invalid verification code.";
-        $_SESSION['status_code'] = "error";
-        header("Location: admin_login");
-        exit(0);
-    }
-}
-
 if (isset($_POST['admin_login_btn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -47,20 +34,6 @@ if (isset($_POST['admin_login_btn'])) {
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password'])) {
-                // Check if this is a new device (you can implement more advanced logic here)
-                if (!isset($_SESSION['device_verified'])) {
-                    // Generate and send verification code
-                    $_SESSION['verification_code'] = rand(100000, 999999); // Example code
-                    $_SESSION['verification_email'] = $email; // Store email for sending code
-
-                    // Send email with verification code (implement your email function)
-                    mail($email, "Your verification code", "Your code is: " . $_SESSION['verification_code']);
-
-                    // Redirect to enter verification code
-                    header("Location: enter_verification.php");
-                    exit(0);
-                }
-
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
@@ -79,7 +52,7 @@ if (isset($_POST['admin_login_btn'])) {
                 ];
 
                 $_SESSION['login_success'] = true;
-                header("Location: admin_dashboard.php");
+                header("Location: admin_login");
                 exit(0);
             } else {
                 // Increment login attempts on failure
