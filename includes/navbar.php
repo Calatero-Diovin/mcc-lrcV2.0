@@ -36,8 +36,8 @@ include('admin/config/dbcon.php');
 
                     <?php else :?>
                     <li class="nav-item">
-                         <a class="nav-link  text-white <?=$page == 'admin_login' ? 'active': '' ?> fw-semibold"
-                              href="admin_login">Home</a>
+                         <a class="nav-link  text-white <?=$page == '.' ? 'active': '' ?> fw-semibold"
+                              href=".">Home</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
