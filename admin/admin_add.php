@@ -40,14 +40,14 @@ include('./includes/sidebar.php');
                                                        <label for="">Middle Name</label>
                                                        <span class=" text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="text" name="middlename" class="form-control">
+                                                  <input type="text" id="middlename" name="middlename" class="form-control">
                                              </div>
                                         </div>
 
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Last Name</label>
-                                                  <input type="text" name="lastname" class="form-control" required>
+                                                  <input type="text" id="lastname" name="lastname" class="form-control" required>
                                              </div>
                                         </div>
 
@@ -174,12 +174,9 @@ function validateForm() {
     return true;
 }
 
-document.getElementById('submitBtn').addEventListener('click', function() {
-        const input = document.getElementById('firstname').value;
-
-        // Regex pattern to check for common XSS tags
+ // Function to check for XSS tags
+ function checkForXSS(input) {
         const xssPattern = /<[^>]*>/;
-
         if (xssPattern.test(input)) {
             Swal.fire({
                 title: 'Invalid Input!',
@@ -187,7 +184,22 @@ document.getElementById('submitBtn').addEventListener('click', function() {
                 icon: 'error',
                 confirmButtonText: 'Okay'
             });
+            return true; // Return true if XSS is found
         }
+        return false; // Return false if no XSS
+    }
+
+    // Attach event listeners to input fields
+    document.getElementById('firstname').addEventListener('input', function() {
+        checkForXSS(this.value);
+    });
+
+    document.getElementById('middlename').addEventListener('input', function() {
+        checkForXSS(this.value);
+    });
+
+    document.getElementById('lastname').addEventListener('input', function() {
+        checkForXSS(this.value);
     });
 </script>
 <?php 
