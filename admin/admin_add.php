@@ -368,6 +368,18 @@ function validatePhoneNumber() {
         if (/[0-9]/.test(password)) strength++;
         if (/[^A-Za-z0-9]/.test(password)) strength++; // special characters
 
+        // Check for XSS tags
+        const xssPattern = /<[^>]*>/; // Regex pattern to detect HTML tags
+        if (xssPattern.test(password)) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Your password cannot contain HTML tags.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return; // Exit if XSS is detected
+        }
+
         // Show SweetAlert if the password is not strong
         if (strength < 4 && password.length > 0) {
             Swal.fire({
