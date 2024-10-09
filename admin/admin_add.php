@@ -87,7 +87,7 @@ include('./includes/sidebar.php');
                                                        <label for="">Profile Image</label>
                                                        <span class=" text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="file" name="admin_image" class="form-control">
+                                                  <input type="file" id="admin_image" name="admin_image" class="form-control">
                                              </div>
                                         </div>
 
@@ -273,6 +273,24 @@ function validatePhoneNumber() {
 
     // Attach event listener to the address input field for the blur event
     document.getElementById('address').addEventListener('blur', validateAddress);
+
+    function validateImage() {
+        const fileInput = document.getElementById('admin_image');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+
+        // Check if the file extension is valid
+        if (!allowedExtensions.exec(filePath)) {
+            Swal.fire({
+                title: 'Invalid File Format!',
+                text: 'Please upload an image in JPEG, JPG, or PNG format.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                fileInput.value = ''; // Clear the input
+            });
+        }
+    }
 </script>
 <?php 
 include('./includes/footer.php');
