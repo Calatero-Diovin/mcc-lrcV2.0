@@ -139,40 +139,43 @@ function togglePassword() {
 }
 
 function validatePhoneNumber() {
-    var phoneNumber = document.getElementById("phone_number").value;
-    var warning = document.getElementById("phone_warning");
-    var phonePattern = /^09\d{0,9}$/;
+        const phoneInput = document.getElementById('phone_number');
+        const warning = document.getElementById('phone_warning');
 
-    if (!phonePattern.test(phoneNumber)) {
-        warning.textContent = "Phone number must start with 09 and contain only numbers.";
-    } else {
-        warning.textContent = "";
+        // Remove non-numeric characters
+        const cleanedInput = phoneInput.value.replace(/\D/g, '');
+
+        // Check if the input starts with "09"
+        if (cleanedInput.length > 0 && !cleanedInput.startsWith('09')) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number must start with "09".',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = ''; // Clear the input
+            });
+            return;
+        } else {
+            warning.textContent = ''; // Clear the warning if valid
+        }
+
+        // Ensure the maximum length of 11 digits
+        if (cleanedInput.length > 11) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Phone number cannot exceed 11 digits.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                phoneInput.value = cleanedInput.substring(0, 11); // Trim to 11 digits
+            });
+            return;
+        }
+
+        // Set the cleaned input back to the input field
+        phoneInput.value = cleanedInput;
     }
-}
-
-function validateForm() {
-    var phoneNumber = document.getElementById("phone_number").value;
-    var warning = document.getElementById("phone_warning");
-    var phonePattern = /^09\d{9}$/;
-
-    if (!phonePattern.test(phoneNumber)) {
-        warning.textContent = "Phone number must start with 09 and be 11 digits long.";
-        return false;
-    } else {
-        warning.textContent = "";
-    }
-
-    var password = document.getElementById("password").value;
-    var passwordWarning = document.getElementById("password_warning");
-    if (password.length < 8) {
-        passwordWarning.textContent = "Password must be at least 8 characters long.";
-        return false;
-    } else {
-        passwordWarning.textContent = "";
-    }
-    
-    return true;
-}
 
  // Function to check for XSS tags
  function checkForXSS(input) {
