@@ -1,42 +1,47 @@
 <?php
 include('authentication.php');
 
-// Delete Admin
-if (isset($_POST['delete_admin'])) {
-    $admin_id = mysqli_real_escape_string($con, $_POST['delete_admin']);
 
-    $check_img_query = "SELECT admin_image FROM admin WHERE admin_id = ?";
-    $stmt = $con->prepare($check_img_query);
-    $stmt->bind_param("s", $admin_id);
-    $stmt->execute();
-    $img_result = $stmt->get_result();
-    $result_data = $img_result->fetch_array(MYSQLI_ASSOC);
+if(isset($_POST['delete_admin']))
+{
+     $admin_id = mysqli_real_escape_string($con, $_POST['delete_admin']);
 
-    $admin_image = $result_data['admin_image'];
+     $check_img_query = "SELECT * FROM admin WHERE admin_id ='$admin_id'";
+     $img_result = mysqli_query($con, $check_img_query);
+     $result_data = mysqli_fetch_array($img_result);
 
-    $query = "DELETE FROM admin WHERE admin_id = ?";
-    $stmt = $con->prepare($query);
-    $stmt->bind_param("s", $admin_id);
-    $query_run = $stmt->execute();
+     $admin_image = $result_data['admin_image'];
 
-    if ($query_run) {
-        if (file_exists('../uploads/admin_profile/' . $admin_image)) {
-            unlink("../uploads/admin_profile/" . $admin_image);
-        }
+     $query = "DELETE FROM admin WHERE admin_id ='$admin_id'";
+     $query_run = mysqli_query($con, $query);
 
-        $_SESSION['status'] = 'Admin Deleted Successfully';
-        $_SESSION['status_code'] = "success";
-    } else {
-        $_SESSION['status'] = 'Admin Not Deleted';
-        $_SESSION['status_code'] = "error";
-    }
-    header("Location: admin");
-    exit(0);
+     if($query_run)
+     {
+          if(file_exists('../uploads/admin_profile/'.$admin_image))
+          {
+               unlink("../uploads/admin_profile/".$admin_image);
+          }
+
+          $_SESSION['status'] = 'Admin Deleted Successfully';
+          $_SESSION['status_code'] = "success";
+          header("Location: admin");
+          exit(0);
+     }
+     else
+     {
+          $_SESSION['status'] = 'Admin Not Deleted';
+          $_SESSION['status_code'] = "error";
+          header("Location: admin");
+          exit(0);
+     }
 }
 
+
 // Update Admin
-if (isset($_POST['edit_admin'])) {
+if(isset($_POST['edit_admin']))
+{
     $admin_id = mysqli_real_escape_string($con, $_POST['admin_id']);
+
     $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
     $middlename = mysqli_real_escape_string($con, $_POST['middlename']);
     $lastname = mysqli_real_escape_string($con, $_POST['lastname']);
@@ -49,35 +54,42 @@ if (isset($_POST['edit_admin'])) {
     $admin_image = $_FILES['admin_image']['name'];
     $update_admin_filename = $old_admin_filename;
 
-    if ($admin_image != NULL) {
+    if($admin_image != NULL)
+    {
         // Rename the Image
         $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
-        $admin_filename = time() . '.' . $admin_extension;
-        $update_admin_filename = $admin_filename;
+        $admin_filename = time().'.'.$admin_extension;
+        $update_admin_filename =  $admin_filename;
     }
 
-    $query = "UPDATE admin SET firstname = ?, middlename = ?, lastname = ?, email = ?, address = ?, phone_number = ?, admin_type = ?, admin_image = ? WHERE admin_id = ?";
-    $stmt = $con->prepare($query);
-    $stmt->bind_param("sssssssss", $firstname, $middlename, $lastname, $email, $address, $phone_number, $admin_type, $update_admin_filename, $admin_id);
-    $query_run = $stmt->execute();
+    $query = "UPDATE `admin` SET firstname='$firstname', middlename='$middlename', lastname='$lastname', email='$email', address='$address', phone_number='$phone_number', admin_type='$admin_type', admin_image='$update_admin_filename' WHERE admin_id = '$admin_id'";
+    $query_run = mysqli_query($con, $query);
 
-    if ($query_run) {
-        if ($admin_image != NULL) {
-            if (file_exists('../uploads/admin_profile/' . $old_admin_filename)) {
-                unlink("../uploads/admin_profile/" . $old_admin_filename);
+    if($query_run)
+    {
+        if($admin_image != NULL)
+        {
+            if(file_exists('../uploads/admin_profile/'.$old_admin_filename))
+            {
+                unlink("../uploads/admin_profile/".$old_admin_filename);
             }
-            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
+            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/'.$admin_filename);
         }
-
+        
         $_SESSION['status'] = 'Admin Updated successfully';
         $_SESSION['status_code'] = "success";
-    } else {
+        header("Location: admin_edit?id=$admin_id");
+        exit(0);
+    }
+    else
+    {
         $_SESSION['status'] = 'Admin not Updated';
         $_SESSION['status_code'] = "error";
+        header("Location: admin_edit?id=$admin_id");
+        exit(0);
     }
-    header("Location: admin_edit?id=$admin_id");
-    exit(0);
 }
+
 
 // Add Admin
 if (isset($_POST['add_admin'])) {
@@ -101,13 +113,10 @@ if (isset($_POST['add_admin'])) {
     }
 
     // Check if the email exists in ms_account table
-    $email_check_query = "SELECT * FROM ms_account WHERE username = ?";
-    $stmt = $con->prepare($email_check_query);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $email_check_result = $stmt->get_result();
+    $email_check_query = "SELECT * FROM ms_account WHERE username = '$email'";
+    $email_check_result = mysqli_query($con, $email_check_query);
 
-    if ($email_check_result->num_rows == 0) {
+    if (mysqli_num_rows($email_check_result) == 0) {
         $_SESSION['status'] = 'Email not found. Please visit the BSIT office to get registered.';
         $_SESSION['status_code'] = "error";
         header("Location: admin_add");
@@ -115,50 +124,53 @@ if (isset($_POST['add_admin'])) {
     }
 
     // Check if the email already exists in admin table
-    $email_check_query_admin = "SELECT * FROM admin WHERE email = ?";
-    $stmt = $con->prepare($email_check_query_admin);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $email_check_result_admin = $stmt->get_result();
+    $email_check_query_admin = "SELECT * FROM admin WHERE email = '$email'";
+    $email_check_result_admin = mysqli_query($con, $email_check_query_admin);
 
-    if ($email_check_result_admin->num_rows > 0) {
+    if (mysqli_num_rows($email_check_result_admin) > 0) {
         $_SESSION['status'] = 'Email already exists.';
         $_SESSION['status_code'] = "error";
         header("Location: admin_add");
         exit(0);
     }
 
-    // Check if the image is uploaded
-    if (empty($admin_image)) {
-        $_SESSION['status'] = 'Image is required.';
-        $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
-        exit(0);
-    }
+    if ($admin_image != "") {
+        // Rename the Image
+        $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
+        $admin_filename = time() . '.' . $admin_extension;
 
-    // Rename the Image
-    $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
-    $admin_filename = time() . '.' . $admin_extension;
+        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
+                  VALUES ('$firstname', '$middlename', '$lastname', '$email', '$address', '$phone_number', '$hashed_password', '$admin_filename', '$admin_type', NOW())";
+        $query_run = mysqli_query($con, $query);
 
-    // Prepare the query
-    $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-    $stmt = $con->prepare($query);
-    $stmt->bind_param("ssssssssis", $firstname, $middlename, $lastname, $email, $address, $phone_number, $hashed_password, $admin_filename, $admin_type);
-    
-    $query_run = $stmt->execute();
-
-    if ($query_run) {
-        move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
-        $_SESSION['status'] = 'Admin Added successfully';
-        $_SESSION['status_code'] = "success";
+        if ($query_run) {
+            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
+            $_SESSION['status'] = 'Admin Added successfully';
+            $_SESSION['status_code'] = "success";
+            header("Location: admin");
+            exit(0);
+        } else {
+            $_SESSION['status'] = 'Admin not Added';
+            $_SESSION['status_code'] = "error";
+            header("Location: admin");
+            exit(0);
+        }
     } else {
-        $_SESSION['status'] = 'Admin not Added';
-        $_SESSION['status_code'] = "error";
-    }
-    
-    header("Location: admin");
-    exit(0);
-}
+        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
+                  VALUES ('$firstname', '$middlename', '$lastname', '$email', '$address', '$phone_number', '$hashed_password', NULL, '$admin_type', NOW())";
+        $query_run = mysqli_query($con, $query);
 
+        if ($query_run) {
+            $_SESSION['status'] = 'Admin Added successfully';
+            $_SESSION['status_code'] = "success";
+            header("Location: admin");
+            exit(0);
+        } else {
+            $_SESSION['status'] = 'Admin not Added';
+            $_SESSION['status_code'] = "error";
+            header("Location: admin");
+            exit(0);
+        }
+    }
+}
 ?>
