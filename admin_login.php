@@ -32,6 +32,7 @@ include('config/dbcon.php');
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 
@@ -93,6 +94,10 @@ include('config/dbcon.php');
                                     <div id="validationServerUsernameFeedback" class="invalid-feedback">
                                         Please enter your password.
                                     </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <div class="g-recaptcha" data-sitekey="6LfNJ1wqAAAAAKE4vmQh1Gc4LJC6e7Js1Eg9Ns76"></div>
+                                    <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
