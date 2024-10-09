@@ -114,7 +114,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="Address"
                                                        class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="address" type="text"
-                                                            class="form-control" id="Address" value="address"></div>
+                                                            class="form-control" id="Address" value="<?=$admin['address']?>"></div>
                                              </div>
                                              <div class="row mb-3">
                                                   <label for="Phone"
