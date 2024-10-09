@@ -130,7 +130,7 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-footer d-flex justify-content-end">
                               <div>
-                                   <a href="admin.php" class="btn btn-secondary">Cancel</a>
+                                   <a href="admin" class="btn btn-secondary">Cancel</a>
                                    <button type="submit" name="add_admin" class="btn btn-primary">Add Admin</button>
                               </div>
                          </div>
