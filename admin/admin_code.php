@@ -128,41 +128,37 @@ if (isset($_POST['add_admin'])) {
         exit(0);
     }
 
-    if ($admin_image != "") {
-        // Rename the Image
-        $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
-        $admin_filename = time() . '.' . $admin_extension;
-
-        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("ssssssssis", $firstname, $middlename, $lastname, $email, $address, $phone_number, $hashed_password, $admin_filename, $admin_type);
-        $query_run = $stmt->execute();
-
-        if ($query_run) {
-            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
-            $_SESSION['status'] = 'Admin Added successfully';
-            $_SESSION['status_code'] = "success";
-        } else {
-            $_SESSION['status'] = 'Admin not Added';
-            $_SESSION['status_code'] = "error";
-        }
-    } else {
-        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, NOW())";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("sssssssss", $firstname, $middlename, $lastname, $email, $address, $phone_number, $hashed_password, $admin_type);
-        $query_run = $stmt->execute();
-
-        if ($query_run) {
-            $_SESSION['status'] = 'Admin Added successfully';
-            $_SESSION['status_code'] = "success";
-        } else {
-            $_SESSION['status'] = 'Admin not Added';
-            $_SESSION['status_code'] = "error";
-        }
+    // Check if the image is uploaded
+    if (empty($admin_image)) {
+        $_SESSION['status'] = 'Image is required.';
+        $_SESSION['status_code'] = "error";
+        header("Location: admin_add");
+        exit(0);
     }
+
+    // Rename the Image
+    $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
+    $admin_filename = time() . '.' . $admin_extension;
+
+    // Prepare the query
+    $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("ssssssssis", $firstname, $middlename, $lastname, $email, $address, $phone_number, $hashed_password, $admin_filename, $admin_type);
+    
+    $query_run = $stmt->execute();
+
+    if ($query_run) {
+        move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
+        $_SESSION['status'] = 'Admin Added successfully';
+        $_SESSION['status_code'] = "success";
+    } else {
+        $_SESSION['status'] = 'Admin not Added';
+        $_SESSION['status_code'] = "error";
+    }
+    
     header("Location: admin");
     exit(0);
 }
+
 ?>
