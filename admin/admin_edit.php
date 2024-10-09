@@ -19,7 +19,7 @@ include('./includes/sidebar.php');
                <div class="col-lg-12">
                     <div class="card">
                          <div class="card-header d-flex justify-content-end">
-                              <a href="admin.php" class="btn btn-primary">Back</a>
+                              <a href="admin" class="btn btn-primary">Back</a>
                          </div>
                          <div class="card-body">
                               <?php
