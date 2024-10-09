@@ -190,10 +190,6 @@ document.getElementById('admin_image_input').addEventListener('change', function
     }
 });
 
-function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
-}
 </script>
 <?php 
 include('./includes/footer.php');
