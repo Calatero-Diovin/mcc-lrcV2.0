@@ -81,7 +81,7 @@ include('config/dbcon.php');
                                     <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
-                                        Please enter a valid email ending with @mcclawis.edu.ph
+                                        Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
@@ -134,19 +134,6 @@ include('config/dbcon.php');
             });
         <?php endif; ?>
     });
-
-    function validateEmail() {
-    const emailInput = document.getElementById('email');
-    const feedback = document.getElementById('validationServerEmailFeedback');
-    
-    if (emailInput.value.endsWith('@mcclawis.edu.ph')) {
-        emailInput.classList.remove('is-invalid');
-        feedback.style.display = 'none';
-    } else {
-        emailInput.classList.add('is-invalid');
-        feedback.style.display = 'block';
-    }
-}
 </script>
 
 </html>
