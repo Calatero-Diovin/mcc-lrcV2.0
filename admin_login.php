@@ -166,41 +166,23 @@ include('config/dbcon.php');
     <?php endif; ?>
 });
 
-  // Verify OTP with validation
-  $('#verifyOtp').click(function() {
-        var enteredOtp = $('#otp').val();
-        
-        // Check for HTML tags in the OTP input
-        var regex = /<[^>]*>/; // Regex to detect HTML tags
-        if (regex.test(enteredOtp)) {
-            // Show SweetAlert if XSS tags are detected
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Input',
-                text: 'XSS tags not allowed!',
-            });
-            return; // Stop the function if invalid
-        }
-
-        // Proceed with AJAX if input is valid
-        $.ajax({
-            type: 'POST',
-            url: 'admin_verify.php',
-            data: { otp: enteredOtp },
-            success: function(response) {
-                if (response.success) {
-                    // OTP verified successfully
-                    window.location.href = './admin/.'; // Redirect to dashboard
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Invalid OTP',
-                        text: 'Please try again.',
-                    });
-                }
+ // Verify OTP
+$('#verifyOtp').click(function() {
+    var enteredOtp = $('#otp').val();
+    $.ajax({
+        type: 'POST',
+        url: 'admin_verify.php',
+        data: { otp: enteredOtp },
+        success: function(response) {
+            if (response.success) {
+                // OTP verified successfully
+                window.location.href = './admin/.'; // Redirect to dashboard
+            } else {
+                alert("Invalid OTP, please try again.");
             }
-        });
+        }
     });
+});
 </script>
 
 </html>
