@@ -2,9 +2,14 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
-require 'vendor/autoload.php'; // Ensure you include the autoload file
+
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
