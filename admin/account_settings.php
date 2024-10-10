@@ -81,8 +81,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             <input type="hidden" name="old_admin_image"
                                                                  value="<?=$admin['admin_image'];?>">
                                                             <input type="file" name="admin_image" class="form-control"
-                                                                 autocomplete="off" id="admin_image_input">
-                                                                 <small class="text-muted" id="file_error" style="display: none; color: red;">Only JPG, JPEG, and PNG files are allowed.</small>
+                                                                 autocomplete="off">
+
                                                        </div>
                                                   </div>
                                              </div>
@@ -91,14 +91,14 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="firstname" type="text"
                                                             class="form-control" id="firstname"
-                                                            value="<?=$admin['firstname']?>" onblur="sanitizeInput(this)"></div>
+                                                            value="<?=$admin['firstname']?>"></div>
                                              </div>
 
                                              <div class="row mb-3">
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="middlename" type="text"
-                                                            class="form-control" value="<?=$admin['middlename']?>" onblur="sanitizeInput(this)">
+                                                            class="form-control" value="<?=$admin['middlename']?>">
                                                   </div>
                                              </div>
                                              <div class="row mb-3">
@@ -106,7 +106,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Lastname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="lastname" type="text"
                                                             class="form-control" id="lastname"
-                                                            value="<?=$admin['lastname']?>" onblur="sanitizeInput(this)">
+                                                            value="<?=$admin['lastname']?>">
                                                   </div>
                                              </div>
 
@@ -114,7 +114,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="Address"
                                                        class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="address" type="text"
-                                                            class="form-control" id="Address" value="address" onblur="sanitizeInput(this)"></div>
+                                                            class="form-control" id="Address" value="<?=$admin['address']?>"></div>
                                              </div>
                                              <div class="row mb-3">
                                                   <label for="Phone"
@@ -122,7 +122,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <div class="col-md-8 col-lg-9"> <input name="phone" type="tel"
                                                             class="form-control" id="Phone"
                                                             maxlength="11"
-                                                            value="<?=$admin['phone_number']?>" onblur="sanitizeInput(this)">
+                                                            value="<?=$admin['phone_number']?>">
                                                             <div class="invalid-feedback">
                                                                       Phone number must start with "09" and be exactly 11 digits long.
                                                                  </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Email</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="email" type="email"
                                                             class="form-control" id="Email"
-                                                            value="<?=$admin['email']?>" onblur="sanitizeInput(this)"></div>
+                                                            value="<?=$admin['email']?>" readonly></div>
                                              </div>
                                              <?php
                                                   }
@@ -155,7 +155,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="current_password" type="password" class="form-control" id="currentPassword" onblur="sanitizeInput(this)">
+                                                            <input name="current_password" type="password" class="form-control" id="currentPassword">
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                   </div>
@@ -164,7 +164,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required onblur="sanitizeInput(this)">
+                                                            <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required>
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                        <div id="newPasswordWarning" class="text-danger"></div>
@@ -174,7 +174,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
-                                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required onblur="sanitizeInput(this)">
+                                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required>
                                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('renewPassword')"><i class="bi bi-eye"></i></button>
                                                        </div>
                                                        <div id="renewPasswordWarning" class="text-danger"></div>
@@ -240,26 +240,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
             document.getElementById('renewPassword').setCustomValidity('');
         }
     });
-
-    document.getElementById('admin_image_input').addEventListener('change', function() {
-    const file = this.files[0];
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    const errorMessage = document.getElementById('file_error');
-    
-    if (file) {
-        if (!allowedTypes.includes(file.type)) {
-            errorMessage.style.display = 'block'; // Show error message
-            this.value = ''; // Clear the input
-        } else {
-            errorMessage.style.display = 'none'; // Hide error message
-        }
-    }
-});
-
-    function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
-}
 </script>
 
 <?php
