@@ -185,7 +185,7 @@ include('config/dbcon.php');
         // Proceed with AJAX if input is valid
         $.ajax({
             type: 'POST',
-            url: 'verify_otp.php',
+            url: 'admin_verify.php',
             data: { otp: enteredOtp },
             success: function(response) {
                 if (response.success) {
