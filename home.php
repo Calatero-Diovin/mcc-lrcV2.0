@@ -60,9 +60,7 @@ include('includes/navbar.php');
                     <!-- Grid column -->
                     <div class="col-md-7 col-lg-8 text-center text-md-start">
                         <div class="p-3">
-                            Madridejos Community College 2.0 <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="DIOVIN CALATERO">
-  DEVELOPER
-</button>
+                            Madridejos Community College v2.0 (Developer: Diovin Calatero)
                         </div>
                     </div>
                     <!-- Grid column -->
