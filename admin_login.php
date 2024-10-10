@@ -113,6 +113,30 @@ include('config/dbcon.php');
                 </div>
             </div>
         </div>
+
+        <!-- OTP Verification Modal -->
+<div id="otpModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otpModalLabel">Verify Your Email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please enter the OTP sent to your email:</p>
+                <input type="text" id="otp" class="form-control" maxlength="6" required>
+                <div class="invalid-feedback">Please enter the OTP.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="verifyOtp">Verify OTP</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     </section>
     <?php include('includes/script.php'); include('message.php'); ?>
     <script>
@@ -128,16 +152,54 @@ include('config/dbcon.php');
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-            <?php unset($_SESSION['login_success']); // Clear session variable ?>
+    <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+        <?php unset($_SESSION['login_success']); // Clear session variable ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            showConfirmButton: false,
+            timer: 1500 // Auto-close after 1.5 seconds
+        }).then(() => {
+            // Show the OTP modal
+            $('#otpModal').modal('show');
+        });
+    <?php endif; ?>
+});
+
+  // Verify OTP with validation
+  $('#verifyOtp').click(function() {
+        var enteredOtp = $('#otp').val();
+        
+        // Check for HTML tags in the OTP input
+        var regex = /<[^>]*>/; // Regex to detect HTML tags
+        if (regex.test(enteredOtp)) {
+            // Show SweetAlert if XSS tags are detected
             Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
-                showConfirmButton: true
-            }).then(() => {
-                window.location.href = './admin/.'; // Redirect after showing SweetAlert
+                icon: 'error',
+                title: 'Invalid Input',
+                text: 'XSS tags not allowed!',
             });
-        <?php endif; ?>
+            return; // Stop the function if invalid
+        }
+
+        // Proceed with AJAX if input is valid
+        $.ajax({
+            type: 'POST',
+            url: 'verify_otp.php',
+            data: { otp: enteredOtp },
+            success: function(response) {
+                if (response.success) {
+                    // OTP verified successfully
+                    window.location.href = './admin/.'; // Redirect to dashboard
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid OTP',
+                        text: 'Please try again.',
+                    });
+                }
+            }
+        });
     });
 </script>
 
