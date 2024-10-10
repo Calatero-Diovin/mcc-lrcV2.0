@@ -2,6 +2,9 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+require 'vendor/autoload.php'; // Ensure you include the autoload file
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
@@ -49,51 +52,56 @@ if (isset($_POST['admin_login_btn'])) {
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password'])) {
-                // Reset login attempts on successful login
-                $_SESSION['login_attempts'] = 0;
-                $_SESSION['lockout_time'] = null;
+                // Generate a random verification code
+                $verification_code = rand(100000, 999999);
+                
+                // Store the code in session
+                $_SESSION['verification_code'] = $verification_code;
+                $_SESSION['admin_email'] = $email; // Store the email for sending code
+                
+                // Send the verification code using PHPMailer
+                $mail = new PHPMailer(true);
+                
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.example.com'; // Your SMTP server
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'mcclearningresourcecenter@gmail.com'; // Your email
+                    $mail->Password   = 'qxbi jqnf hgfn lkih'; // Your email password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port       = 587;
 
-                $admin_id = $data['admin_id'];
-                $admin_name = $data['firstname'] . ' ' . $data['lastname'];
-                $admin_email = $data['email'];
-                $admin_type = $data['admin_type'];
+                    // Recipients
+                    $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+                    $mail->addAddress($email); // Send to the admin email
 
-                $_SESSION['auth'] = true;
-                $_SESSION['auth_role'] = "$admin_type";
-                $_SESSION['auth_admin'] = [
-                    'admin_id' => $admin_id,
-                    'admin_name' => $admin_name,
-                    'email' => $admin_email,
-                ];
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Your Verification Code';
+                    $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
 
-                $_SESSION['login_success'] = true;
-                header("Location: admin_login");
-                exit(0);
+                    $mail->send();
+
+                    // Reset login attempts
+                    $_SESSION['login_attempts'] = 0;
+                    $_SESSION['lockout_time'] = null;
+
+                    $_SESSION['login_success'] = true; // Set session variable to trigger SweetAlert
+                    header("Location: admin_login");
+                    exit(0);
+                } catch (Exception $e) {
+                    $_SESSION['status'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    $_SESSION['status_code'] = "error";
+                    header("Location: admin_login");
+                    exit(0);
+                }
             } else {
                 // Increment login attempts on failure
-                $_SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts'] >= 3) {
-                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                    $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
-                } else {
-                    $_SESSION['status'] = "Invalid email, password, or admin type.";
-                }
-                $_SESSION['status_code'] = "error";
-                header("Location: admin_login");
-                exit(0);
+                incrementLoginAttempts();
             }
         } else {
-            // Increment login attempts on failure
-            $_SESSION['login_attempts']++;
-            if ($_SESSION['login_attempts'] >= 3) {
-                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
-            } else {
-                $_SESSION['status'] = "Invalid email, password, or admin type.";
-            }
-            $_SESSION['status_code'] = "error";
-            header("Location: admin_login");
-            exit(0);
+            incrementLoginAttempts();
         }
 
         mysqli_stmt_close($stmt);
@@ -103,5 +111,18 @@ if (isset($_POST['admin_login_btn'])) {
         header("Location: admin_login");
         exit(0);
     }
+}
+
+function incrementLoginAttempts() {
+    $_SESSION['login_attempts']++;
+    if ($_SESSION['login_attempts'] >= 3) {
+        $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+        $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+    } else {
+        $_SESSION['status'] = "Invalid email, password, or admin type.";
+    }
+    $_SESSION['status_code'] = "error";
+    header("Location: admin_login");
+    exit(0);
 }
 ?>

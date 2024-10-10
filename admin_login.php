@@ -150,47 +150,46 @@ include('config/dbcon.php');
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-                <?php unset($_SESSION['login_success']); // Clear session variable ?>
-                // Show SweetAlert for verification code
-                Swal.fire({
-                    title: 'Verify Your Account',
-                    text: 'Please enter the verification code sent to your email:',
-                    input: 'text',
-                    inputPlaceholder: 'Verification Code',
-                    showCancelButton: true,
-                    confirmButtonText: 'Verify',
-                    cancelButtonText: 'Cancel',
-                    preConfirm: (code) => {
-                        if (!code) {
-                            Swal.showValidationMessage('Please enter a verification code');
-                        } else {
-                            return fetch('verify_code.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ code: code })
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(response.statusText);
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                if (!data.success) {
-                                    Swal.showValidationMessage('Invalid verification code. Please try again.');
-                                } else {
-                                    // Redirect if verification is successful
-                                    window.location.href = './admin/.'; // Adjust as necessary
-                                }
-                            });
+    <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+        <?php unset($_SESSION['login_success']); // Clear session variable ?>
+        Swal.fire({
+            title: 'Verify Your Account',
+            text: 'Please enter the verification code sent to your email:',
+            input: 'text',
+            inputPlaceholder: 'Verification Code',
+            showCancelButton: true,
+            confirmButtonText: 'Verify',
+            cancelButtonText: 'Cancel',
+            preConfirm: (code) => {
+                if (!code) {
+                    Swal.showValidationMessage('Please enter a verification code');
+                } else {
+                    return fetch('verify_code.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ code: code, expectedCode: '<?php echo $_SESSION['verification_code']; ?>' })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
                         }
-                    }
-                });
-            <?php endif; ?>
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data.success) {
+                            Swal.showValidationMessage('Invalid verification code. Please try again.');
+                        } else {
+                            // Redirect if verification is successful
+                            window.location.href = './admin/.'; // Adjust as necessary
+                        }
+                    });
+                }
+            }
         });
+    <?php endif; ?>
+});
 </script>
 
 </html>
