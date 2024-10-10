@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-
+include('includes/protect.php');
 include('admin/config/dbcon.php');
 
 if(isset($_POST['change_password']))

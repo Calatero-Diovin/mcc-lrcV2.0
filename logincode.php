@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/protect.php');
 
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {

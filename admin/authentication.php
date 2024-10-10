@@ -1,6 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
+include('includes/protect.php');
 include('config/dbcon.php');
 
 if(!isset($_SESSION['auth']))

@@ -1,6 +1,7 @@
 <?php 
 ini_set('session.cookie_httponly', 1);
 session_start();
+include('includes/protect.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,10 @@ session_start();
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
+     <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>Reset Password</title>
      

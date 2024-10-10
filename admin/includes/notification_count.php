@@ -1,4 +1,5 @@
 <?php
+include('protect.php');
 include('authentication.php');
 
 $query = "SELECT COUNT(DISTINCT CONCAT(h.user_id, '-', h.faculty_id)) AS total_borrowers

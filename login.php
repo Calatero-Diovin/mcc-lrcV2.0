@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/protect.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,10 @@ include('./admin/config/dbcon.php');
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
+     <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
      <script src="https://www.google.com/recaptcha/api.js" async defer></script>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../admin/config/dbcon.php');
+include('includes/protect.php');
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +12,10 @@ include('../admin/config/dbcon.php');
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <meta name="robots" content="noindex, nofollow" />
+     <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
+     <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
      <link href="https://fonts.gstatic.com" rel="preconnect" />

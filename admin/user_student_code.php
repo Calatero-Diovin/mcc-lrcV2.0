@@ -1,4 +1,5 @@
 <?php
+include('includes/protect.php');
 include('authentication.php');
 use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;

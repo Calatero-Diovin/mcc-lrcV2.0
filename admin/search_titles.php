@@ -1,4 +1,5 @@
 <?php
+include('includes/protect.php');
 include('authentication.php');
 
 $query = isset($_POST['query']) ? $_POST['query'] : '';

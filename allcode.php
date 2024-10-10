@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 
 include('admin/config/dbcon.php');
+include('includes/protect.php');
  
 
 if (isset($_SESSION['auth_stud']['stud_id'])) {

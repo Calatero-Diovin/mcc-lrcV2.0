@@ -1,4 +1,5 @@
 <?php 
+include('includes/protect.php');
 include('authentication.php');
 
 $student_id = $_GET['student_id'];

@@ -1,5 +1,6 @@
 <?php
 include('authentication.php');
+include('includes/protect.php');
 
 if (isset($_POST['change_password'])) {
     $current_password = mysqli_real_escape_string($con, $_POST['current_password']);

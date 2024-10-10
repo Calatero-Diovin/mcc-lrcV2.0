@@ -1,9 +1,29 @@
+<?php
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+header('X-Content-Type-Options: nosniff');
+header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+
+session_set_cookie_params([
+     'lifetime' => 0,           // Session cookie, expires when the browser closes
+     'path' => '/',             // Available within the entire domain
+     'domain' => '',            // Default domain
+     'secure' => true,          // Only sent over HTTPS
+     'httponly' => true,        // Not accessible via JavaScript
+     'samesite' => 'Lax'        // CSRF protection
+ ]);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
      <meta charset="utf-8" />
      <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
+     <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
      <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
 

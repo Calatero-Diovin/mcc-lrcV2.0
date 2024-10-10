@@ -1,4 +1,5 @@
 <?php 
+include('includes/protect.php');
 include('authentication.php');
 
 $firstname = $_GET['firstname'];

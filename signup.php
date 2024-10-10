@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/protect.php');
 
 $code = $_GET['code'];
 
@@ -173,6 +174,10 @@ $code_row = $code_result->fetch_assoc();
 <!-- Alertify JS link -->
 <link rel="stylesheet" href="assets/css/alertify.min.css" />
 <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+     <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
+     <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
 
 <!-- Custom CSS links -->
 <link rel="stylesheet" href="assets/css/signup.css">
