@@ -113,6 +113,28 @@ include('config/dbcon.php');
                 </div>
             </div>
         </div>
+
+         <!-- Verification Code Modal -->
+    <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verificationModalLabel">Verify Your Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please enter the verification code sent to your email:</p>
+                    <input type="text" id="verificationCode" class="form-control" placeholder="Verification Code" required>
+                    <div class="invalid-feedback">Please enter a verification code.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="verifyCodeBtn">Verify</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </section>
     <?php include('includes/script.php'); include('message.php'); ?>
     <script>
@@ -128,17 +150,47 @@ include('config/dbcon.php');
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-            <?php unset($_SESSION['login_success']); // Clear session variable ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
-                showConfirmButton: true
-            }).then(() => {
-                window.location.href = './admin/.'; // Redirect after showing SweetAlert
-            });
-        <?php endif; ?>
-    });
+            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+                <?php unset($_SESSION['login_success']); // Clear session variable ?>
+                // Show SweetAlert for verification code
+                Swal.fire({
+                    title: 'Verify Your Account',
+                    text: 'Please enter the verification code sent to your email:',
+                    input: 'text',
+                    inputPlaceholder: 'Verification Code',
+                    showCancelButton: true,
+                    confirmButtonText: 'Verify',
+                    cancelButtonText: 'Cancel',
+                    preConfirm: (code) => {
+                        if (!code) {
+                            Swal.showValidationMessage('Please enter a verification code');
+                        } else {
+                            return fetch('verify_code.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ code: code })
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(response.statusText);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                if (!data.success) {
+                                    Swal.showValidationMessage('Invalid verification code. Please try again.');
+                                } else {
+                                    // Redirect if verification is successful
+                                    window.location.href = './admin/.'; // Adjust as necessary
+                                }
+                            });
+                        }
+                    }
+                });
+            <?php endif; ?>
+        });
 </script>
 
 </html>
