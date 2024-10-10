@@ -19,7 +19,7 @@ $user_row = $user_result->fetch_assoc();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self';"> -->
      <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
      <meta http-equiv="Content-Security-Policy" content="object-src 'none';">
      <meta http-equiv="Content-Security-Policy" content="base-uri 'self';">
