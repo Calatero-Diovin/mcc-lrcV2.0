@@ -70,7 +70,7 @@ if (isset($_POST['admin_login_btn'])) {
                 try {
                     // Server settings
                     $mail->isSMTP();
-                    $mail->Host       = 'smtp.example.com'; // Your SMTP server
+                    $mail->Host       = 'smtp.gmail.com'; // Your SMTP server
                     $mail->SMTPAuth   = true;
                     $mail->Username   = 'mcclearningresourcecenter@gmail.com'; // Your email
                     $mail->Password   = 'qxbi jqnf hgfn lkih'; // Your email password
