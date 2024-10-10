@@ -187,7 +187,6 @@ include('config/dbcon.php');
                             Swal.showValidationMessage('Invalid verification code. Please try again.');
                         } else {
                             // Redirect if verification is successful
-                            Swal.showValidationMessage('Login Successfully.');
                             window.location.href = './admin/.'; // Adjust as necessary
                         }
                     });
