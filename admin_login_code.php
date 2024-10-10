@@ -59,17 +59,42 @@ if (isset($_POST['admin_login_btn'])) {
 
                 // Send OTP to user's email
                 $to = $data['email'];
-                $subject = "Your OTP Code";
-                $message = "Your OTP code is: $otp";
-                mail($to, $subject, $message); // Make sure mail settings are configured
+                $subject = "Your OTP Code - MCC Learning Resource Center";
+                $imageUrl = 'https://mcc-lrc.com/images/mcc-lrc.png'; // Change to your image URL
+
+                // Customize the message body with an image
+                $message = "
+                <html>
+                <head>
+                    <title>Your OTP Code</title>
+                </head>
+                <body>
+                    <h2>Your OTP Code</h2>
+                    <img src='$imageUrl' alt='MCC Logo' style='width:200px;'><br>
+                    <p>Dear {$data['firstname']},</p>
+                    <p>Your OTP code is: <strong>$otp</strong></p>
+                    <p>Please use this code to complete your login.</p>
+                    <p>If you did not request this code, please ignore this email.</p>
+                    <p>Thank you,<br>MCC Learning Resource Center</p>
+                </body>
+                </html>
+                ";
+
+                // Set content-type header for HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= "From: mcclearningresourcecenter@gmail.com" . "\r\n"; // Change to your "from" address
+
+                // Send the email
+                mail($to, $subject, $message, $headers);
 
                 // Prepare session data
                 $_SESSION['auth'] = true;
                 $_SESSION['auth_role'] = "$admin_type";
                 $_SESSION['auth_admin'] = [
-                    'admin_id' => $admin_id,
-                    'admin_name' => $admin_name,
-                    'email' => $admin_email,
+                    'admin_id' => $data['admin_id'],
+                    'admin_name' => $data['firstname'] . ' ' . $data['lastname'],
+                    'email' => $data['email'],
                 ];
 
                 // Redirect to OTP verification page or show modal

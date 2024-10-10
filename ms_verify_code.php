@@ -132,7 +132,7 @@ if (isset($_POST['registration_link'])) {
             <body>
                 <div class='container'>
                     <div class='header'>
-                        <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                        <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                     </div>
                     <div class='content'>
                         <p>Hello,</p>
