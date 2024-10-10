@@ -124,7 +124,7 @@ include('config/dbcon.php');
                 </div>
                 <div class="modal-body">
                     <p>Please enter the verification code sent to your email:</p>
-                    <input type="number" id="verificationCode" class="form-control" placeholder="Verification Code" required min="100000" max="999999" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    <input type="number" id="verificationCode" class="form-control" placeholder="Verification Code" required>
                     <div class="invalid-feedback">Please enter a verification code.</div>
                 </div>
                 <div class="modal-footer">
@@ -149,18 +149,13 @@ include('config/dbcon.php');
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-     // Optional: Further ensure input is numeric
-     document.getElementById('verificationCode').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Allow only numbers
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
     <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
         <?php unset($_SESSION['login_success']); // Clear session variable ?>
         Swal.fire({
             title: 'Verify Your Account',
             text: 'Please enter the verification code sent to your email:',
-            input: 'text',
+            input: 'number',
             inputPlaceholder: 'Verification Code',
             showCancelButton: true,
             confirmButtonText: 'Verify',
