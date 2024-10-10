@@ -124,7 +124,7 @@ include('config/dbcon.php');
                 </div>
                 <div class="modal-body">
                     <p>Please enter the verification code sent to your email:</p>
-                    <input type="number" id="verificationCode" class="form-control" placeholder="Verification Code" required>
+                    <input type="text" id="verificationCode" class="form-control" placeholder="Verification Code" required>
                     <div class="invalid-feedback">Please enter a verification code.</div>
                 </div>
                 <div class="modal-footer">
@@ -155,7 +155,7 @@ include('config/dbcon.php');
         Swal.fire({
             title: 'Verify Your Account',
             text: 'Please enter the verification code sent to your email:',
-            input: 'number',
+            input: 'text',
             inputPlaceholder: 'Verification Code',
             showCancelButton: true,
             confirmButtonText: 'Verify',
