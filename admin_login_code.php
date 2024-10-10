@@ -53,17 +53,11 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
 
-                // Generate OTP
-                $otp = rand(100000, 999999); // 6-digit OTP
-                $_SESSION['otp'] = $otp; // Store OTP in session
+                $admin_id = $data['admin_id'];
+                $admin_name = $data['firstname'] . ' ' . $data['lastname'];
+                $admin_email = $data['email'];
+                $admin_type = $data['admin_type'];
 
-                // Send OTP to user's email
-                $to = $data['email'];
-                $subject = "Your OTP Code";
-                $message = "Your OTP code is: $otp";
-                mail($to, $subject, $message); // Make sure mail settings are configured
-
-                // Prepare session data
                 $_SESSION['auth'] = true;
                 $_SESSION['auth_role'] = "$admin_type";
                 $_SESSION['auth_admin'] = [
@@ -72,9 +66,8 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
-                // Redirect to OTP verification page or show modal
                 $_SESSION['login_success'] = true;
-                header("Location: admin_login"); // Redirect to the login page (where modal will show)
+                header("Location: admin_login");
                 exit(0);
             } else {
                 // Increment login attempts on failure
