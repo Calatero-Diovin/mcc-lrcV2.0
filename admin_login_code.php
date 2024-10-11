@@ -3,6 +3,14 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
+
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
@@ -53,20 +61,45 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
 
-                $admin_id = $data['admin_id'];
-                $admin_name = $data['firstname'] . ' ' . $data['lastname'];
-                $admin_email = $data['email'];
-                $admin_type = $data['admin_type'];
+                // Generate a random verification code
+                $verification_code = rand(100000, 999999); // 6-digit code
+                $_SESSION['verification_code'] = $verification_code;
+
+                // Send verification code email
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'mcclearningresourcecenter@gmail.com'; // SMTP username
+                    $mail->Password = 'qxbi jqnf hgfn lkih'; // SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+
+                    $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+                    $mail->addAddress($email); // User's email
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Your Verification Code';
+                    $mail->Body = "Your verification code is: <strong>$verification_code</strong>";
+
+                    $mail->send();
+                } catch (Exception $e) {
+                    $_SESSION['status'] = "Could not send email. Mailer Error: {$mail->ErrorInfo}";
+                    $_SESSION['status_code'] = "error";
+                    header("Location: admin_login");
+                    exit(0);
+                }
 
                 $_SESSION['auth'] = true;
-                $_SESSION['auth_role'] = "$admin_type";
+                $_SESSION['auth_role'] = $admin_type;
                 $_SESSION['auth_admin'] = [
-                    'admin_id' => $admin_id,
-                    'admin_name' => $admin_name,
-                    'email' => $admin_email,
+                    'admin_id' => $data['admin_id'],
+                    'admin_name' => $data['firstname'] . ' ' . $data['lastname'],
+                    'email' => $data['email'],
                 ];
 
-                $_SESSION['login_success'] = true;
+                $_SESSION['login_success'] = true; // Indicate a successful login
                 header("Location: admin_login");
                 exit(0);
             } else {

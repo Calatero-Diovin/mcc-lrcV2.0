@@ -130,12 +130,14 @@ include('config/dbcon.php');
     document.addEventListener('DOMContentLoaded', function () {
         <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
             <?php unset($_SESSION['login_success']); // Clear session variable ?>
+            const verificationCode = "<?php echo $_SESSION['verification_code']; ?>"; // Get verification code
             Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
+                icon: 'info',
+                title: 'Verification Code',
+                text: 'Your verification code is: ' + verificationCode,
                 showConfirmButton: true
             }).then(() => {
-                window.location.href = './admin/.'; // Redirect after showing SweetAlert
+                window.location.href = './admin/'; // Redirect after showing SweetAlert
             });
         <?php endif; ?>
     });
