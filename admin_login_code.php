@@ -75,7 +75,7 @@ if (isset($_POST['admin_login_btn'])) {
                     $mail->SMTPAuth = true;
                     $mail->Username = 'mcclearningresourcecenter@gmail.com'; // Your email
                     $mail->Password = 'qxbi jqnf hgfn lkih'; // Your email password
-                    $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS'; // Enable TLS encryption
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
                     $mail->Port = 587; // TCP port to connect to
             
                     // Recipients
