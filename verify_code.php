@@ -43,7 +43,7 @@ if (isset($_POST['admin_email'])) {
         $mail->send();
 
         // Redirect or show a success message
-        header("Location: verification_sent.php");
+        header("Location: admin_login");
         exit();
     } catch (Exception $e) {
         $_SESSION['status'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
