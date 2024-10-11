@@ -49,6 +49,7 @@ if (isset($_POST['admin_login_btn'])) {
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password'])) {
+                session_regenerate_id(true); // Regenerate session ID
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;

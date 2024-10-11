@@ -113,6 +113,29 @@ include('config/dbcon.php');
                 </div>
             </div>
         </div>
+
+        <!-- Include this modal in your admin_login.php file -->
+<div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verificationModalLabel">Verification Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please enter the verification code sent to your email.</p>
+                <form action="verify_code.php" method="POST" id="verificationForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="verification_code" placeholder="Verification Code" required>
+                    </div>
+                    <input type="hidden" name="admin_email" value="<?php echo htmlspecialchars($admin_email); ?>">
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     </section>
     <?php include('includes/script.php'); include('message.php'); ?>
     <script>
@@ -133,9 +156,11 @@ include('config/dbcon.php');
             Swal.fire({
                 icon: 'success',
                 title: 'Login Successful',
-                showConfirmButton: true
+                showConfirmButton: false,
+                timer: 1500
             }).then(() => {
-                window.location.href = './admin/.'; // Redirect after showing SweetAlert
+                // Show the verification modal
+                $('#verificationModal').modal('show');
             });
         <?php endif; ?>
     });
