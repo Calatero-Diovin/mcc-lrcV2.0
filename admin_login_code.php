@@ -3,6 +3,14 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
+
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
@@ -58,21 +66,20 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['verification_code'] = $verification_code; // Store in session for later verification
             
                 // Send verification code via email
-                require 'phpmailer/vendor/autoload.php'; // Make sure to include PHPMailer's autoload
-                $mail = new PHPMailer\PHPMailer\PHPMailer();
+                $mail = new PHPMailer(true);
             
                 try {
                     // Server settings
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.example.com'; // Your SMTP server
+                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'your_email@example.com'; // Your email
-                    $mail->Password = 'your_email_password'; // Your email password
-                    $mail->SMTPSecure = 'tls'; // Enable TLS encryption
+                    $mail->Username = 'mcclearningresourcecenter@gmail.com'; // Your email
+                    $mail->Password = 'qxbi jqnf hgfn lkih'; // Your email password
+                    $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS'; // Enable TLS encryption
                     $mail->Port = 587; // TCP port to connect to
             
                     // Recipients
-                    $mail->setFrom('your_email@example.com', 'Your Name');
+                    $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
                     $mail->addAddress($admin_email); // Add the admin's email
             
                     // Content
