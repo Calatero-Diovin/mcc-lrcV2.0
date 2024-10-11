@@ -67,6 +67,7 @@ if (isset($_POST['admin_login_btn'])) {
             
                 // Send verification code via email
                 $mail = new PHPMailer(true);
+                $mail->SMTPDebug = 2;
             
                 try {
                     // Server settings
