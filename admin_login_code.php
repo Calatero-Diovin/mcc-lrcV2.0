@@ -3,14 +3,6 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
-require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
-
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
@@ -60,56 +52,23 @@ if (isset($_POST['admin_login_btn'])) {
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
-            
-                // Generate a verification code
-                $verification_code = rand(100000, 999999); // 6-digit code
-                $_SESSION['verification_code'] = $verification_code; // Store in session for later verification
-            
-                // Send verification code via email
-                $mail = new PHPMailer(true);
-                $mail->SMTPDebug = 2;
-            
-                try {
-                    // Server settings
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'mcclearningresourcecenter@gmail.com'; // Your email
-                    $mail->Password = 'qxbi jqnf hgfn lkih'; // Your email password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-                    $mail->Port = 587; // TCP port to connect to
-            
-                    // Recipients
-                    $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
-                    $mail->addAddress($admin_email); // Add the admin's email
-            
-                    // Content
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Your Verification Code';
-                    $mail->Body = "Your verification code is: <strong>$verification_code</strong>";
-            
-                    $mail->send();
-            
-                    // Set session variable to indicate that verification is needed
-                    $_SESSION['verification_required'] = true;
-                    $_SESSION['auth'] = true; // Assuming you still want to set auth
-                    $_SESSION['auth_role'] = "$admin_type";
-                    $_SESSION['auth_admin'] = [
-                        'admin_id' => $admin_id,
-                        'admin_name' => $admin_name,
-                        'email' => $admin_email,
-                    ];
-            
-                    // Redirect to admin_login and trigger SweetAlert
-                    $_SESSION['login_success'] = true; // Indicate login success
-                    header("Location: admin_login");
-                    exit(0);
-                } catch (Exception $e) {
-                    $_SESSION['status'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    $_SESSION['status_code'] = "error";
-                    header("Location: admin_login");
-                    exit(0);
-                }
+
+                $admin_id = $data['admin_id'];
+                $admin_name = $data['firstname'] . ' ' . $data['lastname'];
+                $admin_email = $data['email'];
+                $admin_type = $data['admin_type'];
+
+                $_SESSION['auth'] = true;
+                $_SESSION['auth_role'] = "$admin_type";
+                $_SESSION['auth_admin'] = [
+                    'admin_id' => $admin_id,
+                    'admin_name' => $admin_name,
+                    'email' => $admin_email,
+                ];
+
+                $_SESSION['login_success'] = true;
+                header("Location: admin_login");
+                exit(0);
             } else {
                 // Increment login attempts on failure
                 $_SESSION['login_attempts']++;

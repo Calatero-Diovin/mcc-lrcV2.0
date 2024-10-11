@@ -127,42 +127,16 @@ include('config/dbcon.php');
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
         <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
             <?php unset($_SESSION['login_success']); // Clear session variable ?>
-            if (<?php echo json_encode(isset($_SESSION['verification_required'])); ?>) {
-                const verificationCode = prompt('Enter the verification code sent to your email:');
-                
-                if (verificationCode) {
-                    // Send the verification code to the server for validation
-                    fetch('verify_code.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ verification_code: verificationCode })
-                    }).then(response => response.json()).then(data => {
-                        if (data.success) {
-                            // Redirect to the dashboard
-                            window.location.href = './admin/.';
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Verification Failed',
-                                text: data.message || 'Invalid verification code.'
-                            });
-                        }
-                    });
-                }
-            } else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    showConfirmButton: true
-                }).then(() => {
-                    window.location.href = './admin/.'; // Redirect after showing SweetAlert
-                });
-            }
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful',
+                showConfirmButton: true
+            }).then(() => {
+                window.location.href = './admin/.'; // Redirect after showing SweetAlert
+            });
         <?php endif; ?>
     });
 </script>
