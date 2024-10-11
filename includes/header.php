@@ -4,7 +4,7 @@ if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
      header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
      exit();
  }
- 
+
 function isValidUrl($url) {
      return preg_match('/^https?:\/\/(www\.)?mcc-lrc\.com/', $url);
  }
@@ -12,7 +12,7 @@ function isValidUrl($url) {
  // Example usage of the function
  $link = "https://mcc-lrc.com";
  if (isValidUrl($link)) {
-     echo "<a href='$link'>Trusted Link</a>";
+     
  } else {
      echo "Invalid URL.";
  }
@@ -23,7 +23,7 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
  }
 
  // Add CSP header
-header("Content-Security-Policy: default-src 'self'; script-src 'self' https://mcc-lrc.com; style-src 'self' 'unsafe-inline';");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://mcc-lrc.com;");
 
 ?>
 
