@@ -263,9 +263,7 @@ function validatePhoneNumber() {
     }
 
     // Attach event listener to the email input field
-    document.getElementById('email').addEventListener('input', function() {
-        validateEmail(this.value);
-    });
+    document.getElementById('email').addEventListener('blur', validateEmail);
 
     function validateAddress() {
         const addressInput = document.getElementById('address').value;
