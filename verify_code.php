@@ -3,16 +3,22 @@ session_start();
 
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    $code = $input['code'];
-    $expectedCode = $_SESSION['verification_code'] ?? null;
-
-    if ($code == $expectedCode) {
-        echo json_encode(['success' => true]);
-        unset($_SESSION['verification_code']); // Clear the code from session
-    } else {
-        echo json_encode(['success' => false]);
-    }
+if (!isset($_SESSION['verification_code'])) {
+    echo json_encode(['success' => false, 'message' => 'No verification code found.']);
+    exit(0);
 }
-?>
+
+if (isset($_POST['verification_code'])) {
+    $input_code = $_POST['verification_code'];
+
+    if ($input_code == $_SESSION['verification_code']) {
+        unset($_SESSION['verification_code']); // Clear the verification code
+        unset($_SESSION['verification_required']); // Clear the verification requirement
+
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid verification code.']);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Verification code not submitted.']);
+}
