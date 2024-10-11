@@ -24,7 +24,7 @@ include('authentication.php');
 if (isset($_POST['delete_book'])) {
     $accession_number = mysqli_real_escape_string($con, $_POST['accession_number']);
 
-    $select_query = "SELECT book_id, title, copyright_date FROM book WHERE accession_number = '$accession_number'";
+    $select_query = "SELECT book_id, title, copyright_date, author, isbn FROM book WHERE accession_number = '$accession_number'";
     $select_query_run = mysqli_query($con, $select_query);
 
     if (mysqli_num_rows($select_query_run) > 0) {
@@ -32,6 +32,8 @@ if (isset($_POST['delete_book'])) {
         $book_id = $row['book_id'];
         $title = $row['title'];
         $copyright_date = $row['copyright_date'];
+        $author = $row['author'];
+        $isbn = $row['isbn'];
 
         // Begin transaction
         mysqli_begin_transaction($con);
@@ -63,7 +65,7 @@ if (isset($_POST['delete_book'])) {
             mysqli_rollback($con);
             $_SESSION['status'] = $e->getMessage();
             $_SESSION['status_code'] = "error";
-            header("Location: book_views?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&tab=copies");
+            header("Location: book_views?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&author=" . urlencode($author) . "&isbn=" . urlencode($isbn) . "&tab=copies");
             exit(0);
         }
     } else {
@@ -171,7 +173,7 @@ if (isset($_POST['update_accession_number'])) {
             }
         }
 
-        header("Location: book_views?title=" . urlencode($title) . "&copyright_date=". urlencode($copyright_date) . "&tab=copies");
+        header("Location: book_views?title=" . urlencode($title) . "&copyright_date=". urlencode($copyright_date) . "&author=". urlencode($author) . "&isbn=". urlencode($isbn) . "&tab=copies");
         exit();
     }
 }

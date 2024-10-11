@@ -22,12 +22,14 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-body">
                               <?php
-                              if(isset($_GET['title']) || isset($_GET['copyright_date']))
+                              if(isset($_GET['title']) || isset($_GET['copyright_date']) || isset($_GET['author']) || isset($_GET['isbn']))
                               {
                                    $book_title = mysqli_real_escape_string($con, $_GET['title']);
                                    $copyright_date = mysqli_real_escape_string($con, $_GET['copyright_date']);
+                                   $author = mysqli_real_escape_string($con, $_GET['author']);
+                                   $isbn = mysqli_real_escape_string($con, $_GET['isbn']);
 
-                                   $query = "SELECT * FROM book LEFT JOIN category ON book.category_id = category.category_id WHERE title='$book_title' AND copyright_date='$copyright_date'"; 
+                                   $query = "SELECT * FROM book LEFT JOIN category ON book.category_id = category.category_id WHERE title='$book_title' AND copyright_date='$copyright_date' AND author='$author' AND isbn='$isbn'"; 
                                    $query_run = mysqli_query($con, $query);
 
                                    if(mysqli_num_rows($query_run) > 0)

@@ -72,7 +72,7 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                     <div class="card-body">
                         <div class="d-flex justify-content-end mb-3">
                             <!-- Back Button -->
-                            <a href="books.php" class="btn btn-primary" style="margin-top:10px;margin-bottom:-30px;">Back</a>
+                            <a href="books" class="btn btn-primary" style="margin-top:10px;margin-bottom:-30px;">Back</a>
                         </div>
                         <ul class="nav nav-tabs" id="myTab">
                             <li class="nav-item">
@@ -88,14 +88,16 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                             <div class="tab-pane fade <?= $activeTabPane == 'details-tab-pane' ? 'show active' : '' ?>" id="details-tab-pane">
                                 <div class="card-body">
                                     <?php
-                                    if (isset($_GET['title']) || isset($_GET['copyright_date'])) {
+                                    if (isset($_GET['title']) || isset($_GET['copyright_date']) || isset($_GET['author']) || isset($_GET['isbn'])) {
                                         $book_title = mysqli_real_escape_string($con, $_GET['title']);
                                         $copyright_date = mysqli_real_escape_string($con, $_GET['copyright_date']);
+                                        $author = mysqli_real_escape_string($con, $_GET['author']);
+                                        $isbn = mysqli_real_escape_string($con, $_GET['isbn']);
                                         $query = "SELECT book.*, category.classname, COUNT(book.accession_number) AS copy_count,
                                                   SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count 
                                                   FROM book 
                                                   LEFT JOIN category ON book.category_id = category.category_id 
-                                                  WHERE book.title = '$book_title' AND book.copyright_date = '$copyright_date'";
+                                                  WHERE book.title = '$book_title' AND book.copyright_date = '$copyright_date' AND book.author = '$author' AND book.isbn = '$isbn'";
                                         $query_run = mysqli_query($con, $query);
 
                                         if (mysqli_num_rows($query_run) > 0) {
@@ -197,7 +199,7 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                                             $query = "SELECT book.*, category.classname 
                                                       FROM book 
                                                       LEFT JOIN category ON book.category_id = category.category_id 
-                                                      WHERE book.title = '$book_title' AND book.copyright_date = '$copyright_date'";
+                                                      WHERE book.title = '$book_title' AND book.copyright_date = '$copyright_date' AND book.author = '$author' AND book.isbn = '$isbn'";
                                             $query_run = mysqli_query($con, $query);
 
                                             if (mysqli_num_rows($query_run) > 0) {

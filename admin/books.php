@@ -69,8 +69,8 @@ include('./includes/sidebar.php');
                                                     COUNT(book.accession_number) AS copy_count, 
                                                     SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count 
                                                 FROM book 
-                                                GROUP BY book.title, book.copyright_date
-                                                ORDER BY book.title DESC, book.copyright_date DESC";
+                                                GROUP BY book.title, book.copyright_date, book.author, book.isbn
+                                                ORDER BY book.title DESC, book.copyright_date, book.author, book.isbn DESC";
                                                 $query_run = mysqli_query($con, $query);
 
                                                 if (mysqli_num_rows($query_run)) {
@@ -93,18 +93,18 @@ include('./includes/sidebar.php');
                                                             <td><?= htmlspecialchars($book['publisher']); ?></td>
                                                             <td><?= htmlspecialchars($book['call_number']); ?></td>
                                                             <td>
-                                                                <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
+                                                                <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
                                                                 <?= htmlspecialchars($book['available_count']); ?> of <?= htmlspecialchars($book['copy_count']); ?> available
                                                                 </a>
                                                             </td>
                                                             <td class="justify-content-center">
                                                                 <div class="btn-group" style="background: #DFF6FF;">
                                                                     <!-- View Book Action -->
-                                                                    <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
+                                                                    <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
                                                                         <i class="bi bi-eye-fill"></i>
                                                                     </a>
                                                                     <!-- Edit Book Action -->
-                                                                    <a href="book_edit?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
+                                                                    <a href="book_edit?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
                                                                         <i class="bi bi-pencil-fill"></i>
                                                                     </a>
                                                                 </div>
