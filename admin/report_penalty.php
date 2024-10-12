@@ -163,19 +163,19 @@ $total_penalty = number_format($count_penalty_row['total_penalty'], 2);
                     },
                     {
                         extend: 'excelHtml5',
-                        text: 'Export to Excel',
+                        text: 'Excel',
                         title: `Total Amount of Penalty: Php <?= $total_penalty ?>`,
                         autoFilter: true,
                         sheetName: 'Exported data'
                     },
                     {
                         extend: 'pdfHtml5',
-                        text: 'Export to PDF',
+                        text: 'PDF',
                         title: `Total Amount of Penalty: Php <?= $total_penalty ?>`
                     },
                     {
                         extend: 'copyHtml5',
-                        text: 'Copy to Clipboard',
+                        text: 'Copy',
                         title: `Total Amount of Penalty: Php <?= $total_penalty ?>`,
                         messageTop: `Total Amount of Penalty: Php <?= $total_penalty ?>`
                     }
