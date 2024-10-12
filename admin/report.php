@@ -39,10 +39,6 @@ include('./includes/sidebar.php');
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
-                                <div class="tab-pane fade show active" id="student-tab-pane">
-                                    <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                    <h1 class="sname">MCC Learning Resource Center</h1>
-                                    <h2 class="tname">Student Report</h2>
                                     <table id="myDataTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
