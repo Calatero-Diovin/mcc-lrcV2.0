@@ -4,74 +4,6 @@ include('includes/header.php');
 include('includes/sidebar.php'); 
 ?>
 
-<style>
-.data_table {
-    background: #fff;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.data_table .btn {
-    padding: 5px 10px;
-    margin: 10px 3px 10px 0;
-}
-
-.sname, .dated, .tname{
-    display: none;
-}
-.span {
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-@media print {
-    body * {
-        visibility: hidden;
-    }
-
-    .alert {
-        border: none;
-        margin-bottom: -70px;
-        font-weight: bold;
-    }
-    .table, #head, .pull-left,
-    .alert, .sname,
-    .dated, .tname, .table *{
-        visibility: visible;
-    }
-    .sname{
-        display: block;
-        position: fixed;
-        top: 80px;
-        left: 20px;
-        font-weight: bold;
-    }
-    .dated {
-        display: block;
-        position: fixed;
-        top: 50px;
-        right: 0;
-        font-size: 15px;
-    }
-    .data_table{
-        position: fixed;
-        left: 0px;
-        top: 170px;
-        right: 0px;
-    }
-    .tname {
-            display: block;
-            position: fixed;
-            left: 0;
-            top: 170px;
-            right: 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 20px;
-        }
-}
-</style>
-
 <main id="main" class="main">
     <?php 
     $page = basename($_SERVER['SCRIPT_NAME']); 
@@ -101,17 +33,6 @@ include('includes/sidebar.php');
                     </div>
                     <div class="card-body">
                         <div class="row d-flex justify-content-end align-items-center mt-2">
-                            <div class="text-start">
-                                <button onclick="exportToPDF()" class="btn btn-danger pdf-button">
-                                    <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                </button>
-                                <button onclick="exportToExcel()" class="btn btn-success excel-button">
-                                    <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                </button>
-                                <button onclick="window.print()" class="btn btn-primary print-button">
-                                    <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                </button>
-                            </div>
                             <form action="" method="POST" class="col-12 col-md-5 d-flex">
                                 <?php date_default_timezone_set('Asia/Manila'); ?>
                                 <div class="form-group form-group-sm">
@@ -164,13 +85,8 @@ include('includes/sidebar.php');
                                         }
                                         ?>
                                         
-                                        <table id="myDataTable2" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <table id="example" class="display" style="width:100%">
                                         <div class="pull-left">
-                                        <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                                <h1 class="sname">MCC Learning Resource Center</h1>
-                                                <h2 class="tname">Report Penalty</h2>
-                                                <br>
-                                                <br>
                                                 <div class="span">
                                                     <div class="alert alert-info mt-2 p-1">
                                                         <i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= number_format($count_penalty_row['total_penalty'], 2) ?>
@@ -218,61 +134,41 @@ include('includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 <script>
-    async function exportToPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.autoTable({
-            html: '#myDataTable2',
-            styles: { fontSize: 8 },
-            headStyles: { fillColor: [0, 0, 0] },
-            startY: 20
-        });
-
-        doc.save('penalty_report.pdf');
-    }
-
-    function exportToExcel() {
-        var wb = XLSX.utils.book_new();
-        var ws_data = [
-            ['Penalty Amount', 'Received From', 'Person In Charge', 'Due Date', 'Date Returned']
-        ];
-
-        var table = document.querySelector('#myDataTable2 tbody');
-        var rows = table.querySelectorAll('tr');
-
-        rows.forEach(function(row) {
-            var cells = row.querySelectorAll('td');
-            var row_data = [];
-            cells.forEach(function(cell) {
-                row_data.push(cell.innerText);
-            });
-            ws_data.push(row_data);
-        });
-
-        var ws = XLSX.utils.aoa_to_sheet(ws_data);
-        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-        XLSX.writeFile(wb, "penalty_report.xlsx");
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-    // Function to add auto-increment ID to a table
-    function addAutoIncrementId(tableSelector) {
-        const table = document.querySelector(tableSelector);
-        if (table) {
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach((row, index) => {
-                const idCell = row.querySelector('.auto-id');
-                if (idCell) {
-                    idCell.textContent = index + 1;
+    new DataTable('#example', {
+    order: [[4, 'desc']],
+    layout: {
+        top1Start: {
+            buttons: [
+                {
+                    extend: 'print',
+                    customScripts: [
+                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+                    ]
+                },
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                },
+                {
+                    extend: 'pdfHtml5'
+                },
+                {
+                    extend: 'copyHtml5'
                 }
-            });
+            ]
+        }
+    },
+    language: {
+        buttons: {
+            copyTitle: 'Added to clipboard',
+            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+            copySuccess: {
+                _: '%d rows copied',
+                1: '1 row copied'
+            }
         }
     }
-
-    // Apply auto-increment IDs to the specific tables
-    addAutoIncrementId('#myDataTable tbody');
-    addAutoIncrementId('#myDataTable2 tbody');
 });
 </script>
 
