@@ -56,7 +56,7 @@ include('includes/sidebar.php');
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="">
+                                    <div class="data_table">
                                         <?php
                                         // Fetch admin name
                                         $admin_query = mysqli_query($con, "SELECT admin_name FROM report LIMIT 1") or die(mysqli_connect_error());
@@ -88,7 +88,6 @@ include('includes/sidebar.php');
                                         }
                                         ?>
                                         
-                                        <table id="example" class="display" style="width:100%">
                                         <div class="pull-left">
                                                 <div class="span">
                                                     <div class="alert alert-info mt-2 p-1">
@@ -96,6 +95,7 @@ include('includes/sidebar.php');
                                                     </div>
                                                 </div>
                                             </div>
+                                        <table id="example" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Penalty Amount</th>
