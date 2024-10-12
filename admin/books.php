@@ -47,7 +47,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Books Table -->
-                                        <table id="myDataTable" class="table table-bordered table-striped table-sm">
+                                        <table id="example2" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -129,7 +129,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Ebooks Table -->
-                                        <table id="myDataTable2" class="table table-bordered table-striped table-sm">
+                                        <table id="example3" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -212,14 +212,14 @@ include('../message.php');
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Add auto-increment ID to Books Table
-    let booksTable = document.querySelector('#myDataTable tbody');
+    let booksTable = document.querySelector('#example2 tbody');
     let bookRows = booksTable.querySelectorAll('tr');
     bookRows.forEach((row, index) => {
         row.querySelector('.auto-id').textContent = index + 1;
     });
 
     // Add auto-increment ID to Ebooks Table
-    let ebooksTable = document.querySelector('#myDataTable2 tbody');
+    let ebooksTable = document.querySelector('#example3 tbody');
     let ebookRows = ebooksTable.querySelectorAll('tr');
     ebookRows.forEach((row, index) => {
         row.querySelector('.auto-id').textContent = index + 1;
