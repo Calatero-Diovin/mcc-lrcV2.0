@@ -3,6 +3,8 @@ require_once('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css">
 <main id="main" class="main" data-aos="fade-down">
     <div class="pagetitle">
         <h1>Report</h1>
@@ -138,6 +140,11 @@ include('./includes/sidebar.php');
     </section>
 </main>
 
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
 <script>
     new DataTable('#example', {
     layout: {
