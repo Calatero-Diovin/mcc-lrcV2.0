@@ -182,25 +182,25 @@ new DataTable('#example2', {
                     customScripts: [
                         'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
                     ],
-                    className: 'btn btn-outline-info mr-2' // Set the class name here
+                    className: 'btn btn-primary' // Set the class name here
                 },
                 {
                     extend: 'excelHtml5',
                     autoFilter: true,
                     sheetName: 'Exported data',
-                    className: 'btn btn-outline-info mr-2' // Set the class name here
+                    className: 'btn btn-success' // Set the class name here
                 },
                 {
                     extend: 'pdfHtml5',
-                    className: 'btn btn-outline-info mr-2' // Set the class name here
+                    className: 'btn btn-danger' // Set the class name here
                 },
                 {
                     extend: 'copyHtml5',
-                    className: 'btn btn-outline-info mr-2' // Set the class name here
+                    className: 'btn btn-secondary' // Set the class name here
                 },
                 {
                     extend: 'pageLength',
-                    className: 'btn btn-outline-info mr-2' // Set the class name here
+                    className: 'btn btn-warning' // Set the class name here
                 }
             ]
         }
