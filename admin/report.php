@@ -145,6 +145,8 @@ include('./includes/sidebar.php');
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
 <script>
     new DataTable('#example', {
     order: [[4, 'desc']],
