@@ -14,10 +14,6 @@ include('./includes/sidebar.php');
         #myDataTable, #myDataTable2, .sname, .dated, .tname, #myDataTable *, #myDataTable2 * {
             visibility: visible;
         }
-        #myDataTable tbody tr, 
-        #myDataTable2 tbody tr {
-            visibility: visible;
-        }
         #myDataTable, #myDataTable2 {
             position: fixed;
             left: 0px;
@@ -48,18 +44,6 @@ include('./includes/sidebar.php');
             text-align: center;
             font-size: 20px;
         }
-         /* Hide the sorting icons in DataTables */
-        th.sorting:after,
-        th.sorting_asc:after,
-        th.sorting_desc:after,
-        th.sorting:before,
-        th.sorting_asc:before,
-        th.sorting_desc:before {
-            display: none !important;
-        }
-        .table-striped > tbody > tr:nth-of-type(odd) {
-        background-color: transparent !important; /* Make odd rows transparent */
-    }
     }
 </style>
 <main id="main" class="main" data-aos="fade-down">
