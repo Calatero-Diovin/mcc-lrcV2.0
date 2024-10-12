@@ -38,8 +38,7 @@ if(isset($_POST['delete_admin']))
 
 
 // Update Admin
-if(isset($_POST['edit_admin']))
-{
+if (isset($_POST['edit_admin'])) {
     $admin_id = mysqli_real_escape_string($con, $_POST['admin_id']);
 
     $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
@@ -54,35 +53,40 @@ if(isset($_POST['edit_admin']))
     $admin_image = $_FILES['admin_image']['name'];
     $update_admin_filename = $old_admin_filename;
 
-    if($admin_image != NULL)
-    {
+    // Allowed file extensions
+    $allowedExtensions = ['jpg', 'jpeg', 'png'];
+    $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
+
+    // Check if the uploaded file is of valid type
+    if ($admin_image != NULL && !in_array(strtolower($admin_extension), $allowedExtensions)) {
+        $_SESSION['status'] = 'Invalid file format! Only JPG, JPEG, and PNG are allowed.';
+        $_SESSION['status_code'] = "error";
+        header("Location: admin_edit?id=$admin_id");
+        exit(0);
+    }
+
+    if ($admin_image != NULL) {
         // Rename the Image
-        $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
-        $admin_filename = time().'.'.$admin_extension;
-        $update_admin_filename =  $admin_filename;
+        $admin_filename = time() . '.' . $admin_extension;
+        $update_admin_filename = $admin_filename;
     }
 
     $query = "UPDATE `admin` SET firstname='$firstname', middlename='$middlename', lastname='$lastname', email='$email', address='$address', phone_number='$phone_number', admin_type='$admin_type', admin_image='$update_admin_filename' WHERE admin_id = '$admin_id'";
     $query_run = mysqli_query($con, $query);
 
-    if($query_run)
-    {
-        if($admin_image != NULL)
-        {
-            if(file_exists('../uploads/admin_profile/'.$old_admin_filename))
-            {
-                unlink("../uploads/admin_profile/".$old_admin_filename);
+    if ($query_run) {
+        if ($admin_image != NULL) {
+            if (file_exists('../uploads/admin_profile/' . $old_admin_filename)) {
+                unlink("../uploads/admin_profile/" . $old_admin_filename);
             }
-            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/'.$admin_filename);
+            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
         }
         
         $_SESSION['status'] = 'Admin Updated successfully';
         $_SESSION['status_code'] = "success";
         header("Location: admin_edit?id=$admin_id");
         exit(0);
-    }
-    else
-    {
+    } else {
         $_SESSION['status'] = 'Admin not Updated';
         $_SESSION['status_code'] = "error";
         header("Location: admin_edit?id=$admin_id");
@@ -134,43 +138,45 @@ if (isset($_POST['add_admin'])) {
         exit(0);
     }
 
-    if ($admin_image != "") {
-        // Rename the Image
-        $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
-        $admin_filename = time() . '.' . $admin_extension;
+    // Check if the admin image is provided
+    if (empty($admin_image)) {
+        $_SESSION['status'] = 'Image is required. Please upload an image in JPG, JPEG, or PNG format.';
+        $_SESSION['status_code'] = "error";
+        header("Location: admin_add");
+        exit(0);
+    }
 
-        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
-                  VALUES ('$firstname', '$middlename', '$lastname', '$email', '$address', '$phone_number', '$hashed_password', '$admin_filename', '$admin_type', NOW())";
-        $query_run = mysqli_query($con, $query);
+    // Check the file extension
+    $allowedExtensions = ['jpg', 'jpeg', 'png'];
+    $admin_extension = pathinfo($admin_image, PATHINFO_EXTENSION);
+    
+    if (!in_array(strtolower($admin_extension), $allowedExtensions)) {
+        $_SESSION['status'] = 'Invalid file format! Only JPG, JPEG, and PNG are allowed.';
+        $_SESSION['status_code'] = "error";
+        header("Location: admin_add");
+        exit(0);
+    }
 
-        if ($query_run) {
-            move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
-            $_SESSION['status'] = 'Admin Added successfully';
-            $_SESSION['status_code'] = "success";
-            header("Location: admin");
-            exit(0);
-        } else {
-            $_SESSION['status'] = 'Admin not Added';
-            $_SESSION['status_code'] = "error";
-            header("Location: admin");
-            exit(0);
-        }
+    // Rename the Image
+    $admin_filename = time() . '.' . $admin_extension;
+
+    // Insert into admin table
+    $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
+              VALUES ('$firstname', '$middlename', '$lastname', '$email', '$address', '$phone_number', '$hashed_password', '$admin_filename', '$admin_type', NOW())";
+    $query_run = mysqli_query($con, $query);
+
+    if ($query_run) {
+        move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
+        $_SESSION['status'] = 'Admin Added successfully';
+        $_SESSION['status_code'] = "success";
+        header("Location: admin");
+        exit(0);
     } else {
-        $query = "INSERT INTO admin (firstname, middlename, lastname, email, address, phone_number, password, admin_image, admin_type, admin_added) 
-                  VALUES ('$firstname', '$middlename', '$lastname', '$email', '$address', '$phone_number', '$hashed_password', NULL, '$admin_type', NOW())";
-        $query_run = mysqli_query($con, $query);
-
-        if ($query_run) {
-            $_SESSION['status'] = 'Admin Added successfully';
-            $_SESSION['status_code'] = "success";
-            header("Location: admin");
-            exit(0);
-        } else {
-            $_SESSION['status'] = 'Admin not Added';
-            $_SESSION['status_code'] = "error";
-            header("Location: admin");
-            exit(0);
-        }
+        $_SESSION['status'] = 'Admin not Added';
+        $_SESSION['status_code'] = "error";
+        header("Location: admin");
+        exit(0);
     }
 }
+
 ?>
