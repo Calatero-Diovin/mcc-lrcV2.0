@@ -77,22 +77,7 @@ include('./includes/sidebar.php');
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="faculty-tab-pane">
-                                    <div class="text-start mt-4">
-                                        <button onclick="exportToPDF('myDataTable2', 'faculty')" class="btn btn-danger pdf-button">
-                                            <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                        </button>
-                                        <button onclick="exportToExcel('myDataTable2', 'faculty')" class="btn btn-success excel-button">
-                                            <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                        </button>
-                                        <button onclick="window.print()" class="btn btn-primary print-button">
-                                            <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                        </button>
-                                    </div>
-                                    <br><br>
-                                    <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                    <h1 class="sname">MCC Learning Resource Center</h1>
-                                    <h2 class="tname">Faculty Report</h2>
-                                    <table id="myDataTable2" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                <table id="example" class="display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -137,40 +122,15 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-    // Check if DataTable is already initialized
-    if (!$.fn.DataTable.isDataTable('#example')) {
-        // Initialize DataTable
-        const exampleTable = new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                }
-            }
-        });
-
-        // Function to add auto-increment ID to the DataTable
-        function addAutoIncrementID() {
-            const tableBody = document.querySelector('#example tbody');
-            if (tableBody) {
-                const rows = tableBody.querySelectorAll('tr');
-                rows.forEach((row, index) => {
-                    const idCell = row.querySelector('.auto-id');
-                    if (idCell) {
-                        idCell.textContent = index + 1; // Set auto-increment ID
-                    }
-                });
+    document.addEventListener('DOMContentLoaded', function () {
+    // Initialize DataTable
+    const exampleTable = new DataTable('#example', {
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             }
         }
-
-        // Event listener for DataTable draw event
-        exampleTable.on('draw', function () {
-            addAutoIncrementID(); // Update IDs on redraw
-        });
-
-        // Initial call to add auto-increment IDs
-        addAutoIncrementID();
-    }
+    });
 });
 </script>
 
