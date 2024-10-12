@@ -169,7 +169,7 @@ include('./includes/sidebar.php');
                 },
                 {
                     extend: 'pdfHtml5',
-                    messageTop: 'PDF created by PDFMake with Buttons for DataTables.'
+                    messageTop: 'PDF created by MCC Learning Resource Center'
                 }
             ]
         }
