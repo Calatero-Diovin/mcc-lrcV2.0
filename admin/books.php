@@ -226,16 +226,76 @@ include('../message.php');
 document.addEventListener('DOMContentLoaded', function () {
     // Add auto-increment ID to Books Table
     let booksTable = document.querySelector('#example2 tbody');
-    let bookRows = booksTable.querySelectorAll('tr');
-    bookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
+    if (booksTable) { // Ensure the table exists
+        let bookRows = booksTable.querySelectorAll('tr');
+        bookRows.forEach((row, index) => {
+            let autoIdCell = row.querySelector('.auto-id');
+            if (autoIdCell) { // Ensure the cell exists
+                autoIdCell.textContent = index + 1;
+            }
+        });
+    }
 
     // Add auto-increment ID to Ebooks Table
     let ebooksTable = document.querySelector('#example3 tbody');
-    let ebookRows = ebooksTable.querySelectorAll('tr');
-    ebookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
+    if (ebooksTable) { // Ensure the table exists
+        let ebookRows = ebooksTable.querySelectorAll('tr');
+        ebookRows.forEach((row, index) => {
+            let autoIdCell = row.querySelector('.auto-id');
+            if (autoIdCell) { // Ensure the cell exists
+                autoIdCell.textContent = index + 1;
+            }
+        });
+    }
+});
+
+// Initialize DataTables
+new DataTable('#example', {
+    order: [[4, 'asc']],
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'print',
+                    customScripts: [
+                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+                    ]
+                },
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                },
+                {
+                    extend: 'pdfHtml5'
+                },
+                {
+                    extend: 'copyHtml5'
+                },
+                {
+                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
+                }
+            ]
+        }
+    },
+    language: {
+        buttons: {
+            copyTitle: 'Added to clipboard',
+            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+            copySuccess: {
+                _: '%d rows copied',
+                1: '1 row copied'
+            }
+        }
+    }
+});
+
+// Initialize DataTables for the other tables if needed
+new DataTable('#example2', {
+    // Add your configuration here if needed
+});
+
+new DataTable('#example3', {
+    // Add your configuration here if needed
 });
 </script>
