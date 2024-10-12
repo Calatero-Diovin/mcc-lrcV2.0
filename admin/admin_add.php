@@ -227,43 +227,46 @@ function validatePhoneNumber() {
     });
 
     // Function to check for XSS tags and email domain
-    function validateEmail(input) {
-        const xssPattern = /<[^>]*>/;
-        const validDomain = /@mcclawis\.edu\.ph$/; // Regex for the valid domain
+function validateEmail(input) {
+    const xssPattern = /<[^>]*>/;
+    const validDomain = /@mcclawis\.edu\.ph$/; // Regex for the valid domain
 
-        // Check for XSS tags
-        if (xssPattern.test(input)) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'XSS tags are not allowed.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                // Clear the input field
-                document.getElementById('email').value = '';
-            });
-            return true; // Return true if XSS is found
-        }
-
-        // Check for valid email domain
-        if (!validDomain.test(input)) {
-            Swal.fire({
-                title: 'Invalid Email!',
-                text: 'Please use an email address ending with @mcclawis.edu.ph.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                // Clear the input field
-                document.getElementById('email').value = '';
-            });
-            return true; // Return true if invalid email
-        }
-
-        return false; // Return false if everything is valid
+    // Check for XSS tags
+    if (xssPattern.test(input)) {
+        Swal.fire({
+            title: 'Invalid Input!',
+            text: 'XSS tags are not allowed.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        }).then(() => {
+            // Clear the input field
+            document.getElementById('email').value = '';
+        });
+        return false; // Return false if XSS is found
     }
 
-    // Attach event listener to the email input field
-    document.getElementById('email').addEventListener('blur', validateEmail);
+    // Check for valid email domain
+    if (!validDomain.test(input)) {
+        Swal.fire({
+            title: 'Invalid Email!',
+            text: 'Please use an email address ending with @mcclawis.edu.ph.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        }).then(() => {
+            // Clear the input field
+            document.getElementById('email').value = '';
+        });
+        return false; // Return false if invalid email
+    }
+
+    return true; // Return true if everything is valid
+}
+
+// Attach event listener to the email input field
+document.getElementById('email').addEventListener('blur', function() {
+    const inputValue = this.value;
+    validateEmail(inputValue);
+});
 
     function validateAddress() {
         const addressInput = document.getElementById('address').value;
