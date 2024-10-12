@@ -53,20 +53,6 @@ if(isset($_SESSION['status']) && $_SESSION['status'] !='')
     // Initialize AOS (Animate On Scroll)
     AOS.init();
 
-    // Initialize DataTables
-    $(document).ready(function() {
-        $('#myDataTable').DataTable();
-        $('#myDataTable2').DataTable();
-
-        var table = $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-        });
-
-        table.buttons().container()
-            .appendTo('#example_wrapper .col-md-6:eq(0)');
-    });
-
     $(document).ready(function(){
             $('.toggle-sidebar-btn').click(function(){
                 $('body').toggleClass('toggle-sidebar');

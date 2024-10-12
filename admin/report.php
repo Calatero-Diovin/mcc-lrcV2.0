@@ -3,49 +3,6 @@ require_once('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 ?>
-<style>
-    .sname, .dated, .tname {
-        display: none;
-    }
-    @media print {
-        body {
-            visibility: hidden;
-        }
-        #myDataTable, #myDataTable2, .sname, .dated, .tname, #myDataTable *, #myDataTable2 * {
-            visibility: visible;
-        }
-        #myDataTable, #myDataTable2 {
-            position: fixed;
-            left: 0px;
-            top: 180px;
-            right: 0px;
-        }
-        .sname {
-            display: block;
-            position: fixed;
-            left: 0px;
-            top: 30px;
-            font-weight: bold;
-        }
-        .dated {
-            display: block;
-            position: fixed;
-            top: 10px;
-            right: 0px;
-            font-size: 15px;
-        }
-        .tname {
-            display: block;
-            position: fixed;
-            left: 0;
-            top: 130px;
-            right: 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 20px;
-        }
-    }
-</style>
 <main id="main" class="main" data-aos="fade-down">
     <div class="pagetitle">
         <h1>Report</h1>
@@ -83,21 +40,10 @@ include('./includes/sidebar.php');
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="student-tab-pane">
                                     <div class="text-start mt-4">
-                                        <button onclick="exportToPDF('myDataTable', 'student')" class="btn btn-danger pdf-button">
-                                            <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                        </button>
-                                        <button onclick="exportToExcel('myDataTable', 'student')" class="btn btn-success excel-button">
-                                            <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                        </button>
-                                        <button onclick="window.print()" class="btn btn-primary print-button">
-                                            <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                        </button>
+                                        
                                     </div>
                                     <br><br>
-                                    <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                    <h1 class="sname">MCC Learning Resource Center</h1>
-                                    <h2 class="tname">Student Report</h2>
-                                    <table id="myDataTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                    <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -195,60 +141,19 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-    async function exportToPDF(tableId, reportType) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.autoTable({
-            html: '#' + tableId,
-            styles: { fontSize: 8 },
-            headStyles: { fillColor: [0, 0, 0] },
-            startY: 20
-        });
-
-        const fileName = reportType === 'student' ? 'student_report.pdf' : 'faculty_report.pdf';
-        doc.save(fileName);
+    new DataTable('#example', {
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'print',
+                    customScripts: [
+                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+                    ]
+                }
+            ]
+        }
     }
-
-    function exportToExcel(tableId, reportType) {
-        var wb = XLSX.utils.book_new();
-        var ws_data = [
-            ['Name', 'Book Title', 'Task', 'Person In Charge', 'Date Transaction']
-        ];
-
-        var table = document.getElementById(tableId);
-        var rows = table.querySelectorAll('tbody tr');
-
-        rows.forEach(function(row) {
-            var cells = row.querySelectorAll('td');
-            var row_data = [];
-            cells.forEach(function(cell) {
-                row_data.push(cell.innerText);
-            });
-            ws_data.push(row_data);
-        });
-
-        var ws = XLSX.utils.aoa_to_sheet(ws_data);
-        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-        const fileName = reportType === 'student' ? 'student_report.xlsx' : 'faculty_report.xlsx';
-        XLSX.writeFile(wb, fileName);
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-     // Add auto-increment ID to Books Table
-     let booksTable = document.querySelector('#myDataTable tbody');
-     let bookRows = booksTable.querySelectorAll('tr');
-     bookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
-
-     // Add auto-increment ID to Ebooks Table
-     let ebooksTable = document.querySelector('#myDataTable2 tbody');
-     let ebookRows = ebooksTable.querySelectorAll('tr');
-     ebookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
 });
 </script>
 
