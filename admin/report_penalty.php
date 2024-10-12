@@ -140,6 +140,10 @@ include('includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
+<?php 
+$total_penalty = number_format($count_penalty_row['total_penalty'], 2);
+?>
+
 <script>
     new DataTable('#example', {
         order: [[3, 'asc']],
