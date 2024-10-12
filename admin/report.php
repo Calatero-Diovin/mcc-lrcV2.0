@@ -39,7 +39,7 @@ include('./includes/sidebar.php');
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
-                                    <table id="myDataTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                            <table id="example" class="display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -137,60 +137,37 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-    async function exportToPDF(tableId, reportType) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.autoTable({
-            html: '#' + tableId,
-            styles: { fontSize: 8 },
-            headStyles: { fillColor: [0, 0, 0] },
-            startY: 20
-        });
-
-        const fileName = reportType === 'student' ? 'student_report.pdf' : 'faculty_report.pdf';
-        doc.save(fileName);
-    }
-
-    function exportToExcel(tableId, reportType) {
-        var wb = XLSX.utils.book_new();
-        var ws_data = [
-            ['Name', 'Book Title', 'Task', 'Person In Charge', 'Date Transaction']
-        ];
-
-        var table = document.getElementById(tableId);
-        var rows = table.querySelectorAll('tbody tr');
-
-        rows.forEach(function(row) {
-            var cells = row.querySelectorAll('td');
-            var row_data = [];
-            cells.forEach(function(cell) {
-                row_data.push(cell.innerText);
-            });
-            ws_data.push(row_data);
-        });
-
-        var ws = XLSX.utils.aoa_to_sheet(ws_data);
-        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-        const fileName = reportType === 'student' ? 'student_report.xlsx' : 'faculty_report.xlsx';
-        XLSX.writeFile(wb, fileName);
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
-     // Add auto-increment ID to Books Table
-     let booksTable = document.querySelector('#myDataTable tbody');
-     let bookRows = booksTable.querySelectorAll('tr');
-     bookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
+    // Initialize DataTable
+    const exampleTable = new DataTable('#example', {
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        }
+    });
 
-     // Add auto-increment ID to Ebooks Table
-     let ebooksTable = document.querySelector('#myDataTable2 tbody');
-     let ebookRows = ebooksTable.querySelectorAll('tr');
-     ebookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
+    // Function to add auto-increment ID to the DataTable
+    function addAutoIncrementID() {
+        const tableBody = document.querySelector('#example tbody');
+        if (tableBody) {
+            const rows = tableBody.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                const idCell = row.querySelector('.auto-id');
+                if (idCell) {
+                    idCell.textContent = index + 1; // Set auto-increment ID
+                }
+            });
+        }
+    }
+
+    // Event listener for DataTable draw event
+    exampleTable.on('draw', function () {
+        addAutoIncrementID(); // Update IDs on redraw
+    });
+
+    // Initial call to add auto-increment IDs
+    addAutoIncrementID();
 });
 </script>
 
