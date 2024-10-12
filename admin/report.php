@@ -47,7 +47,10 @@ include('./includes/sidebar.php');
          /* Hide the sorting icons in DataTables */
         th.sorting:after,
         th.sorting_asc:after,
-        th.sorting_desc:after {
+        th.sorting_desc:after,
+        th.sorting:before,
+        th.sorting_asc:before,
+        th.sorting_desc:before {
             display: none !important;
         }
     }
