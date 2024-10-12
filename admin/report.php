@@ -151,7 +151,7 @@ include('./includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-    new DataTable('#example', {
+   new DataTable('#example', {
     order: [[4, 'desc']],
     layout: {
         topStart: {
@@ -169,8 +169,21 @@ include('./includes/sidebar.php');
                 },
                 {
                     extend: 'pdfHtml5'
+                },
+                {
+                    extend: 'copyHtml5'
                 }
             ]
+        }
+    },
+    language: {
+        buttons: {
+            copyTitle: 'Added to clipboard',
+            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+            copySuccess: {
+                _: '%d rows copied',
+                1: '1 row copied'
+            }
         }
     }
 });
