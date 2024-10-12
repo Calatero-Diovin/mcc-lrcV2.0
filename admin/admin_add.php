@@ -40,7 +40,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">First Name</label>
-                                                  <input type="text" id="firstname" name="firstname" class="form-control" required>
+                                                  <input type="text" id="firstname" placeholder="Diovin" name="firstname" class="form-control" required>
                                              </div>
                                         </div>
 
@@ -50,14 +50,14 @@ include('./includes/sidebar.php');
                                                        <label for="">Middle Name</label>
                                                        <span class=" text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="text" id="middlename" name="middlename" class="form-control">
+                                                  <input type="text" id="middlename" placeholder="Pasicaran" name="middlename" class="form-control">
                                              </div>
                                         </div>
 
                                         <div class="col-12 col-md-3">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Last Name</label>
-                                                  <input type="text" id="lastname" name="lastname" class="form-control" required>
+                                                  <input type="text" id="lastname" placeholder="Calatero" name="lastname" class="form-control" required>
                                              </div>
                                         </div>
 
@@ -68,7 +68,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Email</label>
-                                                  <input type="email" id="email" name="email" class="form-control" required>
+                                                  <input type="email" id="email" placeholder="diovin.calatero@mcclawis.edu.ph" name="email" class="form-control" required>
                                              </div>
                                         </div>
 
@@ -88,7 +88,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-3 mt-2">
                                                   <label for="">Address</label>
-                                                  <input type="text" id="address" name="address" class="form-control" required>
+                                                  <input type="text" id="address" placeholder="Patao, Bantayan, Cebu" name="address" class="form-control" required>
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
