@@ -3,6 +3,14 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 
+// Check if 'code' is present in the URL
+if (!isset($_GET['code']) || empty($_GET['code'])) {
+    // Redirect to a 404 error page
+    header("HTTP/1.0 404 Not Found");
+    include('404.php'); // Ensure you have a 404.php file to display the error
+    exit; // Ensure no further code is executed
+}
+
 $code = $_GET['code'];
 
 $code_query = "SELECT username FROM ms_account WHERE verification_code = ?";
