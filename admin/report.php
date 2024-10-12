@@ -3,49 +3,7 @@ require_once('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 ?>
-<style>
-    .sname, .dated, .tname {
-        display: none;
-    }
-    @media print {
-        body {
-            visibility: hidden;
-        }
-        #myDataTable, #myDataTable2, .sname, .dated, .tname, #myDataTable *, #myDataTable2 * {
-            visibility: visible;
-        }
-        #myDataTable, #myDataTable2 {
-            position: fixed;
-            left: 0px;
-            top: 180px;
-            right: 0px;
-        }
-        .sname {
-            display: block;
-            position: fixed;
-            left: 0px;
-            top: 30px;
-            font-weight: bold;
-        }
-        .dated {
-            display: block;
-            position: fixed;
-            top: 10px;
-            right: 0px;
-            font-size: 15px;
-        }
-        .tname {
-            display: block;
-            position: fixed;
-            left: 0;
-            top: 130px;
-            right: 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 20px;
-        }
-    }
-</style>
+
 <main id="main" class="main" data-aos="fade-down">
     <div class="pagetitle">
         <h1>Report</h1>
@@ -82,18 +40,6 @@ include('./includes/sidebar.php');
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="student-tab-pane">
-                                    <div class="text-start mt-4">
-                                        <button onclick="exportToPDF('myDataTable', 'student')" class="btn btn-danger pdf-button">
-                                            <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                        </button>
-                                        <button onclick="exportToExcel('myDataTable', 'student')" class="btn btn-success excel-button">
-                                            <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                        </button>
-                                        <button onclick="window.print()" class="btn btn-primary print-button">
-                                            <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                        </button>
-                                    </div>
-                                    <br><br>
                                     <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
                                     <h1 class="sname">MCC Learning Resource Center</h1>
                                     <h2 class="tname">Student Report</h2>
