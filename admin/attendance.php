@@ -4,61 +4,6 @@ include('includes/header.php');
 include('./includes/sidebar.php'); 
 ?>
 
-<style>
-.data_table {
-     background: #fff;
-     padding: 15px;
-     /* box-shadow: 1px 3px 5px #aaa; */
-     border-radius: 5px;
-}
-
-.data_table .btn {
-     padding: 5px 10px;
-     margin: 10px 3px 10px 0;
-}
-.sname, .dated, .tname{
-    display: none;
-}
-
-@media print {
-    body *{
-     visibility: hidden;
-    }
-    #myDataTabele, .sname, .dated, .tname, #myDataTable *{
-     visibility: visible;
-    } 
-    .sname{
-    display: block;
-    position: fixed;
-            left: 0px;
-            top: 30px;
-            font-weight: bold;
-     }
-     .dated{
-    display: block;
-    position: fixed;
-            top: 10px;
-            right: 0px;
-            font-size: 15px;
-     }
-     .data_table{
-        position: fixed;
-        left: 0px;
-        top: 100px;
-        right: 0px;
-    }
-    .tname {
-     display: block;
-            position: fixed;
-            left: 0;
-            top: 130px;
-            right: 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 20px;
-    }
-}
-</style>
 <main id="main" class="main">
      <div class="pagetitle" data-aos="fade-down">
 
@@ -82,17 +27,6 @@ include('./includes/sidebar.php');
 
                                    <div class="card-body">
                                         <div class="row d-flex justify-content-end align-items-center mt-2">
-                                        <div class="text-start">
-                                            <button onclick="exportToPDF()" class="btn btn-danger pdf-button">
-                                                <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                            </button>
-                                            <button onclick="exportToExcel()" class="btn btn-success excel-button">
-                                                <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                            </button>
-                                            <button onclick="window.print()" class="btn btn-primary print-button">
-                                                <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                            </button>
-                                        </div>
                                              <form action="" method="POST" class="col-12 col-md-5 d-flex ">
 
                                                   <?php date_default_timezone_set('Asia/Manila'); ?>
@@ -122,12 +56,7 @@ include('./includes/sidebar.php');
                                                   <div class="col-12">
 
                                                        <div class="data_table">
-                                                            <table id="myDataTable"
-                                                                 class="table table-striped table-bordered">
-                                                                 <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                                <h1 class="sname">MCC Learning Resource Center</h1>
-                                                <h2 class="tname">Attendance List</h2>
-                                                <br>
+                                                       <table id="example" class="display" style="width:100%">
                                                                  <thead>
                                                                       <tr>
                                                                       <th>Date</th>
@@ -211,43 +140,43 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-        async function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.autoTable({
-                html: '#myDataTable',
-                styles: { fontSize: 8 },
-                headStyles: { fillColor: [0, 0, 0] },
-                startY: 20
-            });
-
-            doc.save('attendance_report.pdf');
+     new DataTable('#example', {
+    order: [[0, 'desc']],
+    layout: {
+        top1Start: {
+            buttons: [
+                {
+                    extend: 'print',
+                    customScripts: [
+                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+                    ]
+                },
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                },
+                {
+                    extend: 'pdfHtml5'
+                },
+                {
+                    extend: 'copyHtml5'
+                }
+            ]
         }
-
-        function exportToExcel() {
-            var wb = XLSX.utils.book_new();
-            var ws_data = [
-                ['Date', 'Time in', 'Full Name', 'Program', 'Time out']
-            ];
-
-            var table = document.querySelector('#myDataTable tbody');
-            var rows = table.querySelectorAll('tr');
-
-            rows.forEach(function(row) {
-                var cells = row.querySelectorAll('td');
-                var row_data = [];
-                cells.forEach(function(cell) {
-                    row_data.push(cell.innerText);
-                });
-                ws_data.push(row_data);
-            });
-
-            var ws = XLSX.utils.aoa_to_sheet(ws_data);
-            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-            XLSX.writeFile(wb, "attendance_report.xlsx");
+    },
+    language: {
+        buttons: {
+            copyTitle: 'Added to clipboard',
+            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+            copySuccess: {
+                _: '%d rows copied',
+                1: '1 row copied'
+            }
         }
-    </script>
+    }
+});
+</script>
 
 
 <?php 
