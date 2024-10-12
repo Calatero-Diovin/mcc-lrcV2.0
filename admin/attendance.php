@@ -153,7 +153,7 @@ include('./includes/sidebar.php');
      new DataTable('#example', {
     order: [[0, 'desc']],
     layout: {
-        top1Start: {
+        topStart: { // Use 'topStart' instead of 'top1Start'
             buttons: [
                 {
                     extend: 'print',
@@ -171,6 +171,9 @@ include('./includes/sidebar.php');
                 },
                 {
                     extend: 'copyHtml5'
+                },
+                {
+                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
                 }
             ]
         }
