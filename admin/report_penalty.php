@@ -56,7 +56,7 @@ include('includes/sidebar.php');
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="data_table">
+                                    <div class="">
                                         <?php
                                         // Fetch admin name
                                         $admin_query = mysqli_query($con, "SELECT admin_name FROM report LIMIT 1") or die(mysqli_connect_error());
