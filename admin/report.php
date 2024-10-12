@@ -41,10 +41,6 @@ include('./includes/sidebar.php');
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="student-tab-pane">
-                                    <div class="text-start mt-4">
-                                        
-                                    </div>
-                                    <br><br>
                                     <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -81,22 +77,7 @@ include('./includes/sidebar.php');
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="faculty-tab-pane">
-                                    <div class="text-start mt-4">
-                                        <button onclick="exportToPDF('myDataTable2', 'faculty')" class="btn btn-danger pdf-button">
-                                            <i class="bi bi-file-earmark-pdf-fill"></i> <b>Export to PDF</b>
-                                        </button>
-                                        <button onclick="exportToExcel('myDataTable2', 'faculty')" class="btn btn-success excel-button">
-                                            <i class="bi bi-file-earmark-excel-fill"></i> <b>Export to Excel</b>
-                                        </button>
-                                        <button onclick="window.print()" class="btn btn-primary print-button">
-                                            <i class="bi bi-printer-fill"></i> <b>Print</b>
-                                        </button>
-                                    </div>
-                                    <br><br>
-                                    <h5 class="dated">Date: <?php echo date('F d, Y'); ?></h5>
-                                    <h1 class="sname">MCC Learning Resource Center</h1>
-                                    <h2 class="tname">Faculty Report</h2>
-                                    <table id="myDataTable2" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                    <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -152,6 +133,43 @@ include('./includes/sidebar.php');
 
 <script>
    new DataTable('#example', {
+    order: [[4, 'desc']],
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'print',
+                    customScripts: [
+                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+                    ]
+                },
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
+                },
+                {
+                    extend: 'pdfHtml5'
+                },
+                {
+                    extend: 'copyHtml5'
+                }
+            ]
+        }
+    },
+    language: {
+        buttons: {
+            copyTitle: 'Added to clipboard',
+            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+            copySuccess: {
+                _: '%d rows copied',
+                1: '1 row copied'
+            }
+        }
+    }
+});
+
+new DataTable('#example2', {
     order: [[4, 'desc']],
     layout: {
         topStart: {
