@@ -59,7 +59,7 @@ include('./includes/sidebar.php');
                                                   <div class="col-12">
 
                                                        <div class="data_table">
-                                                       <table id="example" class="display" style="width:100%">
+                                                       <table id="example3" class="display" style="width:100%">
                                                                  <thead>
                                                                       <tr>
                                                                       <th>Date</th>
@@ -150,7 +150,7 @@ include('./includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-     new DataTable('#example', {
+     new DataTable('#example3', {
     order: [[0, 'desc']],
     layout: {
         topStart: { // Use 'topStart' instead of 'top1Start'
