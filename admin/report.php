@@ -46,7 +46,6 @@ include('./includes/sidebar.php');
                                     <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Book Title</th>
                                                 <th>Task</th>
@@ -68,7 +67,6 @@ include('./includes/sidebar.php');
                                             ?>
                                             <?php if(isset($row['user_id'])) :?>
                                             <tr>
-                                            <td class="auto-id" style="text-align: center;"></td>
                                                 <td><?php echo $user_name; ?></td>
                                                 <td><?php echo $row['title']; ?></td>
                                                 <td><?php echo $row['detail_action']; ?></td>
