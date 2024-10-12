@@ -647,7 +647,7 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const phonePattern = /^09\d{9}$/;
   const namePattern = /^[A-Za-z\s]+$/; // Regex for alphabetic characters and spaces
 
-  if (!cellphone || !contactPerson || !personCellNo) {
+  if (!cellphone || !contactPerson || !personCellNo|| !email) {
     Swal.fire({
       title: "Please fill this field.",
       icon: "error",
