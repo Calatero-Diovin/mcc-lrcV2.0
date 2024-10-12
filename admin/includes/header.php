@@ -34,6 +34,9 @@
           href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
      <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css" />
+     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
      
 
      <!-- Custom CSS -->

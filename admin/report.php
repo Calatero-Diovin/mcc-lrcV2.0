@@ -121,8 +121,12 @@ include('./includes/sidebar.php');
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable
+    // Initialize DataTable with both responsive and row reorder features
     const exampleTable = new DataTable('#example', {
+        responsive: true,
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
         layout: {
             topStart: {
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
