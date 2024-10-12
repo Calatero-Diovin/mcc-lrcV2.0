@@ -79,7 +79,7 @@ include('./includes/sidebar.php');
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th style="width:50%;">Book Title</th>
+                                                <th>Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
                                                 <th>Date Transaction</th>
@@ -100,7 +100,7 @@ include('./includes/sidebar.php');
                                             <?php if(isset($row['faculty_id'])) :?>
                                             <tr>
                                                 <td><?php echo $faculty_name; ?></td>
-                                                <td><?php echo $row['title']; ?></td>
+                                                <td style="width:50%;"><?php echo $row['title']; ?></td>
                                                 <td><?php echo $row['detail_action']; ?></td>
                                                 <td><?php echo $row['admin_name']; ?></td>
                                                 <td><?php echo date("M d, Y h:i:s a",strtotime($row['date_transaction'])); ?></td>
