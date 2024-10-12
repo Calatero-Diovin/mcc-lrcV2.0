@@ -4,6 +4,18 @@ include('includes/header.php');
 include('./includes/sidebar.php'); 
 ?>
 
+<style>
+@media print {
+    .table-responsive {
+        overflow: visible !important; /* Ensure the table fits */
+    }
+    th, td {
+        white-space: nowrap; /* Prevent line breaks */
+    }
+    /* Additional styles for print */
+}
+</style>
+
 <main id="main" class="main" data-aos="fade-down">
     <div class="pagetitle">
         <h1>Report</h1>
@@ -47,7 +59,7 @@ include('./includes/sidebar.php');
                                                 <th>Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
-                                                <th>Date Transaction</th>
+                                                <th style="width: 25%;">Date Transaction</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,7 +94,7 @@ include('./includes/sidebar.php');
                                                 <th>Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
-                                                <th>Date Transaction</th>
+                                                <th style="width: 25%;">Date Transaction</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -119,32 +131,37 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Initialize DataTable for both student and faculty tables
-        const studentTable = new DataTable('.student-table', {
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            layout: {
-                topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                }
+document.addEventListener('DOMContentLoaded', function () {
+    const studentTable = new DataTable('.student-table', {
+        responsive: true,
+        columnDefs: [
+            { width: '25%', targets: 4 } // Adjust width for date column
+        ],
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
             }
-        });
-
-        const facultyTable = new DataTable('.faculty-table', {
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            layout: {
-                topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                }
-            }
-        });
+        }
     });
+
+    const facultyTable = new DataTable('.faculty-table', {
+        responsive: true,
+        columnDefs: [
+            { width: '25%', targets: 4 } // Adjust width for date column
+        ],
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        layout: {
+            topStart: {
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        }
+    });
+});
 </script>
 
 <?php 
