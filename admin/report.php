@@ -168,8 +168,7 @@ include('./includes/sidebar.php');
                     sheetName: 'Exported data'
                 },
                 {
-                    extend: 'pdfHtml5',
-                    messageTop: 'PDF created by MCC Learning Resource Center'
+                    extend: 'pdfHtml5'
                 }
             ]
         }
