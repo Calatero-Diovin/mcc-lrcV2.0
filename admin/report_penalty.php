@@ -142,7 +142,7 @@ include('includes/sidebar.php');
 
 <script>
     new DataTable('#example', {
-    order: [[3, 'desc']],
+    order: [[3, 'asc']],
     layout: {
         top1Start: {
             buttons: [
