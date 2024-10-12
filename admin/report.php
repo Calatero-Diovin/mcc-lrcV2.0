@@ -39,7 +39,7 @@ include('./includes/sidebar.php');
                                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#faculty-tab-pane">Faculty Staff</button>
                                 </li>
                             </ul>
-                            <br><br>
+                            <br>
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="student-tab-pane">
                                     <table id="example2" class="display" style="width:100%">
@@ -77,7 +77,7 @@ include('./includes/sidebar.php');
                                         </tbody>
                                     </table>
                                 </div>
-                                <br><br>
+                                <br>
                                 <div class="tab-pane fade" id="faculty-tab-pane">
                                     <table id="example" class="display" style="width:100%">
                                         <thead>
