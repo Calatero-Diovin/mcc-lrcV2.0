@@ -23,7 +23,7 @@ include('./includes/sidebar.php');
                             <li class="nav-item">
                                 <a class="nav-link <?=$page == 'report' || $page == 'report_faculty' ? 'active': '' ?>" href="report">All Transaction</a>
                             </li>
-                            <li class="nav-item  border border-info border-start-0 rounded-end">
+                            <li class="nav-item border border-info border-start-0 rounded-end">
                                 <a class="nav-link <?=$page == 'report_penalty' ? 'active': '' ?>" href="report_penalty">Penalty Report</a>
                             </li>
                         </ul>
@@ -39,7 +39,8 @@ include('./includes/sidebar.php');
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
-                            <table id="example" class="display nowrap" style="width:100%">
+                                <div class="tab-pane fade show active" id="student-tab-pane">
+                                    <table class="display nowrap student-table" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -51,31 +52,30 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $result= mysqli_query($con,"SELECT * from report 
+                                            $result = mysqli_query($con,"SELECT * from report 
                                             LEFT JOIN book ON report.book_id = book.book_id 
                                             LEFT JOIN user ON report.user_id = user.user_id
                                             order by report.report_id DESC ");
-                                            while ($row= mysqli_fetch_array ($result) ){
-                                                $id=$row['report_id'];
-                                                $book_id=$row['book_id'];
-                                                $user_name=$row['firstname']." ".$row['lastname'];
-                                                $admin =$row['admin_name'];
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                if (isset($row['user_id'])) {
+                                                    $user_name = $row['firstname']." ".$row['lastname'];
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $user_name; ?></td>
+                                                        <td style="width:20%;"><?php echo $row['title']; ?></td>
+                                                        <td><?php echo $row['detail_action']; ?></td>
+                                                        <td><?php echo $row['admin_name']; ?></td>
+                                                        <td><?php echo date("M d, Y h:i:s a", strtotime($row['date_transaction'])); ?></td>
+                                                    </tr>
+                                                    <?php 
+                                                }
+                                            } 
                                             ?>
-                                            <?php if(isset($row['user_id'])) :?>
-                                            <tr>
-                                                <td><?php echo $user_name; ?></td>
-                                                <td style="width:20%;"><?php echo $row['title']; ?></td>
-                                                <td><?php echo $row['detail_action']; ?></td>
-                                                <td><?php echo $row['admin_name']; ?></td>
-                                                <td><?php echo date("M d, Y h:i:s a",strtotime($row['date_transaction'])); ?></td>
-                                            </tr>
-                                            <?php endif; ?>
-                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="faculty-tab-pane">
-                                <table id="example" class="display nowrap" style="width:100%">
+                                    <table class="display nowrap faculty-table" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -87,26 +87,25 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $result= mysqli_query($con,"SELECT * from report 
+                                            $result = mysqli_query($con,"SELECT * from report 
                                             LEFT JOIN book ON report.book_id = book.book_id 
                                             LEFT JOIN faculty ON report.faculty_id = faculty.faculty_id
                                             order by report.report_id DESC ");
-                                            while ($row= mysqli_fetch_array ($result) ){
-                                                $id=$row['report_id'];
-                                                $book_id=$row['book_id'];
-                                                $faculty_name=$row['firstname']." ".$row['lastname'];
-                                                $admin =$row['admin_name'];
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                if (isset($row['faculty_id'])) {
+                                                    $faculty_name = $row['firstname']." ".$row['lastname'];
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $faculty_name; ?></td>
+                                                        <td style="width:20%;"><?php echo $row['title']; ?></td>
+                                                        <td><?php echo $row['detail_action']; ?></td>
+                                                        <td><?php echo $row['admin_name']; ?></td>
+                                                        <td><?php echo date("M d, Y h:i:s a", strtotime($row['date_transaction'])); ?></td>
+                                                    </tr>
+                                                    <?php 
+                                                }
+                                            } 
                                             ?>
-                                            <?php if(isset($row['faculty_id'])) :?>
-                                            <tr>
-                                                <td><?php echo $faculty_name; ?></td>
-                                                <td style="width:20%;"><?php echo $row['title']; ?></td>
-                                                <td><?php echo $row['detail_action']; ?></td>
-                                                <td><?php echo $row['admin_name']; ?></td>
-                                                <td><?php echo date("M d, Y h:i:s a",strtotime($row['date_transaction'])); ?></td>
-                                            </tr>
-                                            <?php endif; ?>
-                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -121,19 +120,31 @@ include('./includes/sidebar.php');
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable with both responsive and row reorder features
-    const exampleTable = new DataTable('#example', {
-        responsive: true,
-        rowReorder: {
-            selector: 'td:nth-child(2)'
-        },
-        layout: {
-            topStart: {
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        // Initialize DataTable for both student and faculty tables
+        const studentTable = new DataTable('.student-table', {
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
             }
-        }
+        });
+
+        const facultyTable = new DataTable('.faculty-table', {
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            }
+        });
     });
-});
 </script>
 
 <?php 
