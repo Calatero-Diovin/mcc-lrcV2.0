@@ -14,6 +14,10 @@ include('./includes/sidebar.php');
         #myDataTable, #myDataTable2, .sname, .dated, .tname, #myDataTable *, #myDataTable2 * {
             visibility: visible;
         }
+        #myDataTable tbody tr, 
+        #myDataTable2 tbody tr {
+            visibility: visible !important;
+        }
         #myDataTable, #myDataTable2 {
             position: fixed;
             left: 0px;
