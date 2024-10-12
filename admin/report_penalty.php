@@ -141,31 +141,39 @@ include('includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-   new DataTable('#example', {
+    new DataTable('#example', {
         order: [[3, 'asc']],
         layout: {
             top1Start: {
                 buttons: [
                     {
                         extend: 'print',
-                        text: `<i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= $total_penalty ?>`,
+                        text: 'Print',
+                        title: `<i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= $total_penalty ?>`,
+                        customize: function (win) {
+                            $(win.document.body).find('h1').after(`<div style="margin-bottom: 10px; font-size: 16px;">Total Amount of Penalty: Php <?= $total_penalty ?></div>`);
+                        },
                         customScripts: [
                             'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
                         ]
                     },
                     {
                         extend: 'excelHtml5',
-                        text: `<i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= $total_penalty ?>`,
+                        text: 'Export to Excel',
+                        title: `Total Amount of Penalty: Php <?= $total_penalty ?>`,
                         autoFilter: true,
                         sheetName: 'Exported data'
                     },
                     {
                         extend: 'pdfHtml5',
-                        text: `<i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= $total_penalty ?>`
+                        text: 'Export to PDF',
+                        title: `Total Amount of Penalty: Php <?= $total_penalty ?>`
                     },
                     {
                         extend: 'copyHtml5',
-                        text: `<i class="icon-credit-card icon-large"></i>&nbsp;Total Amount of Penalty: Php <?= $total_penalty ?>`
+                        text: 'Copy to Clipboard',
+                        title: `Total Amount of Penalty: Php <?= $total_penalty ?>`,
+                        messageTop: `Total Amount of Penalty: Php <?= $total_penalty ?>`
                     }
                 ]
             }
