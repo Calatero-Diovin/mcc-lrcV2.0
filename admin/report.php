@@ -137,37 +137,40 @@ include('./includes/sidebar.php');
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable
-    const exampleTable = new DataTable('#example', {
-        layout: {
-            topStart: {
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+   document.addEventListener('DOMContentLoaded', function () {
+    // Check if DataTable is already initialized
+    if (!$.fn.DataTable.isDataTable('#example')) {
+        // Initialize DataTable
+        const exampleTable = new DataTable('#example', {
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            }
+        });
+
+        // Function to add auto-increment ID to the DataTable
+        function addAutoIncrementID() {
+            const tableBody = document.querySelector('#example tbody');
+            if (tableBody) {
+                const rows = tableBody.querySelectorAll('tr');
+                rows.forEach((row, index) => {
+                    const idCell = row.querySelector('.auto-id');
+                    if (idCell) {
+                        idCell.textContent = index + 1; // Set auto-increment ID
+                    }
+                });
             }
         }
-    });
 
-    // Function to add auto-increment ID to the DataTable
-    function addAutoIncrementID() {
-        const tableBody = document.querySelector('#example tbody');
-        if (tableBody) {
-            const rows = tableBody.querySelectorAll('tr');
-            rows.forEach((row, index) => {
-                const idCell = row.querySelector('.auto-id');
-                if (idCell) {
-                    idCell.textContent = index + 1; // Set auto-increment ID
-                }
-            });
-        }
+        // Event listener for DataTable draw event
+        exampleTable.on('draw', function () {
+            addAutoIncrementID(); // Update IDs on redraw
+        });
+
+        // Initial call to add auto-increment IDs
+        addAutoIncrementID();
     }
-
-    // Event listener for DataTable draw event
-    exampleTable.on('draw', function () {
-        addAutoIncrementID(); // Update IDs on redraw
-    });
-
-    // Initial call to add auto-increment IDs
-    addAutoIncrementID();
 });
 </script>
 
