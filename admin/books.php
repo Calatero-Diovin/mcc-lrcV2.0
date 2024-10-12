@@ -4,9 +4,6 @@ include('includes/header.php');
 include('./includes/sidebar.php'); 
 ?>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css">
-
 <style>
     #hover:hover {
         text-decoration: underline;
@@ -50,7 +47,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Books Table -->
-                                        <table id="example2" class="display" style="width:100%">
+                                        <table id="myDataTable" class="table table-bordered table-striped table-sm">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -132,7 +129,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Ebooks Table -->
-                                        <table id="example3" class="display" style="width:100%">
+                                        <table id="myDataTable2" class="table table-bordered table-striped table-sm">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -212,90 +209,20 @@ include('./includes/script.php');
 include('../message.php');   
 ?>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Add auto-increment ID to Books Table
-    let booksTable = document.querySelector('#example2 tbody');
-    if (booksTable) { // Ensure the table exists
-        let bookRows = booksTable.querySelectorAll('tr');
-        bookRows.forEach((row, index) => {
-            let autoIdCell = row.querySelector('.auto-id');
-            if (autoIdCell) { // Ensure the cell exists
-                autoIdCell.textContent = index + 1;
-            }
-        });
-    }
+    let booksTable = document.querySelector('#myDataTable tbody');
+    let bookRows = booksTable.querySelectorAll('tr');
+    bookRows.forEach((row, index) => {
+        row.querySelector('.auto-id').textContent = index + 1;
+    });
 
     // Add auto-increment ID to Ebooks Table
-    let ebooksTable = document.querySelector('#example3 tbody');
-    if (ebooksTable) { // Ensure the table exists
-        let ebookRows = ebooksTable.querySelectorAll('tr');
-        ebookRows.forEach((row, index) => {
-            let autoIdCell = row.querySelector('.auto-id');
-            if (autoIdCell) { // Ensure the cell exists
-                autoIdCell.textContent = index + 1;
-            }
-        });
-    }
-});
-
-// Initialize DataTables
-new DataTable('#example', {
-    order: [[4, 'asc']],
-    layout: {
-        topStart: {
-            buttons: [
-                {
-                    extend: 'print',
-                    customScripts: [
-                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
-                    ]
-                },
-                {
-                    extend: 'excelHtml5',
-                    autoFilter: true,
-                    sheetName: 'Exported data'
-                },
-                {
-                    extend: 'pdfHtml5'
-                },
-                {
-                    extend: 'copyHtml5'
-                },
-                {
-                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
-                }
-            ]
-        }
-    },
-    language: {
-        buttons: {
-            copyTitle: 'Added to clipboard',
-            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
-            copySuccess: {
-                _: '%d rows copied',
-                1: '1 row copied'
-            }
-        }
-    }
-});
-
-// Initialize DataTables for the other tables if needed
-new DataTable('#example2', {
-    // Add your configuration here if needed
-});
-
-new DataTable('#example3', {
-    // Add your configuration here if needed
+    let ebooksTable = document.querySelector('#myDataTable2 tbody');
+    let ebookRows = ebooksTable.querySelectorAll('tr');
+    ebookRows.forEach((row, index) => {
+        row.querySelector('.auto-id').textContent = index + 1;
+    });
 });
 </script>
