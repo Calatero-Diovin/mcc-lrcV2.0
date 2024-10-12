@@ -135,7 +135,7 @@ include('./includes/sidebar.php');
    new DataTable('#example', {
     order: [[4, 'desc']],
     layout: {
-        topStart: {
+        top1Start: {
             buttons: [
                 {
                     extend: 'print',
@@ -172,7 +172,7 @@ include('./includes/sidebar.php');
 new DataTable('#example2', {
     order: [[4, 'desc']],
     layout: {
-        topStart: {
+        top1Start: {
             buttons: [
                 {
                     extend: 'print',
