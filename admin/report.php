@@ -79,7 +79,7 @@ include('./includes/sidebar.php');
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Book Title</th>
+                                                <th style="width:50%;">Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
                                                 <th>Date Transaction</th>
