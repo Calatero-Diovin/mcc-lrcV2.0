@@ -310,24 +310,31 @@ function validateAddress() {
     });
 
     function validateImage() {
-        const fileInput = document.getElementById('admin_image');
-        const filePath = fileInput.value;
-        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    const fileInput = document.getElementById('admin_image');
+    const file = fileInput.files[0]; // Get the first file
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
 
-        // Check if the file extension is valid
-        if (!allowedExtensions.exec(filePath)) {
-            Swal.fire({
-                title: 'Invalid File Format!',
-                text: 'Please upload an image in JPEG, JPG, or PNG format.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                fileInput.value = ''; // Clear the input
-            });
-        }
+    // Check if a file is selected
+    if (!file) {
+        return; // No file selected, do nothing
     }
-    document.getElementById('admin_image').addEventListener('blur', validateImage);
-</script>
+
+    // Check if the file extension is valid
+    if (!allowedExtensions.exec(file.name)) {
+        Swal.fire({
+            title: 'Invalid File Format!',
+            text: 'Please upload an image in JPEG, JPG, or PNG format.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        }).then(() => {
+            fileInput.value = ''; // Clear the input
+        });
+    }
+}
+
+// Attach event listener to the file input field
+document.getElementById('admin_image').addEventListener('change', validateImage);
+
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
