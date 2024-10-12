@@ -44,6 +44,12 @@ include('./includes/sidebar.php');
             text-align: center;
             font-size: 20px;
         }
+         /* Hide the sorting icons in DataTables */
+        th.sorting:after,
+        th.sorting_asc:after,
+        th.sorting_desc:after {
+            display: none !important;
+        }
     }
 </style>
 <main id="main" class="main" data-aos="fade-down">
