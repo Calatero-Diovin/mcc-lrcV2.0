@@ -147,7 +147,7 @@ include('./includes/sidebar.php');
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
 <script>
     new DataTable('#example', {
-        order: [[3, 'desc']]
+    order: [[3, 'desc']],
     layout: {
         topStart: {
             buttons: [
