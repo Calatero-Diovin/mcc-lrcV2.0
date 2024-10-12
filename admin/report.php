@@ -156,6 +156,11 @@ include('./includes/sidebar.php');
                     customScripts: [
                         'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
                     ]
+                },
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true,
+                    sheetName: 'Exported data'
                 }
             ]
         }
