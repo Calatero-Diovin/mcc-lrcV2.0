@@ -98,7 +98,6 @@ include('includes/sidebar.php');
                                             </div>
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Penalty Amount</th>
                                                     <th>Received from</th>
                                                     <th>Person In Charge</th>
@@ -109,7 +108,6 @@ include('includes/sidebar.php');
                                             <tbody>
                                                 <?php while ($return_row = mysqli_fetch_array($return_query)) { ?>
                                                 <tr>
-                                                <td class="auto-id" style="text-align: center;"></td>
                                                     <td class="<?= ($return_row['book_penalty'] != 'No Penalty') ? 'alert alert-warning' : ''; ?>" style="width:100px;">
                                                         Php <?= number_format($return_row['book_penalty'], 2) ?>
                                                     </td>
