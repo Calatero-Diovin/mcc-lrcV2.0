@@ -62,7 +62,7 @@ include('./includes/sidebar.php');
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $user_name; ?></td>
-                                                        <td style="width:20%;"><?php echo $row['title']; ?></td>
+                                                        <td style="width:20px;"><?php echo $row['title']; ?></td>
                                                         <td><?php echo $row['detail_action']; ?></td>
                                                         <td><?php echo $row['admin_name']; ?></td>
                                                         <td><?php echo date("M d, Y h:i:s a", strtotime($row['date_transaction'])); ?></td>
