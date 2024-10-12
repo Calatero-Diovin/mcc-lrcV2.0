@@ -147,6 +147,9 @@ include('./includes/sidebar.php');
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
 <script>
     new DataTable('#example', {
     order: [[4, 'desc']],
@@ -163,6 +166,10 @@ include('./includes/sidebar.php');
                     extend: 'excelHtml5',
                     autoFilter: true,
                     sheetName: 'Exported data'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    messageTop: 'PDF created by PDFMake with Buttons for DataTables.'
                 }
             ]
         }
