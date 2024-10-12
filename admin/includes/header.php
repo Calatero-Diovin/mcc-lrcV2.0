@@ -31,9 +31,10 @@
      <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
 
      <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+          href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
      <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
+          href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css" />
+     
 
      <!-- Custom CSS -->
      <link href="assets/css/style.css" rel="stylesheet" />
