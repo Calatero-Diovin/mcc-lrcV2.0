@@ -156,6 +156,15 @@ include('./includes/sidebar.php');
                     customScripts: [
                         'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
                     ]
+                },
+                {
+                    extend: 'csv'
+                },
+                {
+                    extend: 'excel'
+                },
+                {
+                    extend: 'pdf'
                 }
             ]
         }
