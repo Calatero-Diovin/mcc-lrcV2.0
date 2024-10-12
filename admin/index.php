@@ -4,7 +4,7 @@ include('includes/header.php');
 include('./includes/sidebar.php'); 
 
 // Count total titles
-$query_titles = "SELECT COUNT(*) AS total_titles FROM (SELECT DISTINCT title, copyright_date FROM book) AS unique_titles";
+$query_titles = "SELECT COUNT(*) AS total_titles FROM (SELECT DISTINCT title, copyright_date, author, isbn FROM book) AS unique_titles";
 $query_run_titles = mysqli_query($con, $query_titles); 
 $row_titles = mysqli_fetch_assoc($query_run_titles);
 $total_titles = $row_titles['total_titles'];
