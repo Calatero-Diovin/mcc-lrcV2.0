@@ -144,7 +144,7 @@ include('includes/sidebar.php');
     new DataTable('#example', {
     order: [[3, 'asc']],
     layout: {
-        top1Start: {
+        topStart: {
             buttons: [
                 {
                     extend: 'print',
@@ -162,6 +162,9 @@ include('includes/sidebar.php');
                 },
                 {
                     extend: 'copyHtml5'
+                },
+                {
+                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
                 }
             ]
         }

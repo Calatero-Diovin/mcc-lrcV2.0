@@ -135,7 +135,7 @@ include('./includes/sidebar.php');
    new DataTable('#example', {
     order: [[4, 'asc']],
     layout: {
-        top1Start: {
+        topStart: {
             buttons: [
                 {
                     extend: 'print',
@@ -153,6 +153,9 @@ include('./includes/sidebar.php');
                 },
                 {
                     extend: 'copyHtml5'
+                },
+                {
+                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
                 }
             ]
         }
@@ -172,7 +175,7 @@ include('./includes/sidebar.php');
 new DataTable('#example2', {
     order: [[4, 'asc']],
     layout: {
-        top1Start: {
+        topStart: {
             buttons: [
                 {
                     extend: 'print',
@@ -190,6 +193,9 @@ new DataTable('#example2', {
                 },
                 {
                     extend: 'copyHtml5'
+                },
+                {
+                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
                 }
             ]
         }
