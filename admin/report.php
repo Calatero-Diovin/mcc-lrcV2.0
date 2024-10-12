@@ -53,6 +53,9 @@ include('./includes/sidebar.php');
         th.sorting_desc:before {
             display: none !important;
         }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: transparent !important; /* Make odd rows transparent */
+    }
     }
 </style>
 <main id="main" class="main" data-aos="fade-down">
