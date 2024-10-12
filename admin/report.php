@@ -56,7 +56,7 @@ include('./includes/sidebar.php');
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Book Title</th>
+                                                <th style="width: 25%;">Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
                                                 <th style="width: 25%;">Date Transaction</th>
@@ -91,10 +91,10 @@ include('./includes/sidebar.php');
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Book Title</th>
+                                                <th style="width: 25%;">Book Title</th>
                                                 <th>Task</th>
                                                 <th>Person In Charge</th>
-                                                <th style="width: 25%;">Date Transaction</th>
+                                                <th>Date Transaction</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const studentTable = new DataTable('.student-table', {
         responsive: true,
         columnDefs: [
-            { width: '25%', targets: 4 } // Adjust width for date column
+            { width: '25%', targets: 2 } // Adjust width for date column
         ],
         rowReorder: {
             selector: 'td:nth-child(2)'
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const facultyTable = new DataTable('.faculty-table', {
         responsive: true,
         columnDefs: [
-            { width: '25%', targets: 4 } // Adjust width for date column
+            { width: '25%', targets: 2 } // Adjust width for date column
         ],
         rowReorder: {
             selector: 'td:nth-child(2)'
