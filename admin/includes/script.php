@@ -5,8 +5,11 @@
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <!-- JQuery Datatables -->
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/dataTables.bootstrap5.min.js"></script>
 <script src="assets/js/pdfmake.min.js"></script>
 <script src="assets/js/vfs_fonts.js"></script>
+<script src="assets/js/datatables.min.js"></script>
 
 <!-- Chart.js -->
 <script src="assets/js/chart.min.js"></script>
@@ -29,12 +32,6 @@
 <script src="assets/js/xlsx.full.min.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
-
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
-<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
 <?php
 if(isset($_SESSION['status']) && $_SESSION['status'] !='')
