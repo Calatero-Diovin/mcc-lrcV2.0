@@ -152,21 +152,21 @@ $total_volumes = $row_volumes['total_volumes'];
                          </div>
 
                          <?php
-                              // Fetch the total penalty for the current month from the database
-                              $currentMonth = date('Y-m'); // Get the current month in 'YYYY-MM' format
+                              
+                              $currentMonth = date('Y-m');
                               $query = "SELECT SUM(book_penalty) AS total_penalty 
                                         FROM return_book 
-                                        WHERE DATE_FORMAT(due_date, '%Y-%m') = '$currentMonth'"; // Filter for the current month
+                                        WHERE DATE_FORMAT(due_date, '%Y-%m') = '$currentMonth'";
 
                               $query_run = mysqli_query($con, $query);
 
-                              $total_penalty = 0; // Initialize total penalty
+                              $total_penalty = 0;
 
                               if ($query_run) {
                               $result = mysqli_fetch_assoc($query_run);
-                              $total_penalty = $result['total_penalty'] ?? 0; // Get the total penalty, default to 0 if null
+                              $total_penalty = $result['total_penalty'] ?? 0;
                               } else {
-                              $total_penalty = 0; // Fallback in case of an error
+                              $total_penalty = 0;
                               }
                          ?>
 
