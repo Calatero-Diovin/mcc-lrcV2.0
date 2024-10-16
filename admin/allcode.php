@@ -82,13 +82,21 @@ if (isset($_SESSION['auth_stud']['stud_id']))
  }
  
  // Logout
- if (isset($_POST['logout_btn'])) {
-     unset($_SESSION['auth']);
-     unset($_SESSION['auth_role']);
-     unset($_SESSION['auth_stud']);
- 
-     $_SESSION['message_success'] = "Logout Successfully";
-     header("Location: ../admin_login");
-     exit(0);
- }
+if (isset($_POST['logout_btn'])) {
+    // Unset session variables
+    unset($_SESSION['auth']);
+    unset($_SESSION['auth_role']);
+    unset($_SESSION['auth_stud']);
+    
+    // Destroy the session
+    session_destroy();
+    
+    // Set a success message (optional)
+    $_SESSION['message_success'] = "Logout Successfully";
+    
+    // Redirect to the login page
+    header("Location: ../admin_login");
+    exit(0);
+}
+
 ?>
