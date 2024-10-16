@@ -8,5 +8,5 @@ RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
 RewriteCond %{REQUEST_URI} ^/mcc-lrcv2.0/.htaccess
-RewriteCond %{REQUEST_URI} ^/mcc-lrcv2.0/phpqrcode
+RewriteCond %{REQUEST_URI} ^/phpqrcode/$
 RewriteRule ^ - [F,L]
