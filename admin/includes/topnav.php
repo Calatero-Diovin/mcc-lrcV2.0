@@ -1,9 +1,4 @@
 <?php // include('authentication.php'); ?>
-
-<!-- Include SweetAlert CSS and JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
 <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Logo -->
     <div class="d-flex align-items-center">
@@ -152,18 +147,35 @@
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <form action="allcode.php" method="POST" id="logoutForm">
-                            <button class="dropdown-item d-flex align-items-center" name="logout_btn" type="button" onclick="confirmLogout()">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Log Out</span>
-                            </button>
-                        </form>
-                    </li>
+    <form id="logoutForm" action="allcode.php" method="POST">
+        <button class="dropdown-item d-flex align-items-center" name="logout_btn" type="button" onclick="confirmLogout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Log Out</span>
+        </button>
+    </form>
+</li>
                 </ul>
             </li>
         </ul>
     </nav>
 </header>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function confirmLogout() {
+        swal({
+            title: "Are you sure?",
+            text: "Do you really want to log out?",
+            icon: "warning",
+            buttons: ["Cancel", "Yes, log me out!"],
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                document.getElementById("logoutForm").submit();
+            }
+        });
+    }
+</script>
 
 <style>
 .scrollable-dropdown {
@@ -171,26 +183,3 @@
     overflow-y: auto;
 }
 </style>
-
-<script>
-function confirmLogout() {
-    swal({
-        title: "Are you sure?",
-        text: "You will be logged out of your account.",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, log me out!",
-        cancelButtonText: "Cancel",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function(isConfirm){
-        if (isConfirm) {
-            // Submit the form if confirmed
-            document.getElementById('logoutForm').submit();
-        } else {
-            swal("Cancelled", "You are still logged in :)", "error");
-        }
-    });
-}
-</script>
