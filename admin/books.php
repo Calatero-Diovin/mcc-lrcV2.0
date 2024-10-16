@@ -211,35 +211,38 @@ include('../message.php');
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable and add auto-increment ID to Books and Ebooks Tables
-    let tables = document.querySelectorAll('table tbody');
-    tables.forEach(tbody => {
-        let rows = tbody.querySelectorAll('tr');
-        rows.forEach((row, index) => {
-            row.querySelector('.auto-id').textContent = index + 1;
-        });
-    });
-
-    // Check if the DataTable is already initialized
-    new DataTable('#example', {
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            columnDefs: [
-                { 
-                    targets: 1, // Index of the column to hide (0 for the first column)
-                    visible: false // Set to false to hide the column
+    // Function to initialize DataTable and add auto-increment ID
+    function initializeTable(tableSelector, columnDefs) {
+        let table = document.querySelector(tableSelector);
+        if (table) {
+            let tbody = table.querySelector('tbody');
+            let rows = tbody.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                let autoIdCell = row.querySelector('.auto-id');
+                if (autoIdCell) {
+                    autoIdCell.textContent = index + 1;
                 }
-            ]
-        });
+            });
 
-        // Check if the DataTable is already initialized
-    new DataTable('#example2', {
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            }
-        });
+            new DataTable(tableSelector, {
+                responsive: true,
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                columnDefs: columnDefs
+            });
+        }
+    }
+
+    // Initialize both tables with their specific configurations
+    initializeTable('#example', [
+        {
+            targets: 1,
+            visible: false
+        }
+    ]);
+    
+    initializeTable('#example2', []); // No columnDefs for the second table
 });
 </script>
+
