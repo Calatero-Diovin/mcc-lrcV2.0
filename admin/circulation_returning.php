@@ -58,7 +58,7 @@ $user_row = $user_result->fetch_assoc();
                         ?>
 
                         <div class="table-responsive">
-                                <table class="table">
+                        <table id="example" class="display nowrap" style="width:100%">
                                     <thead class="border-top border-dark border-opacity-25">
                                         <tr>
                                             <th>Select</th>
@@ -161,6 +161,17 @@ $user_row = $user_result->fetch_assoc();
         </div>
     </section>
 </main>
+
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+          new DataTable('#example', {
+          responsive: true,
+          rowReorder: {
+               selector: 'td:nth-child(2)'
+          }
+});
+});
+</script>
 
 <script>
 function validateForm() {
