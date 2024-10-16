@@ -28,12 +28,6 @@
      <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
      <!-- Datatables -->
      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-     <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
-
-     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
-     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
 
      <!-- Custom CSS -->
      <link href="assets/css/style.css" rel="stylesheet" />
@@ -46,6 +40,9 @@
      <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
 
      <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
 
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
