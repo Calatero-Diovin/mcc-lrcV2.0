@@ -68,7 +68,6 @@ include('./includes/sidebar.php');
                                                             <td><?=$user['gender'];?></td>
                                                             <td><?=$user['course'];?></td>
                                                             <td class="justify-content-center">
-                                                                 <center>
                                                                  <div class="btn-group" style="background: #DFF6FF;">
                                                                       <button type="button" class="btn btn-sm border dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false">
                                                                            <i class="bi bi-gear-fill"></i>
@@ -102,7 +101,6 @@ include('./includes/sidebar.php');
                                                                            </a></li>
                                                                       </ul>
                                                                  </div>
-                                                                 </center>
                                                             </td>
                                                        </tr>
                                                        <?php
