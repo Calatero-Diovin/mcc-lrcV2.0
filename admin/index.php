@@ -152,40 +152,40 @@ $total_volumes = $row_volumes['total_volumes'];
                          </div>
 
                          <?php
-// Fetch the total penalty for the current month from the database
-$currentMonth = date('Y-m'); // Get the current month in 'YYYY-MM' format
-$query = "SELECT SUM(book_penalty) AS total_penalty 
-          FROM return_book 
-          WHERE DATE_FORMAT(due_date, '%Y-%m') = '$currentMonth'"; // Filter for the current month
+                              // Fetch the total penalty for the current month from the database
+                              $currentMonth = date('Y-m'); // Get the current month in 'YYYY-MM' format
+                              $query = "SELECT SUM(book_penalty) AS total_penalty 
+                                        FROM return_book 
+                                        WHERE DATE_FORMAT(due_date, '%Y-%m') = '$currentMonth'"; // Filter for the current month
 
-$query_run = mysqli_query($con, $query);
+                              $query_run = mysqli_query($con, $query);
 
-$total_penalty = 0; // Initialize total penalty
+                              $total_penalty = 0; // Initialize total penalty
 
-if ($query_run) {
-    $result = mysqli_fetch_assoc($query_run);
-    $total_penalty = $result['total_penalty'] ?? 0; // Get the total penalty, default to 0 if null
-} else {
-    $total_penalty = 0; // Fallback in case of an error
-}
-?>
+                              if ($query_run) {
+                              $result = mysqli_fetch_assoc($query_run);
+                              $total_penalty = $result['total_penalty'] ?? 0; // Get the total penalty, default to 0 if null
+                              } else {
+                              $total_penalty = 0; // Fallback in case of an error
+                              }
+                         ?>
 
-<div class="col-xxl-4 col-md-4" data-aos="fade-down">
-    <div class="card info-card fines-card border-3 border-top border-success">
-        <div class="card-body">
-            <h5 class="card-title">Fines</h5>
-            <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cash-coin"></i>
-                </div>
-                <div class="ps-3">
-                    <h6>₱ <?php echo number_format($total_penalty, 2); ?></h6>
-                    <span class="text-success small pt-2 fw-bold">Total book penalty for this month</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                         <div class="col-xxl-4 col-md-4" data-aos="fade-down">
+                              <div class="card info-card fines-card border-3 border-top border-success">
+                                   <div class="card-body">
+                                        <h5 class="card-title">Fines</h5>
+                                        <div class="d-flex align-items-center">
+                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                  <i class="bi bi-cash-coin"></i>
+                                             </div>
+                                             <div class="ps-3">
+                                                  <h6>₱ <?php echo number_format($total_penalty, 2); ?></h6>
+                                                  <span class="text-success small pt-2 fw-bold">Total book penalty</span>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
 
                          <div class="row">
                               <div data-aos="fade-down" class="col-lg-6">
