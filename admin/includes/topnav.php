@@ -147,35 +147,18 @@
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-    <form id="logoutForm" action="allcode.php" method="POST">
-        <button class="dropdown-item d-flex align-items-center" name="logout_btn" type="button" onclick="confirmLogout()">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Log Out</span>
-        </button>
-    </form>
-</li>
+                        <form action="allcode.php" method="POST">
+                            <button class="dropdown-item d-flex align-items-center" name="logout_btn" type="submit">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Log Out</span>
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>
     </nav>
 </header>
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    function confirmLogout() {
-        swal({
-            title: "Are you sure?",
-            text: "Do you really want to log out?",
-            icon: "warning",
-            buttons: ["Cancel", "Yes, log me out!"],
-            dangerMode: true,
-        }).then((willLogout) => {
-            if (willLogout) {
-                document.getElementById("logoutForm").submit();
-            }
-        });
-    }
-</script>
 
 <style>
 .scrollable-dropdown {
