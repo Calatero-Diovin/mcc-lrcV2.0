@@ -212,7 +212,7 @@ include('../message.php');
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Function to initialize DataTable and add auto-increment ID
-    function initializeTable(tableSelector) {
+    function initializeTable(tableSelector, columnDefs) {
         let table = document.querySelector(tableSelector);
         if (table) {
             let tbody = table.querySelector('tbody');
@@ -229,18 +229,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                columnDefs: [
-                    {
-                        targets: 1,
-                        visible: false // Only for the first table, if needed
-                    }
-                ]
+                columnDefs: columnDefs
             });
         }
     }
 
-    // Initialize both tables
-    initializeTable('#example');
-    initializeTable('#example2');
+    // Initialize both tables with their specific configurations
+    initializeTable('#example', [
+        {
+            targets: 1,
+            visible: false
+        }
+    ]);
+    
+    initializeTable('#example2', []); // No columnDefs for the second table
 });
 </script>
