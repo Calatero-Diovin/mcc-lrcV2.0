@@ -152,44 +152,49 @@ $total_volumes = $row_volumes['total_volumes'];
                          </div>
 
                          <?php
-                              // Get the current month and year
-                              $currentMonth = date('Y-m');
+                              // Fetch the total penalty grouped by month from the database
+                              $query = "SELECT DATE_FORMAT(due_date, '%Y-%m') AS month, SUM(book_penalty) AS total_penalty 
+                              FROM return_book 
+                              GROUP BY month 
+                              ORDER BY month DESC"; // Adjust return_date to your actual date column
 
-                              // Check if the stored month is set and if it's different from the current month
-                              if (!isset($_SESSION['last_reset_month']) || $_SESSION['last_reset_month'] !== $currentMonth) {
-                              $_SESSION['last_reset_month'] = $currentMonth; // Update the stored month
-                              $total_penalty = 0; // Reset total penalty to zero
-                              } else {
-                              // Fetch the total penalty from the database
-                              $query = "SELECT SUM(book_penalty) AS total_penalty FROM return_book";
                               $query_run = mysqli_query($con, $query);
 
+                              $monthly_penalties = []; // Initialize an array to hold penalties by month
+
                               if ($query_run) {
-                                   $result = mysqli_fetch_assoc($query_run);
-                                   $total_penalty = $result['total_penalty'];
-                              } else {
-                                   $total_penalty = 0; // Fallback in case of an error
+                              while ($result = mysqli_fetch_assoc($query_run)) {
+                              $monthly_penalties[$result['month']] = $result['total_penalty'];
                               }
+                              } else {
+                              $monthly_penalties = []; // Fallback in case of an error
                               }
                          ?>
 
-<div class="col-xxl-4 col-md-4" data-aos="fade-down">
-    <div class="card info-card fines-card border-3 border-top border-success">
-        <div class="card-body">
-            <h5 class="card-title">Fines</h5>
-            <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cash-coin"></i>
-                </div>
-                <div class="ps-3">
-                    <h6>₱ <?php echo number_format($total_penalty, 2); ?></h6>
-                    <span class="text-success small pt-2 fw-bold">Total book penalty</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+                         <div class="col-xxl-4 col-md-4" data-aos="fade-down">
+                              <div class="card info-card fines-card border-3 border-top border-success">
+                                   <div class="card-body">
+                                        <h5 class="card-title">Fines</h5>
+                                        <div class="d-flex align-items-center">
+                                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                  <i class="bi bi-cash-coin"></i>
+                                             </div>
+                                             <div class="ps-3">
+                                                  <?php
+                                                  if (empty($monthly_penalties)) {
+                                                  echo '<h6>₱ 0.00</h6>';
+                                                  } else {
+                                                  foreach ($monthly_penalties as $month => $penalty) {
+                                                       echo '<h6>' . $month . ': ₱ ' . number_format($penalty, 2) . '</h6>';
+                                                  }
+                                                  }
+                                                  ?>
+                                                  <span class="text-success small pt-2 fw-bold">Total book penalty by month</span>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
 
                          <div class="row">
                               <div data-aos="fade-down" class="col-lg-6">
