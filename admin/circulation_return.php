@@ -110,20 +110,6 @@ include('./includes/sidebar.php');
 							?>
 
                                    <table id="example" class="display nowrap" style="width:100%">
-
-                                        <!-- <div class="pull-left">
-                                             <div class="span">
-                                                  <div class="alert alert-info mt-2 p-1"><i
-                                                            class="icon-credit-card icon-large"></i>&nbsp;Total Amount
-                                                       of
-                                                       Penalty:&nbsp;
-                                                       <?php 
-                                                       // echo "Php ".$count_penalty_row['sum(book_penalty)'].".00";
-                                                        ?>
-                                                  </div>
-                                             </div>
-                                        </div> -->
-
                                         <thead>
                                              <tr>
                                                   <th>Image</th>
