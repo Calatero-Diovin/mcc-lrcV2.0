@@ -9,6 +9,9 @@ include('./includes/sidebar.php');
         text-decoration: underline;
     }
 </style>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
 
 <main id="main" class="main" data-aos="fade-down">
     <?php $page = basename($_SERVER['SCRIPT_NAME']); ?>
@@ -47,7 +50,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Books Table -->
-                                        <table id="myDataTable" class="table table-bordered table-striped table-sm">
+                                        <table id="example" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -208,21 +211,29 @@ include('./includes/footer.php');
 include('./includes/script.php');
 include('../message.php');   
 ?>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Add auto-increment ID to Books Table
-    let booksTable = document.querySelector('#myDataTable tbody');
-    let bookRows = booksTable.querySelectorAll('tr');
-    bookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
+    // Add auto-increment ID to Books and Ebooks Tables
+    let tables = document.querySelectorAll('table tbody');
+    tables.forEach(tbody => {
+        let rows = tbody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            row.querySelector('.auto-id').textContent = index + 1;
+        });
     });
+});
 
-    // Add auto-increment ID to Ebooks Table
-    let ebooksTable = document.querySelector('#myDataTable2 tbody');
-    let ebookRows = ebooksTable.querySelectorAll('tr');
-    ebookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
+new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
 });
 </script>
