@@ -221,13 +221,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Check if the DataTable is already initialized
-    if (!$.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable({
+    new DataTable('#example', {
             responsive: true,
             rowReorder: {
                 selector: 'td:nth-child(2)'
-            }
+            },
+            columnDefs: [
+                { 
+                    targets: 1, // Index of the column to hide (0 for the first column)
+                    visible: false // Set to false to hide the column
+                }
+            ]
         });
-    }
 });
 </script>
