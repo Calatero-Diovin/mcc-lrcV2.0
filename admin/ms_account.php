@@ -36,7 +36,7 @@ include('./includes/sidebar.php');
                                              <div class="row">
                                                   <div class="col-12">
                                                        <div class="data_table">
-                                                            <table id="myDataTable" class="table table-striped table-bordered">
+                                                       <table id="example" class="display nowrap" style="width:100%">
                                                                  <br>
                                                                  <thead>
                                                                       <tr>
@@ -90,7 +90,12 @@ include('../message.php');
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-     let table = document.querySelector('#myDataTable');
+     new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
+});
      let rows = table.querySelectorAll('tbody tr');
      rows.forEach((row, index) => {
           row.querySelector('.auto-id').textContent = index + 1;
