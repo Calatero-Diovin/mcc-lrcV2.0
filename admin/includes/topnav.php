@@ -8,6 +8,11 @@
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
+    <script>
+        document.querySelector('.toggle-sidebar-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('active');
+});
+</script>
 
     <?php 
     if (isset($_SESSION['auth_admin']['admin_id'])) {
