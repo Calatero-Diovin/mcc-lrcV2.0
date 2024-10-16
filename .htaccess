@@ -7,4 +7,4 @@ RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
 
-Redirect 301 /about.php
+Redirect 301 ^/about.php
