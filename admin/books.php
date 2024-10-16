@@ -132,7 +132,6 @@ include('./includes/sidebar.php');
                                         <table id="example2" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Book Image</th>
                                                     <th>Title</th>
                                                     <th>Author</th>
@@ -150,7 +149,6 @@ include('./includes/sidebar.php');
                                                     foreach ($query_run as $book) {
                                                         ?>
                                                         <tr>
-                                                            <td class="auto-id" style="text-align: center;"></td>
                                                             <td>
                                                                 <center>
                                                                     <?php if ($book['opac_image'] != ""): ?>

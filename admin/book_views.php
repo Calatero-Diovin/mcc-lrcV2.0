@@ -184,7 +184,7 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                                 <div class="table-responsive">
                                     <br>
                                     <!-- Copies Table -->
-                                    <table id="myDataTable" class="table table-bordered table-striped table-sm">
+                                    <table id="example" class="display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Accession No.</th>
@@ -288,6 +288,17 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
     </section>
 </main>
 
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+          new DataTable('#example', {
+          responsive: true,
+          rowReorder: {
+               selector: 'td:nth-child(2)'
+          }
+});
+});
+</script>
+
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -295,23 +306,6 @@ include('../message.php');
 ?>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Add auto-increment ID to Books Table
-    let booksTable = document.querySelector('#myDataTable tbody');
-    let bookRows = booksTable.querySelectorAll('tr');
-    bookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
-
-    // Handle status change
-    document.querySelectorAll('.status-select').forEach(select => {
-        select.addEventListener('change', function () {
-            const accessionNumber = this.getAttribute('data-accession');
-            const newStatus = this.value;
-            updateStatus(accessionNumber, newStatus);
-        });
-    });
-});
 
 function validateNumberInput(input) {
     // Filter out non-numeric characters
