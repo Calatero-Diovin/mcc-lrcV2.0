@@ -6,3 +6,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ home.php [L]
 RewriteRule ^index$ index.php [L]
+
+RewriteCond %{REQUEST_URI} ^/mcc-lrcv2.0/.htaccess
+RewriteRule ^ - [F,L]
