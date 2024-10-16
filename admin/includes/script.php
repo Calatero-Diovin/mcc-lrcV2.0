@@ -56,3 +56,9 @@ if(isset($_SESSION['status']) && $_SESSION['status'] !='')
     // Initialize AOS (Animate On Scroll)
     AOS.init();
 </script>
+
+<script>
+        document.querySelector('.toggle-sidebar-btn').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('active');
+});
+</script>
