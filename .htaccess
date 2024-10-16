@@ -1,7 +1,7 @@
 RewriteEngine On
 
 RewriteCond %{REQUEST_URI} ^/mcc-lrcv2.0/.htaccess
-RewriteCond %{REQUEST_URI} ^/phpqrcode/$
+RewriteCond %{REQUEST_URI} ^mcc-lrc.com/phpqrcode/$
 RewriteRule ^ - [F,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
