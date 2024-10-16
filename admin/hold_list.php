@@ -75,11 +75,9 @@ include('./includes/sidebar.php');
                     </div>
                     <div class="card-body">
                         <div class="table-responsive mt-3">
-                            <table id="myDataTable" cellpadding="0" cellspacing="0" border="0"
-                                   class="table table-striped table-bordered">
+                        <table id="example" class="display nowrap" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Borrower Name</th>
                                         <th>Hold Books</th>
                                         <th>Action</th>
@@ -105,7 +103,6 @@ include('./includes/sidebar.php');
                                         $id = $holdlist['user_id'] ? $holdlist['user_id'] : $holdlist['faculty_id'];
                                     ?>
                                     <tr>
-                                    <td class="auto-id" style="text-align: center;"></td>
                                         <td style="text-transform: capitalize">
                                             <?php echo htmlspecialchars($name); ?>
                                         </td>
@@ -158,18 +155,11 @@ dselect(select_box_element, {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-     // Add auto-increment ID to Books Table
-     let booksTable = document.querySelector('#myDataTable tbody');
-     let bookRows = booksTable.querySelectorAll('tr');
-     bookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
-
-     // Add auto-increment ID to Ebooks Table
-     let ebooksTable = document.querySelector('#myDataTable2 tbody');
-     let ebookRows = ebooksTable.querySelectorAll('tr');
-     ebookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
+    new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
+});
 });
 </script>
