@@ -228,12 +228,16 @@ document.addEventListener('DOMContentLoaded', function () {
             row.querySelector('.auto-id').textContent = index + 1;
         });
     });
-});
 
-new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(2)'
+    // Initialize DataTable only if it's not already initialized
+    let exampleTable = $('#example').DataTable();
+    if (!$.fn.DataTable.isDataTable('#example')) {
+        exampleTable = new DataTable('#example', {
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
+        });
     }
 });
 </script>
