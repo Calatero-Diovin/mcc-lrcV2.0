@@ -97,7 +97,6 @@ include('./includes/sidebar.php');
                          <div class="card-body">
                               <div class="table-responsive mt-3">
                               <table id="example" class="display nowrap" style="width:100%">
-
                                         <thead>
                                              <tr>
                                                   <th>Acc #</th>
