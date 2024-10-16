@@ -129,7 +129,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Ebooks Table -->
-                                        <table id="myDataTable2" class="table table-bordered table-striped table-sm">
+                                        <table id="example2" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -232,6 +232,27 @@ document.addEventListener('DOMContentLoaded', function () {
                     visible: false // Set to false to hide the column
                 }
             ]
+        });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize DataTable and add auto-increment ID to Books and Ebooks Tables
+    let tables = document.querySelectorAll('table tbody');
+    tables.forEach(tbody => {
+        let rows = tbody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            row.querySelector('.auto-id').textContent = index + 1;
+        });
+    });
+
+    // Check if the DataTable is already initialized
+    new DataTable('#example2', {
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
         });
 });
 </script>
