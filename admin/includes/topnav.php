@@ -1,4 +1,9 @@
 <?php // include('authentication.php'); ?>
+
+<!-- Include SweetAlert CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Logo -->
     <div class="d-flex align-items-center">
@@ -147,10 +152,6 @@
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <!-- Include SweetAlert CSS and JS -->
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
                         <form action="allcode.php" method="POST" id="logoutForm">
                             <button class="dropdown-item d-flex align-items-center" name="logout_btn" type="button" onclick="confirmLogout()">
                                 <i class="bi bi-box-arrow-right"></i>
