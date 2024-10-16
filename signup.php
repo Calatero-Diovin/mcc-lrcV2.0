@@ -7,7 +7,6 @@ include('./admin/config/dbcon.php');
 if (!isset($_GET['code']) || empty($_GET['code'])) {
     // Redirect to a 404 error page
     header("HTTP/1.0 404 Not Found");
-    include('404.php'); // Ensure you have a 404.php file to display the error
     exit; // Ensure no further code is executed
 }
 
