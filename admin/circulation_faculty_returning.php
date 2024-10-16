@@ -162,6 +162,17 @@ $faculty_row = $faculty_result->fetch_assoc();
 </main>
 
 <script>
+     document.addEventListener('DOMContentLoaded', function () {
+     new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
+});
+});
+</script>
+
+<script>
 function validateForm() {
     const checkboxes = document.querySelectorAll('input[name="selected_books[]"]:checked');
     if (checkboxes.length === 0) {
@@ -175,13 +186,6 @@ function validateForm() {
     }
     return true;
 }
-
-new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(2)'
-    }
-});
 </script>
 
 <?php 
