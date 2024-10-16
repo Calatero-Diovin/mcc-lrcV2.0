@@ -129,7 +129,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Ebooks Table -->
-                                        <table id="myDataTable2" class="table table-bordered table-striped table-sm">
+                                        <table id="example" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
