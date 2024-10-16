@@ -159,6 +159,17 @@ include('./includes/sidebar.php');
      </section>
 </main>
 
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+     new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
+});
+});
+</script>
+
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -170,15 +181,6 @@ var select_box_element = document.querySelector('#select_box');
 
 dselect(select_box_element, {
      search: true
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-     new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(2)'
-    }
-});
 });
 
 function sanitizeInput(element) {
