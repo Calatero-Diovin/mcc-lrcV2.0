@@ -137,13 +137,13 @@ include('./includes/sidebar.php');
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(2)'
-    }
-});
-});
+            new DataTable('#example', {
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
+        });
+    });
 </script>
 
 <?php 
