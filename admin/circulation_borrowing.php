@@ -248,14 +248,12 @@ include('message.php');
 ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    if (!$.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable({
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            }
-        });
+    new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
     }
+});
 });
 
 function sanitizeInput(input) {
