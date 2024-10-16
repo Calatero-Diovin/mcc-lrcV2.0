@@ -57,7 +57,7 @@ $faculty_row = $faculty_result->fetch_assoc();
                         ?>
 
                         <div class="table-responsive">
-                                <table class="table">
+                        <table id="example" class="display nowrap" style="width:100%">
                                     <thead class="border-top border-dark border-opacity-25">
                                         <tr>
                                             <th>Select</th>
@@ -175,6 +175,15 @@ function validateForm() {
     }
     return true;
 }
+
+if (!$.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable({
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
+        });
+    }
 </script>
 
 <?php 

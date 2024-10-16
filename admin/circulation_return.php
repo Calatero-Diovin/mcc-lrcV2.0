@@ -109,8 +109,7 @@ include('./includes/sidebar.php');
 							
 							?>
 
-                                   <table id="myDataTable" cellpadding="0" cellspacing="0" border="0"
-                                        class="table table-striped table-bordered">
+                                   <table id="example" class="display nowrap" style="width:100%">
 
                                         <!-- <div class="pull-left">
                                              <div class="span">
@@ -235,4 +234,13 @@ function sanitizeInput(element) {
     const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
     element.value = sanitizedValue;
 }
+
+if (!$.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable({
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
+        });
+    }
 </script>

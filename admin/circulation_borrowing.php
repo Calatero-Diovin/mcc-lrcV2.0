@@ -73,7 +73,7 @@ $stmt->close();
                         ?>
 
                         <div class="table-responsive">
-                            <table class="table">
+                        <table id="example" class="display nowrap" style="width:100%">
                                 <form method="POST" action="">
                                     <thead class="border-top border-dark border-opacity-25">
                                         <tr>
@@ -248,19 +248,14 @@ include('message.php');
 ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-     // Add auto-increment ID to Books Table
-     let booksTable = document.querySelector('#myDataTable tbody');
-     let bookRows = booksTable.querySelectorAll('tr');
-     bookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
-
-     // Add auto-increment ID to Ebooks Table
-     let ebooksTable = document.querySelector('#myDataTable2 tbody');
-     let ebookRows = ebooksTable.querySelectorAll('tr');
-     ebookRows.forEach((row, index) => {
-          row.querySelector('.auto-id').textContent = index + 1;
-     });
+    if (!$.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable({
+            responsive: true,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            }
+        });
+    }
 });
 
 function sanitizeInput(input) {
