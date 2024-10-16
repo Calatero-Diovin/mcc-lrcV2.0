@@ -235,12 +235,10 @@ function sanitizeInput(element) {
     element.value = sanitizedValue;
 }
 
-if (!$.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable({
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            }
-        });
+new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
     }
+});
 </script>

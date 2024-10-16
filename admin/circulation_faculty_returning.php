@@ -176,14 +176,12 @@ function validateForm() {
     return true;
 }
 
-if (!$.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable({
-            responsive: true,
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            }
-        });
+new DataTable('#example', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
     }
+});
 </script>
 
 <?php 
