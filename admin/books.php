@@ -220,7 +220,7 @@ include('../message.php');
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Add auto-increment ID to Books and Ebooks Tables
+    // Initialize DataTable and add auto-increment ID to Books and Ebooks Tables
     let tables = document.querySelectorAll('table tbody');
     tables.forEach(tbody => {
         let rows = tbody.querySelectorAll('tr');
@@ -229,10 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Initialize DataTable only if it's not already initialized
-    let exampleTable = $('#example').DataTable();
+    // Check if the DataTable is already initialized
     if (!$.fn.DataTable.isDataTable('#example')) {
-        exampleTable = new DataTable('#example', {
+        $('#example').DataTable({
             responsive: true,
             rowReorder: {
                 selector: 'td:nth-child(2)'
