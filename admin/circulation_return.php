@@ -217,6 +217,17 @@ include('./includes/sidebar.php');
      </section>
 </main>
 
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+          new DataTable('#example', {
+          responsive: true,
+          rowReorder: {
+               selector: 'td:nth-child(2)'
+          }
+});
+});
+</script>
+
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -234,13 +245,4 @@ function sanitizeInput(element) {
     const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
     element.value = sanitizedValue;
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-          new DataTable('#example', {
-          responsive: true,
-          rowReorder: {
-               selector: 'td:nth-child(2)'
-          }
-});
-});
 </script>
