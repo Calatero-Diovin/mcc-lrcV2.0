@@ -137,7 +137,7 @@ include('./includes/sidebar.php');
         new DataTable(selector, {
             responsive: true, // Moved inside the options object
             rowReorder: {
-                selector: 'td:nth-child(1)' // Also moved inside the options object
+                selector: 'td:nth-child(2)' // Also moved inside the options object
             },
             order: [[4, 'asc']],
             layout: {
@@ -167,6 +167,7 @@ include('./includes/sidebar.php');
     initDataTable('#example');
     initDataTable('#example2');
 </script>
+
 
 <?php 
 include('./includes/footer.php');
