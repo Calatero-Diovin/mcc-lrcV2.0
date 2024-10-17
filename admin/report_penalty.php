@@ -95,7 +95,7 @@ include('includes/sidebar.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                        <table id="example3" class="display" style="width:100%">
+                                        <table id="example" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Penalty Amount</th>
@@ -141,7 +141,7 @@ include('includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-    new DataTable('#example3', {
+    new DataTable('#example', {
     order: [[3, 'asc']],
     layout: {
         topStart: {
