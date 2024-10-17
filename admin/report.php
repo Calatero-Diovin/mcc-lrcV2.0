@@ -77,7 +77,7 @@ include('./includes/sidebar.php');
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="faculty-tab-pane">
-                                    <table id="example2" class="display" style="width:100%">
+                                    <table id="examples" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -159,7 +159,7 @@ include('./includes/sidebar.php');
 </script>
 
 <script>
-    new DataTable('#example2', {
+    new DataTable('#examples', {
         order: [[4, 'asc']],
         layout: {
             topStart: {
