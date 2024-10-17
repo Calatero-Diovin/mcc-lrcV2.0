@@ -23,10 +23,10 @@ include('./includes/sidebar.php');
                     <div class="card-header">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link <?= ($page == 'report' || $page == 'report_faculty') ? 'active' : '' ?>" href="report">All Transaction</a>
+                                <a class="nav-link <?=$page == 'report' || $page == 'report_faculty' ? 'active': '' ?>" href="report">All Transaction</a>
                             </li>
-                            <li class="nav-item border border-info border-start-0 rounded-end">
-                                <a class="nav-link <?= ($page == 'report_penalty') ? 'active' : '' ?>" href="report_penalty">Penalty Report</a>
+                            <li class="nav-item  border border-info border-start-0 rounded-end">
+                                <a class="nav-link <?=$page == 'report_penalty' ? 'active': '' ?>" href="report_penalty">Penalty Report</a>
                             </li>
                         </ul>
                     </div>
@@ -54,24 +54,25 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $stmt = $con->prepare("SELECT * FROM report 
-                                                LEFT JOIN book ON report.book_id = book.book_id 
-                                                LEFT JOIN user ON report.user_id = user.user_id 
-                                                WHERE report.user_id IS NOT NULL 
-                                                ORDER BY report.report_id DESC");
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            
-                                            while ($row = $result->fetch_assoc()) {
-                                                $user_name = $row['firstname'] . " " . $row['lastname'];
+                                            $result= mysqli_query($con,"SELECT * from report 
+                                            LEFT JOIN book ON report.book_id = book.book_id 
+                                            LEFT JOIN user ON report.user_id = user.user_id
+                                            order by report.report_id DESC ");
+                                            while ($row= mysqli_fetch_array ($result) ){
+                                                $id=$row['report_id'];
+                                                $book_id=$row['book_id'];
+                                                $user_name=$row['firstname']." ".$row['lastname'];
+                                                $admin =$row['admin_name'];
                                             ?>
+                                            <?php if(isset($row['user_id'])) :?>
                                             <tr>
-                                                <td><?= htmlspecialchars($user_name); ?></td>
-                                                <td><?= htmlspecialchars($row['title']); ?></td>
-                                                <td><?= htmlspecialchars($row['detail_action']); ?></td>
-                                                <td><?= htmlspecialchars($row['admin_name']); ?></td>
-                                                <td><?= date("M d, Y h:i:s a", strtotime($row['date_transaction'])); ?></td>
+                                                <td><?php echo $user_name; ?></td>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['detail_action']; ?></td>
+                                                <td><?php echo $row['admin_name']; ?></td>
+                                                <td><?php echo date("M d, Y h:i:s a",strtotime($row['date_transaction'])); ?></td>
                                             </tr>
+                                            <?php endif; ?>
                                             <?php } ?>
                                         </tbody>
                                     </table>
@@ -89,24 +90,25 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $stmt = $con->prepare("SELECT * FROM report 
-                                                LEFT JOIN book ON report.book_id = book.book_id 
-                                                LEFT JOIN faculty ON report.faculty_id = faculty.faculty_id 
-                                                WHERE report.faculty_id IS NOT NULL 
-                                                ORDER BY report.report_id DESC");
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            
-                                            while ($row = $result->fetch_assoc()) {
-                                                $faculty_name = $row['firstname'] . " " . $row['lastname'];
+                                            $result= mysqli_query($con,"SELECT * from report 
+                                            LEFT JOIN book ON report.book_id = book.book_id 
+                                            LEFT JOIN faculty ON report.faculty_id = faculty.faculty_id
+                                            order by report.report_id DESC ");
+                                            while ($row= mysqli_fetch_array ($result) ){
+                                                $id=$row['report_id'];
+                                                $book_id=$row['book_id'];
+                                                $faculty_name=$row['firstname']." ".$row['lastname'];
+                                                $admin =$row['admin_name'];
                                             ?>
+                                            <?php if(isset($row['faculty_id'])) :?>
                                             <tr>
-                                                <td><?= htmlspecialchars($faculty_name); ?></td>
-                                                <td><?= htmlspecialchars($row['title']); ?></td>
-                                                <td><?= htmlspecialchars($row['detail_action']); ?></td>
-                                                <td><?= htmlspecialchars($row['admin_name']); ?></td>
-                                                <td><?= date("M d, Y h:i:s a", strtotime($row['date_transaction'])); ?></td>
+                                                <td><?php echo $faculty_name; ?></td>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['detail_action']; ?></td>
+                                                <td><?php echo $row['admin_name']; ?></td>
+                                                <td><?php echo date("M d, Y h:i:s a",strtotime($row['date_transaction'])); ?></td>
                                             </tr>
+                                            <?php endif; ?>
                                             <?php } ?>
                                         </tbody>
                                     </table>
