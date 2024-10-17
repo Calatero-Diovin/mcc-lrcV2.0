@@ -150,45 +150,34 @@ include('./includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-     new DataTable('#example3', {
-    order: [[0, 'desc']],
-    layout: {
-        topStart: { // Use 'topStart' instead of 'top1Start'
-            buttons: [
-                {
-                    extend: 'print',
-                    customScripts: [
-                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
+     const initDataTable = (selector) => {
+        new DataTable(selector, {
+            order: [[0, 'asc']],
+            layout: {
+                topStart: {
+                    buttons: [
+                        { extend: 'print' },
+                        { extend: 'excelHtml5', autoFilter: true, sheetName: 'Exported data' },
+                        { extend: 'pdfHtml5' },
+                        { extend: 'copyHtml5' },
+                        { extend: 'pageLength' } 
                     ]
-                },
-                {
-                    extend: 'excelHtml5',
-                    autoFilter: true,
-                    sheetName: 'Exported data'
-                },
-                {
-                    extend: 'pdfHtml5'
-                },
-                {
-                    extend: 'copyHtml5'
-                },
-                {
-                    extend: 'pageLength' // Corrected from 'pagelength' to 'pageLength'
                 }
-            ]
-        }
-    },
-    language: {
-        buttons: {
-            copyTitle: 'Added to clipboard',
-            copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
-            copySuccess: {
-                _: '%d rows copied',
-                1: '1 row copied'
+            },
+            language: {
+                buttons: {
+                    copyTitle: 'Added to clipboard',
+                    copyKeys: 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data to your clipboard. <br><br>To cancel, click this message or press Esc.',
+                    copySuccess: {
+                        _: '%d rows copied',
+                        1: '1 row copied'
+                    }
+                }
             }
-        }
-    }
-});
+        });
+    };
+
+    initDataTable('#example3');
 </script>
 
 
