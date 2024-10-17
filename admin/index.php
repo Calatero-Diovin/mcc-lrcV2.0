@@ -188,7 +188,7 @@ $total_volumes = $row_volumes['total_volumes'];
                          </div>
 
                          <div class="row">
-                              <div data-aos="fade-down" class="col-lg-6">
+                              <div data-aos="fade-down" class="col-lg-7">
                                    <div class="card">
                                         <div class="card-body">
                                              <?php
