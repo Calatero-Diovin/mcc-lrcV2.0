@@ -138,10 +138,7 @@ include('./includes/sidebar.php');
         topStart: {
             buttons: [
                 {
-                    extend: 'print',
-                    customScripts: [
-                        'https://unpkg.com/pagedjs/dist/paged.polyfill.js'
-                    ]
+                    extend: 'print'
                 },
                 {
                     extend: 'excelHtml5',
