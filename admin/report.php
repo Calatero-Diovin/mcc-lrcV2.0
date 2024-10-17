@@ -135,6 +135,10 @@ include('./includes/sidebar.php');
 <script>
     const initDataTable = (selector) => {
         new DataTable(selector, {
+            responsive: true, // Moved inside the options object
+            rowReorder: {
+                selector: 'td:nth-child(2)' // Also moved inside the options object
+            },
             order: [[4, 'asc']],
             layout: {
                 topStart: {
