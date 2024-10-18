@@ -117,6 +117,10 @@ include('./includes/sidebar.php');
                         <a href="book_edit?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
+                        <!-- Delete Book Action -->
+                        <a href="javascript:void(0);" onclick="confirmDelete('<?= urlencode($book['title']); ?>', '<?= urlencode($book['copyright_date']); ?>', '<?= urlencode($book['author']); ?>', '<?= urlencode($book['isbn']); ?>')" class="btn btn-sm border text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Book">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -208,6 +212,14 @@ include('./includes/sidebar.php');
         </div>
     </section>
 </main>
+
+<script>
+function confirmDelete(title, copyright_date, author, isbn) {
+    if (confirm('Are you sure you want to delete this book?')) {
+        window.location.href = 'book_delete.php?title=' + title + '&copyright_date=' + copyright_date + '&author=' + author + '&isbn=' + isbn;
+    }
+}
+</script>
 
 <?php 
 include('./includes/footer.php');
