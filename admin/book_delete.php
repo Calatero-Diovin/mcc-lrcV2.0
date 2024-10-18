@@ -15,17 +15,22 @@ if (isset($_GET['title'], $_GET['copyright_date'], $_GET['author'], $_GET['isbn'
     // Execute the query
     if (mysqli_query($con, $query)) {
         // Redirect with success message
-        header("Location: book?message=Book deleted successfully");
-        exit();
+        $_SESSION['status'] = 'Book deleted successfully';
+        $_SESSION['status_code'] = "success";
+        header("Location: books");
+        exit(0);
     } else {
         // Redirect with error message
-        header("Location: books?error=Error deleting book: " . mysqli_error($con));
-        exit();
+        $_SESSION['status'] = 'Error deleting book: ' . mysqli_error($con);
+        $_SESSION['status_code'] = "error";
+        header("Location: books");
+        exit(0);
     }
 } else {
     // Redirect if parameters are missing
-    header("Location: books?error=Missing parameters");
-    exit();
+    $_SESSION['status'] = 'Missing parameters';
+    $_SESSION['status_code'] = "error";
+    header("Location: books");
+    exit(0);
 }
-
 ?>
