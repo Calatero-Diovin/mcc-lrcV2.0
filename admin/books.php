@@ -87,7 +87,7 @@ include('./includes/sidebar.php');
             ?>
             <tr>
                 <td class="auto-id" style="text-align: center;"></td>
-                <td><?= htmlspecialchars($book['accession_numbers']); ?></td>
+                <td style="display: none;"><?= htmlspecialchars($book['accession_numbers']); ?></td>
                 <td>
                     <center>
                         <?php if (!empty($book['book_image'])): ?>
