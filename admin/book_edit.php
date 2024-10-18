@@ -41,13 +41,13 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Title</label>
-                                                  <input type="text" name="title" value="<?=$book['title'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="title" name="title" value="<?=$book['title'];?>" class="form-control">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Author</label>
-                                                  <input type="text" name="author" value="<?=$book['author'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="author" name="author" value="<?=$book['author'];?>" class="form-control">
                                              </div>
                                         </div>
                                    </div>
@@ -61,13 +61,13 @@ include('./includes/sidebar.php');
                                                        class="form-control"
                                                        autocomplete="off"
                                                        pattern="\d{4}"
-                                                       required onblur="sanitizeInput(this)">
+                                                       required>
                                         </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Publisher</label>
-                                                  <input type="text" name="publisher" value="<?=$book['publisher'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="publisher" name="publisher" value="<?=$book['publisher'];?>" class="form-control">
                                              </div>
                                         </div>
                                    </div>
@@ -75,13 +75,13 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">ISBN</label>
-                                                  <input type="text" name="isbn" value="<?=$book['isbn'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="isbn" name="isbn" value="<?=$book['isbn'];?>" class="form-control">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Place of Publication</label>
-                                                  <input type="text" name="place_publication" value="<?=$book['place_publication'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="place_publication" name="place_publication" value="<?=$book['place_publication'];?>" class="form-control">
                                              </div>
                                         </div>
                                    </div>
@@ -91,7 +91,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Call Number</label>
-                                                  <input type="text" name="call_number" id="book_call_number_edit" value="<?=$book['call_number'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="call_number" name="call_number" id="book_call_number_edit" value="<?=$book['call_number'];?>" class="form-control">
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-5">
@@ -106,16 +106,16 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                              <div class="mb-2 input-group-sm">
                                                   <label for="subject">Subject/s</label>
-                                                  <input type="text" id="subject" name="subject" value="<?=$book['subject'];?>" class="form-control mb-2" onblur="sanitizeInput(this)">
-                                                  <input type="text" id="subject" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2" onblur="sanitizeInput(this)">
-                                                  <input type="text" id="subject" name="subject2" value="<?=$book['subject2'];?>" class="form-control" onblur="sanitizeInput(this)">
+                                                  <input type="text" id="subject" name="subject" value="<?=$book['subject'];?>" class="form-control mb-2">
+                                                  <input type="text" id="subject" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2">
+                                                  <input type="text" id="subject" name="subject2" value="<?=$book['subject2'];?>" class="form-control">
                                              </div>
                                         </div>
                                    </div>
                                    </div>
                                    <div class="card-footer d-flex justify-content-end">
                                         <div>
-                                             <a href="books.php" class="btn btn-secondary">Cancel</a>
+                                             <a href="books" class="btn btn-secondary">Cancel</a>
                                              <button type="submit" name="update_book" class="btn btn-primary">Update Book</button>
                                         </div>
                                    </div>
@@ -171,11 +171,6 @@ include('../message.php');
         return true; // Allow form submission
     }
 
-    function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
-}
-
 function validateImage(input) {
     const file = input.files[0];
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -187,4 +182,43 @@ function validateImage(input) {
         }
     }
 }
+
+function validateNameInput(inputField) {
+        const value = inputField.value;
+        const xssPattern = /<[^>]*>/; // Regex pattern to detect HTML tags
+
+        // Check for XSS tags
+        if (xssPattern.test(value)) {
+            Swal.fire({
+                title: 'Invalid Input!',
+                text: 'Field cannot contain HTML tags.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            inputField.value = ''; // Clear the input field
+            inputField.focus(); // Refocus on the input field
+        }
+    }
+
+    document.getElementById('title').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('author').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('publisher').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('isbn').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('place_publication').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('call_number').addEventListener('input', function() {
+        validateNameInput(this);
+    });
+    document.getElementById('subject').addEventListener('input', function() {
+        validateNameInput(this);
+    });
 </script>
