@@ -79,7 +79,7 @@ include('./includes/sidebar.php');
                                                         ?>
                                                         <tr>
                                                             <td class="auto-id" style="text-align: center;"></td>
-                                                            <td style="display:none;"><?= htmlspecialchars($book['accession_number']); ?></td>
+                                                            <td ><?= htmlspecialchars($book['copy_count']); ?></td>
                                                             <td>
                                                                 <center>
                                                                     <?php if ($book['book_image'] != ""): ?>
