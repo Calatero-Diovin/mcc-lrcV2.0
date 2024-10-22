@@ -42,7 +42,7 @@ include('./admin/config/dbcon.php');
                color: gray;
           }
           
-          @media (max-width: 600px) {
+          @media (max-width: 900px) {
                #admin {
                     display: none;
                }
