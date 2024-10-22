@@ -140,27 +140,24 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
 </div>
 
 <script>
-function sanitizeAndSubmit() {
-    const inputField = document.getElementById('searchInput');
-    const inputValue = inputField.value;
+function validateSearch() {
+    const searchInput = document.getElementById('searchInput').value;
     
-    // Check for HTML tags
-    if (/<[^>]*>/.test(inputValue)) {
-        // Show SweetAlert error
+    // Regular expression to detect HTML tags
+    const regex = /<[^>]*>/;
+    
+    // Check if the input contains any HTML tags
+    if (regex.test(searchInput)) {
+        // Show SweetAlert
         swal({
-            title: "Error!",
-            text: "Input contains invalid characters (HTML tags are not allowed).",
-            type: "error",
-            confirmButtonText: "OK"
+            title: "Invalid Input!",
+            text: "Stop that!",
+            icon: "warning",
+            button: "OK",
         });
-    } else {
-        // Sanitize the input by removing HTML tags
-        const sanitizedValue = inputValue.replace(/<[^>]*>/g, '');
-        inputField.value = sanitizedValue;
-
-        // Optionally, you can trigger form submission here
-        // inputField.form.submit();
+        return false; // Prevent form submission
     }
+    return true; // Allow form submission
 }
 </script>
 
