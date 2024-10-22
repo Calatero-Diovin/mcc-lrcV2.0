@@ -50,10 +50,10 @@ session_start();
           <div class="container-xl">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
-                    <a href="login" class="back">
+                         <div class="col-md-6 ">
+                         <a href="login" class="back">
                               <i class="bi bi-arrow-left-circle-fill m-3"></i>
                          </a>
-                         <div class="col-md-6 ">
                               <div class="">
                                    <img src="images/mcc-lrc.png" alt="logo"
                                         class="img-fluid d-none d-md-block  p-5" />
