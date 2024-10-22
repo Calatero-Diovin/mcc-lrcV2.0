@@ -41,6 +41,12 @@ include('./admin/config/dbcon.php');
           .back:hover {
                color: gray;
           }
+          
+          @media (max-width: 600px) {
+               #admin {
+                    display: none;
+               }
+          }
      </style>
 </head>
 
@@ -118,7 +124,7 @@ include('./admin/config/dbcon.php');
                                                   <a href="password-reset" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
                                              <p>
-                                                  <a href="admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                                  <a href="admin_login" id="admin" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                              </p>
                                         </div>
                                    </div>
