@@ -82,7 +82,7 @@ session_start();
                                         <button type="submit" name="registration_link"
                                              class="btn btn-primary text-light font-weight-bolder btn-lg">Send Registration Link</button>
                                    </div>
-                                   <div class="text-end mt-5">
+                                   <div class="text-end mt-5 fw-bold">
                                         <p>
                                              <a href="login" class="text-primary text-decoration-none fw-semibold">User Login</a>
                                         </p>
