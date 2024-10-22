@@ -88,6 +88,12 @@ session_start();
           </div>
      </section>
 
+          <!-- Alertify JS link -->
+          <script src="assets/js/alertify.min.js"></script>
+
+<!-- Custom JS link -->
+<script src="assets/js/script.js"></script>
+
      <script>
           // Function to validate the form
           (function() {
