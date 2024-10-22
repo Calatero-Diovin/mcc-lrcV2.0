@@ -98,25 +98,11 @@ if (isset($_POST['login_btn'])) {
                 }
             } else {
                 // Increment login attempts on failure
-                $_SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts'] >= 3) {
-                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                    $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
-                } else {
-                    $_SESSION['status'] = "Incorrect ID no. or Password";
-                }
-                $_SESSION['status_code'] = "error";
+                handleLoginFailure();
             }
         } else {
             // Increment login attempts on failure
-            $_SESSION['login_attempts']++;
-            if ($_SESSION['login_attempts'] >= 3) {
-                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
-            } else {
-                $_SESSION['status'] = "Incorrect ID no. or Password";
-            }
-            $_SESSION['status_code'] = "error";
+            handleLoginFailure();
         }
     } else {
         $_SESSION['status'] = "Database error: Could not prepare statement";
@@ -129,5 +115,17 @@ if (isset($_POST['login_btn'])) {
     $_SESSION['status_code'] = "warning";
     header("Location: login");
     exit(0);
+}
+
+// Function to handle login failures
+function handleLoginFailure() {
+    $_SESSION['login_attempts']++;
+    if ($_SESSION['login_attempts'] >= 3) {
+        $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+        $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+    } else {
+        $_SESSION['status'] = "Incorrect ID no. or Password";
+    }
+    $_SESSION['status_code'] = "error";
 }
 ?>
