@@ -80,7 +80,7 @@ include('./admin/config/dbcon.php');
                                    ?>
                                    <strong class="text-danger text-center">Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).</strong>
                               <?php endif; ?>
-                              <form action="logincode.php" method="POST" class="needs-validation" novalidate>
+                              <form id="loginForm" action="logincode.php" method="POST" class="needs-validation" novalidate>
                                    <div class="col-md-12 mb-3">
                                         <label for="role_as" class="form-label">Login As:</label>
                                         <select class="form-select" id="role_as" name="role_as" required>
@@ -107,9 +107,6 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
-                                        <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
-                                        </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
                                         <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
@@ -134,6 +131,36 @@ include('./admin/config/dbcon.php');
                </div>
           </div>
      </section>
+
+     <script>
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Show SweetAlert with reCAPTCHA
+    Swal.fire({
+        title: 'Please Confirm You Are Human',
+        html: '<div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        onBeforeOpen: () => {
+            // Render reCAPTCHA when the alert is shown
+            grecaptcha.render(document.querySelector('.g-recaptcha'), {
+                'sitekey': '6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg'
+            });
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                Swal.fire('Please complete the reCAPTCHA.');
+            } else {
+                // If reCAPTCHA is completed, submit the form
+                document.getElementById('loginForm').submit();
+            }
+        }
+    });
+});
+</script>
 
      <!-- Alertify JS link -->
      <script src="assets/js/alertify.min.js"></script>
