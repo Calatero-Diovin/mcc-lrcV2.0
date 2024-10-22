@@ -140,13 +140,13 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     // Show SweetAlert with reCAPTCHA
     Swal.fire({
         title: 'Please Confirm You Are Human',
-        html: '<div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>',
+        html: '<div class="g-recaptcha" data-sitekey="6LchymgqAAAAAJ583rvG8FfP8oQrbQ_HFPwHmIqT"></div>',
         showCancelButton: true,
         confirmButtonText: 'Submit',
         willOpen: () => {
             // Render reCAPTCHA when the alert is about to be shown
             grecaptcha.render(document.querySelector('.g-recaptcha'), {
-                'sitekey': '6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg'
+                'sitekey': '6LchymgqAAAAAJ583rvG8FfP8oQrbQ_HFPwHmIqT'
             });
         }
     }).then((result) => {
