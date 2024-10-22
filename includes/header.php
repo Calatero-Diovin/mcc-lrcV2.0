@@ -33,7 +33,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' https://m
 <head>
      <meta charset="utf-8" />
      <meta name="viewport" content="width=device-width, initial-scale=1" />
-     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
 
      <!-- Bootstrap CSS -->

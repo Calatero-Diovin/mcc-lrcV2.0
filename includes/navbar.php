@@ -12,7 +12,7 @@ include('admin/config/dbcon.php');
                aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
           </button>
-          <img src="assets/img/mcc-logo.png" alt="logo" class=" mx-2" height="40px" width="40px" />
+          <img src="./images/mcc-lrc.png" alt="logo" class=" mx-2" height="40px" width="40px" />
           <a class="navbar-brand text-white fw-bold fs-5" href="#">MCC-LRC</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-pills nav-justified">
