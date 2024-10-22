@@ -81,6 +81,11 @@ session_start();
                                         <button type="submit" name="password_reset_link"
                                              class="btn btn-primary text-light font-weight-bolder btn-lg">Send Password Reset Link</button>
                                    </div>
+                                   <div class="text-end mt-5 fw-bold">
+                                        <p>
+                                             <a href="login" class="text-primary text-decoration-none fw-semibold">User Login</a>
+                                        </p>
+                                   </div>
                               </form>
                          </div>
                     </div>

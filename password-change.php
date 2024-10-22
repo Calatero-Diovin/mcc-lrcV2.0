@@ -121,6 +121,11 @@ $faculty_row = $faculty_result->fetch_assoc();
                             <div class="d-grid gap-2 md-3">
                                 <button type="submit" name="password-change" class="btn btn-primary text-light font-weight-bolder btn-lg">Submit</button>
                             </div>
+                            <div class="text-end mt-5 fw-bold">
+                                        <!-- <p>
+                                             <a href="login" class="text-primary text-decoration-none fw-semibold">User Login</a>
+                                        </p> -->
+                                   </div>
                         </form>
                     </div>
                 </div>
