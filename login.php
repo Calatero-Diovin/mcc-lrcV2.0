@@ -12,7 +12,6 @@ include('./admin/config/dbcon.php');
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
-     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -32,6 +31,8 @@ include('./admin/config/dbcon.php');
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
+
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <style>
           .back {
