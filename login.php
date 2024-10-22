@@ -12,7 +12,6 @@ include('./admin/config/dbcon.php');
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
-     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -32,6 +31,8 @@ include('./admin/config/dbcon.php');
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
+
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <style>
           .back {
@@ -142,8 +143,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         html: '<div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>',
         showCancelButton: true,
         confirmButtonText: 'Submit',
-        onBeforeOpen: () => {
-            // Render reCAPTCHA when the alert is shown
+        willOpen: () => {
+            // Render reCAPTCHA when the alert is about to be shown
             grecaptcha.render(document.querySelector('.g-recaptcha'), {
                 'sitekey': '6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg'
             });
