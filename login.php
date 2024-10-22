@@ -123,8 +123,8 @@ include('./admin/config/dbcon.php');
                                         <p>
                                                   <a href="password-reset" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
-                                             <p>
-                                                  <a href="admin_login" id="admin" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                             <p id="admin">
+                                                  <a href="admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                              </p>
                                         </div>
                                    </div>
