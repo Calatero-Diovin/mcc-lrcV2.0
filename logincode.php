@@ -26,7 +26,7 @@ if (isset($_POST['login_btn'])) {
     $recaptcha_response = $_POST['g-recaptcha-response']; // Get reCAPTCHA response
 
     // Verify the reCAPTCHA
-    $secret_key = '6LchymgqAAAAAIcC50pnuQBMXidnclM6ISVWMSl1'; // Replace with your reCAPTCHA secret key
+    $secret_key = '6LcUy2gqAAAAABAxtmLZ6NK7WHQkWpy2vlxyAa1g'; // Replace with your reCAPTCHA secret key
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$recaptcha_response");
     $response_keys = json_decode($response, true);
 
