@@ -32,14 +32,11 @@ session_start();
      <link rel="stylesheet" href="assets/css/login.css">
 
      <style>
-          .back{
-               position: fixed;
-               left:20px;
-               top:10px;
+          .back {
                font-size: 30px;
                color: black;
           }
-          .back:hover{
+          .back:hover {
                color: gray;
           }
      </style>
@@ -50,10 +47,10 @@ session_start();
           <div class="container-xl">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
-                         <div class="col-md-6 ">
-                         <a href="login" class="back">
+                    <a href="login" class="back">
                               <i class="bi bi-arrow-left-circle-fill m-3"></i>
                          </a>
+                         <div class="col-md-6 ">
                               <div class="">
                                    <img src="images/mcc-lrc.png" alt="logo"
                                         class="img-fluid d-none d-md-block  p-5" />
