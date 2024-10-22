@@ -10,7 +10,7 @@ include('./admin/config/dbcon.php');
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
@@ -54,7 +54,7 @@ include('./admin/config/dbcon.php');
                          </a>
                          <div class="col-md-6 ">
                               <div class="">
-                                   <img src="assets/img/mcc-logo.png" alt="logo"
+                                   <img src="images/mcc-lrc.png" alt="logo"
                                         class="img-fluid d-none d-md-block  p-5" />
                               </div>
                          </div>
