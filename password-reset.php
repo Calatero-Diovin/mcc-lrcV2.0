@@ -47,12 +47,12 @@ session_start();
 
 <body>
      <section class="d-flex mt-1 flex-column justify-content-center align-items-center">
-     <a href="login" class="back">
-               <i class="bi bi-arrow-left-circle-fill"></i>
-          </a>
           <div class="container-xl">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
+                    <a href="login" class="back">
+               <i class="bi bi-arrow-left-circle-fill"></i>
+          </a>
                          <div class="col-md-6 ">
                               <div class="">
                                    <img src="images/mcc-lrc.png" alt="logo"
