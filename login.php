@@ -107,7 +107,7 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-3" style="padding: 20px;">
                                              <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
                                         </div>
                                    </div>
