@@ -112,7 +112,7 @@ if (isset($_POST['deny'])) {
                         <body>
                             <div class='container'>
                                 <div class='header'>
-                                    <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                                    <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                                 </div>
                                 <div class='content'>
                                     <h1 style='color:#dc3545;text-align:center;'>Your Account has been Denied!!!</h1>
@@ -215,7 +215,7 @@ if(isset($_POST['approved'])) {
             <body>
                 <div class='container'>
                     <div class='header'>
-                        <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                        <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                     </div>
                     <div class='content'>
                         <h1 style='color:#198754;text-align:center;'>Your Account has been Approved.</h1>
@@ -299,7 +299,7 @@ if(isset($_POST['block_student'])) {
             <body>
                 <div class='container'>
                     <div class='header'>
-                        <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                        <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                     </div>
                     <div class='content'>
                         <h1 style='color:#dc3545;text-align:center;'>Your Account has been Blocked!!!</h1>
@@ -383,7 +383,7 @@ if(isset($_POST['unblock_student'])) {
             <body>
                 <div class='container'>
                     <div class='header'>
-                        <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                        <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                     </div>
                     <div class='content'>
                         <h1 style='color:#198754;text-align:center;'>Your Account has been Unblocked.</h1>
@@ -485,7 +485,7 @@ if (isset($_POST['delete_student_id'])) {
                 <body>
                     <div class='container'>
                         <div class='header'>
-                            <img src='https://mcc-lrc.com/images/mcc-logo.png' alt='Logo'>
+                            <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                         </div>
                         <div class='content'>
                             <h1 style='color:#dc3545;text-align:center;'>Your Account has been Deleted!!!</h1>
