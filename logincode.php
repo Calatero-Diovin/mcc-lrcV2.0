@@ -23,19 +23,6 @@ if (isset($_POST['login_btn'])) {
     $user_id = $_POST['student_id'];
     $password = $_POST['password'];
     $role = $_POST['role_as'];
-    $recaptcha_response = $_POST['g-recaptcha-response']; // Get reCAPTCHA response
-
-    // Verify the reCAPTCHA
-    $secret_key = '6LcUy2gqAAAAABAxtmLZ6NK7WHQkWpy2vlxyAa1g'; // Replace with your reCAPTCHA secret key
-    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$recaptcha_response");
-    $response_keys = json_decode($response, true);
-
-    if (!$response_keys['success']) {
-        $_SESSION['status'] = "Please complete the reCAPTCHA.";
-        $_SESSION['status_code'] = "error";
-        header("Location: login");
-        exit(0);
-    }
 
     // Determine the login query based on role
     if ($role == 'student') {
@@ -98,11 +85,25 @@ if (isset($_POST['login_btn'])) {
                 }
             } else {
                 // Increment login attempts on failure
-                handleLoginFailure();
+                $_SESSION['login_attempts']++;
+                if ($_SESSION['login_attempts'] >= 3) {
+                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                    $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+                } else {
+                    $_SESSION['status'] = "Incorrect ID no. or Password";
+                }
+                $_SESSION['status_code'] = "error";
             }
         } else {
             // Increment login attempts on failure
-            handleLoginFailure();
+            $_SESSION['login_attempts']++;
+            if ($_SESSION['login_attempts'] >= 3) {
+                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
+            } else {
+                $_SESSION['status'] = "Incorrect ID no. or Password";
+            }
+            $_SESSION['status_code'] = "error";
         }
     } else {
         $_SESSION['status'] = "Database error: Could not prepare statement";
@@ -115,17 +116,5 @@ if (isset($_POST['login_btn'])) {
     $_SESSION['status_code'] = "warning";
     header("Location: login");
     exit(0);
-}
-
-// Function to handle login failures
-function handleLoginFailure() {
-    $_SESSION['login_attempts']++;
-    if ($_SESSION['login_attempts'] >= 3) {
-        $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-        $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
-    } else {
-        $_SESSION['status'] = "Incorrect ID no. or Password";
-    }
-    $_SESSION['status_code'] = "error";
 }
 ?>

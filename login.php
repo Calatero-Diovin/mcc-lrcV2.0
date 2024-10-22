@@ -12,6 +12,7 @@ include('./admin/config/dbcon.php');
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -31,9 +32,6 @@ include('./admin/config/dbcon.php');
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
-
-     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
      <style>
           .back {
@@ -82,7 +80,7 @@ include('./admin/config/dbcon.php');
                                    ?>
                                    <strong class="text-danger text-center">Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).</strong>
                               <?php endif; ?>
-                              <form id="loginForm" action="logincode.php" method="POST" class="needs-validation" novalidate>
+                              <form action="logincode.php" method="POST" class="needs-validation" novalidate>
                                    <div class="col-md-12 mb-3">
                                         <label for="role_as" class="form-label">Login As:</label>
                                         <select class="form-select" id="role_as" name="role_as" required>
@@ -109,6 +107,9 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
+                                        <div class="mb-3">
+                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
+                                        </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
                                         <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
@@ -134,43 +135,6 @@ include('./admin/config/dbcon.php');
           </div>
      </section>
 
-     <script>
-     document.getElementById('loginForm').addEventListener('submit', function(event) {
-         event.preventDefault(); // Prevent default form submission
-
-         // Show SweetAlert with reCAPTCHA
-         Swal.fire({
-             title: 'Please Confirm You Are Human',
-             html: '<div class="g-recaptcha" data-sitekey="6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4"></div>',
-             showCancelButton: true,
-             confirmButtonText: 'Submit',
-             willOpen: () => {
-                 // Render reCAPTCHA when the alert is about to be shown
-                 grecaptcha.render(document.querySelector('.g-recaptcha'), {
-                     'sitekey': '6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4'
-                 });
-             }
-         }).then((result) => {
-             if (result.isConfirmed) {
-                 const response = grecaptcha.getResponse();
-                 if (response.length === 0) {
-                     Swal.fire('Please complete the reCAPTCHA.');
-                 } else {
-                     // If reCAPTCHA is completed, submit the form
-                     const recaptchaInput = document.createElement('input');
-                     recaptchaInput.type = 'hidden';
-                     recaptchaInput.name = 'g-recaptcha-response';
-                     recaptchaInput.value = response;
-                     document.getElementById('loginForm').appendChild(recaptchaInput);
-
-                     // Submit the form
-                     document.getElementById('loginForm').submit();
-                 }
-             }
-         });
-     });
-     </script>
-
      <!-- Alertify JS link -->
      <script src="assets/js/alertify.min.js"></script>
 
@@ -179,40 +143,40 @@ include('./admin/config/dbcon.php');
 
      <script>
      document.addEventListener('DOMContentLoaded', function() {
-         const roleSelect = document.getElementById('role_as');
-         const studentIdLabel = document.getElementById('student_id_label');
-         const studentIdInput = document.getElementById('student_id');
+    const roleSelect = document.getElementById('role_as');
+    const studentIdLabel = document.getElementById('student_id_label');
+    const studentIdInput = document.getElementById('student_id');
 
-         // Function to setup the input field based on role
-         function setupInputField() {
-             if (roleSelect.value === 'faculty' || roleSelect.value === 'staff') {
-                 studentIdLabel.textContent = 'Username';
-                 studentIdInput.placeholder = 'Enter your username';
-                 studentIdInput.removeAttribute('maxlength'); // No limit for username
-                 studentIdInput.removeEventListener('input', formatStudentID); // No formatting
-             } else {
-                 studentIdLabel.textContent = 'Student ID No.';
-                 studentIdInput.placeholder = 'Enter your Student ID No. (e.g., 2021-1055)';
-                 studentIdInput.setAttribute('maxlength', '9'); // Limit for student ID
-                 studentIdInput.addEventListener('input', formatStudentID); // Add formatting
-             }
-         }
+    // Function to setup the input field based on role
+    function setupInputField() {
+        if (roleSelect.value === 'faculty' || roleSelect.value === 'staff') {
+            studentIdLabel.textContent = 'Username';
+            studentIdInput.placeholder = 'Enter your username';
+            studentIdInput.removeAttribute('maxlength'); // No limit for username
+            studentIdInput.removeEventListener('input', formatStudentID); // No formatting
+        } else {
+            studentIdLabel.textContent = 'Student ID No.';
+            studentIdInput.placeholder = 'Enter your Student ID No. (e.g., 2021-1055)';
+            studentIdInput.setAttribute('maxlength', '9'); // Limit for student ID
+            studentIdInput.addEventListener('input', formatStudentID); // Add formatting
+        }
+    }
 
-         // Event listener for role select change
-         roleSelect.addEventListener('change', setupInputField);
+    // Event listener for role select change
+    roleSelect.addEventListener('change', setupInputField);
 
-         // Initial setup based on default role selection
-         setupInputField();
+    // Initial setup based on default role selection
+    setupInputField();
 
-         function formatStudentID(event) {
-             let value = studentIdInput.value;
+    function formatStudentID(event) {
+        let value = studentIdInput.value;
 
-             // Allow only digits and a single dash
-             if (/[^0-9-]/.test(value)) {
-                 studentIdInput.value = value.replace(/[^0-9-]/g, '');
-             }
-         }
-     });
+        // Allow only digits and a single dash
+        if (/[^0-9-]/.test(value)) {
+            studentIdInput.value = value.replace(/[^0-9-]/g, '');
+        }
+    }
+});
      </script>
 
      <?php
