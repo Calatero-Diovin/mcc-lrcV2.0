@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="d-flex align-items-center">
         <a href="." class="logo d-flex align-items-center">
-            <img src="./images/mcc-lrc.png" alt="logo" width="100px" height="100px" class="mx-2" />
+            <img src="./images/mcc-lrc.png" alt="logo" width="50px" height="100px" class="mx-2" />
             <span class="d-none d-lg-block mx-2">MCC <span class="text-info d-block fs-6">Learning Resource Center</span></span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
