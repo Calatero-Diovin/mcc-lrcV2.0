@@ -154,10 +154,10 @@ include('./admin/config/dbcon.php');
                     // Redirect to a new page with reCAPTCHA or show reCAPTCHA modal
                     Swal.fire({
                         title: 'reCAPTCHA',
-                        html: '<div class="g-recaptcha" data-sitekey="6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4"></div>',
+                        html: '<div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>',
                         onBeforeOpen: () => {
                             grecaptcha.render('g-recaptcha', {
-                                'sitekey': '6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4',
+                                'sitekey': '6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg',
                                 'callback': function(response) {
                                     // This callback is triggered when reCAPTCHA is successfully completed
                                     Swal.fire({
