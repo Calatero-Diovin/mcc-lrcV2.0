@@ -107,9 +107,6 @@ include('./admin/config/dbcon.php');
                                                   Please enter your password.
                                              </div>
                                         </div>
-                                        <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
-                                        </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
                                         <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
@@ -134,6 +131,56 @@ include('./admin/config/dbcon.php');
                </div>
           </div>
      </section>
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show SweetAlert for reCAPTCHA
+            Swal.fire({
+                title: 'Complete reCAPTCHA',
+                text: 'Please complete the reCAPTCHA to proceed.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Open reCAPTCHA',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to a new page with reCAPTCHA or show reCAPTCHA modal
+                    Swal.fire({
+                        title: 'reCAPTCHA',
+                        html: '<div class="g-recaptcha" data-sitekey="6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4"></div>',
+                        onBeforeOpen: () => {
+                            grecaptcha.render('g-recaptcha', {
+                                'sitekey': '6LcUy2gqAAAAAIyCYkHQ6gQ_KSFsskmLcvFGQtt4',
+                                'callback': function(response) {
+                                    // This callback is triggered when reCAPTCHA is successfully completed
+                                    Swal.fire({
+                                        title: 'Submitting...',
+                                        text: 'Your login request is being processed.',
+                                        allowOutsideClick: false,
+                                        didOpen: () => {
+                                            Swal.showLoading();
+                                        },
+                                    });
+
+                                    // Submit the form after a short delay (optional)
+                                    setTimeout(() => {
+                                        form.submit(); // Now submit the form
+                                    }, 1000); // Adjust delay as needed
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 
      <!-- Alertify JS link -->
      <script src="assets/js/alertify.min.js"></script>
