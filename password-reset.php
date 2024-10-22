@@ -47,9 +47,6 @@ session_start();
           <div class="container">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
-                    <a href="login" class="back">
-                              <i class="bi bi-arrow-left-circle-fill m-3"></i>
-                         </a>
                          <div class="col-md-6 ">
                               <div class="">
                                    <img src="images/mcc-lrc.png" alt="logo"
