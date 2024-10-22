@@ -108,7 +108,7 @@ include('./admin/config/dbcon.php');
                                              </div>
                                         </div>
                                         <div class="mb-3">
-                                             <div style="margin-top: -20px;margin-bottom: -20px;" class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
+                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
