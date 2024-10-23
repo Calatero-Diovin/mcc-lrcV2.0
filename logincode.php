@@ -78,10 +78,13 @@ if (isset($_POST['login_btn'])) {
                     exit(0);
                 } elseif ($status == 'pending') {
                     $_SESSION['status'] = "Your account is still pending for approval! Please wait..";
+                    $_SESSION['status_code'] = "warning";
                 } elseif ($status == 'blocked') {
                     $_SESSION['status'] = "Your account has been blocked!";
+                    $_SESSION['status_code'] = "warning";
                 } else {
                     $_SESSION['status'] = "Your account is inactive or disabled";
+                    $_SESSION['status_code'] = "error";
                 }
             } else {
                 // Increment login attempts on failure
