@@ -22,7 +22,7 @@
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^8.2.12"
+                "php": "^7.9"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.10",
