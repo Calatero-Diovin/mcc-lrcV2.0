@@ -2,7 +2,8 @@
 include('authentication.php');
 
 // Include the barcode generator
-require_once 'barcode/vendor/autoload.php'; // Adjust the path if necessary
+require 'barcode/vendor/autoload.php'; // Adjust the path if necessary
+
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 // Update Status
