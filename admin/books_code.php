@@ -179,11 +179,6 @@ if (isset($_POST['update_accession_number'])) {
 }
 
 // Add Book
-// Include the barcode generator library
-require 'vendor/autoload.php'; // Ensure the autoloader is included
-
-use Picqer\Barcode\BarcodeGeneratorPNG;
-
 if (isset($_POST['add_book'])) {
     // Collect form data
     $title = $_POST['title'];
@@ -219,7 +214,7 @@ if (isset($_POST['add_book'])) {
         $image_type = $_FILES['book_image']['type'];
 
         $image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
-        $allowed_ext = ['jpg', 'jpeg', 'png'];
+        $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
         if (in_array($image_ext, $allowed_ext)) {
             if ($image_error === 0) {
@@ -261,7 +256,7 @@ if (isset($_POST['add_book'])) {
 
         for ($i = 1; $i <= $copy; $i++) {
             $accession_number = $_POST['accession_number_' . $i];
-
+            
             // Bind the accession number parameter and execute the statement
             mysqli_stmt_bind_param($check_stmt, "s", $accession_number);
             mysqli_stmt_execute($check_stmt);
@@ -289,19 +284,12 @@ if (isset($_POST['add_book'])) {
     $insert_stmt = mysqli_prepare($con, $insert_query);
 
     if ($insert_stmt) {
-        $generator = new BarcodeGeneratorPNG();
-        
         for ($i = 1; $i <= $copy; $i++) {
             $accession_number = $_POST['accession_number_' . $i];
             $barcode = $pre . '-' . $suf . $accession_number;
-
-            // Generate the barcode and save it as an image
-            $barcode_image = $generator->getBarcode($barcode, $generator::TYPE_CODE_128);
-            $barcode_image_path = '../uploads/barcodes/' . uniqid('', true) . '.png';
-            file_put_contents($barcode_image_path, $barcode_image);
-
+            
             // Bind parameters and execute the statement
-            mysqli_stmt_bind_param($insert_stmt, "ssssssssssssss", $title, $author, $isbn, $publisher, $copyright_date, $place_publication, $call_number, $category_id, $book_image, $accession_number, $barcode_image_path, $subject, $subject1, $subject2);
+            mysqli_stmt_bind_param($insert_stmt, "ssssssssssssss", $title, $author, $isbn, $publisher, $copyright_date, $place_publication, $call_number, $category_id, $book_image, $accession_number, $barcode, $subject, $subject1, $subject2);
             mysqli_stmt_execute($insert_stmt);
         }
 
