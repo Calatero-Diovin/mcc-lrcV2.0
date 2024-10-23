@@ -207,7 +207,13 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                                                     ?>
                                                     <tr>
                                                         <td><?= $book['accession_number']; ?></td>
-                                                        <td><?= $book['barcode']; ?></td>
+                                                        <td>
+                                                            <?php if ($book['barcode'] != ""): ?>
+                                                                <img src="../uploads/barcodes/<?= $book['barcode']; ?>" alt="" width="200px" height="200px">
+                                                            <?php else: ?>
+                                                                <img src="../uploads/books_img/book_image.jpg" alt="" width="200px" height="200px">
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td style="text-transform: capitalize"><?= $book['status']; ?></td>
                                                         <td><?= $book['classname']; ?></td>
                                                         <td>
