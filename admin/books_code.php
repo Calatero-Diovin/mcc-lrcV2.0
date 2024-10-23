@@ -2,7 +2,7 @@
 include('authentication.php');
 
 // Include the barcode generator
-require_once('barcode/vendor/autoload.php'); // Adjust the path if necessary
+// require_once('barcode/vendor/autoload.php'); 
 
 // Update Status
 // if (isset($_POST['update_status'])) {
@@ -290,14 +290,14 @@ if (isset($_POST['add_book'])) {
         for ($i = 1; $i <= $copy; $i++) {
             $accession_number = $_POST['accession_number_' . $i];
             $barcode = $pre . '-' . $suf . $accession_number;
-            $barcodeImagePath = '../uploads/barcodes'.$barcode.".png";
-            $barcodeImage = $barcode.".png";
+            // $barcodeImagePath = '../uploads/barcodes'.$barcode.".png";
+            // $barcodeImage = $barcode.".png";
 
-            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-            file_put_contents($barcodeImagePath, $generator->getBarcode($barcode, $generator::TYPE_CODE_128));
+            // $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+            // file_put_contents($barcodeImagePath, $generator->getBarcode($barcode, $generator::TYPE_CODE_128));
             
             // Bind parameters and execute the statement
-            mysqli_stmt_bind_param($insert_stmt, "ssssssssssssss", $title, $author, $isbn, $publisher, $copyright_date, $place_publication, $call_number, $category_id, $book_image, $accession_number, $barcodeImage, $subject, $subject1, $subject2);
+            mysqli_stmt_bind_param($insert_stmt, "ssssssssssssss", $title, $author, $isbn, $publisher, $copyright_date, $place_publication, $call_number, $category_id, $book_image, $accession_number, $barcode, $subject, $subject1, $subject2);
             mysqli_stmt_execute($insert_stmt);
         }
 
