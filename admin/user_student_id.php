@@ -212,7 +212,7 @@ if ($row) {
             </center> 
             <br>
             <div class="container" align="center">
-                <p style="font-size:14px;font-weight:bold;color:black;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
+                <p style="font-size:14px;font-weight:bold;text-transform:uppercase;color:black;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
                 <br>
             </div>
             <div>
