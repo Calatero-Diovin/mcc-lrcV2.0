@@ -40,6 +40,10 @@ include('admin/config/dbcon.php');
                               href=".">Home</a>
                     </li>
                     <li class="nav-item">
+                         <a class="nav-link  text-white <?=$page == 'web-opac' ? 'active': '' ?> fw-semibold"
+                              href="web-opac">Home</a>
+                    </li>
+                    <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
                               href="about">About</a>
                     </li>
