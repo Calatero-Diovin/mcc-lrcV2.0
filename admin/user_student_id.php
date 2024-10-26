@@ -85,7 +85,6 @@ if ($row) {
   @media print {
     body{
       color: black;
-      background: none;
       background-image: url('images/bg-id.jpg');
       background-size: cover;
       background-position: center;
@@ -93,7 +92,9 @@ if ($row) {
     }
   }
   body {
-    background:cornflowerblue; /* Set the background of the body to white */
+    background-image: url('images/bg-id.jpg');
+    background-size: cover;
+    background-position: center; /* Set the background of the body to white */
   }
 
   #bg {
