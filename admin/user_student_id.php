@@ -232,8 +232,8 @@ if ($row) {
             <br>
                 <div class="container" align="center">
                     <p style="color:black;">In case of emergency, please notify:</p>
-                    <p class="text-start" style="color:black;margin-left:15px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
-                    <p class="text-start" style="color:black;margin-left:15px;margin-top:-10px;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
+                    <p class="text-center" style="color:black;margin-left:15px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
+                    <p class="text-center" style="color:black;margin-left:15px;margin-top:-10px;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
         </center>
                 </div>
     </div>
