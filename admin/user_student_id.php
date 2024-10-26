@@ -82,6 +82,16 @@ if ($row) {
 <body>
 
 <style>
+  @media print {
+    body{
+      color: black;
+      background: none;
+      background-image: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-print-color-adjust: exact;
+    }
+  }
   body {
     background:cornflowerblue; /* Set the background of the body to white */
   }
