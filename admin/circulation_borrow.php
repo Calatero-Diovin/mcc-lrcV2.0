@@ -3,6 +3,13 @@ include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 ?>
 
 
@@ -122,7 +129,88 @@ include('./includes/sidebar.php');
 									$id = $borrow_row ['borrow_book_id'];
 									$book_id = $borrow_row ['book_id'];
 									$user_id = $borrow_row ['user_id'];
-							?>
+
+                                             $due_date = strtotime($borrow_row['due_date']);
+                                             $current_date = time();
+
+                                             if ($current_date > $due_date && !$borrow_row['date_returned']) {
+                                                  $mail = new PHPMailer(true);
+                                                  try {
+                                                       $mail->isSMTP();
+                                                       $mail->Host       = 'smtp.gmail.com';
+                                                       $mail->SMTPAuth   = true;
+                                                       $mail->Username   = 'mcclearningresourcecenter@gmail.com';
+                                                       $mail->Password   = 'qxbi jqnf hgfn lkih';
+                                                       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                                       $mail->Port       = 587;
+
+                                                       $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+                                                       $mail->addAddress($borrow_row['email']);
+
+                                                       $mail->isHTML(true);
+                                                       $mail->Subject = 'Overdue Book Notification';
+                                                       $mail->Body = "
+                                                       <html>
+                                                            <head>
+                                                                 <style>
+                                                                      body {
+                                                                      font-family: Arial, sans-serif;
+                                                                      background-color: #f4f4f4;
+                                                                      margin: 0;
+                                                                      padding: 0;
+                                                                      }
+                                                                      .container {
+                                                                      width: 80%;
+                                                                      margin: 20px auto;
+                                                                      padding: 20px;
+                                                                      background-color: #fff;
+                                                                      border-radius: 8px;
+                                                                      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                                                      }
+                                                                      .header {
+                                                                      text-align: center;
+                                                                      padding-bottom: 20px;
+                                                                      border-bottom: 1px solid #ddd;
+                                                                      }
+                                                                      .logo {
+                                                                      max-width: 150px;
+                                                                      height: auto;
+                                                                      }
+                                                                      .content {
+                                                                      padding: 20px 0;
+                                                                      }
+                                                                      .button {
+                                                                      display: inline-block;
+                                                                      padding: 10px 20px;
+                                                                      background-color: #007bff;
+                                                                      text-decoration: none;
+                                                                      color: white;
+                                                                      border-radius: 4px;
+                                                                      }
+                                                                 </style>
+                                                            </head>
+                                                            <body>
+                                                                 <div class='container'>
+                                                                      <div class='header'>
+                                                                      <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
+                                                                      </div>
+                                                                      <div class='content'>
+                                                                      <p>Dear " . $borrow_row['firstname'] . " ". $borrow_row['lastname'] . ",</p>
+                                                                      <p>Your borrowed book " . $borrow_row['title'] . " is overdue. Please return it as soon as possible.</p>
+                                                                      <p>Thank you!</p>
+                                                                      </div>
+                                                                 </div>
+                                                            </body>
+                                                       </html>
+                                                       ";
+                                                       $mail->send();
+                                                            return true;
+                                                       } catch (Exception $e) {
+                                                            error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                                                            return false;
+                                                       }
+                                             }
+							          ?>
                                              <?php
                                                        if(isset($user_id))
                                                        {
