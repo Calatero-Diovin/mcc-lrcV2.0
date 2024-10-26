@@ -230,7 +230,7 @@ if (isset($_POST['password-change'])) {
     } else {
         $_SESSION['status'] = 'Something went wrong.';
         $_SESSION['status_code'] = 'error';
-        header('Location: password-change.php');
+        header('Location: password-change');
         exit(0);
     }
 }
