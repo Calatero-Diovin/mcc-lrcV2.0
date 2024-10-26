@@ -109,7 +109,10 @@ if ($row) {
     opacity: 0.88;
     font-family: sans-serif;
     transition: 0.4s;
-    background-color: #FFFFFF;
+    background: url('images/bg-id.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no repeat;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     transition: 0.4s;
   }
