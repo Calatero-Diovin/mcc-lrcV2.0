@@ -89,7 +89,7 @@ $user_row = $user_result->fetch_assoc();
                         </div>
                         <form action="admin-forgot-code.php" method="POST" class="needs-validation" novalidate style="margin-top:30px;" onsubmit="return validatePassword()">
                             <!-- Add hidden input field to pass email -->
-                            <input type="text" name="email" value="<?php echo $user_row['email']; ?>"> 
+                            <input type="hidden" name="email" value="<?php echo $user_row['email']; ?>"> 
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
