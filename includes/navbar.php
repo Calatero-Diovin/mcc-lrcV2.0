@@ -41,7 +41,7 @@ include('admin/config/dbcon.php');
                     </li>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'web-opac' ? 'active': '' ?> fw-semibold"
-                              href="web-opac">Home</a>
+                              href="web-opac">Web OPAC</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
