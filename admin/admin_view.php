@@ -93,10 +93,10 @@ include('./includes/sidebar.php');
                                                   <p class="d-inline">:&nbsp;<?=$admin['phone_number'];?></p>
                                              </div>
 
-                                             <!-- <div class="mb-3">
+                                             <div class="mb-3">
                                                   <span class="fw-semibold">Password &emsp;</span>
                                                   <p class="d-inline">:&nbsp;<?=$admin['password'];?></p>
-                                             </div> -->
+                                             </div>
 
                                         </div>
                                    </div>
