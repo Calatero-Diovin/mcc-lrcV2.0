@@ -213,8 +213,10 @@ if ($row) {
             <br>
             <div class="container" align="center">
                 <p style="font-size:20px;font-weight:bold;text-transform:capitalize;color:black;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
-                <p style="font-weight:bold;color:black;position:relative;left:0;right:0;bottom:-30px;font-size:11px;"><?php echo "STUDENT NO.".' '.$stu_id; ?></p>
                 <br>
+            </div>
+            <div>
+            <p style="font-weight:bold;color:black;position:relative;left:0;right:0;bottom:-30px;font-size:11px;"><?php echo "STUDENT NO.".' '.$stu_id; ?></p>
             </div>
             <div>
                 <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:Georgia,serif;position:absolute;left:0;right:0;bottom:0;letter-spacing:2px;"><?php echo $course; ?></p>
