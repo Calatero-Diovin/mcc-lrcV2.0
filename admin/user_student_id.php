@@ -229,7 +229,7 @@ if ($row) {
         <br>
         <br>
         <center>
-            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="180px" height="180px" style="filter: brightness(0) invert(1);">
+            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="180px" height="180px" style="background-color:transparent;mix-blend-mode: multiply;">
             <br>
             <br>
             <br>
