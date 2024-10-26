@@ -25,7 +25,7 @@ function send_password_reset($get_email, $token) {
 
             //Recipients
             $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
-            $mail->addAddress($get_name); // Recipient's email address
+            $mail->addAddress($get_email); // Recipient's email address
 
         // Email content settings
         $mail->isHTML(true);
