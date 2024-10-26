@@ -125,7 +125,7 @@ if ($row) {
     opacity: 0.88;
     font-family: sans-serif;
     transition: 0.4s;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-front.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -138,7 +138,7 @@ if ($row) {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-front.png');
     background-repeat: repeat-x;
     background-size: 250px 450px;
     opacity: 0.2;
@@ -155,7 +155,7 @@ if ($row) {
     transition: 0.4s;
     width: 250px;
     height: 450px;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -177,10 +177,10 @@ if ($row) {
 
 <script type="text/javascript">	
  		
- 	window.print();
-  setTimeout(function(){
-    window.close()
-  },60000)
+ 	// window.print();
+  // setTimeout(function(){
+  //   window.close()
+  // },60000)
  </script>
 
 <div id="bg">
