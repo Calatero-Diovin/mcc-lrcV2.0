@@ -103,7 +103,10 @@ include('config/dbcon.php');
                             <div class="d-grid gap-2 md-3 mb-3">
                                 <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
                             </div>
-                            <div class="text-end mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <p>
+                                    <a href="forgot-admin-pass" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
+                                </p>
                                 <p>
                                     <a href="../login" class="text-primary text-decoration-none fw-semibold">User Login</a>
                                 </p>
