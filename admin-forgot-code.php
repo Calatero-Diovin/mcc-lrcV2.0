@@ -128,7 +128,7 @@ if (isset($_POST['password_reset_link'])) {
 if (isset($_POST['password-change'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $new_password = mysqli_real_escape_string($con, $_POST['new_password']);
-    $hashed_password = password_hash($new_password, PASSWORD_ARGON2I);
+    $hashed_password = password_hash($new_password, PASSWORD_ARGON2D);
 
     // User table check
     $check_email_user = "SELECT email FROM admin WHERE email='$email'";

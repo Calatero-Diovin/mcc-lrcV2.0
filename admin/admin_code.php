@@ -104,7 +104,7 @@ if (isset($_POST['add_admin'])) {
     $address = mysqli_real_escape_string($con, $_POST['address']);
     $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $hashed_password = password_hash($password, PASSWORD_ARGON2D);
     $admin_type = mysqli_real_escape_string($con, $_POST['admin_type']);
     $admin_image = $_FILES['admin_image']['name'];
 
