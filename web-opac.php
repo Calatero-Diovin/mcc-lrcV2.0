@@ -24,7 +24,7 @@ include('admin/config/dbcon.php');
                 <h3 class="fw-semibold">Madridejos Community College</h3>
                 <h4 class="fw-semibold">Learning Resource Center</h4>
               </center>
-              <form id="searchForm" method="GET" onsubmit="return searchBooks(event);">
+              <form method="GET" onsubmit="return validateSearch();">
                 <div class="d-flex">
                   <div class="input-group mb-3 me-6">
                     <input type="text" name="search" id="searchInput" value="<?php if (isset($_GET['search'])) { echo htmlspecialchars($_GET['search']); } ?>" class="form-control" placeholder="Type here to search" required>
@@ -47,53 +47,52 @@ include('admin/config/dbcon.php');
           <div id="new_books" class="row row-cols-1 row-cols-md-12 g-4">
             <?php 
             if (isset($_GET['search'])) { 
-                $filtervalues = strip_tags(trim(mysqli_real_escape_string($con, $_GET['search'])));
-                $query = "SELECT book.*, COUNT(book.accession_number) AS copy_count,
-                          SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
-                          FROM book 
-                          WHERE title LIKE '%$filtervalues%' AND status_hold = ''
-                          GROUP BY title, author, copyright_date, isbn
-                          ORDER BY title, author, copyright_date, isbn DESC";
-            
-                $query_run = mysqli_query($con, $query);
-                if (mysqli_num_rows($query_run) > 0) {
-                    foreach ($query_run as $book) {
-                        $unavailable_count = $book['copy_count'] - $book['available_count'];
+              $filtervalues = strip_tags(trim(mysqli_real_escape_string($con, $_GET['search'])));
+              $query = "SELECT book.*, COUNT(book.accession_number) AS copy_count,
+                        SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
+                        FROM book 
+                        WHERE title LIKE '%$filtervalues%' AND status_hold = ''
+                        GROUP BY title, author, copyright_date, isbn
+                        ORDER BY title, author, copyright_date, isbn DESC";
+              $query_run = mysqli_query($con, $query);
+              if (mysqli_num_rows($query_run) > 0) {
+                foreach ($query_run as $book) {
+                  $unavailable_count = $book['copy_count'] - $book['available_count'];
             ?>
             <div class="card mt-1">
-                <div class="card-body pt-3 d-md-flex d-sm-block">
-                    <div class="col-xl-2">
-                        <a href="book_details?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="text-decoration-none">
-                            <?php if ($book['book_image'] != ""): ?>
-                                <img src="uploads/books_img/<?php echo htmlspecialchars($book['book_image']); ?>" width="100px" alt="">
-                            <?php else: ?>
-                                <img src="uploads/books_img/book_image.jpg" alt="">
-                            <?php endif; ?>
-                        </a>
-                    </div>
-                    <div class="col-xl-10">
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12 fs-6">
-                                <a href="book_details?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>" style="text-decoration: none" class="fw-bold">
-                                    <?= htmlspecialchars($book['title']) ?>
-                                </a>
-                                (<?= htmlspecialchars($book['copyright_date']) ?>)
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-lg-9 col-md-8">
-                                by&nbsp;<?= htmlspecialchars($book['author']); ?>
-                            </div>
-                        </div>
-                    </div>
+              <div class="card-body pt-3 d-md-flex d-sm-block">
+                <div class="col-xl-2">
+                  <a href="web-opac-view?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="text-decoration-none">
+                    <?php if ($book['book_image'] != ""): ?>
+                    <img src="uploads/books_img/<?php echo htmlspecialchars($book['book_image']); ?>" width="100px" alt="">
+                    <?php else: ?>
+                    <img src="uploads/books_img/book_image.jpg" alt="">
+                    <?php endif; ?>
+                  </a>
                 </div>
+                <div class="col-xl-10">
+                  <div class="row mt-3">
+                    <div class="col-lg-12 col-md-12 fs-6">
+                      <a href="web-opac-view?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>" style="text-decoration: none" class="fw-bold">
+                        <?= htmlspecialchars($book['title']) ?>
+                      </a>
+                      (<?= htmlspecialchars($book['copyright_date']) ?>)
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-lg-9 col-md-8">
+                      by&nbsp;<?= htmlspecialchars($book['author']); ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <?php
-                    }
-                } else {
-                    echo '<div class="col-md-12 alert alert-info h5 text-center">No Book Found</div>';
-                }
-            }else {
+                } 
+              } else {
+                echo '<div class="col-md-12 alert alert-info h5 text-center">No Book Found</div>';
+              }
+            } else {
               $query = "SELECT book.*, COUNT(book.accession_number) AS copy_count, 
                         SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
                         FROM book 
@@ -105,7 +104,7 @@ include('admin/config/dbcon.php');
                 foreach ($query_run as $book) {
             ?>
             <div class="col-12 col-md-3" data-aos="zoom-in">
-              <a style="text-decoration: none !important;" href="book_details?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>">
+              <a style="text-decoration: none !important;" href="web-opac-view?id=<?= urlencode($book['book_id']); ?>&title=<?= urlencode($book['title']); ?>&author=<?= urlencode($book['author']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&isbn=<?= urlencode($book['isbn']); ?>">
                 <div class="card h-100 shadow">
                   <?php if ($book['book_image'] != ""): ?>
                     <p class="text-center"><?php echo htmlspecialchars($book['title']) ?></p>
@@ -129,37 +128,28 @@ include('admin/config/dbcon.php');
 </div>
 
 <script>
-function searchBooks(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+function validateSearch() {
     const searchInput = document.getElementById('searchInput').value;
-
-    // Validate input
+    
+    // Regular expression to detect HTML tags
     const regex = /<[^>]*>/;
+    
+    // Check if the input contains any HTML tags
     if (regex.test(searchInput)) {
+        // Show SweetAlert
         swal({
             title: "Invalid Input!",
             text: "Stop that!",
             icon: "warning",
             button: "OK",
         });
-        return false;
+        return false; // Prevent form submission
     }
-
-    // AJAX request to fetch books
-    fetch(`search_books.php?search=${encodeURIComponent(searchInput)}`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('new_books').innerHTML = data; // Update book list
-        })
-        .catch(error => console.error('Error:', error));
-
-    return false; // Prevent default form submission
+    return true; // Allow form submission
 }
 </script>
 
-
 <?php
-include('includes/footer.php');
 include('includes/script.php');
 include('message.php'); 
 ?>
