@@ -216,8 +216,8 @@ if ($row) {
                 <p style="font-weight:bold;color:black;"><?php echo "STUDENT No.".' '.$stu_id; ?></p>
                 <br>
             </div>
-            <div style="background-color:white;">
-                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;"><?php echo $course; ?></p>
+            <div>
+                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:fantasy;position:absolute;left:0;right:0;bottom:0;"><?php echo $course; ?></p>
             </div>
     </div>
 
