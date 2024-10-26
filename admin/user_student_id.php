@@ -217,7 +217,7 @@ if ($row) {
                 <br>
             </div>
             <div>
-                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:fantasy;position:absolute;left:0;right:0;bottom:0;"><?php echo $course; ?></p>
+                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:fantasy;position:absolute;left:0;right:0;bottom:0;letter-spacing:2px;"><?php echo $course; ?></p>
             </div>
     </div>
 
