@@ -236,7 +236,7 @@ if ($row) {
                       <div>
                     <p class="text-center" style="color:black;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
                     </div>
-                    <div style="position:absolute:left:0;right:0;bottom:-30px;">
+                    <div style="position:absolute:left:0;right:0;bottom:0;">
                     <p class="text-center" style="color:black;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
         </center>
                 </div>
