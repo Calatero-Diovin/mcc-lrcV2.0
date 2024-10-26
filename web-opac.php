@@ -17,7 +17,7 @@ include('admin/config/dbcon.php');
         <div class="card-header">
           <div class="d-flex align-items-center justify-content-center mt-2">
             <div class="mx-2">
-              <img src="assets/img/mcc-logo.png" class="d-sm-none d-md-block me-4" style="height: 100px; width: 100px;" alt="MCC Logo">
+              <img src="images/mcc-lrc.png" class="d-sm-none d-md-block me-4" style="height: 100px; width: 100px;" alt="MCC Logo">
             </div>
             <div class="col-8 mt-2">
               <center>
