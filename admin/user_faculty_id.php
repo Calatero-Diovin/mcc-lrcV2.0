@@ -177,7 +177,7 @@ if ($row) {
  	window.print();
   setTimeout(function(){
     window.close()
-  },750)
+  },60000)
  </script>
 
 <div id="bg">
