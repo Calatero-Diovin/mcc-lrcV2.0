@@ -204,9 +204,9 @@ if ($row) {
                 <?php      
                     if ($profile != "") {
                         //echo "<img src='../uploads/$profile' height='175px' width='200px' alt='' style='border: 2px solid black; border-radius: 60%;'>";
-                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 4px solid black; width: 170px; height: 170px; border-radius: 50%;position:absolute;left:0;right:0;top:90px;display:block;margin:0 auto;'>";
+                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 4px solid cornflowerblue; width: 170px; height: 170px; border-radius: 50%;position:absolute;left:0;right:0;top:90px;display:block;margin:0 auto;'>";
                         } else {
-                        echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 2px solid black; border-radius: 50%;'>";
+                        echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 2px solid cornflowerblue; border-radius: 50%;'>";
                         }
                 ?> 
             </center> 
