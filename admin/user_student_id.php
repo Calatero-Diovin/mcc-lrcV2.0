@@ -204,7 +204,7 @@ if ($row) {
                 <?php      
                     if ($profile != "") {
                         //echo "<img src='../uploads/$profile' height='175px' width='200px' alt='' style='border: 2px solid black; border-radius: 60%;'>";
-                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 2px solid black; width: 150px; height: 150px;'>";
+                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 2px solid black; width: 150px; height: 150px; border-radius: 50%;'>";
                         } else {
                         echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 2px solid black; border-radius: 50%;'>";
                         }
