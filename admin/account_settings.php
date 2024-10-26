@@ -52,10 +52,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                    <li class="nav-item"> <button class="nav-link active " data-bs-toggle="tab"
                                              data-bs-target="#profile-edit">Edit
                                              Profile</button></li>
-
-                                   <li class="nav-item"> <button class="nav-link " data-bs-toggle="tab"
-                                             data-bs-target="#profile-change-password">Change
-                                             Password</button></li>
                               </ul>
                               <div class="tab-content pt-2">
 
@@ -148,43 +144,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="btn btn-primary">Save Changes</button></div>
                                         </form>
                                    </div>
-
-                                   <div class="tab-pane fade pt-3" id="profile-change-password">
-                                        <form action="account_settings_code.php" method="POST" id="passwordForm">
-                                             <div class="row mb-3">
-                                                  <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                                                  <div class="col-md-8 col-lg-9">
-                                                       <div class="input-group">
-                                                            <input name="current_password" type="password" class="form-control" id="currentPassword">
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassword')"><i class="bi bi-eye-slash"></i></button>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                             <div class="row mb-3">
-                                                  <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                                                  <div class="col-md-8 col-lg-9">
-                                                       <div class="input-group">
-                                                            <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required>
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassword')"><i class="bi bi-eye-slash"></i></button>
-                                                       </div>
-                                                       <div id="newPasswordWarning" class="text-danger"></div>
-                                                  </div>
-                                             </div>
-                                             <div class="row mb-3">
-                                                  <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                                                  <div class="col-md-8 col-lg-9">
-                                                       <div class="input-group">
-                                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required>
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('renewPassword')"><i class="bi bi-eye-slash"></i></button>
-                                                       </div>
-                                                       <div id="renewPasswordWarning" class="text-danger"></div>
-                                                  </div>
-                                             </div>
-                                             <div class="text-center">
-                                                  <button type="submit" name="change_password" class="btn btn-primary">Change Password</button>
-                                             </div>
-                                        </form>
-                                   </div>
                               </div>
                          </div>
                     </div>
@@ -215,29 +174,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
         if (phoneInput.startsWith('09')) {
             this.setCustomValidity('');
             this.classList.remove('is-invalid');
-        }
-    });
-
-    function togglePassword(fieldId) {
-        var field = document.getElementById(fieldId);
-        var type = field.getAttribute('type') === 'password' ? 'text' : 'password';
-        field.setAttribute('type', type);
-        var icon = field.nextElementSibling.querySelector('i');
-        icon.classList.toggle('bi-eye-slash');
-        icon.classList.toggle('bi-eye');
-    }
-
-    document.getElementById('passwordForm').addEventListener('input', function() {
-        var newPassword = document.getElementById('newPassword').value;
-        var renewPassword = document.getElementById('renewPassword').value;
-
-        // Check if new password matches confirm password
-        if (newPassword !== renewPassword) {
-            document.getElementById('renewPasswordWarning').textContent = 'Passwords do not match.';
-            document.getElementById('renewPassword').setCustomValidity('Passwords do not match.');
-        } else {
-            document.getElementById('renewPasswordWarning').textContent = '';
-            document.getElementById('renewPassword').setCustomValidity('');
         }
     });
 </script>
