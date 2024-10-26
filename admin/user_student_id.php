@@ -112,7 +112,7 @@ if ($row) {
     background: url('images/bg-id.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no repeat;
+    background-repeat: no-repeat;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     transition: 0.4s;
   }
@@ -139,7 +139,10 @@ if ($row) {
     transition: 0.4s;
     width: 250px;
     height: 450px;
-    background: #FFFFFF; /* Set the background color to white */
+    background: url('images/bg-id.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
     font-size: 16px;
     font-family: sans-serif;
