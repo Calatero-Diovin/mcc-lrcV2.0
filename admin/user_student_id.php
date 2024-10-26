@@ -83,8 +83,9 @@ if ($row) {
 
 <style>
   @media print {
-    body{
+    #id {
       color: black;
+      background: none;
       background-image: url('images/bg-id.jpg');
       background-size: cover;
       background-position: center;
@@ -92,9 +93,7 @@ if ($row) {
     }
   }
   body {
-    background-image: url('images/bg-id.jpg');
-    background-size: cover;
-    background-position: center; /* Set the background of the body to white */
+    background:cornflowerblue; /* Set the background of the body to white */
   }
 
   #bg {
@@ -120,7 +119,7 @@ if ($row) {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('../admin/images/Foxrocklogo1.jpg');
+    background: url('images/bg-id.jpg');
     background-repeat: repeat-x;
     background-size: 250px 450px;
     opacity: 0.2;
