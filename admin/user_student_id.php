@@ -178,6 +178,9 @@ if ($row) {
 <script type="text/javascript">	
  		
  	window.print();
+  function(){
+    window.close()
+  }
  </script>
 
 <div id="bg">
