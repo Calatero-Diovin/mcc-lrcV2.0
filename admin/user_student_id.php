@@ -85,10 +85,26 @@ if ($row) {
   @media print {
     #id {
       color: black;
-      background: none;
-      background-image: url('images/bg-id.jpg');
+      background: url('images/bg-id.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
+      -webkit-print-color-adjust: exact;
+    }
+    #id::before {
+      color: black;
+      background: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-print-color-adjust: exact;
+    }
+    .id-1 {
+      color: black;
+      background: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       -webkit-print-color-adjust: exact;
     }
   }
