@@ -225,7 +225,7 @@ if ($row) {
     </div>
 
     <div class="id-1">
-        <p class="text-end" style="font-size:10px;margin-top:15px;margin-right:7px;font-weight:bold;">Birthdate: <?php echo date('F j, Y', strtotime($bdate)); ?></p>
+        <p class="text-end" style="font-size:10px;position:absolute;top:10px;font-weight:bold;">Birthdate: <?php echo date('F j, Y', strtotime($bdate)); ?></p>
         <br>
         <br>
         <center>
