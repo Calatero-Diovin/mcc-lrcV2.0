@@ -230,10 +230,7 @@ if ($row) {
         <br>
         <center>
             <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="210px" height="180px" >
-            <br>
-            <br>
-            <br>
-                <div class="container" align="center">
+                <div>
                     <p style="color:black;">In case of emergency, please notify:</p>
                       </div>
                       <div>
