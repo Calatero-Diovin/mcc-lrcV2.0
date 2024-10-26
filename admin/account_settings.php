@@ -15,8 +15,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
           <h1>Profile</h1>
           <nav>
                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
+                    <li class="breadcrumb-item"><a href=".">Home</a></li>
+                    <li class="breadcrumb-item"><a href="admin">Admin</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                </ol>
           </nav>
@@ -156,7 +156,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
                                                             <input name="current_password" type="password" class="form-control" id="currentPassword">
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassword')"><i class="bi bi-eye"></i></button>
+                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassword')"><i class="bi bi-eye-slash"></i></button>
                                                        </div>
                                                   </div>
                                              </div>
@@ -165,7 +165,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
                                                             <input name="newpassword" type="password" class="form-control" id="newPassword" minlength="8" required>
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassword')"><i class="bi bi-eye"></i></button>
+                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassword')"><i class="bi bi-eye-slash"></i></button>
                                                        </div>
                                                        <div id="newPasswordWarning" class="text-danger"></div>
                                                   </div>
@@ -175,7 +175,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <div class="col-md-8 col-lg-9">
                                                        <div class="input-group">
                                                             <input name="renewpassword" type="password" class="form-control" id="renewPassword" minlength="8" required>
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('renewPassword')"><i class="bi bi-eye"></i></button>
+                                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('renewPassword')"><i class="bi bi-eye-slash"></i></button>
                                                        </div>
                                                        <div id="renewPasswordWarning" class="text-danger"></div>
                                                   </div>
@@ -223,8 +223,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
         var type = field.getAttribute('type') === 'password' ? 'text' : 'password';
         field.setAttribute('type', type);
         var icon = field.nextElementSibling.querySelector('i');
-        icon.classList.toggle('bi-eye');
         icon.classList.toggle('bi-eye-slash');
+        icon.classList.toggle('bi-eye');
     }
 
     document.getElementById('passwordForm').addEventListener('input', function() {
