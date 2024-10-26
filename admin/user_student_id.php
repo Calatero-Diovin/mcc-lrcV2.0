@@ -12,7 +12,6 @@ if ($row) {
     $stu_id = $row['student_id_no'];
 
     // Extract necessary data for printing
-    $title = "Foxrock Fiber Internet";
     $names = $row['firstname'].' '.$row['lastname'];
     $email = $row['email'];
     $contact = $row['cell_no'];
@@ -162,6 +161,9 @@ if ($row) {
                         <img src="assets/img/mcc-logo.png" alt="Avatar"  width='60px' height='60px' alt=''>
                         </td>
                         <td><p style="font-size:10px;text-align:center;"><b>MADRIDEJOS COMMUNITY COLLEGE<br>LEARNING RESOURCE CENTER</b><br><small>BUNAKAN, MADRIDEJOS, CEBU</small></p></td>
+                        <td>
+                        <img src="images/mcc-lrc.png" alt="Avatar"  width='60px' height='60px' alt=''>
+                        </td>
                     </tr>        
                 </table>     
             </center>
