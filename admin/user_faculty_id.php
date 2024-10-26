@@ -34,7 +34,7 @@ if ($row) {
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <meta name="robots" content="noindex, nofollow" />
-     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <link rel="icon" href="images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
      <link href="https://fonts.gstatic.com" rel="preconnect" />
      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -80,6 +80,32 @@ if ($row) {
 <body>
 
 <style>
+  @media print {
+    #id {
+      color: black;
+      background: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-print-color-adjust: exact;
+    }
+    #id::before {
+      color: black;
+      background: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-print-color-adjust: exact;
+    }
+    .id-1 {
+      color: black;
+      background: url('images/bg-id.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-print-color-adjust: exact;
+    }
+  }
   body {
     background:cornflowerblue; /* Set the background of the body to white */
   }
@@ -97,7 +123,10 @@ if ($row) {
     opacity: 0.88;
     font-family: sans-serif;
     transition: 0.4s;
-    background-color: #FFFFFF;
+    background: url('images/bg-id.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     transition: 0.4s;
   }
@@ -107,7 +136,7 @@ if ($row) {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('../admin/images/Foxrocklogo1.jpg');
+    background: url('images/bg-id.jpg');
     background-repeat: repeat-x;
     background-size: 250px 450px;
     opacity: 0.2;
@@ -124,7 +153,10 @@ if ($row) {
     transition: 0.4s;
     width: 250px;
     height: 450px;
-    background: #FFFFFF; /* Set the background color to white */
+    background: url('images/bg-id.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
     font-size: 16px;
     font-family: sans-serif;
@@ -156,9 +188,12 @@ if ($row) {
                 <table>
                     <tr class="d-flex align-items justify-content-between"> 
                         <td>
-                        <img src="assets/img/mcc-logo.png" alt="Avatar"  width='60px' height='60px' alt=''>
+                        <img src="assets/img/mcc-logo.png" alt="Avatar"  width='40px' height='40px' alt=''>
                         </td>
                         <td><p style="font-size:10px;text-align:center;"><b>MADRIDEJOS COMMUNITY COLLEGE<br>LEARNING RESOURCE CENTER</b><br><small>BUNAKAN, MADRIDEJOS, CEBU</small></p></td>
+                        <td>
+                        <img src="images/mcc-lrc.png" alt="Avatar"  width='40px' height='40px' alt=''>
+                        </td>
                     </tr>        
                 </table>     
             </center>
