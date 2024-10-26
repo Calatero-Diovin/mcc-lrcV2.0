@@ -110,6 +110,7 @@ if ($row) {
   }
   body {
     background:cornflowerblue; /* Set the background of the body to white */
+    color: black;
   }
 
   #bg {
