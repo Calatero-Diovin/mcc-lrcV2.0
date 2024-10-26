@@ -105,7 +105,7 @@ include('config/dbcon.php');
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
-                                    <a href="forgot-admin-pass" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
+                                    <a href="admin-forgot-pass" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                 </p>
                                 <p>
                                     <a href="../login" class="text-primary text-decoration-none fw-semibold">User Login</a>
