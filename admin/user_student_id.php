@@ -204,7 +204,7 @@ if ($row) {
                 <?php      
                     if ($profile != "") {
                         //echo "<img src='../uploads/$profile' height='175px' width='200px' alt='' style='border: 2px solid black; border-radius: 60%;'>";
-                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 4px solid #1176c2; width: 170px; height: 170px; border-radius: 50%;position:absolute;left:0;right:0;top:70px;display:block;margin:0 auto;'>";
+                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 4px solid #1176c2; width: 170px; height: 170px; border-radius: 50%;position:absolute;left:0;right:0;top:90px;display:block;margin:0 auto;'>";
                         } else {
                         echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 4px solid #1176c2; border-radius: 50%;'>";
                         }
@@ -228,7 +228,7 @@ if ($row) {
         <br>
         <br>
         <center>
-            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="180px" height="180px" style="background-color:transparent;mix-blend-mode: multiply;">
+            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="180px" height="180px" style="background-color:transparent;mix-blend-mode: multiply;margin-top:-20px;">
             <br>
             <br>
             <br>
