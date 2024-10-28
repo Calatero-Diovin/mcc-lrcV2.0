@@ -221,11 +221,11 @@ if ($row) {
             <div class="container" align="center">
                 <p style="font-size:13px;font-weight:bold;text-transform:uppercase;color:black;position:absolute;left:0;right:0;bottom:110px;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
                 <br>
-                      </div>
-                      <div>
-                <p style="font-weight:bold;color:black;text-align:center;position:absolute;left:0;right:0;bottom:70px;font-size:11px;"><?php echo $type; ?></p>
-                </div>
-            <div style="background-color:white;">
+            </div>
+            <div>
+            <p style="font-weight:bold;color:black;text-align:center;position:absolute;left:0;right:0;bottom:70px;font-size:11px;"><?php echo $type; ?></p>
+            </div>
+            <div>
                 <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:Georgia,serif;position:absolute;left:0;right:0;bottom:0;letter-spacing:2px;"><?php echo $course; ?></p>
             </div>
     </div>
@@ -241,8 +241,8 @@ if ($row) {
             <br>
                 <div class="container" align="center">
                     <p style="color:black;margin-top:-20px;">In case of emergency, please notify:</p>
-                    <p class="text-start" style="color:black;margin-top:-5px;margin-bottom:-2px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
-                    <p class="text-start" style="color:black;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
+                    <p class="text-center" style="color:black;margin-top:-5px;margin-bottom:-2px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
+                    <p class="text-center" style="color:black;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
         </center>
                 </div>
     </div>
