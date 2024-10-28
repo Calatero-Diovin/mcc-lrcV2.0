@@ -228,7 +228,7 @@ if ($row) {
         <br>
         <br>
         <center>
-            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="220px" height="200px" style="background-color:transparent;mix-blend-mode: multiply;margin-top:-50px;">
+            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="220px" height="200px" style="background-color:transparent;mix-blend-mode: multiply;margin-top:-48px;">
             <br>
             <br>
             <br>
