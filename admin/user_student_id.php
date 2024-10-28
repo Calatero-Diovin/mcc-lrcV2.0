@@ -177,10 +177,10 @@ if ($row) {
 </style>
 
 <script type="text/javascript">	
-  //window.print();
-  //setTimeout(function(){
-  //window.close()
-  //},5000)
+  window.print();
+  setTimeout(function(){
+  window.close()
+  },5000)
  </script>
 
 <div id="bg">
