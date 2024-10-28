@@ -117,116 +117,165 @@ include('./includes/sidebar.php');
                                              </tr>
                                         </thead>
                                         <tbody>
-
                                              <?php
-								$borrow_query = mysqli_query($con,"SELECT * FROM borrow_book
-									LEFT JOIN book ON borrow_book.book_id = book.book_id 
-									LEFT JOIN user ON borrow_book.user_id = user.user_id 
-									WHERE borrowed_status = 'borrowed'
-									ORDER BY borrow_book.borrow_book_id DESC");
-								$borrow_count = mysqli_num_rows($borrow_query);
-								while($borrow_row = mysqli_fetch_array($borrow_query)){
-									$id = $borrow_row ['borrow_book_id'];
-									$book_id = $borrow_row ['book_id'];
-									$user_id = $borrow_row ['user_id'];
+                                             $borrow_query = mysqli_query($con, "SELECT * FROM borrow_book
+                                                  LEFT JOIN book ON borrow_book.book_id = book.book_id 
+                                                  LEFT JOIN user ON borrow_book.user_id = user.user_id 
+                                                  WHERE borrowed_status = 'borrowed'
+                                                  ORDER BY borrow_book.borrow_book_id DESC");
+                                             
+                                             $borrow_count = mysqli_num_rows($borrow_query);
+                                             
+                                             while ($borrow_row = mysqli_fetch_array($borrow_query)) {
+                                                  $id = $borrow_row['borrow_book_id'];
+                                                  $book_id = $borrow_row['book_id'];
+                                                  $user_id = $borrow_row['user_id'];
 
-                                             $due_date = strtotime($borrow_row['due_date']);
-                                             $current_date = time();
+                                                  $due_date = strtotime($borrow_row['due_date']);
+                                                  $current_date = time();
+                                                  $one_day_seconds = 86400; // Number of seconds in a day
 
-                                             if ($current_date > $due_date && !$borrow_row['date_returned']) {
-                                                  $mail = new PHPMailer(true);
-                                                  try {
-                                                       $mail->isSMTP();
-                                                       $mail->Host       = 'smtp.gmail.com';
-                                                       $mail->SMTPAuth   = true;
-                                                       $mail->Username   = 'mcclearningresourcecenter@gmail.com';
-                                                       $mail->Password   = 'qxbi jqnf hgfn lkih';
-                                                       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                                                       $mail->Port       = 587;
+                                                  // Check for overdue notifications
+                                                  if ($current_date > $due_date && !$borrow_row['date_returned']) {
+                                                       $mail = new PHPMailer(true);
+                                                       try {
+                                                            $mail->isSMTP();
+                                                            $mail->Host = 'smtp.gmail.com';
+                                                            $mail->SMTPAuth = true;
+                                                            $mail->Username = 'mcclearningresourcecenter@gmail.com';
+                                                            $mail->Password = 'qxbi jqnf hgfn lkih';
+                                                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                                            $mail->Port = 587;
 
-                                                       $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
-                                                       $mail->addAddress($borrow_row['email']);
+                                                            $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+                                                            $mail->addAddress($borrow_row['email']);
 
-                                                       $mail->isHTML(true);
-                                                       $mail->Subject = 'Overdue Book Notification';
-                                                       $mail->Body = "
-                                                       <html>
-                                                            <head>
+                                                            $mail->isHTML(true);
+                                                            $mail->Subject = 'Overdue Book Notification';
+                                                            $mail->Body = "
+                                                            <html>
+                                                                 <head>
                                                                  <style>
                                                                       body {
-                                                                      font-family: Arial, sans-serif;
-                                                                      background-color: #f4f4f4;
-                                                                      margin: 0;
-                                                                      padding: 0;
+                                                                           font-family: Arial, sans-serif;
+                                                                           background-color: #f4f4f4;
+                                                                           margin: 0;
+                                                                           padding: 0;
                                                                       }
                                                                       .container {
-                                                                      width: 80%;
-                                                                      margin: 20px auto;
-                                                                      padding: 20px;
-                                                                      background-color: #fff;
-                                                                      border-radius: 8px;
-                                                                      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                                                           width: 80%;
+                                                                           margin: 20px auto;
+                                                                           padding: 20px;
+                                                                           background-color: #fff;
+                                                                           border-radius: 8px;
+                                                                           box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                                                                       }
                                                                       .header {
-                                                                      text-align: center;
-                                                                      padding-bottom: 20px;
-                                                                      border-bottom: 1px solid #ddd;
-                                                                      }
-                                                                      .logo {
-                                                                      max-width: 150px;
-                                                                      height: auto;
+                                                                           text-align: center;
+                                                                           padding-bottom: 20px;
+                                                                           border-bottom: 1px solid #ddd;
                                                                       }
                                                                       .content {
-                                                                      padding: 20px 0;
-                                                                      }
-                                                                      .button {
-                                                                      display: inline-block;
-                                                                      padding: 10px 20px;
-                                                                      background-color: #007bff;
-                                                                      text-decoration: none;
-                                                                      color: white;
-                                                                      border-radius: 4px;
+                                                                           padding: 20px 0;
                                                                       }
                                                                  </style>
-                                                            </head>
-                                                            <body>
+                                                                 </head>
+                                                                 <body>
                                                                  <div class='container'>
                                                                       <div class='header'>
-                                                                      <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
+                                                                           <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
                                                                       </div>
                                                                       <div class='content'>
-                                                                      <p>Dear " . $borrow_row['firstname'] . " ". $borrow_row['lastname'] . ",</p>
-                                                                      <p>Your borrowed book " . $borrow_row['title'] . " is overdue. Please return it as soon as possible.</p>
-                                                                      <p>Thank you!</p>
+                                                                           <p>Dear " . $borrow_row['firstname'] . " " . $borrow_row['lastname'] . ",</p>
+                                                                           <p>Your borrowed book " . $borrow_row['title'] . " is overdue. Please return it as soon as possible.</p>
+                                                                           <p>Thank you!</p>
                                                                       </div>
                                                                  </div>
-                                                            </body>
-                                                       </html>
-                                                       ";
-                                                       $mail->send();
-                                                            return true;
+                                                                 </body>
+                                                            </html>
+                                                            ";
+                                                            $mail->send();
                                                        } catch (Exception $e) {
                                                             error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-                                                            return false;
                                                        }
-                                             }
-							          ?>
-                                             <?php
-                                                       if(isset($user_id))
-                                                       {
-                                                       ?>
+                                                  }
+
+                                                  // Check for due date notifications
+                                                  if ($due_date - $current_date <= $one_day_seconds && !$borrow_row['date_returned']) {
+                                                       $mail = new PHPMailer(true);
+                                                       try {
+                                                            $mail->isSMTP();
+                                                            $mail->Host = 'smtp.gmail.com';
+                                                            $mail->SMTPAuth = true;
+                                                            $mail->Username = 'mcclearningresourcecenter@gmail.com';
+                                                            $mail->Password = 'qxbi jqnf hgfn lkih';
+                                                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                                            $mail->Port = 587;
+
+                                                            $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+                                                            $mail->addAddress($borrow_row['email']);
+
+                                                            $mail->isHTML(true);
+                                                            $mail->Subject = 'Book Due Date Reminder';
+                                                            $mail->Body = "
+                                                            <html>
+                                                                 <head>
+                                                                 <style>
+                                                                      body {
+                                                                           font-family: Arial, sans-serif;
+                                                                           background-color: #f4f4f4;
+                                                                           margin: 0;
+                                                                           padding: 0;
+                                                                      }
+                                                                      .container {
+                                                                           width: 80%;
+                                                                           margin: 20px auto;
+                                                                           padding: 20px;
+                                                                           background-color: #fff;
+                                                                           border-radius: 8px;
+                                                                           box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                                                      }
+                                                                      .header {
+                                                                           text-align: center;
+                                                                           padding-bottom: 20px;
+                                                                           border-bottom: 1px solid #ddd;
+                                                                      }
+                                                                      .content {
+                                                                           padding: 20px 0;
+                                                                      }
+                                                                 </style>
+                                                                 </head>
+                                                                 <body>
+                                                                 <div class='container'>
+                                                                      <div class='header'>
+                                                                           <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
+                                                                      </div>
+                                                                      <div class='content'>
+                                                                           <p>Dear " . $borrow_row['firstname'] . " " . $borrow_row['lastname'] . ",</p>
+                                                                           <p>This is a reminder that your borrowed book " . $borrow_row['title'] . " is due tomorrow. Please return it on time.</p>
+                                                                           <p>Thank you!</p>
+                                                                      </div>
+                                                                 </div>
+                                                                 </body>
+                                                            </html>
+                                                            ";
+                                                            $mail->send();
+                                                       } catch (Exception $e) {
+                                                            error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                                                       }
+                                                  }
+                                             ?>
+
                                              <tr>
-                                             <td style="text-align: center;">
-                                                  <?php echo $borrow_row['accession_number']; ?>
-                                             </td>
+                                                  <td style="text-align: center;">
+                                                       <?php echo $borrow_row['accession_number']; ?>
+                                                  </td>
                                                   <td>
                                                        <center>
                                                             <?php if($borrow_row['book_image'] != ""): ?>
-                                                            <img src="../uploads/books_img/<?php echo $borrow_row['book_image']; ?>"
-                                                                 alt="" width="80px" height="80px">
+                                                                 <img src="../uploads/books_img/<?php echo $borrow_row['book_image']; ?>" alt="" width="80px" height="80px">
                                                             <?php else: ?>
-                                                            <img src="../uploads/books_img/book_image.jpg" alt=""
-                                                                 width="80px" height="80px">
+                                                                 <img src="../uploads/books_img/book_image.jpg" alt="" width="80px" height="80px">
                                                             <?php endif; ?>
                                                        </center>
                                                   </td>
@@ -234,32 +283,26 @@ include('./includes/sidebar.php');
                                                        <?php echo $borrow_row['firstname']." ".$borrow_row['lastname']; ?>
                                                   </td>
                                                   <td style="text-transform: capitalize">
-                                                       <?php echo $borrow_row['title']; ?></td>
-                                                  <td><?php echo date("M d, Y",strtotime($borrow_row['date_borrowed'])); ?>
+                                                       <?php echo $borrow_row['title']; ?>
                                                   </td>
-                                                  <td><?php echo date("M d, Y",strtotime($borrow_row['due_date'])); ?>
+                                                  <td><?php echo date("M d, Y", strtotime($borrow_row['date_borrowed'])); ?></td>
+                                                  <td><?php echo date("M d, Y", strtotime($borrow_row['due_date'])); ?></td>
+                                                  <td><?php echo ($borrow_row['date_returned'] == "0000-00-00 00:00:00") ? "Pending" : date("M d, Y h:i:s a", strtotime($borrow_row['date_returned'])); ?></td>
+                                                  <td class="<?php echo $borrow_row['borrowed_status'] != 'borrowed' ? 'alert alert-success' : 'alert alert-danger'; ?>" style="text-transform: capitalize">
+                                                       <?php echo $borrow_row['borrowed_status']; ?>
                                                   </td>
-                                                  <td><?php echo ($borrow_row['date_returned'] == "0000-00-00 00:00:00") ? "Pending" : date("M d, Y h:m:s a",strtotime($borrow_row['date_returned'])); ?>
-                                                  </td>
-                                                  <?php
-									if ($borrow_row['borrowed_status'] != 'borrowed') {
-										echo "<td class='alert alert-success' style='text-transform: capitalize'>".$borrow_row['borrowed_status']."</td>";
-									} else {
-										echo "<td  class='alert alert-danger' style='text-transform: capitalize'>".$borrow_row['borrowed_status']."</td>";
-									}
-								?>
                                              </tr>
-                                             <?php } } 
-							if ($borrow_count <= 0){
-								echo '
-									<table style="float:right;">
-										<tr>
-											<td style="padding:10px;" class="alert alert-danger">No Books Borrowed at this Moment</td>
-										</tr>
-									</table>
-								';
-							} 							
-							?>
+                                             <?php } // End of while loop 
+
+                                             if ($borrow_count <= 0) {
+                                                  echo '
+                                                       <table style="float:right;">
+                                                            <tr>
+                                                                 <td style="padding:10px;" class="alert alert-danger">No Books Borrowed at this Moment</td>
+                                                            </tr>
+                                                       </table>
+                                                  ';
+                                             } ?>
                                         </tbody>
                                    </table>
                               </div>
