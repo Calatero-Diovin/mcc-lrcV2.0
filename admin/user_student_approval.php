@@ -3,7 +3,46 @@ include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php');
 ?>
+<!-- CSS -->
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
 
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
 <main id="main" class="main">
      <div class="pagetitle d-flex justify-content-between">
           <div>
@@ -52,11 +91,11 @@ include('./includes/sidebar.php');
                                                   <td>
                                                        <center>
                                                             <?php if($user['profile_image'] != ""): ?>
-                                                            <img src="../uploads/profile_images/<?php echo $user['profile_image']; ?>"
-                                                                 alt="image" width="120px" height="100px">
+                                                                 <img src="../uploads/profile_images/<?php echo $user['profile_image']; ?>"
+                                                                      alt="image" width="120px" height="100px" class="profile-image" onclick="openModal(this.src)">
                                                             <?php else: ?>
-                                                            <img src="uploads/books_img/book_image.jpg" alt=""
-                                                                 width="120px" height="100px">
+                                                                 <img src="uploads/books_img/book_image.jpg" alt=""
+                                                                      width="120px" height="100px" class="profile-image" onclick="openModal(this.src)">
                                                             <?php endif; ?>
                                                        </center>
                                                   </td>
@@ -102,6 +141,12 @@ include('./includes/sidebar.php');
      </section>
 </main>
 
+<!-- Modal -->
+<div id="imageModal" class="modal" style="display:none;">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
 <!-- Deny Reason Modal -->
 <div class="modal fade" id="denyReasonModal" tabindex="-1" aria-labelledby="denyReasonModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -126,6 +171,18 @@ include('./includes/sidebar.php');
         </div>
     </div>
 </div>
+
+<!-- JavaScript -->
+<script>
+function openModal(src) {
+    document.getElementById("imageModal").style.display = "block";
+    document.getElementById("modalImage").src = src;
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+</script>
 
 <?php 
 include('./includes/footer.php');
