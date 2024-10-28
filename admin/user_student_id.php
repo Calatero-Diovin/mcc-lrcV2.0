@@ -156,7 +156,7 @@ if ($row) {
     transition: 0.4s;
     width: 250px;
     height: 450px;
-    background: url('images/bg.png');
+    background: url('images/bg-back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
