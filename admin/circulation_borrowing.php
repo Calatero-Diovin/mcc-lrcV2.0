@@ -11,13 +11,8 @@ if (isset($_SESSION['auth_admin']['admin_id'])) {
 
 $student_id = $_GET['student_id'];
 
-$stmt = $con->prepare("SELECT * FROM user WHERE student_id_no = ?");
-$stmt->bind_param("s", $student_id); 
-$stmt->execute();
-$result = $stmt->get_result();
-$user_row = $result->fetch_array(MYSQLI_ASSOC);
-$stmt->close();
-
+$user_query = mysqli_query($con, "SELECT * FROM user WHERE student_id_no = '$student_id'");
+$user_row = mysqli_fetch_array($user_query);
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +45,7 @@ $stmt->close();
                             <form action="" method="POST">
                                 <div class="input-group mb-3 input-group-sm">
                                     <span class="input-group-text bg-primary text-white" id="basic-addon1">ACCESSION NO.</span>
-                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required oninput="sanitizeInput(this)">
+                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                 </div>
                             </form>
                         </div>
@@ -73,7 +68,7 @@ $stmt->close();
                         ?>
 
                         <div class="table-responsive">
-                        <table id="example" class="display nowrap" style="width:100%">
+                            <table class="table">
                                 <form method="POST" action="">
                                     <thead class="border-top border-dark border-opacity-25">
                                         <tr>
@@ -248,18 +243,20 @@ include('message.php');
 ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(7)'
-    }
-});
-});
+     // Add auto-increment ID to Books Table
+     let booksTable = document.querySelector('#myDataTable tbody');
+     let bookRows = booksTable.querySelectorAll('tr');
+     bookRows.forEach((row, index) => {
+          row.querySelector('.auto-id').textContent = index + 1;
+     });
 
-function sanitizeInput(input) {
-    // Remove any potential XSS tags from the input
-    input.value = input.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+     // Add auto-increment ID to Ebooks Table
+     let ebooksTable = document.querySelector('#myDataTable2 tbody');
+     let ebookRows = ebooksTable.querySelectorAll('tr');
+     ebookRows.forEach((row, index) => {
+          row.querySelector('.auto-id').textContent = index + 1;
+     });
+});
 </script>
 </body>
 </html>
