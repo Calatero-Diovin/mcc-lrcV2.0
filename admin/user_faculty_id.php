@@ -108,6 +108,7 @@ if ($row) {
   }
   body {
     background:cornflowerblue; /* Set the background of the body to white */
+    color: black;
   }
 
   #bg {
@@ -123,7 +124,7 @@ if ($row) {
     opacity: 0.88;
     font-family: sans-serif;
     transition: 0.4s;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-front.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -136,7 +137,7 @@ if ($row) {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-front.png');
     background-repeat: repeat-x;
     background-size: 250px 450px;
     opacity: 0.2;
@@ -153,7 +154,7 @@ if ($row) {
     transition: 0.4s;
     width: 250px;
     height: 450px;
-    background: url('images/bg-id.jpg');
+    background: url('images/bg-back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -174,10 +175,10 @@ if ($row) {
 </style>
 
 <script type="text/javascript">	
- 	window.print();
+  window.print();
   setTimeout(function(){
-    window.close()
-  },60000)
+  window.close()
+  },5000)
  </script>
 
 <div id="bg">
@@ -189,7 +190,7 @@ if ($row) {
                         <td>
                         <img src="assets/img/mcc-logo.png" alt="Avatar"  width='40px' height='40px' alt=''>
                         </td>
-                        <td><p style="font-size:10px;text-align:center;"><b>MADRIDEJOS COMMUNITY COLLEGE<br>LEARNING RESOURCE CENTER</b><br><small>BUNAKAN, MADRIDEJOS, CEBU</small></p></td>
+                        <td><p style="font-size:8px;text-align:center;"><b>MADRIDEJOS COMMUNITY COLLEGE<br>LEARNING RESOURCE CENTER</b><br><small><b>BUNAKAN, MADRIDEJOS, CEBU</b></small></p></td>
                         <td>
                         <img src="images/mcc-lrc.png" alt="Avatar"  width='40px' height='40px' alt=''>
                         </td>
@@ -201,36 +202,38 @@ if ($row) {
                 <?php      
                     if ($profile != "") {
                         //echo "<img src='../uploads/$profile' height='175px' width='200px' alt='' style='border: 2px solid black; border-radius: 60%;'>";
-                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 2px solid black; width: 150px; height: 150px;'>";
+                        echo "<img src='../uploads/profile_images/$profile' alt='' style='border: 4px solid #1076c1; width: 1.6in; height: 1.6in;overflow:hidden;position:absolute;left:0;right:0;top:90px;display:block;margin:0 auto;'>";
                         } else {
-                        echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 2px solid black; border-radius: 50%;'>";
+                        echo "<img src='assets/img/image.png' height='150px' width='150px' alt='' style='border: 4px solid #1176c2;'>";
                         }
                 ?> 
             </center> 
             <br>
             <div class="container" align="center">
-                <p style="font-size:20px;font-weight:bold;text-transform:capitalize;color:black;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
-                <p style="font-weight:bold;color:black;text-transform:capitalize;"><?php echo $type; ?></p>
+                <p style="font-size:13px;font-weight:bold;text-transform:uppercase;color:black;position:absolute;left:0;right:0;bottom:110px;"><?php if(isset($names)){ $namez=$names;echo$namez;} ?></p>
                 <br>
-            </div>
+                      </div>
+                      <div>
+                <p style="font-weight:bold;color:black;text-align:center;position:absolute;left:0;right:0;bottom:70px;font-size:11px;"><?php echo $type; ?></p>
+                </div>
             <div style="background-color:white;">
-                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;"><?php echo $course; ?></p>
+                <p style="font-size:30px;font-weight:bold;color:black;text-align:center;font-family:Georgia,serif;position:absolute;left:0;right:0;bottom:0;letter-spacing:2px;"><?php echo $course; ?></p>
             </div>
     </div>
 
     <div class="id-1">
-        <p class="text-end" style="font-size:10px;margin-top:15px;margin-right:7px;font-weight:bold;">Birthdate: <?php echo date('F j, Y', strtotime($bdate)); ?></p>
+        <p class="text-end" style="font-size:10px;margin-top:10px;margin-right:7px;font-weight:bold;">Birthdate: <?php echo date('F j, Y', strtotime($bdate)); ?></p>
         <br>
         <br>
         <center>
-            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="210px" height="180px" >
+            <img src="../qrcodes/<?php echo htmlspecialchars($qrcode); ?>" alt="Avatar" width="220px" height="200px" style="background-color:transparent;mix-blend-mode: multiply;margin-top:-48px;">
             <br>
             <br>
             <br>
                 <div class="container" align="center">
-                    <p style="color:black;">In case of emergency, please notify:</p>
-                    <p class="text-start" style="color:black;margin-left:15px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
-                    <p class="text-start" style="color:black;margin-left:15px;margin-top:-10px;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
+                    <p style="color:black;margin-top:-20px;">In case of emergency, please notify:</p>
+                    <p class="text-start" style="color:black;margin-top:-5px;margin-bottom:-2px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
+                    <p class="text-start" style="color:black;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
         </center>
                 </div>
     </div>
