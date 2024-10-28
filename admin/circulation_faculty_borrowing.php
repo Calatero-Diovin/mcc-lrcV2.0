@@ -44,7 +44,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                             <form action="" method="POST">
                                 <div class="input-group mb-3 input-group-sm">
                                     <span class="input-group-text bg-primary text-white" id="basic-addon1">ACCESSION NO.</span>
-                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required onblur="sanitizeInput(this)">
+                                    <input type="text" name="barcode" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                 </div>
                             </form>
                         </div>
@@ -66,10 +66,11 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                         ?>
 
                         <div class="table-responsive">
-                        <table id="example" class="display nowrap" style="width:100%">
+                            <table class="table">
                                 <form method="POST" action="">
                                     <thead class="border-top border-dark border-opacity-25">
                                         <tr>
+                                            <th>ID</th>
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>Author</th>
@@ -96,6 +97,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                                         <tr>
                                             <input type="hidden" name="faculty_id" value="<?php echo htmlspecialchars($faculty_row['faculty_id']); ?>">
                                             <input type="hidden" name="book_id" value="<?php echo htmlspecialchars($book_row['book_id']); ?>">
+                                            <td class="auto-id" style="text-align: center;"></td>
                                             <td>
                                                 <center>
                                                     <?php if (!empty($book_row['book_image'])): ?>
@@ -241,18 +243,20 @@ include('message.php');
 ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    new DataTable('#example', {
-    responsive: true,
-    rowReorder: {
-        selector: 'td:nth-child(2)'
-    }
-});
-});
+     // Add auto-increment ID to Books Table
+     let booksTable = document.querySelector('#myDataTable tbody');
+     let bookRows = booksTable.querySelectorAll('tr');
+     bookRows.forEach((row, index) => {
+          row.querySelector('.auto-id').textContent = index + 1;
+     });
 
-function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
-}
+     // Add auto-increment ID to Ebooks Table
+     let ebooksTable = document.querySelector('#myDataTable2 tbody');
+     let ebookRows = ebooksTable.querySelectorAll('tr');
+     ebookRows.forEach((row, index) => {
+          row.querySelector('.auto-id').textContent = index + 1;
+     });
+});
 </script>
 </body>
 </html>
