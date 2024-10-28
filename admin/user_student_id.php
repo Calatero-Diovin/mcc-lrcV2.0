@@ -234,7 +234,7 @@ if ($row) {
             <br>
                 <div class="container" align="center">
                     <p style="color:black;margin-top:-20px;">In case of emergency, please notify:</p>
-                    <p class="text-center" style="color:black;margin-top:20px;margin-bottom:-2px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
+                    <p class="text-center" style="color:black;margin-top:10px;margin-bottom:-2px;font-size:14px;font-weight:bold;"><?php echo $contact_person; ?></p>
                     <p class="text-center" style="color:black;font-size:14px;font-weight:bold;"><?php echo $person_cell_no; ?></p>
         </center>
                 </div>
