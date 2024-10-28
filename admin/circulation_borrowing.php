@@ -120,7 +120,7 @@ $stmt->close();
                                             <td><?php echo $book_row['copyright_date']; ?></td>
                                             <td><?php echo $book_row['publisher']; ?></td>
                                             <td><?php echo $book_row['barcode']; ?></td>
-                                            <td><button name="borrow" class="btn btn-primary"><i class="fa fa-check"></i> Borrow</button></td>
+                                            <td><button type="submit" name="borrow" class="btn btn-primary"><i class="fa fa-check"></i> Borrow</button></td>
                                         </tr>
                                         </tbody>
                                         <?php } } ?>
