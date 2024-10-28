@@ -1,29 +1,38 @@
 <?php
 include('authentication.php');
 
+// Ensure database connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
 // Fetch and sanitize GET parameter
-$id=intval($_GET['faculty_id']);
-$query=mysqli_query($con, "select * from faculty where faculty_id='$id'");
-$row = mysqli_fetch_assoc($query);
-$numb=mysqli_num_rows($query); 
+$id = intval($_GET['faculty_id']);
+
+// Prepare and execute query with parameter binding to prevent SQL injection
+$query = mysqli_prepare($con, "SELECT * FROM faculty WHERE faculty_id = ?");
+mysqli_stmt_bind_param($query, 'i', $id);
+mysqli_stmt_execute($query);
+$result = mysqli_stmt_get_result($query);
+
 // Check if record exists
+$row = mysqli_fetch_assoc($result);
+
 if ($row) {
     // Extract necessary data for printing
-    $names = $row['firstname'].' '.$row['lastname'];
-    $email = $row['email'];
-    $contact = $row['cell_no'];
-    $location_address = $row['address'];
-    $profile = $row['profile_image'];
-    $qrcode = $row['qr_code'];
-    $contact_person = $row['contact_person'];
-    $person_cell_no = $row['person_cell_no'];
-    $course = $row['course'];
-    $bdate = $row['birthdate'];
-    $type = $row['role_as'];
-
-    // Generate barcode
-    //$Bar = new Picqer\Barcode\BarcodeGeneratorHTML();
-    //$code = $Bar->getBarcode($serial, $Bar::TYPE_CODE_128);
+    $names = htmlspecialchars($row['firstname'] . ' ' . $row['lastname']);
+    $email = htmlspecialchars($row['email']);
+    $contact = htmlspecialchars($row['cell_no']);
+    $location_address = htmlspecialchars($row['address']);
+    $profile = htmlspecialchars($row['profile_image']);
+    $qrcode = htmlspecialchars($row['qr_code']);
+    $contact_person = htmlspecialchars($row['contact_person']);
+    $person_cell_no = htmlspecialchars($row['person_cell_no']);
+    $course = htmlspecialchars($row['course']);
+    $bdate = htmlspecialchars($row['birthdate']);
+    $type = htmlspecialchars($row['role_as']);
+} else {
+    die("No record found.");
 }
 ?>
 <!DOCTYPE html>
