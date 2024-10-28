@@ -65,7 +65,7 @@ include('./includes/sidebar.php');
   position: absolute;
   top: 15px;
   right: 35px;
-  color: #f1f1f1;
+  color: white;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
@@ -211,9 +211,8 @@ include('./includes/sidebar.php');
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-  <span class="close">X</span>
+  <span class="close">&times;</span>
   <img class="modal-content" id="img01">
-  <div id="caption"></div>
 </div>
 
 <script>
@@ -223,11 +222,9 @@ var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 var img = document.getElementById("myImg");
 var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
 img.onclick = function(){
   modal.style.display = "block";
   modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
 }
 
 // Get the <span> element that closes the modal
