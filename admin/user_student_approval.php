@@ -211,7 +211,7 @@ include('./includes/sidebar.php');
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-  <span class="close">&times;</span>
+  <span class="close">X</span>
   <img class="modal-content" id="img01">
   <div id="caption"></div>
 </div>
