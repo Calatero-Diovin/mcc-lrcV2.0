@@ -2,6 +2,14 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 ?>
 
 
