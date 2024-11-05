@@ -11,7 +11,7 @@ include('./includes/sidebar.php');
     th.multiline-title {
             white-space: normal;
             word-wrap: break-word;
-            max-width: 200px;
+            max-width: 100px;
             text-align: center;
         }
 </style>
