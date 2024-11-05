@@ -8,6 +8,12 @@ include('./includes/sidebar.php');
     #hover:hover {
         text-decoration: underline;
     }
+    th.multiline-title {
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 200px;
+            text-align: center;
+        }
 </style>
 
 <main id="main" class="main" data-aos="fade-down">
@@ -53,7 +59,7 @@ include('./includes/sidebar.php');
                                                     <th>ID</th>
                                                     <th style="display:none;"></th>
                                                     <th>Image</th>
-                                                    <th>Title</th>
+                                                    <th class="multiline-title">Title</th>
                                                     <th>Author</th>
                                                     <th>Copyright Date</th>
                                                     <th>Publisher</th>
