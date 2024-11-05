@@ -67,7 +67,7 @@ include('includes/navbar.php');
 
                     <!-- Grid column -->
                     <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-                        <a href="https://www.facebook.com/madridejoscommunitycollege" class="btn btn-outline-light btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
+                        <a href="https://web.facebook.com/MCCLRC" class="btn btn-outline-light btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
                         <a href="https://www.youtube.com/watch?v=bIzChSbj0OU" class="btn btn-outline-light btn-floating m-1" role="button"><i class="bi bi-youtube"></i></a>
                     </div>
                     <!-- Grid column -->

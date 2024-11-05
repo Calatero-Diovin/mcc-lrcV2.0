@@ -216,7 +216,7 @@ include('includes/navbar.php');
                          <!-- Grid column -->
                          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                               <!-- Facebook -->
-                              <a href="https://www.facebook.com/madridejoscommunitycollege"
+                              <a href="https://web.facebook.com/MCCLRC"
                                    class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
                                         class="bi bi-facebook"></i></a>
 
