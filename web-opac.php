@@ -86,7 +86,7 @@ include('admin/config/dbcon.php');
                   </div>
                   <div class="row mt-2">
                     <div class="col-lg-9 col-md-8">
-                      Call Number&nbsp;<?= htmlspecialchars($book['call_number']); ?>
+                      Call Number: &nbsp;<?= htmlspecialchars($book['call_number']); ?>
                     </div>
                   </div>
                 </div>
