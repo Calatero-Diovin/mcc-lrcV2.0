@@ -77,6 +77,10 @@ include('admin/config/dbcon.php');
                                                             <div class="col-lg-3 col-md-4 label fw-semibold">ISBN</div>
                                                             <div class="col-lg-9 col-md-8"><?= htmlspecialchars($book['isbn']) ?></div>
                                                         </div>
+                                                        <div class="row mt-2">
+                                                            <div class="col-lg-3 col-md-4 label fw-semibold">Call Number</div>
+                                                            <div class="col-lg-9 col-md-8"><?= htmlspecialchars($book['call_number']) ?></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
