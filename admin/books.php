@@ -9,9 +9,7 @@ include('./includes/sidebar.php');
         text-decoration: underline;
     }
     td.multiline-title {
-        max-width: 200px;        /* Set the maximum width */
-  word-wrap: break-word;   /* Break long words */
-  overflow-wrap: break-word;
+        hyphens: auto;
         }
 </style>
 
