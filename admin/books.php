@@ -9,9 +9,9 @@ include('./includes/sidebar.php');
         text-decoration: underline;
     }
     td.multiline-title {
-        white-space: normal;
-    word-wrap: break-word;
-    max-width: 250px;  /* Adjust as necessary */
+        max-width: 200px;        /* Set the maximum width */
+  word-wrap: break-word;   /* Break long words */
+  overflow-wrap: break-word;
         }
 </style>
 
