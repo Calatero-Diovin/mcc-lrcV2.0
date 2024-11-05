@@ -8,12 +8,6 @@ include('./includes/sidebar.php');
     #hover:hover {
         text-decoration: underline;
     }
-    .multiline-title {
-            white-space: normal;
-            word-wrap: break-word;
-            max-width: 100px;
-            text-align: center;
-        }
 </style>
 
 <main id="main" class="main" data-aos="fade-down">
@@ -59,7 +53,7 @@ include('./includes/sidebar.php');
                                                     <th>ID</th>
                                                     <th style="display:none;"></th>
                                                     <th>Image</th>
-                                                    <th>Title</th>
+                                                    <th class="multiline-title">Title</th>
                                                     <th>Author</th>
                                                     <th>Copyright Date</th>
                                                     <th>Publisher</th>
@@ -103,7 +97,7 @@ include('./includes/sidebar.php');
                         <?php endif; ?>
                     </center>
                 </td>
-                <td class="multiline-title"><?= htmlspecialchars($book['title']); ?></td>
+                <td><?= htmlspecialchars($book['title']); ?></td>
                 <td><?= htmlspecialchars($book['author']); ?></td>
                 <td><?= htmlspecialchars($book['copyright_date']); ?></td>
                 <td><?= htmlspecialchars($book['publisher']); ?></td>
