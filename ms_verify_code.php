@@ -79,12 +79,12 @@ if (isset($_POST['registration_link'])) {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'mcclearningresourcecenter@gmail.com'; // Use environment variable
-            $mail->Password   = 'qxbi jqnf hgfn lkih'; // Use environment variable
+            $mail->Username   = 'mcclearningresourcecenter2.0@gmail.com'; // Use environment variable
+            $mail->Password   = 'mbuq bvbh wtst tnsr'; // Use environment variable
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom('mcclearningresourcecenter@gmail.com', 'MCC Learning Resource Center');
+            $mail->setFrom('mcclearningresourcecenter2.0@gmail.com', 'MCC Learning Resource Center');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
