@@ -47,7 +47,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Books Table -->
-                                        <table id="myDataTable" class="table table-bordered table-striped table-sm">
+                                        <table id="example" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -141,7 +141,7 @@ include('./includes/sidebar.php');
                                     </div>
                                     <div class="table-responsive">
                                         <!-- Ebooks Table -->
-                                        <table id="myDataTable2" class="table table-bordered table-striped table-sm">
+                                        <table id="example2" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Book Image</th>
@@ -229,19 +229,32 @@ include('../message.php');
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Add auto-increment ID to Books Table
-    let booksTable = document.querySelector('#myDataTable tbody');
-    let bookRows = booksTable.querySelectorAll('tr');
-    bookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
+    // Function to initialize DataTable and add auto-increment ID
+    function initializeTable(tableSelector, columnDefs) {
+        let table = document.querySelector(tableSelector);
+        if (table) {
+            let tbody = table.querySelector('tbody');
+            let rows = tbody.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                let autoIdCell = row.querySelector('.auto-id');
+                if (autoIdCell) {
+                    autoIdCell.textContent = index + 1;
+                }
+            });
 
-    // Add auto-increment ID to Ebooks Table
-    let ebooksTable = document.querySelector('#myDataTable2 tbody');
-    let ebookRows = ebooksTable.querySelectorAll('tr');
-    ebookRows.forEach((row, index) => {
-        row.querySelector('.auto-id').textContent = index + 1;
-    });
+            new DataTable('#example');
+        }
+    }
+
+    // Initialize both tables with their specific configurations
+    initializeTable('#example', [
+        {
+            targets: 1,
+            visible: false
+        }
+    ]);
+    
+    initializeTable('#example2', []); // No columnDefs for the second table
 });
 </script>
 
