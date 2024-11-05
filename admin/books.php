@@ -8,7 +8,7 @@ include('./includes/sidebar.php');
     #hover:hover {
         text-decoration: underline;
     }
-    td.multiline-title {
+    .multiline-title {
             white-space: normal;
             word-wrap: break-word;
             max-width: 100px;
