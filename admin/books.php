@@ -247,12 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initialize both tables with their specific configurations
-    initializeTable('#example', [
-        {
-            targets: 1,
-            visible: false
-        }
-    ]);
+    initializeTable('#example', []);
     
     initializeTable('#example2', []); // No columnDefs for the second table
 });
