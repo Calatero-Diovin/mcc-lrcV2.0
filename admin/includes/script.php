@@ -7,9 +7,6 @@
 <!-- JQuery Datatables -->
 <script src="assets/js/pdfmake.min.js"></script>
 <script src="assets/js/vfs_fonts.js"></script>
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap5.min.js"></script>
-<script src="assets/js/datatables.min.js"></script>
 
 <!-- Chart.js -->
 <script src="assets/js/chart.min.js"></script>
