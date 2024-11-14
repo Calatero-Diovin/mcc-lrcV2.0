@@ -17,13 +17,10 @@ $code_stmt = $con->prepare($code_query);
 $code_stmt->bind_param("s", $code);
 $code_stmt->execute();
 $code_result = $code_stmt->get_result();
-
-if ($code_result->num_rows > 0){
-
+if ($code_result->num_rows > 0) {
     $code_row = $code_result->fetch_assoc();
-    $username = $code_row['username'];
 } else {
     header("HTTP/1.0 404 Not Found");
-    exit;
+    exit; // Ensure no further code is executed
 }
 ?>
