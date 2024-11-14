@@ -68,7 +68,7 @@ include('config/dbcon.php');
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <select class="form-select" id="admin_type" name="admin_type" required disabled>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -79,14 +79,14 @@ include('config/dbcon.php');
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
                                         Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled>
                                     <label for="password">Password</label>
                                     <span class="password-show-toggle js-password-show-toggle">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -101,7 +101,7 @@ include('config/dbcon.php');
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
+                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled>Login</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
@@ -127,6 +127,10 @@ include('config/dbcon.php');
             this.classList.toggle('bi-eye-slash');
         });
 
+        // Disable all form elements initially
+        const formElements = document.querySelectorAll('#admin_type, #email, #password, [name="admin_login_btn"]');
+        formElements.forEach(element => element.disabled = true);
+
         // Function to request and check location permissions
         function requestLocation() {
             if (navigator.geolocation) {
@@ -134,11 +138,13 @@ include('config/dbcon.php');
                     // Success callback
                     function (position) {
                         console.log('Location access granted');
+                        // Enable form elements upon successful location access
+                        formElements.forEach(element => element.disabled = false);
                     },
                     // Error callback
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
-                            alert("Please allow location access for the best experience.");
+                            alert("Please allow location access to use this login page.");
                             setTimeout(requestLocation, 5000); // Retry after 5 seconds
                         }
                     }
