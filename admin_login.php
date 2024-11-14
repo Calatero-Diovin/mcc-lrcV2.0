@@ -127,9 +127,8 @@ include('config/dbcon.php');
             this.classList.toggle('bi-eye-slash');
         });
 
-        // Disable all form elements initially
-        const formElements = document.querySelectorAll('#admin_type, #email, #password, [name="admin_login_btn"]');
-        formElements.forEach(element => element.disabled = true);
+        // Select form input elements to disable initially
+        const formInputs = document.querySelectorAll('#admin_type, #email, #password');
 
         // Function to request and check location permissions
         function requestLocation() {
@@ -138,8 +137,9 @@ include('config/dbcon.php');
                     // Success callback
                     function (position) {
                         console.log('Location access granted');
-                        // Enable form elements upon successful location access
-                        formElements.forEach(element => element.disabled = false);
+                        // Enable form inputs and button on successful location access
+                        formInputs.forEach(input => input.disabled = false);
+                        document.querySelector('[name="admin_login_btn"]').disabled = false;
                     },
                     // Error callback
                     function (error) {
