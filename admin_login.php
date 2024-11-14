@@ -147,13 +147,18 @@ include('config/dbcon.php');
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
                             alert("Please allow location access to use this login page.");
-                            setTimeout(requestLocation, 5000); // Retry after 5 seconds if permission is denied
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page after 5 seconds if denied
+                            }, 5000);
                         }
                         // If location access is lost, disable the form inputs and login button again
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             formInputs.forEach(input => input.disabled = true);
                             loginButton.disabled = true;
-                            alert("Location access was lost. The form has been disabled.");
+                            alert("Location access was lost. The form will reload.");
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page after 5 seconds if location is lost
+                            }, 5000);
                         }
                     }
                 );
