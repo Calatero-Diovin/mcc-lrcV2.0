@@ -59,7 +59,7 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
-    $verification_code = password_hash(rand(), PASSWORD_ARGON2I);
+    $verification_code = password_hash(rand(), PASSWORD_BCRYPT);
 
     $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
     if (!$stmt) {
