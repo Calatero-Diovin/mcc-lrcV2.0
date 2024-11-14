@@ -40,12 +40,12 @@ include('admin/config/dbcon.php');
                               href=".">Home</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link  text-white <?=$page == 'web-opac' ? 'active': '' ?> fw-semibold"
-                              href="web-opac">OPAC</a>
+                         <a class="nav-link  text-white <?=$page == 'web-opac.php' ? 'active': '' ?> fw-semibold"
+                              href="web-opac.php">OPAC</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link  text-white <?=$page == 'about' ? 'active': '' ?> fw-semibold"
-                              href="about">About</a>
+                         <a class="nav-link  text-white <?=$page == 'about.php' ? 'active': '' ?> fw-semibold"
+                              href="about.php">About</a>
                     </li>
                     <?php endif; ?>
                     <?php if(isset($_SESSION['auth_stud'])) :?>
@@ -76,10 +76,10 @@ include('admin/config/dbcon.php');
                     </li>
                     <?php else :?>
                     <li class="nav-item">
-                         <a href="login" class="nav-link text-white fw-semibold">Login</a>
+                         <a href="login.php" class="nav-link text-white fw-semibold">Login</a>
                     </li>
                     <li class="nav-item">
-                         <a href="ms_verify"
+                         <a href="ms_verify.php"
                               class="nav-link text-white bg-info px-3 fw-semibold rounded-pill">Signup</a>
                     </li>
                     <?php endif; ?>
