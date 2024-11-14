@@ -44,7 +44,7 @@ include('./includes/sidebar.php');
                                 <div class="tab-pane fade show active" id="books-tab-pane">
                                     <div class="d-flex justify-content-end my-2">
                                         <!-- Add Book Button -->
-                                        <a href="book_add" class="btn btn-primary">
+                                        <a href="book_add.php" class="btn btn-primary">
                                             <i class="bi bi-journal-plus"></i> Add Book
                                         </a>
                                     </div>
@@ -106,18 +106,18 @@ include('./includes/sidebar.php');
                 <td><?= htmlspecialchars($book['publisher']); ?></td>
                 <td><?= htmlspecialchars($book['call_number']); ?></td>
                 <td>
-                    <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
+                    <a href="book_views.php?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
                         <?= htmlspecialchars($book['available_count']); ?> of <?= htmlspecialchars($book['copy_count']); ?> available
                     </a>
                 </td>
                 <td class="justify-content-center">
                     <div class="btn-group" style="background: #DFF6FF;">
                         <!-- View Book Action -->
-                        <a href="book_views?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
+                        <a href="book_views.php?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
                             <i class="bi bi-eye-fill"></i>
                         </a>
                         <!-- Edit Book Action -->
-                        <a href="book_edit?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
+                        <a href="book_edit.php?title=<?= urlencode($book['title']); ?>&copyright_date=<?= urlencode($book['copyright_date']); ?>&author=<?= urlencode($book['author']); ?>&isbn=<?= urlencode($book['isbn']); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <!-- Delete Book Action -->

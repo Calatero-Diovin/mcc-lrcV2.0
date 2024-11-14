@@ -15,7 +15,7 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
     $minutes_remaining = ceil($lockout_time_remaining / 60);
     $_SESSION['status'] = "Too many failed attempts. Please try again in $minutes_remaining minute(s).";
     $_SESSION['status_code'] = "error";
-    header("Location: login");
+    header("Location: login.php");
     exit(0);
 }
 
@@ -32,7 +32,7 @@ if (isset($_POST['login_btn'])) {
     } else {
         $_SESSION['status'] = "Invalid role specified";
         $_SESSION['status_code'] = "warning";
-        header("Location: login");
+        header("Location: login.php");
         exit(0);
     }
 
@@ -112,12 +112,12 @@ if (isset($_POST['login_btn'])) {
         $_SESSION['status'] = "Database error: Could not prepare statement";
         $_SESSION['status_code'] = "error";
     }
-    header("Location: login");
+    header("Location: login.php");
     exit(0);
 } else {
     $_SESSION['status'] = "You are not allowed to access this file";
     $_SESSION['status_code'] = "warning";
-    header("Location: login");
+    header("Location: login.php");
     exit(0);
 }
 ?>

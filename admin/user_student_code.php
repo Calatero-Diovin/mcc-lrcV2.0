@@ -41,7 +41,7 @@ if (isset($_POST['deny'])) {
     if (empty($deny_reason) || strlen($deny_reason) > 255) {
         $_SESSION['status'] = 'Invalid reason provided.';
         $_SESSION['status_code'] = "error";
-        header("Location: user_student_approval");
+        header("Location: user_student_approval.php");
         exit(0);
     }
 
@@ -153,7 +153,7 @@ if (isset($_POST['deny'])) {
     }
 
     // Redirect at the end
-    header("Location: user_student_approval");
+    header("Location: user_student_approval.php");
     exit(0);
 }
 
@@ -221,7 +221,7 @@ if(isset($_POST['approved'])) {
                         <h1 style='color:#198754;text-align:center;'>Your Account has been Approved.</h1>
                         <p>Dear Student,</p>
                         <p>Your MCC-LRC account registration has been approved. You can now log in to your account.</p>
-                        <p><a  style='color: white;' href='http://mcc-lrc.com/login' class='button'>Login</a></p>
+                        <p><a  style='color: white;' href='http://mcc-lrc.com/login.php' class='button'>Login</a></p>
                         <p>Thank you.</p>
                     </div>
                 </div>
@@ -232,12 +232,12 @@ if(isset($_POST['approved'])) {
 
         $_SESSION['status'] = 'Student approved successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: user_student_approval");
+        header("Location: user_student_approval.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Student not approved';
         $_SESSION['status_code'] = "error";
-        header("Location: user_student_approval");
+        header("Location: user_student_approval.php");
         exit(0);
     }
 }
@@ -316,12 +316,12 @@ if(isset($_POST['block_student'])) {
 
         $_SESSION['status'] = "Student has been blocked successfully.";
         $_SESSION['status_code'] = "success";
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     }
 }
@@ -400,12 +400,12 @@ if(isset($_POST['unblock_student'])) {
 
         $_SESSION['status'] = "Student has been unblocked successfully.";
         $_SESSION['status_code'] = "success";
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     }
 }
@@ -512,12 +512,12 @@ if (isset($_POST['delete_student_id'])) {
             $_SESSION['status_code'] = "error";
         }
 
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Student Not Found';
         $_SESSION['status_code'] = "error";
-        header("Location: user_student");
+        header("Location: user_student.php");
         exit(0);
     }
 }
@@ -534,7 +534,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_query($con, $sql)) {
             $_SESSION['status'] = "Updated successfully.";
             $_SESSION['status_code'] = "success";
-            header('Location: user_student');
+            header('Location: user_student.php');
             exit();
         } else {
             echo "Error updating record: " . mysqli_error($con);

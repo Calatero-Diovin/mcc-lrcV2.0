@@ -17,20 +17,20 @@ if (isset($_GET['title'], $_GET['copyright_date'], $_GET['author'], $_GET['isbn'
         // Redirect with success message
         $_SESSION['status'] = 'Book deleted successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: books");
+        header("Location: books.php");
         exit(0);
     } else {
         // Redirect with error message
         $_SESSION['status'] = 'Error deleting book: ' . mysqli_error($con);
         $_SESSION['status_code'] = "error";
-        header("Location: books");
+        header("Location: books.php");
         exit(0);
     }
 } else {
     // Redirect if parameters are missing
     $_SESSION['status'] = 'Missing parameters';
     $_SESSION['status_code'] = "error";
-    header("Location: books");
+    header("Location: books.php");
     exit(0);
 }
 ?>

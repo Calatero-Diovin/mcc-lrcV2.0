@@ -89,7 +89,7 @@
                         <hr class="dropdown-divider" />
                     </li>
                     <li class="notification-item">
-                    <a href="user_student_approval" style="text-decoration:none;font-size:13px;margin-left:10px;">
+                    <a href="user_student_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
                         <div>
                             <h4>Pending Approvals</h4>
                             <p>You have <span><?=$pendingCount;?></span> pending approval(s).</p>
@@ -101,7 +101,7 @@
                     ?>
                     <li style="border-top: 1px solid skyblue;">
                         <center>
-                            <a href="hold_list" style="text-decoration:underline;font-size:13px;margin-left:10px;">Show all notifications</a>
+                            <a href="hold_list.php" style="text-decoration:underline;font-size:13px;margin-left:10px;">Show all notifications</a>
                         </center>
                     </li>
                 </ul>
@@ -123,25 +123,25 @@
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="admin_profile">
+                        <a class="dropdown-item d-flex align-items-center" href="admin_profile.php">
                             <i class="bi bi-person"></i> <span>My Profile</span>
                         </a>
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="account_settings">
+                        <a class="dropdown-item d-flex align-items-center" href="account_settings.php">
                             <i class="bi bi-gear"></i> <span>Account Settings</span>
                         </a>
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="admin">
+                        <a class="dropdown-item d-flex align-items-center" href="admin.php">
                             <i class="bi bi-person-workspace"></i><span>Admin</span>
                         </a>
                     </li>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="circulation_settings">
+                        <a class="dropdown-item d-flex align-items-center" href="circulation_settings.php">
                             <i class="bi bi-journal-album"></i><span>Circulation Settings</span>
                         </a>
                     </li>

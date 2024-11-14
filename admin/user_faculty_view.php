@@ -9,15 +9,15 @@ include('includes/sidebar.php');
                <h1>View Faculty and Staff</h1>
                <nav>
                     <ol class="breadcrumb">
-                         <li class="breadcrumb-item"><a href="users">Users</a></li>
-                         <li class="breadcrumb-item"><a href="user_faculty">Faculty & Staff</a></li>
+                         <li class="breadcrumb-item"><a href="users.php">Users</a></li>
+                         <li class="breadcrumb-item"><a href="user_faculty.php">Faculty & Staff</a></li>
                          <li class="breadcrumb-item active">View Faculty & Staff</li>
                     </ol>
 
                </nav>
           </div>
           <div>
-               <a href="user_faculty" class="btn btn-primary">Back</a>
+               <a href="user_faculty.php" class="btn btn-primary">Back</a>
           </div>
 
      </div>

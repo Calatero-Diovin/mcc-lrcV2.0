@@ -29,8 +29,8 @@ $faculty_row = mysqli_fetch_array($faculty_query);
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href=".">Home</a></li>
-                <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
-                <li class="breadcrumb-item"><a href="circulation_faculty_borrow">Faculty Staff Borrow Book</a></li>
+                <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
+                <li class="breadcrumb-item"><a href="circulation_faculty_borrow.php">Faculty Staff Borrow Book</a></li>
                 <li class="breadcrumb-item active">Borrow Book</li>
             </ol>
         </nav>
@@ -165,7 +165,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                                                     text: 'You have already borrowed this book!',
                                                     confirmButtonText: 'OK'
                                                 }).then(() => {
-                                                    window.location = 'circulation_faculty_borrowing?firstname=" . urlencode($firstname) . "';
+                                                    window.location = 'circulation_faculty_borrowing.php?firstname=" . urlencode($firstname) . "';
                                                 });
                                             </script>";
                                         } else {
@@ -186,7 +186,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                                                         text: 'You are allowed up to " . $allowed['qntty_books'] . " books!',
                                                         confirmButtonText: 'OK'
                                                     }).then(() => {
-                                                        window.location = 'circulation_faculty_borrowing?firstname=" . urlencode($firstname) . "';
+                                                        window.location = 'circulation_faculty_borrowing.php?firstname=" . urlencode($firstname) . "';
                                                     });
                                                 </script>";
                                             } elseif ($bookCount['book_count'] == 1) {
@@ -197,7 +197,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                                                         text: 'This book has already been borrowed!',
                                                         confirmButtonText: 'OK'
                                                     }).then(() => {
-                                                        window.location = 'circulation_faculty_borrowing?firstname=" . urlencode($firstname) . "';
+                                                        window.location = 'circulation_faculty_borrowing.php?firstname=" . urlencode($firstname) . "';
                                                     });
                                                 </script>";
                                             } else {
@@ -217,7 +217,7 @@ $faculty_row = mysqli_fetch_array($faculty_query);
                                                         text: 'Book Borrowed Successfully',
                                                         confirmButtonText: 'OK'
                                                     }).then(() => {
-                                                        window.location = 'circulation_faculty_borrowing?firstname=" . urlencode($firstname) . "';
+                                                        window.location = 'circulation_faculty_borrowing.php?firstname=" . urlencode($firstname) . "';
                                                     });
                                                 </script>";
                                             }

@@ -18,17 +18,17 @@ include('admin/config/dbcon.php');
                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-pills nav-justified">
                     <?php if(isset($_SESSION['auth_stud'])) :?>
                     <li class="nav-item">
-                         <a class="nav-link text-white <?=$page == 'index' || $page == 'book_details' ? 'active': '' ?> fw-semibold"
-                              href="index">Home</a>
+                         <a class="nav-link text-white <?=$page == 'index.php' || $page == 'book_details' ? 'active': '' ?> fw-semibold"
+                              href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link text-white <?=$page == 'ebook' ? 'active': '' ?> fw-semibold"
-                              href="ebook">Ebooks</a>
+                         <a class="nav-link text-white <?=$page == 'ebook.php' ? 'active': '' ?> fw-semibold"
+                              href="ebook.php">Ebooks</a>
                     </li>
 
                     <li class="nav-item">
-                         <a class="nav-link text-white <?=$page == 'notification' ? 'active': '' ?> fw-semibold"
-                              href="notification">Notification</a>
+                         <a class="nav-link text-white <?=$page == 'notification.php' ? 'active': '' ?> fw-semibold"
+                              href="notification.php">Notification</a>
                     </li>
 
 
@@ -67,7 +67,7 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <form action="allcode" method="POST">
+                                   <form action="allcode.php" method="POST">
                                         <button type="submit" name="logout_btn" class="dropdown-item"><i
                                                   class="bi bi-box-arrow-right"></i> Logout</button>
                                    </form>

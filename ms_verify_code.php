@@ -18,7 +18,7 @@ if (isset($_POST['registration_link'])) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['status'] = "Invalid Email: Please enter a valid MS 365 email address.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -26,7 +26,7 @@ if (isset($_POST['registration_link'])) {
     if ($domain !== 'mcclawis.edu.ph') {
         $_SESSION['status'] = "Invalid Domain: Please enter an email address with the mcclawis.edu.ph domain.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -35,7 +35,7 @@ if (isset($_POST['registration_link'])) {
         error_log("MySQL prepare error: " . $con->error);
         $_SESSION['status'] = "Database error. Please try again later.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -48,14 +48,14 @@ if (isset($_POST['registration_link'])) {
     if ($used === null) {
         $_SESSION['status'] = "Email not found. Please visit the BSIT office to get MS365 Account.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
     if ($used == 1) {
         $_SESSION['status'] = "This email has already been used.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -66,7 +66,7 @@ if (isset($_POST['registration_link'])) {
         error_log("MySQL prepare error: " . $con->error);
         $_SESSION['status'] = "Database error. Please try again later.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -137,7 +137,7 @@ if (isset($_POST['registration_link'])) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>Please click the button below to create a MCC-LRC Account:</p>
-                        <p><a style='color: white;' href='http://mcc-lrc.com/signup?code=$verification_code' class='button'>Register</a></p>
+                        <p><a style='color: white;' href='http://mcc-lrc.com/signup.php?code=$verification_code' class='button'>Register</a></p>
                         <p>If you did not request this registration, please ignore this email.</p>
                     </div>
                 </div>
@@ -148,20 +148,20 @@ if (isset($_POST['registration_link'])) {
             $mail->send();
             $_SESSION['status'] = "Registration link sent. Please check your email on Outlook.";
             $_SESSION['status_code'] = "success";
-            header("Location: ms_verify");
+            header("Location: ms_verify.php");
             exit(0);
         } catch (Exception $e) {
             error_log("Mailer Error: " . $mail->ErrorInfo);
             $_SESSION['status'] = "Unable to send the registration link at this moment.";
             $_SESSION['status_code'] = "error";
-            header("Location: ms_verify");
+            header("Location: ms_verify.php");
             exit(0);
         }
     } else {
         error_log("MySQL execute error: " . $stmt->error);
         $_SESSION['status'] = "Database error. Please try again later.";
         $_SESSION['status_code'] = "error";
-        header("Location: ms_verify");
+        header("Location: ms_verify.php");
         exit(0);
     }
 
@@ -170,7 +170,7 @@ if (isset($_POST['registration_link'])) {
 } else {
     $_SESSION['status'] = "Invalid request.";
     $_SESSION['status_code'] = "error";
-    header("Location: ms_verify");
+    header("Location: ms_verify.php");
     exit(0);
 }
 

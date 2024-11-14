@@ -58,7 +58,7 @@ if (isset($_POST['delete_book'])) {
                 mysqli_commit($con);
                 $_SESSION['status'] = "Book accession number '$accession_number' deleted successfully";
                 $_SESSION['status_code'] = "success";
-                header("Location: book_views?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&tab=copies");
+                header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&tab=copies");
                 exit(0);
             } else {
                 throw new Exception("Failed to delete book accession number '$accession_number'");
@@ -68,13 +68,13 @@ if (isset($_POST['delete_book'])) {
             mysqli_rollback($con);
             $_SESSION['status'] = $e->getMessage();
             $_SESSION['status_code'] = "error";
-            header("Location: book_views?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&author=" . urlencode($author) . "&isbn=" . urlencode($isbn) . "&tab=copies");
+            header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&author=" . urlencode($author) . "&isbn=" . urlencode($isbn) . "&tab=copies");
             exit(0);
         }
     } else {
         $_SESSION['status'] = "No book found with accession number '$accession_number'";
         $_SESSION['status_code'] = "warning";
-        header("Location: book_views?tab=copies");
+        header("Location: book_views.php?tab=copies");
         exit(0);
     }
 }
@@ -129,12 +129,12 @@ if (isset($_POST['update_book'])) {
 
         $_SESSION['status'] = 'Book Updated successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: books");
+        header("Location: books.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Book not Updated';
         $_SESSION['status_code'] = "error";
-        header("Location: books");
+        header("Location: books.php");
         exit(0);
     }
 }
@@ -176,7 +176,7 @@ if (isset($_POST['update_accession_number'])) {
             }
         }
 
-        header("Location: book_views?title=" . urlencode($title) . "&copyright_date=". urlencode($copyright_date) . "&author=". urlencode($author) . "&isbn=". urlencode($isbn) . "&tab=copies");
+        header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=". urlencode($copyright_date) . "&author=". urlencode($author) . "&isbn=". urlencode($isbn) . "&tab=copies");
         exit();
     }
 }
@@ -203,7 +203,7 @@ if (isset($_POST['add_book'])) {
     if ($copyright_date > $currentYear) {
         $_SESSION['status'] = "Year cannot be greater than the current year.";
         $_SESSION['status_code'] = "warning";
-        header("Location: book_add");
+        header("Location: book_add.php");
         exit(0);
     }
 
@@ -229,19 +229,19 @@ if (isset($_POST['add_book'])) {
                 } else {
                     $_SESSION['status'] = "Your file is too large.";
                     $_SESSION['status_code'] = "warning";
-                    header("Location: book_add");
+                    header("Location: book_add.php");
                     exit(0);
                 }
             } else {
                 $_SESSION['status'] = "There was an error uploading your file.";
                 $_SESSION['status_code'] = "error";
-                header("Location: book_add");
+                header("Location: book_add.php");
                 exit(0);
             }
         } else {
             $_SESSION['status'] = "You cannot upload files of this type.";
             $_SESSION['status_code'] = "warning";
-            header("Location: book_add");
+            header("Location: book_add.php");
             exit(0);
         }
     } else {
@@ -269,7 +269,7 @@ if (isset($_POST['add_book'])) {
             if ($count > 0) {
                 $_SESSION['status'] = "Accession number " . $accession_number . " already exists.";
                 $_SESSION['status_code'] = "error";
-                header("Location: book_add");
+                header("Location: book_add.php");
                 exit(0);
             }
         }
@@ -278,7 +278,7 @@ if (isset($_POST['add_book'])) {
     } else {
         $_SESSION['status'] = "Error preparing the statement: " . mysqli_error($con);
         $_SESSION['status_code'] = "error";
-        header("Location: book_add");
+        header("Location: book_add.php");
         exit(0);
     }
 
@@ -305,12 +305,12 @@ if (isset($_POST['add_book'])) {
 
         $_SESSION['status'] = "Book(s) added successfully.";
         $_SESSION['status_code'] = "success";
-        header("Location: books");
+        header("Location: books.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Error preparing the statement: " . mysqli_error($con);
         $_SESSION['status_code'] = "error";
-        header("Location: book_add");
+        header("Location: book_add.php");
         exit(0);
     }
 }

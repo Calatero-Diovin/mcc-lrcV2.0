@@ -16,7 +16,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item">Admin</li>
+                    <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                </ol>
           </nav>
@@ -37,7 +37,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                    // Handle case where no admin is found
                    $_SESSION['status'] = 'Admin not found';
                    $_SESSION['status_code'] = "error";
-                   header("Location: admin_profile");
+                   header("Location: admin_profile.php");
                    exit(0);
                }
                 

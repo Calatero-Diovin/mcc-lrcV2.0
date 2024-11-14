@@ -21,7 +21,7 @@ include('./includes/sidebar.php');
                <div class="col-lg-12">
                     <div class="card">
                          <div class="card-header d-flex justify-content-end">
-                              <a href="web_opac_add" class="btn btn-primary"><i class="bi bi-journal-plus"></i>
+                              <a href="web_opac_add.php" class="btn btn-primary"><i class="bi bi-journal-plus"></i>
                                    Upload Book</a>
                          </div>
                          <div class="card-body">
@@ -67,7 +67,7 @@ include('./includes/sidebar.php');
                                                   <td class=" justify-content-center">
                                                        <div class="btn-group" style="background: #DFF6FF;  ">
                                                             <!-- View Book Action-->
-                                                            <a href="web_opac_view?id=<?=$book['web_opac_id']; ?>"
+                                                            <a href="web_opac_view.php?id=<?=$book['web_opac_id']; ?>"
                                                                  name="view_book"
                                                                  class="viewweb_opacBtn btn btn-sm  border text-primary"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -75,7 +75,7 @@ include('./includes/sidebar.php');
                                                                  <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                             <!-- Edit web_opac Action-->
-                                                            <a href="web_opac_edit?id=<?= $book['web_opac_id']; ?>"
+                                                            <a href="web_opac_edit.php?id=<?= $book['web_opac_id']; ?>"
                                                                  name="update_book"
                                                                  class="btn btn-sm  border text-success"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"

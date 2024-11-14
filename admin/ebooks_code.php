@@ -29,14 +29,14 @@ if(isset($_POST['delete_book']))
 
           $_SESSION['status'] = 'Book Deleted successfully';
           $_SESSION['status_code'] = "success";
-          header("Location: books");
+          header("Location: books.php");
           exit(0);
      }
      else
      {
           $_SESSION['status'] = 'Book not Deleted';
           $_SESSION['status_code'] = "error";
-          header("Location: books");
+          header("Location: books.php");
           exit(0);
      }
 }
@@ -96,14 +96,14 @@ if(isset($_POST['update_book']))
 
           $_SESSION['status'] = 'Book Updated successfully';
           $_SESSION['status_code'] = "success";
-          header("Location: books");
+          header("Location: books.php");
           exit(0);
      }
      else
      {
           $_SESSION['status'] = 'Book not Updated';
           $_SESSION['status_code'] = "error";
-          header("Location: books");
+          header("Location: books.php");
           exit(0);
      }
      
@@ -144,14 +144,14 @@ if(isset($_POST['upload_book']))
      
                $_SESSION['status'] = 'Book Added successfully';
                $_SESSION['status_code'] = "success";
-               header("Location: books");
+               header("Location: books.php");
                exit(0);
           }
           else
           {
                $_SESSION['status'] = 'Book not Added';
                $_SESSION['status_code'] = "error";
-               header("Location: books");
+               header("Location: books.php");
                exit(0);
           }
      }
@@ -168,14 +168,14 @@ if(isset($_POST['upload_book']))
      
                $_SESSION['status'] = 'Book Added successfully';
                $_SESSION['status_code'] = "success";
-               header("Location: books");
+               header("Location: books.php");
                exit(0);
           }
           else
           {
                $_SESSION['status'] = 'Book not Added';
                $_SESSION['status_code'] = "error";
-               header("Location: books");
+               header("Location: books.php");
                exit(0);
           }
      }

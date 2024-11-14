@@ -12,7 +12,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
+                    <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
                     <li class="breadcrumb-item active">Student Return Book</li>
                </ol>
           </nav>
@@ -62,7 +62,7 @@ include('./includes/sidebar.php');
                                         {
                                              // echo $row['student_id_no'];
                                              $student_id = $_GET['student_id_no'];
-                                                  echo ('<script> location.href="circulation_returning?student_id='.$student_id.'";</script');
+                                                  echo ('<script> location.href="circulation_returning.php?student_id='.$student_id.'";</script');
                                              
                                         }
                                    }

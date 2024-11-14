@@ -50,17 +50,17 @@ include('./includes/sidebar.php');
                                 if (mysqli_num_rows($query_run_user) > 0) {
                                     $row = mysqli_fetch_assoc($query_run_user);
                                     $user_id = $row['user_id'];
-                                    echo '<script> location.href="hold_view?id='.$user_id.'&type=user";</script>';
+                                    echo '<script> location.href="hold_view.php?id='.$user_id.'&type=user";</script>';
                                     exit(0); // Make sure script execution stops here
                                 } elseif (mysqli_num_rows($query_run_faculty) > 0) {
                                     $row = mysqli_fetch_assoc($query_run_faculty);
                                     $faculty_id = $row['faculty_id'];
-                                    echo '<script> location.href="hold_view?id='.$faculty_id.'&type=faculty";</script>';
+                                    echo '<script> location.href="hold_view.php?id='.$faculty_id.'&type=faculty";</script>';
                                     exit(0); // Make sure script execution stops here
                                 } else {
                                     $_SESSION['status'] = 'No ID or Username Found';
                                     $_SESSION['status_code'] = "error";
-                                    header("Location: hold_list");
+                                    header("Location: hold_list.php");
                                     exit(0);
                                 }
                             }
@@ -110,7 +110,7 @@ include('./includes/sidebar.php');
                                         <td class="justify-content-center">
                                             <div class="btn-group" style="background: #DFF6FF;">
                                                 <!-- View Hold Books Action -->
-                                                <a href="hold_view?id=<?= htmlspecialchars($id); ?>&type=<?= htmlspecialchars($holdlist['user_id'] ? 'user' : 'faculty'); ?>"
+                                                <a href="hold_view.php?id=<?= htmlspecialchars($id); ?>&type=<?= htmlspecialchars($holdlist['user_id'] ? 'user' : 'faculty'); ?>"
                                                    class="viewBookBtn btn btn-sm border text-primary"
                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                    title="View Hold Books">

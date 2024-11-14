@@ -12,8 +12,8 @@ include('./includes/sidebar.php');
                <h1>Manage Users</h1>
                <nav>
                     <ol class="breadcrumb">
-                         <li class="breadcrumb-item"><a href="users">Users</a></li>
-                         <li class="breadcrumb-item"><a href="user_faculty">Faculty</a></li>
+                         <li class="breadcrumb-item"><a href="users.php">Users</a></li>
+                         <li class="breadcrumb-item"><a href="user_faculty.php">Faculty</a></li>
                          <li class="breadcrumb-item active">Faculty/Staff Approval</li>
                     </ol>
                </nav>
@@ -27,7 +27,7 @@ include('./includes/sidebar.php');
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="m-0 text-dark fw-semibold">Faculty/Staff Approval</h5>
 
-                              <a href="user_faculty" class="btn btn-primary">
+                              <a href="user_faculty.php" class="btn btn-primary">
                                    Back</a>
                          </div>
                          <div class="card-body">

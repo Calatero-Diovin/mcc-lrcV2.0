@@ -27,10 +27,10 @@ include('includes/sidebar.php');
                     <div class="card-header">
                         <ul class="nav nav-pills">
                             <li class="nav-item border border-info border-end-0 rounded-start">
-                                <a class="nav-link <?= $page == 'report' ? 'active' : '' ?>" href="report">All Transaction</a>
+                                <a class="nav-link <?= $page == 'report.php' ? 'active' : '' ?>" href="report.php">All Transaction</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= $page == 'report_penalty' ? 'active' : '' ?>" href="report_penalty">Penalty Report</a>
+                                <a class="nav-link <?= $page == 'report_penalty.php' ? 'active' : '' ?>" href="report_penalty.php">Penalty Report</a>
                             </li>
                         </ul>
                     </div>

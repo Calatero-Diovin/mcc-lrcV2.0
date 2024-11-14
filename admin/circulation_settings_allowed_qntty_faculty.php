@@ -58,7 +58,7 @@
                             if (isset($_POST['student_update_book_qntty1'])) {
                                 $qntty_book = $_POST['qntty_books'];
                                 mysqli_query($con, "UPDATE allowed_book SET qntty_books='$qntty_book' WHERE allowed_book_id = '$id1'");
-                                echo "<script>alert('Book Quantity Updated Successfully');window.location='circulation_settings'</script>";
+                                echo "<script>alert('Book Quantity Updated Successfully');window.location='circulation_setting.php'</script>";
                             }
                             ?>
                         </tr>

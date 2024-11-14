@@ -3,6 +3,15 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
+
 // Check if 'code' is present in the URL
 if (!isset($_GET['email']) || empty($_GET['email'])) {
     // Redirect to a 404 error page
@@ -17,14 +26,24 @@ $user_query = $con->prepare("SELECT * FROM user WHERE email = ?");
 $user_query->bind_param("s", $email);
 $user_query->execute();
 $user_result = $user_query->get_result();
+if($user_result->num_rows > 0){
 $user_row = $user_result->fetch_assoc();
+} else {
+    header("HTTP/1.0 404 Not Found");
+    exit; // Ensure no further code is executed
+}
 
 // Prepare and execute faculty query
 $faculty_query = $con->prepare("SELECT * FROM faculty WHERE email = ?");
 $faculty_query->bind_param("s", $email);
 $faculty_query->execute();
 $faculty_result = $faculty_query->get_result();
+if($faculty_result->num_rows > 0){
 $faculty_row = $faculty_result->fetch_assoc();
+} else {
+    header("HTTP/1.0 404 Not Found");
+    exit; // Ensure no further code is executed
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

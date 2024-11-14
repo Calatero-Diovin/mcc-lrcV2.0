@@ -79,7 +79,7 @@
                                                                  
                                                                      
 
-														echo "<script>alert('Allowed Book Updated Successfully');window.location='circulation_settings'</script>";
+														echo "<script>alert('Allowed Book Updated Successfully');window.location='circulation_settings.php'</script>";
                                                                      
 													
 														

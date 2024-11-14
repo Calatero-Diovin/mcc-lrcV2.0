@@ -72,7 +72,7 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                     <div class="card-body">
                         <div class="d-flex justify-content-end mb-3">
                             <!-- Back Button -->
-                            <a href="books" class="btn btn-primary" style="margin-top:10px;margin-bottom:-30px;">Back</a>
+                            <a href="books.php" class="btn btn-primary" style="margin-top:10px;margin-bottom:-30px;">Back</a>
                         </div>
                         <ul class="nav nav-tabs" id="myTab">
                             <li class="nav-item">

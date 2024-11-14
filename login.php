@@ -2,6 +2,15 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,15 +125,15 @@ include('./admin/config/dbcon.php');
                                         <div class="text-center mb-3">
                                              <p>
                                                   Don't have an account?
-                                                  <a href="./ms_verify" class="text-primary text-decoration-none fw-semibold">Signup</a>
+                                                  <a href="./ms_verify.php" class="text-primary text-decoration-none fw-semibold">Signup</a>
                                              </p>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                         <p>
-                                                  <a href="password-reset" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
+                                                  <a href="password-reset.php" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
                                              <p id="admin">
-                                                  <a href="admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                                  <a href="admin_login.php" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                              </p>
                                         </div>
                                    </div>

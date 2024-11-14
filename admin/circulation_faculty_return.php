@@ -10,7 +10,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
+                    <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
                     <li class="breadcrumb-item active">Faculty/Staff Return Book</li>
                </ol>
           </nav>
@@ -51,13 +51,13 @@ include('./includes/sidebar.php');
                                         foreach($query_run as $row)
                                         {
                                              $firstname = $_GET['firstname'];
-                                             echo ('<script>location.href="circulation_faculty_returning?firstname='.$firstname.'";</script>');
+                                             echo ('<script>location.href="circulation_faculty_returning.php?firstname='.$firstname.'";</script>');
                                         }
                                    }
                                    else
                                    {
                                         $_SESSION['message_error'] = 'No Name Found';
-                                        echo ('<script> location.href="circulation_borrow";</script>');
+                                        echo ('<script> location.href="circulation_borrow.php";</script>');
                                    }
                                   }
                                    ?>

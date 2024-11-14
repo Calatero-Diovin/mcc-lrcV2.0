@@ -26,8 +26,8 @@ $faculty_row = $faculty_result->fetch_assoc();
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href=".">Home</a></li>
-                <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
-                <li class="breadcrumb-item"><a href="circulation_faculty_return">Faculty/Staff Return Book</a></li>
+                <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
+                <li class="breadcrumb-item"><a href="circulation_faculty_return.php">Faculty/Staff Return Book</a></li>
                 <li class="breadcrumb-item active">Return Book</li>
             </ol>
         </nav>
@@ -259,9 +259,9 @@ if (isset($_POST['return_selected'])) {
     }
 
     if ($penalty === 'No Penalty') {
-        echo '<script>location.href="return_faculty_slip?firstname='.$firstname.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
+        echo '<script>location.href="return_faculty_slip.php?firstname='.$firstname.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
     } else {
-        echo '<script>location.href="acknowledgement_receipt_print_faculty?firstname='.$firstname.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
+        echo '<script>location.href="acknowledgement_receipt_print_faculty.php?firstname='.$firstname.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
     }
 }
 ?>

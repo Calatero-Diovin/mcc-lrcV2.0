@@ -10,7 +10,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="books">Ebooks</a></li>
+                    <li class="breadcrumb-item"><a href="books.php">Ebooks</a></li>
                     <li class="breadcrumb-item active">Edit Book</li>
                </ol>
           </nav>
@@ -106,7 +106,7 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-footer d-flex justify-content-end">
                               <div>
-                                   <a href="books" class="btn btn-secondary">Cancel</a>
+                                   <a href="books.php" class="btn btn-secondary">Cancel</a>
                                    <button type="submit" name="update_book" class="btn btn-primary">Update Book</button>
                               </div>
                          </div>

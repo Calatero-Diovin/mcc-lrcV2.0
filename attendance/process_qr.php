@@ -28,7 +28,7 @@ if (isset($_POST['text'])) {
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
-                header("Location:index.php");
+                header("Location:.");
                 exit();
             } else {
                 header("Location:qr_scanner.php");

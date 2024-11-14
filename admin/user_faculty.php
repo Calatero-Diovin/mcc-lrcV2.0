@@ -17,7 +17,7 @@ include('./includes/sidebar.php');
           <h1>Manage Faculty Staff</h1>
           <nav>
                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="users">Users</a></li>
+                    <li class="breadcrumb-item"><a href="users.php">Users</a></li>
                     <li class="breadcrumb-item active">Faculty Staff</li>
                </ol>
           </nav>
@@ -27,7 +27,7 @@ include('./includes/sidebar.php');
                <div class="col-lg-12">
                     <div class="card">
                          <div class="card-header d-flex justify-content-between align-items-center">
-                              <a href="user_faculty_approval" class="btn btn-primary position-relative">
+                              <a href="user_faculty_approval.php" class="btn btn-primary position-relative">
                                    <i class="bi bi-people-fill"></i>
                                    Faculty Approval
                                    <?php
@@ -42,7 +42,7 @@ include('./includes/sidebar.php');
                                    }
                                    ?>
                               </a>
-                              <a href="users" class="btn btn-primary position-relative">Back</a>
+                              <a href="users.php" class="btn btn-primary position-relative">Back</a>
                          </div>
                          <div class="card-body">
                               <div class="table-responsive mt-3">
@@ -74,7 +74,7 @@ include('./includes/sidebar.php');
                                                                       </button>
                                                                       <ul class="dropdown-menu">
                                                                            <!-- View faculty Action -->
-                                                                           <li><a href="user_faculty_view?id=<?=$user['faculty_id'];?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Faculty">
+                                                                           <li><a href="user_faculty_view.php?id=<?=$user['faculty_id'];?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Faculty">
                                                                                 <i class="bi bi-eye-fill"></i> View
                                                                            </a></li>
                                                                            <!-- Edit faculty Action -->
@@ -96,7 +96,7 @@ include('./includes/sidebar.php');
                                                                                 <i class="bi bi-trash-fill"></i> Delete
                                                                            </a></li>
                                                                            <!-- Generate ID Card Action -->
-                                                                           <li><a href="user_faculty_id?faculty_id=<?php echo $user['faculty_id']?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Generate Library ID">
+                                                                           <li><a href="user_faculty_id.php?faculty_id=<?php echo $user['faculty_id']?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Generate Library ID">
                                                                                 <i class="bi bi-card-heading"></i> Generate Library ID
                                                                            </a></li>
                                                                       </ul>

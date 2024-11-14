@@ -16,7 +16,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="admin">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                </ol>
           </nav>

@@ -28,7 +28,7 @@ if ($query) {
     // Handle invalid type
     $_SESSION['status'] = 'Invalid type parameter.';
     $_SESSION['status_code'] = 'error';
-    header("Location: hold_list");
+    header("Location: hold_list.php");
     exit(0);
 }
 ?>
@@ -39,7 +39,7 @@ if ($query) {
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href=".">Home</a></li>
-                <li class="breadcrumb-item"><a href="hold_list">Hold Books</a></li>
+                <li class="breadcrumb-item"><a href="hold_list.php">Hold Books</a></li>
                 <li class="breadcrumb-item active">View Hold Books</li>
             </ol>
         </nav>
@@ -50,7 +50,7 @@ if ($query) {
                 <div class="card">
                     <div class="card-header text-bg-primary d-flex fw-semibold justify-content-between">
                         <h5 class="m-0 text-white fw-semibold">Recent Hold Books</h5>
-                        <a href="hold_list" class="btn btn-success">Back</a>
+                        <a href="hold_list.php" class="btn btn-success">Back</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive mt-3">
@@ -161,13 +161,13 @@ if (isset($_POST['approved'])) {
         
         $_SESSION['status'] = "Hold has been approved.";
         $_SESSION['status_code'] = "success";
-        header("Location: hold_list");
+        header("Location: hold_list.php");
         ob_end_flush(); // Flush and turn off buffering
         exit(0);
     } else {
         $_SESSION['status'] = "Failed to approve the hold.";
         $_SESSION['status_code'] = "error";
-        header("Location: hold_list");
+        header("Location: hold_list.php");
         ob_end_flush(); // Flush and turn off buffering
         exit(0);
     }
@@ -200,13 +200,13 @@ if (isset($_POST['cancel'])) {
         
         $_SESSION['status'] = "Hold has been canceled.";
         $_SESSION['status_code'] = "success";
-        header("Location: hold_list");
+        header("Location: hold_list.php");
         ob_end_flush(); // Flush and turn off buffering
         exit(0);
     } else {
         $_SESSION['status'] = "Failed to cancel the hold.";
         $_SESSION['status_code'] = "error";
-        header("Location: hold_list");
+        header("Location: hold_list.php");
         ob_end_flush(); // Flush and turn off buffering
         exit(0);
     }

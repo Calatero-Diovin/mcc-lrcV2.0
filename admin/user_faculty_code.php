@@ -132,12 +132,12 @@ if (isset($_POST['deny'])) {
             $_SESSION['status_code'] = "error";
         }
 
-        header("Location: user_faculty_approval");
+        header("Location: user_faculty_approval.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Faculty Not Found';
         $_SESSION['status_code'] = "error";
-        header("Location: user_faculty_approval");
+        header("Location: user_faculty_approval.php");
         exit(0);
     }
 }
@@ -206,6 +206,7 @@ if(isset($_POST['approved'])) {
                         <h1 style='color:#198754;text-align:center;'>Your Account has been Approved.</h1>
                         <p>Dear Faculty/Staff,</p>
                         <p>Your MCC-LRC account registration has been approved. You can now log in to your account.</p>
+                        <p><a  style='color: white;' href='http://mcc-lrc.com/login.php' class='button'>Login</a></p>
                         <p>Thank you.</p>
                     </div>
                 </div>
@@ -216,12 +217,12 @@ if(isset($_POST['approved'])) {
 
         $_SESSION['status'] = 'Faculty approved successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: user_faculty_approval");
+        header("Location: user_faculty_approval.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Faculty not approved';
         $_SESSION['status_code'] = "error";
-        header("Location: user_faculty_approval");
+        header("Location: user_faculty_approval.php");
         exit(0);
     }
 }
@@ -301,12 +302,12 @@ if(isset($_POST['block_faculty'])) {
 
         $_SESSION['status'] = "Faculty staff has been blocked successfully.";
         $_SESSION['status_code'] = "success";
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     }
 }
@@ -385,12 +386,12 @@ if(isset($_POST['unblock_faculty'])) {
 
         $_SESSION['status'] = "Faculty staff has been unblocked successfully.";
         $_SESSION['status_code'] = "success";
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     }
 }
@@ -497,12 +498,12 @@ if (isset($_POST['delete_faculty_id'])) {
             $_SESSION['status_code'] = "error";
         }
 
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Faculty Not Found';
         $_SESSION['status_code'] = "error";
-        header("Location: user_faculty");
+        header("Location: user_faculty.php");
         exit(0);
     }
 }
@@ -519,7 +520,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_query($con, $sql)) {
             $_SESSION['status'] = "Updated successfully.";
             $_SESSION['status_code'] = "success";
-            header('Location: user_faculty');
+            header('Location: user_faculty.php');
             exit();
         } else {
             echo "Error updating record: " . mysqli_error($con);

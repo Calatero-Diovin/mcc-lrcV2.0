@@ -78,7 +78,7 @@ function send_password_reset($get_email, $token) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>We received a request to reset your password. Click the button below to reset it:</p>
-                        <p><a style='color: white;' href='https://mcc-lrc.com/admin-pass-change?token=" . urlencode($token) . "' class='button'>Reset Password</a></p>
+                        <p><a style='color: white;' href='https://mcc-lrc.com/admin-pass-change.php?token=" . urlencode($token) . "' class='button'>Reset Password</a></p>
                         <p>If you did not request a password reset, please ignore this email.</p>
                     </div>
                 </div>
@@ -113,12 +113,12 @@ if (isset($_POST['password_reset_link'])) {
             if (send_password_reset($get_email, $token)) {
                 $_SESSION['status'] = 'We e-mailed you a password reset link';
                 $_SESSION['status_code'] = 'success';
-                header('Location: admin-forgot-pass');
+                header('Location: admin-forgot-pass.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = 'Email sending failed. Please try again.';
                 $_SESSION['status_code'] = 'error';
-                header('Location: admin-forgot-pass');
+                header('Location: admin-forgot-pass.php');
                 exit(0);
             }
         }
@@ -145,12 +145,12 @@ if (isset($_POST['password-change'])) {
             if ($update_password_run_user) {
                 $_SESSION['status'] = 'Password successfully changed.';
                 $_SESSION['status_code'] = 'success';
-                header('Location: admin_login');
+                header('Location: admin_login.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = 'Failed to update the password. Please try again.';
                 $_SESSION['status_code'] = 'error';
-                header('Location: admin-pass-change');
+                header('Location: admin-pass-change.php');
                 exit(0);
             }
     }

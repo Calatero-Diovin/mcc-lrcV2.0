@@ -15,7 +15,7 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
     $minutes_remaining = ceil($lockout_time_remaining / 60);
     $_SESSION['status'] = "Too many failed attempts. Please try again in $minutes_remaining minute(s).";
     $_SESSION['status_code'] = "error";
-    header("Location: admin_login");
+    header("Location: admin_login.php");
     exit(0);
 }
 
@@ -31,7 +31,7 @@ if (isset($_POST['admin_login_btn'])) {
     if (intval($response_keys["success"]) !== 1) {
         $_SESSION['status'] = "Please complete the reCAPTCHA.";
         $_SESSION['status_code'] = "error";
-        header("Location: admin_login");
+        header("Location: admin_login.php");
         exit(0);
     }
 
@@ -68,7 +68,7 @@ if (isset($_POST['admin_login_btn'])) {
                 ];
 
                 $_SESSION['login_success'] = true;
-                header("Location: admin_login");
+                header("Location: admin_login.php");
                 exit(0);
             } else {
                 // Increment login attempts on failure
@@ -80,7 +80,7 @@ if (isset($_POST['admin_login_btn'])) {
                     $_SESSION['status'] = "Invalid email, password, or admin type.";
                 }
                 $_SESSION['status_code'] = "error";
-                header("Location: admin_login");
+                header("Location: admin_login.php");
                 exit(0);
             }
         } else {
@@ -93,7 +93,7 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['status'] = "Invalid email, password, or admin type.";
             }
             $_SESSION['status_code'] = "error";
-            header("Location: admin_login");
+            header("Location: admin_login.php");
             exit(0);
         }
 
@@ -101,7 +101,7 @@ if (isset($_POST['admin_login_btn'])) {
     } else {
         $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
-        header("Location: admin_login");
+        header("Location: admin_login.php");
         exit(0);
     }
 }

@@ -22,7 +22,7 @@ include('includes/sidebar.php');
                <div class="col-lg-12">
                     <div class="card">
                          <div class="card-header d-flex justify-content-end">
-                              <a href="admin_add" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add
+                              <a href="admin_add.php" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add
                                    Admin</a>
                          </div>
                          <div class="card-body">
@@ -70,7 +70,7 @@ include('includes/sidebar.php');
                                                   <td class=" justify-content-center">
                                                        <div class="btn-group" style="background: #DFF6FF;  ">
                                                             <!-- View Admin Action-->
-                                                            <a href="admin_view?id=<?=$admin['admin_id']; ?>"
+                                                            <a href="admin_view.php?id=<?=$admin['admin_id']; ?>"
                                                                  name="view_admin"
                                                                  class="viewAdminBtn btn btn-sm  border text-primary"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -78,7 +78,7 @@ include('includes/sidebar.php');
                                                                  <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                             <!-- Edit Admin Action-->
-                                                            <a href="admin_edit?id=<?= $admin['admin_id']; ?>"
+                                                            <a href="admin_edit.php?id=<?= $admin['admin_id']; ?>"
                                                                  name="update_admin"
                                                                  class="btn btn-sm  border text-success"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"

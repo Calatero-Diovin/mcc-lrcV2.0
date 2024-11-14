@@ -26,8 +26,8 @@ $user_row = $user_result->fetch_assoc();
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href=".">Home</a></li>
-                <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
-                <li class="breadcrumb-item"><a href="circulation_return">Student Return Book</a></li>
+                <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
+                <li class="breadcrumb-item"><a href="circulation_return.php">Student Return Book</a></li>
                 <li class="breadcrumb-item active">Return Book</li>
             </ol>
         </nav>
@@ -261,9 +261,9 @@ if (isset($_POST['return_selected'])) {
     }
 
     if ($penalty === 'No Penalty') {
-        echo '<script>location.href="return_slip?student_id='.$student_id.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
+        echo '<script>location.href="return_slip.php?student_id='.$student_id.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
     } else {
-        echo '<script>location.href="acknowledgement_receipt_print?student_id='.$student_id.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
+        echo '<script>location.href="acknowledgement_receipt_print.php?student_id='.$student_id.'&borrow_book_id='.implode(',', $book_ids).'";</script>';
     }
 }
 ?>

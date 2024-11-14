@@ -17,8 +17,8 @@ $user_row = mysqli_fetch_array($user_query);
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
-                    <li class="breadcrumb-item active"><a href="circulation_return">Return Book</a></li>
+                    <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
+                    <li class="breadcrumb-item active"><a href="circulation_return.php">Return Book</a></li>
                </ol>
           </nav>
      </div>
@@ -141,7 +141,7 @@ $user_row = mysqli_fetch_array($user_query);
                               <!-- <button type="submit" name="cancel" class="btn btn-secondary"
                                    value="<?php echo $student_id ?>">Cancel</button> -->
 
-                              <a href="circulation_returning?student_id=<?php echo $student_id ?>"
+                              <a href="circulation_returning.php?student_id=<?php echo $student_id ?>"
                                    class="btn btn-secondary">Cancel</a>
                          </form>
 
@@ -152,7 +152,7 @@ $user_row = mysqli_fetch_array($user_query);
 <?php
  if(isset($_POST['accept']))
  {
-     echo '<script> location.href="acknowledgement_receipt_print?student_id='.$student_id.'";</script>';  
+     echo '<script> location.href="acknowledgement_receipt_print.php?student_id='.$student_id.'";</script>';  
  }
  
  

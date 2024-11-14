@@ -80,7 +80,7 @@
                                         mysqli_query($con," UPDATE penalty SET penalty_amount='$penalty_amount1' WHERE penalty_id = '$penalty_id' ") ;
                                    
                                    
-                                        echo "<script>alert('Book Penalty Updated Successfully');window.location='circulation_settings'</script>";
+                                        echo "<script>alert('Book Penalty Updated Successfully');window.location='circulation_settings.php'</script>";
                                    
                                         
                                    }

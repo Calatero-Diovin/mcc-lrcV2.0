@@ -10,7 +10,7 @@ include('./includes/sidebar.php');
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href=".">Home</a></li>
-                <li class="breadcrumb-item"><a href="circulation">Circulation</a></li>
+                <li class="breadcrumb-item"><a href="circulation.php">Circulation</a></li>
                 <li class="breadcrumb-item active">Faculty Staff Borrow Book</li>
             </ol>
         </nav>
@@ -44,10 +44,10 @@ include('./includes/sidebar.php');
                                     foreach($query_run as $row) {
                                         // Redirect to the borrowing page with the employee_id parameter
                                         $firstname = $row['firstname'];
-                                        echo ('<script> location.href="circulation_faculty_borrowing?firstname='.$firstname.'";</script>');
+                                        echo ('<script> location.href="circulation_faculty_borrowing.php?firstname='.$firstname.'";</script>');
                                     }
                                 } else {
-                                    echo ('<script> location.href="circulation_faculty_borrow";</script>');
+                                    echo ('<script> location.href="circulation_faculty_borrow.php";</script>');
                                     $_SESSION['message_error'] = 'No Faculty Found';
                                 }
                             }

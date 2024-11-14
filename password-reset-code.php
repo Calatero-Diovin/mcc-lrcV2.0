@@ -78,7 +78,7 @@ function send_password_reset($get_name, $get_email, $token) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>We received a request to reset your password. Click the button below to reset it:</p>
-                        <p><a style='color: white;' href='https://mcc-lrc.com/password-change?token=" . urlencode($token) . "&email=" . urlencode($get_email) . "' class='button'>Reset Password</a></p>
+                        <p><a style='color: white;' href='https://mcc-lrc.com/password-change.php?token=" . urlencode($token) . "&email=" . urlencode($get_email) . "' class='button'>Reset Password</a></p>
                         <p>If you did not request a password reset, please ignore this email.</p>
                     </div>
                 </div>
@@ -114,12 +114,12 @@ if (isset($_POST['password_reset_link'])) {
             if (send_password_reset($get_name, $get_email, $token)) {
                 $_SESSION['status'] = 'We e-mailed you a password reset link';
                 $_SESSION['status_code'] = 'success';
-                header('Location: password-reset');
+                header('Location: password-reset.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = 'Email sending failed. Please try again.';
                 $_SESSION['status_code'] = 'error';
-                header('Location: password-reset');
+                header('Location: password-reset.php');
                 exit(0);
             }
         }
@@ -141,19 +141,19 @@ if (isset($_POST['password_reset_link'])) {
             if (send_password_reset($get_name, $get_email, $token)) {
                 $_SESSION['status'] = "We e-mailed you a password reset link";
                 $_SESSION['status_code'] = "success";
-                header('Location: password-reset');
+                header('Location: password-reset.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = "Email sending failed. Please try again.";
                 $_SESSION['status_code'] = "error";
-                header('Location: password-reset');
+                header('Location: password-reset.php');
                 exit(0);
             }
         }
     } else {
         $_SESSION['status'] = "No email found";
         $_SESSION['status_code'] = "error";
-        header('Location: password-reset');
+        header('Location: password-reset.php');
         exit(0);
     }
 }
@@ -180,18 +180,18 @@ if (isset($_POST['password-change'])) {
             if ($update_password_run_user) {
                 $_SESSION['status'] = 'Password successfully changed.';
                 $_SESSION['status_code'] = 'success';
-                header('Location: login');
+                header('Location: login.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = 'Failed to update the password. Please try again.';
                 $_SESSION['status_code'] = 'error';
-                header('Location: password-change');
+                header('Location: password-change.php');
                 exit(0);
             }
         } else {
             $_SESSION['status'] = 'Link already been used. Please request a new password reset link.';
             $_SESSION['status_code'] = 'error';
-            header('Location: password-reset');
+            header('Location: password-reset.php');
             exit(0);
         }
     }
@@ -224,7 +224,7 @@ if (isset($_POST['password-change'])) {
         } else {
             $_SESSION['status'] = 'Link already been used. Please request a new password reset link.';
             $_SESSION['status_code'] = 'error';
-            header('Location: password-reset');
+            header('Location: password-reset.php');
             exit(0);
         }
     } else {

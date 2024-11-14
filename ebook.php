@@ -10,7 +10,7 @@ if (!isset($_SESSION['auth'])) {
 
 if($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" && $_SESSION['auth_role'] != "staff")
 {
-  header("Location:1");
+  header("Location:index.php");
   exit(0);
 }
 ?>

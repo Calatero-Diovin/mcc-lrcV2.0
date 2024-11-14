@@ -80,7 +80,7 @@
 														mysqli_query($con," UPDATE allowed_book SET qntty_books='$qntty_books'  WHERE allowed_book_id = '$id'");
 													
 													
-														echo "<script>alert('Book Quantity Updated Successfully');window.location='circulation_settings'</script>";
+														echo "<script>alert('Book Quantity Updated Successfully');window.location='circulation_settings.php'</script>";
 													
 														
 													}

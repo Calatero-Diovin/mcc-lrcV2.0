@@ -42,7 +42,7 @@ if(isset($_POST['save_excel_data']))
                 if(!$result) {
                     $_SESSION['status'] = "Error importing row $i: " . mysqli_error($con);
                     $_SESSION['status_code'] = "error";
-                    header('Location:ms_account');
+                    header('Location:ms_account.php');
                     exit(0);
                 }
             }
@@ -50,14 +50,14 @@ if(isset($_POST['save_excel_data']))
 
         $_SESSION['status'] = "File imported successfully.";
         $_SESSION['status_code'] = "success";
-        header('Location:ms_account');
+        header('Location:ms_account.php');
         exit(0);
     }
     else
     {
         $_SESSION['status'] = "Invalid file type. Please upload an Excel or CSV file.";
         $_SESSION['status_code'] = "error";
-        header('Location:ms_account');
+        header('Location:ms_account.php');
         exit(0);
     }
 }

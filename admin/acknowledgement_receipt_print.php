@@ -9,6 +9,15 @@ $user_query->bind_param("s", $student_id);
 $user_query->execute();
 $user_result = $user_query->get_result();
 $user_row = $user_result->fetch_assoc();
+
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +93,7 @@ $user_row = $user_result->fetch_assoc();
             <div class="col-lg-12">
                     <div class="card-body">
                     <div class="text-start mt-3">
-                    <a href="circulation_returning?student_id=<?php echo $student_id; ?>" id="back" style="margin-left:20px;" class="btn btn-primary">Back</a>
+                    <a href="circulation_returning.php?student_id=<?php echo $student_id; ?>" id="back" style="margin-left:20px;" class="btn btn-primary">Back</a>
                     </div>
                         <div class="text-end mt-5">
                             <h5>Date: <?php echo date('F d, Y'); ?></h5>

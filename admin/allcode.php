@@ -27,21 +27,21 @@ if(isset($_POST['change_password']))
 
          if ($change_pass_run) {
              $_SESSION['message_success'] = '<small>Password updated successfully</small>';
-             header("Location: myprofile");
+             header("Location: myprofile.php");
              exit(0);
          } else {
              $_SESSION['message_error'] = 'Password not updated';
-             header("Location: myprofile");
+             header("Location: myprofile.php");
              exit(0);
          }
      } else {
          $_SESSION['message_error'] = '<small>Password and confirm password do not match</small>';
-         header("Location: myprofile");
+         header("Location: myprofile.php");
          exit(0);
      }
  } else {
      $_SESSION['message_error'] = 'Current password does not match';
-     header("Location: myprofile");
+     header("Location: myprofile.php");
      exit(0);
  }
 }
@@ -72,11 +72,11 @@ if (isset($_SESSION['auth_stud']['stud_id']))
  
      if ($query_run) {
          $_SESSION['message_success'] = 'Updated Successfully';
-         header("Location: myprofile");
+         header("Location: myprofile.php");
          exit(0);
      } else {
          $_SESSION['message_error'] = 'Not Updated';
-         header("Location: myprofile");
+         header("Location: myprofile.php");
          exit(0);
      }
  }
@@ -95,7 +95,7 @@ if (isset($_POST['logout_btn'])) {
     $_SESSION['message_success'] = "Logout Successfully";
     
     // Redirect to the login page
-    header("Location: ../admin_login");
+    header("Location: ../admin_login.php");
     exit(0);
 }
 

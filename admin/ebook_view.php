@@ -11,7 +11,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="books">Ebooks</a></li>
+                    <li class="breadcrumb-item"><a href="books.php">Ebooks</a></li>
                     <li class="breadcrumb-item active">View Book</li>
                </ol>
           </nav>
@@ -21,7 +21,7 @@ include('./includes/sidebar.php');
                <div class="col-lg-12">
                     <div class="card">
                          <div class="card-header d-flex justify-content-end">
-                              <a href="books" class="btn btn-primary">
+                              <a href="books.php" class="btn btn-primary">
                                    Back
                               </a>
                          </div>

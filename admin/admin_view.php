@@ -10,7 +10,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="admin">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
                     <li class="breadcrumb-item active">View Admin</li>
                </ol>
           </nav>
@@ -21,7 +21,7 @@ include('./includes/sidebar.php');
                     <div class="card">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="m-0 text-dark fw-semibold">Admin Profile Details</h5>
-                              <a href="admin" class="btn btn-primary">
+                              <a href="admin.php" class="btn btn-primary">
                                    Back
                               </a>
                          </div>
@@ -111,7 +111,7 @@ include('./includes/sidebar.php');
                                    // Handle case where no admin is found
                                    $_SESSION['status'] = 'Admin not found';
                                    $_SESSION['status_code'] = "error";
-                                   header("Location: admin_view");
+                                   header("Location: admin_view.php");
                                    exit(0);
                                }
                            }

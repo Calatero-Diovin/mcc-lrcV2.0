@@ -19,7 +19,7 @@ include('./includes/sidebar.php');
           <nav>
                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href=".">Home</a></li>
-                    <li class="breadcrumb-item"><a href="admin">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
                     <li class="breadcrumb-item active">Add Admin</li>
                </ol>
           </nav>
@@ -130,7 +130,7 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-footer d-flex justify-content-end">
                               <div>
-                                   <a href="admin" class="btn btn-secondary">Cancel</a>
+                                   <a href="admin.php" class="btn btn-secondary">Cancel</a>
                                    <button type="submit" name="add_admin" class="btn btn-primary">Add Admin</button>
                               </div>
                          </div>

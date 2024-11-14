@@ -24,14 +24,14 @@ if(isset($_POST['delete_admin']))
 
           $_SESSION['status'] = 'Admin Deleted Successfully';
           $_SESSION['status_code'] = "success";
-          header("Location: admin");
+          header("Location: admin.php");
           exit(0);
      }
      else
      {
           $_SESSION['status'] = 'Admin Not Deleted';
           $_SESSION['status_code'] = "error";
-          header("Location: admin");
+          header("Location: admin.php");
           exit(0);
      }
 }
@@ -61,7 +61,7 @@ if (isset($_POST['edit_admin'])) {
     if ($admin_image != NULL && !in_array(strtolower($admin_extension), $allowedExtensions)) {
         $_SESSION['status'] = 'Invalid file format! Only JPG, JPEG, and PNG are allowed.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_edit?id=$admin_id");
+        header("Location: admin_edit.php?id=$admin_id");
         exit(0);
     }
 
@@ -84,12 +84,12 @@ if (isset($_POST['edit_admin'])) {
         
         $_SESSION['status'] = 'Admin Updated successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: admin_edit?id=$admin_id");
+        header("Location: admin_edit.php?id=$admin_id");
         exit(0);
     } else {
         $_SESSION['status'] = 'Admin not Updated';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_edit?id=$admin_id");
+        header("Location: admin_edit.php?id=$admin_id");
         exit(0);
     }
 }
@@ -123,7 +123,7 @@ if (isset($_POST['add_admin'])) {
     if (mysqli_num_rows($email_check_result) == 0) {
         $_SESSION['status'] = 'Email not found. Please visit the BSIT office to get registered.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
+        header("Location: admin_add.php");
         exit(0);
     }
 
@@ -134,7 +134,7 @@ if (isset($_POST['add_admin'])) {
     if (mysqli_num_rows($email_check_result_admin) > 0) {
         $_SESSION['status'] = 'Email already exists.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
+        header("Location: admin_add.php");
         exit(0);
     }
 
@@ -142,7 +142,7 @@ if (isset($_POST['add_admin'])) {
     if (empty($admin_image)) {
         $_SESSION['status'] = 'Image is required. Please upload an image in JPG, JPEG, or PNG format.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
+        header("Location: admin_add.php");
         exit(0);
     }
 
@@ -153,7 +153,7 @@ if (isset($_POST['add_admin'])) {
     if (!in_array(strtolower($admin_extension), $allowedExtensions)) {
         $_SESSION['status'] = 'Invalid file format! Only JPG, JPEG, and PNG are allowed.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
+        header("Location: admin_add.php");
         exit(0);
     }
 
@@ -169,12 +169,12 @@ if (isset($_POST['add_admin'])) {
         move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
         $_SESSION['status'] = 'Admin Added successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: admin");
+        header("Location: admin.php");
         exit(0);
     } else {
         $_SESSION['status'] = 'Admin not Added';
         $_SESSION['status_code'] = "error";
-        header("Location: admin");
+        header("Location: admin.php");
         exit(0);
     }
 }

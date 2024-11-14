@@ -31,12 +31,12 @@ if (isset($_POST['save_changes'])) {
     if ($query_run) {
         $_SESSION['status'] = "Updated Successfully";
         $_SESSION['status_code'] = "success";
-        header("Location: myprofile");
+        header("Location: myprofile.php");
         exit(0);
     } else {
         $_SESSION['status'] = "Not Updated";
         $_SESSION['status_code'] = "error";
-        header("Location: myprofile");
+        header("Location: myprofile.php");
         exit(0);
     }
 }

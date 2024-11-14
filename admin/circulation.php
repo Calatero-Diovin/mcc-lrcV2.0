@@ -27,7 +27,7 @@ include('./includes/sidebar.php');
                               <div class="row">
 
                                    <div class="col-12 col-md-6 mt-3">
-                                        <a href="circulation_borrow">
+                                        <a href="circulation_borrow.php">
                                              <div
                                                   class="card bg-primary text-white p-4 d-flex flex-row justify-content-between">
                                                   <h2>Borrow Book</h2>
@@ -37,7 +37,7 @@ include('./includes/sidebar.php');
                                    </div>
 
                                    <div class="col-12 col-md-6 mt-3">
-                                        <a href="circulation_return">
+                                        <a href="circulation_return.php">
                                              <div
                                                   class="card bg-primary text-white p-4 d-flex flex-row justify-content-between">
                                                   <h2>Return Book</h2>
@@ -57,7 +57,7 @@ include('./includes/sidebar.php');
                               <div class="row">
 
                                    <div class="col-12 col-md-6 mt-3">
-                                        <a href="circulation_faculty_borrow">
+                                        <a href="circulation_faculty_borrow.php">
                                              <div
                                                   class="card bg-primary text-white p-4 d-flex flex-row justify-content-between">
                                                   <h2>Borrow Book</h2>
@@ -67,7 +67,7 @@ include('./includes/sidebar.php');
                                    </div>
 
                                    <div class="col-12 col-md-6 mt-3">
-                                        <a href="circulation_faculty_return">
+                                        <a href="circulation_faculty_return.php">
                                              <div
                                                   class="card bg-primary text-white p-4 d-flex flex-row justify-content-between">
                                                   <h2>Return Book</h2>

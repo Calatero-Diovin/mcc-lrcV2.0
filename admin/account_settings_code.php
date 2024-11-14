@@ -44,7 +44,7 @@ if (isset($_POST['save_changes'])) {
         $_SESSION['status'] = 'Not Updated';
         $_SESSION['status_code'] = "error";
     }
-    header("Location: account_settings");
+    header("Location: account_settings.php");
     exit(0);
 }
 ?>

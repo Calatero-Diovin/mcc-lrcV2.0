@@ -10,9 +10,10 @@ if (!isset($_SESSION['auth'])) {
     exit(0);
 }
 
-if (!in_array($_SESSION['auth_role'], ['student', 'faculty', 'staff'])) {
-    header("Location: 1");
-    exit(0);
+if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" && $_SESSION['auth_role'] != "staff") 
+{
+  header("Location:index.php");
+  exit(0);
 }
 ?>
 
@@ -21,7 +22,7 @@ if (!in_array($_SESSION['auth_role'], ['student', 'faculty', 'staff'])) {
         <div class="col-12">
             <div class="card mt-4">
                 <div class="card-header">
-                    <a href="index" class="btn btn-primary">Back</a>
+                    <a href="index.php" class="btn btn-primary">Back</a>
                 </div>
                 <div class="card-body">
                     <section class="section profile">
@@ -159,7 +160,7 @@ if (isset($_POST['hold'])) {
     if ($check_result->num_rows > 0) {
         $_SESSION['status'] = "You have already placed a hold on this book title!";
         $_SESSION['status_code'] = "warning";
-        header("Location: book_details?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
+        header("Location: book_details.php?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
         exit(0);
     }
 
@@ -176,7 +177,7 @@ if (isset($_POST['hold'])) {
     if ($borrow_check_result->num_rows > 0) {
         $_SESSION['status'] = "You are already borrowing this book!";
         $_SESSION['status_code'] = "warning";
-        header("Location: book_details?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
+        header("Location: book_details.php?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
         exit();
     }
 
@@ -191,7 +192,7 @@ if (isset($_POST['hold'])) {
     if ($current_hold_count >= 3) {
         $_SESSION['status'] = "You cannot hold more than 3 books!";
         $_SESSION['status_code'] = "warning";
-        header("Location: book_details?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
+        header("Location: book_details.php?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
         exit(0);
     } else {
         // Update the book status to "Hold"
@@ -211,12 +212,12 @@ if (isset($_POST['hold'])) {
         if ($insert_query->execute()) {
             $_SESSION['status'] = "Book held successfully";
             $_SESSION['status_code'] = "success";
-            header("Location:index");
+            header("Location:index.php");
             exit(0);
         } else {
             $_SESSION['status'] = "Failed to hold the book";
             $_SESSION['status_code'] = "error";
-            header("Location: book_details?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
+            header("Location: book_details.php?title=" . urlencode($book_title) . "&id=" . urlencode($book_id));
             exit(0);
         }
     }

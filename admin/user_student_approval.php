@@ -10,8 +10,8 @@ include('./includes/sidebar.php');
                <h1>Manage Users</h1>
                <nav>
                     <ol class="breadcrumb">
-                         <li class="breadcrumb-item"><a href="users">Users</a></li>
-                         <li class="breadcrumb-item"><a href="user_student">Students</a></li>
+                         <li class="breadcrumb-item"><a href="users.php">Users</a></li>
+                         <li class="breadcrumb-item"><a href="user_student.php">Students</a></li>
                          <li class="breadcrumb-item active">Student Approval</li>
                     </ol>
                </nav>
@@ -24,7 +24,7 @@ include('./includes/sidebar.php');
                     <div class="card">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="m-0 text-dark fw-semibold">Students Approval</h5>
-                              <a href="user_student" class="btn btn-primary">Back</a>
+                              <a href="user_student.php" class="btn btn-primary">Back</a>
                          </div>
                          <div class="card-body">
                               <div class="table-responsive mt-3">

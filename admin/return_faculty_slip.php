@@ -9,6 +9,15 @@ $faculty_query->bind_param("s", $firstname);
 $faculty_query->execute();
 $faculty_result = $faculty_query->get_result();
 $faculty_row = $faculty_result->fetch_assoc();
+
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +69,7 @@ $faculty_row = $faculty_result->fetch_assoc();
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-start mt-3">
-                    <a href="circulation_faculty_returning?firstname=<?php echo $firstname; ?>" id="back" style="margin-left:20px;" class="btn btn-primary">Back</a>
+                    <a href="circulation_faculty_returning.php?firstname=<?php echo $firstname; ?>" id="back" style="margin-left:20px;" class="btn btn-primary">Back</a>
                 </div>
                         <div class="text-end mt-5">
                             <h5>Date: <?php echo date('F d, Y'); ?></h5>

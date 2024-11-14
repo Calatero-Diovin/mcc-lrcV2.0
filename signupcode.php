@@ -28,7 +28,7 @@ if (isset($_POST['register_btn'])) {
     if (empty($lastname) || empty($firstname) || empty($gender) || empty($birthdate) || empty($address) || empty($cell_no) || empty($email) || empty($student_id_no) || empty($password) || empty($cpassword) || empty($role_as) || empty($profile_image) || empty($contact_person) || empty($person_cell_no)) {
         $_SESSION['status'] = "Please fill up all fields";
         $_SESSION['status_code'] = "warning";
-        header("Location: login");
+        header("Location: login.php");
         exit(0);
     }
 
@@ -56,12 +56,12 @@ if (isset($_POST['register_btn'])) {
     if (mysqli_stmt_num_rows($stmt_check) > 0) {
         $_SESSION['status'] = ($role_as == 'student') ? "Student ID No. already exists" : "Username already exists";
         $_SESSION['status_code'] = "warning";
-        header("Location: login");
+        header("Location: login.php");
         exit(0);
     } elseif (mysqli_stmt_num_rows($stmt_email_check) > 0) {
         $_SESSION['status'] = "Email already exists";
         $_SESSION['status_code'] = "warning";
-        header("Location: login");
+        header("Location: login.php");
         exit(0);
     }
 
@@ -100,25 +100,25 @@ if (isset($_POST['register_btn'])) {
                             } else {
                                 $_SESSION['status'] = "Sorry, there was an error uploading your file.";
                                 $_SESSION['status_code'] = "error";
-                                header("Location: login");
+                                header("Location: login.php");
                                 exit(0);
                             }
                         } else {
                             $_SESSION['status'] = "Sorry, only JPG, JPEG & PNG files are allowed.";
                             $_SESSION['status_code'] = "error";
-                            header("Location: login");
+                            header("Location: login.php");
                             exit(0);
                         }
                     } else {
                         $_SESSION['status'] = "Sorry, your file is too large. Maximum size is 50MB.";
                         $_SESSION['status_code'] = "error";
-                        header("Location: login");
+                        header("Location: login.php");
                         exit(0);
                     }
                 } else {
                     $_SESSION['status'] = "File is not an image.";
                     $_SESSION['status_code'] = "error";
-                    header("Location: login");
+                    header("Location: login.php");
                     exit(0);
                 }
             }
@@ -161,36 +161,36 @@ if (isset($_POST['register_btn'])) {
                     
                     $_SESSION['status'] = "Registered successfully, wait for approval.";
                     $_SESSION['status_code'] = "success";
-                    header("Location: login");
+                    header("Location: login.php");
                     exit(0);
                 } else {
                     $_SESSION['status'] = "Failed to update QR code path in database";
                     $_SESSION['status_code'] = "error";
-                    header("Location: login");
+                    header("Location: login.php");
                     exit(0);
                 }
             } else {
                 $_SESSION['status'] = "Failed to register user";
                 $_SESSION['status_code'] = "error";
-                header("Location: login");
+                header("Location: login.php");
                 exit(0);
             }
         } else {
             $_SESSION['status'] = "Link already been used.";
             $_SESSION['status_code'] = "error";
-            header("Location: login");
+            header("Location: login.php");
             exit(0);
         }
     } else {
         $_SESSION['status'] = "Email verification not found.";
         $_SESSION['status_code'] = "error";
-        header("Location: login");
+        header("Location: login.php");
         exit(0);
     }
 } else {
     $_SESSION['status'] = "Please fill up all the fields";
     $_SESSION['status_code'] = "warning";
-    header("Location: login");
+    header("Location: login.php");
     exit(0);
 }
 ?>

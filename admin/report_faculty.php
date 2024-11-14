@@ -22,12 +22,12 @@ include('./includes/sidebar.php');
                          <div class="card-header">
                               <ul class="nav nav-pills">
                                    <li class="nav-item">
-                                        <a class="nav-link <?=$page == 'report' || $page == 'report_faculty' ? 'active': '' ?>"
+                                        <a class="nav-link <?=$page == 'report.php' || $page == 'report_faculty.php' ? 'active': '' ?>"
                                              href="report">All Transaction</a>
                                    </li>
                                    <li class="nav-item  border border-info border-start-0 rounded-end">
-                                        <a class="nav-link <?=$page == 'report_penalty' ? 'active': '' ?>"
-                                             href="report_penalty">Penalty Report</a>
+                                        <a class="nav-link <?=$page == 'report_penalty.php' ? 'active': '' ?>"
+                                             href="report_penalty.php">Penalty Report</a>
                                    </li>
                               </ul>
                          </div>
@@ -36,12 +36,12 @@ include('./includes/sidebar.php');
                               <div class="table-responsive mt-3">
                                    <ul class="nav nav-tabs mb-3">
                                         <li class="nav-item">
-                                             <a class="nav-link <?=$page == 'report' ? 'active': '' ?> text-dark"
-                                                  href="report">Students </a>
+                                             <a class="nav-link <?=$page == 'report.php' ? 'active': '' ?> text-dark"
+                                                  href="report.php">Students </a>
                                         </li>
                                         <li class="nav-item">
-                                             <a class="nav-link <?=$page == 'report_faculty' ? 'active': '' ?> text-dark"
-                                                  href="report_faculty">Faculty Staff</a>
+                                             <a class="nav-link <?=$page == 'report_faculty.php' ? 'active': '' ?> text-dark"
+                                                  href="report_faculty.php">Faculty Staff</a>
                                         </li>
                                    </ul>
                                    <table id="myDataTable" cellpadding="0" cellspacing="0" border="0"

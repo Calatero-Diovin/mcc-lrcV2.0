@@ -68,7 +68,7 @@ $pending_faculty_result = $pending_faculty_stmt->get_result();
                                 <?= $name ?>
                             </td>
                             <td>Hold <span><?= $holdlist['num_hold_books'] ?></span> book(s).</td>
-                            <td><a href="hold_list" class="btn btn-primary">View</a></td>
+                            <td><a href="hold_list.php" class="btn btn-primary">View</a></td>
                         </tr>
                     <?php endwhile; ?>
 
@@ -80,7 +80,7 @@ $pending_faculty_result = $pending_faculty_stmt->get_result();
                                 <?= $user['firstname'].' '.$user['lastname'] ?>
                             </td>
                             <td>Pending Approval</td>
-                            <td><a href="user_student_approval" class="btn btn-primary">View</a></td>
+                            <td><a href="user_student_approval.php" class="btn btn-primary">View</a></td>
                         </tr>
                     <?php endwhile; ?>
 
@@ -92,7 +92,7 @@ $pending_faculty_result = $pending_faculty_stmt->get_result();
                                 <?= $faculty['firstname'].' '.$faculty['lastname'] ?>
                             </td>
                             <td>Pending Approval</td>
-                            <td><a href="user_faculty_approval" class="btn btn-primary">View</a></td>
+                            <td><a href="user_faculty_approval.php" class="btn btn-primary">View</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

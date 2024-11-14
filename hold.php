@@ -10,7 +10,7 @@ if (!isset($_SESSION['auth'])) {
 }
 
 if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" && $_SESSION['auth_role'] != "staff") {
-    header("Location:1");
+    header("Location:index.php");
     exit(0);
 }
 ?>
@@ -119,19 +119,19 @@ if (isset($_POST['cancel_hold'])) {
             mysqli_commit($con);
             $_SESSION['status'] = "Book hold cancelled successfully";
             $_SESSION['status_code'] = "success";
-            header("Location: hold");
+            header("Location: hold.php");
             exit(0);
         } else {
             mysqli_rollback($con);
             $_SESSION['status'] = "There was something wrong";
             $_SESSION['status_code'] = "warning";
-            header("Location: hold");
+            header("Location: hold.php");
             exit(0);
         }
     } else {
         $_SESSION['status'] = "Hold not found";
         $_SESSION['status_code'] = "error";
-        header("Location: hold");
+        header("Location: hold.php");
         exit(0);
     }
 }

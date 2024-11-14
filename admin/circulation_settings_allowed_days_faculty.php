@@ -77,7 +77,7 @@
                                         mysqli_query($con," UPDATE allowed_days SET no_of_days='$faculty_no_of_days1' WHERE allowed_days_id = '$faculty_allowed_days_id' ");
                                    
                                         
-                                        echo "<script>alert('Allowed Book Updated Successfully');window.location='circulation_settings'</script>";
+                                        echo "<script>alert('Allowed Book Updated Successfully');window.location='circulation_settings.php'</script>";
                                         
                                    
                                         
