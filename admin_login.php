@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
-include('config/dbcon.php');
+include('admin/config/dbcon.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -41,7 +41,8 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
-     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+     <script src="https://www.google.com/recaptcha/api.js?render=your-v3-site-key"></script>
+
 
 </head>
 
@@ -105,7 +106,7 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <div class="g-recaptcha" data-sitekey="6LfNJ1wqAAAAAKE4vmQh1Gc4LJC6e7Js1Eg9Ns76"></div>
+                                    <div class="g-recaptcha" data-sitekey="6LfRLn8qAAAAAKokcSvsU4844IJCKlDJAesJS4sH"></div>
                                     <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
                                 </div>
                             </div>
@@ -114,10 +115,10 @@ if (strpos($request, '.php') !== false) {
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
-                                    <a href="admin-forgot-pass" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
+                                    <a href="admin-forgot-pass.php" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                 </p>
                                 <p>
-                                    <a href="../login" class="text-primary text-decoration-none fw-semibold">User Login</a>
+                                    <a href="login.php" class="text-primary text-decoration-none fw-semibold">User Login</a>
                                 </p>
                             </div>
                         </form>
@@ -195,7 +196,7 @@ if (strpos($request, '.php') !== false) {
                     title: 'Login Successful',
                     showConfirmButton: true
                 }).then(() => {
-                    window.location.href = './admin/.'; // Redirect after showing SweetAlert
+                    window.location.href = 'admin/.'; // Redirect after showing SweetAlert
                 });
             <?php endif; ?>
         });

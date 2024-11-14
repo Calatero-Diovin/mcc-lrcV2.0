@@ -117,7 +117,7 @@ if (strpos($request, '.php') !== false) {
                                              </div>
                                         </div>
                                         <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LcXaVMqAAAAAGesFaNwKSAsC6P-XtYGG59h9ktg"></div>
+                                             <div class="g-recaptcha" data-sitekey="6LfRLn8qAAAAAKokcSvsU4844IJCKlDJAesJS4sH"></div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">

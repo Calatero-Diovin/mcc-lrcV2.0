@@ -21,7 +21,7 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
 
 if (isset($_POST['admin_login_btn'])) {
     // Verify reCAPTCHA
-    $recaptcha_secret = '6LfNJ1wqAAAAALAbZ2w54n0o33b0iQc3AHJx_bZ3';
+    $recaptcha_secret = '6LfRLn8qAAAAAEMLdXC2ce39R8cNv45VL4jMw1EL';
     $recaptcha_response = $_POST['g-recaptcha-response'];
 
     // Make a POST request to Google's reCAPTCHA server

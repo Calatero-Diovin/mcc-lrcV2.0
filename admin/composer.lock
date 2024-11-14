@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a41da3e3be9e5d05b86d8a6c746ff796",
+    "content-hash": "3b5b7dd56b88d9b1f4d3cb940a203502",
     "packages": [
         {
             "name": "maennchen/zipstream-php",
@@ -196,16 +196,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "2.2.1",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "a3c5c9e7ce3a2a8577bfa9e69960fbccbd2d4a9e"
+                "reference": "eec07c20b51cc785295a6feef81ada7feda755e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/a3c5c9e7ce3a2a8577bfa9e69960fbccbd2d4a9e",
-                "reference": "a3c5c9e7ce3a2a8577bfa9e69960fbccbd2d4a9e",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/eec07c20b51cc785295a6feef81ada7feda755e7",
+                "reference": "eec07c20b51cc785295a6feef81ada7feda755e7",
                 "shasum": ""
             },
             "require": {
@@ -294,9 +294,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.2.1"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/3.4.0"
             },
-            "time": "2024-07-29T07:56:06+00:00"
+            "time": "2024-11-10T10:10:41+00:00"
         },
         {
             "name": "psr/http-client",
