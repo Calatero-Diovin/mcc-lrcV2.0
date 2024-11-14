@@ -149,7 +149,7 @@ include('config/dbcon.php');
                             alert("Please allow location access to use this login page.");
                             setTimeout(function() {
                                 window.location.reload(); // Reload page after 5 seconds if denied
-                            }, 3000);
+                            }, 1000);
                         }
                         // If location access is lost, disable the form inputs and login button again
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
