@@ -60,6 +60,7 @@ if (isset($_POST['registration_link'])) {
     }
 
     $verification_code = md5(rand());
+    $hashedCode = password_hash($verification_code, PASSWORD_ARGON2I);
 
     $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
     if (!$stmt) {
@@ -70,7 +71,7 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
-    $stmt->bind_param("ss", $verification_code, $email);
+    $stmt->bind_param("ss", $hashedCode, $email);
 
     if ($stmt->execute()) {
         $mail = new PHPMailer(true);
@@ -137,7 +138,7 @@ if (isset($_POST['registration_link'])) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>Please click the button below to create a MCC-LRC Account:</p>
-                        <p><a style='color: white;' href='http://mcc-lrc.com/signup?code=$verification_code' class='button'>Register</a></p>
+                        <p><a style='color: white;' href='http://mcc-lrc.com/signup?code=$hashedCode' class='button'>Register</a></p>
                         <p>If you did not request this registration, please ignore this email.</p>
                     </div>
                 </div>
