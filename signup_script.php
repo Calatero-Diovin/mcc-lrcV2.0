@@ -10,7 +10,7 @@ if (!isset($_GET['code']) || empty($_GET['code'])) {
     exit; // Ensure no further code is executed
 }
 
-$code = password_verify($_GET['code']);
+$code = $_GET['code'];
 
 $code_query = "SELECT username FROM ms_account WHERE verification_code = ?";
 $code_stmt = $con->prepare($code_query);
