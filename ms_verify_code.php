@@ -59,9 +59,10 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
-    $verification_code = md5(rand());
-    $hashedCode = password_hash($verification_code, PASSWORD_ARGON2I);
+    // Generate a random verification code
+    $verification_code = bin2hex(random_bytes(16)); // Generate a random verification code
 
+    // Store the plain text verification code in the database
     $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
     if (!$stmt) {
         error_log("MySQL prepare error: " . $con->error);
@@ -71,96 +72,99 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
-    $stmt->bind_param("ss", $hashedCode, $email);
+    $stmt->bind_param("ss", $verification_code, $email);
 
-    if ($stmt->execute()) {
-        $mail = new PHPMailer(true);
-        $mail->SMTPDebug = 2; // Set to 2 for detailed debug output
-        try {
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'mcclearningresourcecenter2.0@gmail.com'; // Use environment variable
-            $mail->Password   = 'mbuq bvbh wtst tnsr'; // Use environment variable
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
-
-            $mail->setFrom('mcclearningresourcecenter2.0@gmail.com', 'MCC Learning Resource Center');
-            $mail->addAddress($email);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'MCC-LRC Creating Account';
-            $mail->Body = "
-            <html>
-            <head>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f4f4;
-                        margin: 0;
-                        padding: 0;
-                    }
-                    .container {
-                        width: 80%;
-                        margin: 20px auto;
-                        padding: 20px;
-                        background-color: #fff;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                    }
-                    .header {
-                        text-align: center;
-                        padding-bottom: 20px;
-                        border-bottom: 1px solid #ddd;
-                    }
-                    .logo {
-                        max-width: 150px;
-                        height: auto;
-                    }
-                    .content {
-                        padding: 20px 0;
-                    }
-                    .button {
-                        display: inline-block;
-                        padding: 10px 20px;
-                        background-color: #007bff;
-                        text-decoration: none;
-                        color: white;
-                        border-radius: 4px;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class='container'>
-                    <div class='header'>
-                        <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
-                    </div>
-                    <div class='content'>
-                        <p>Hello,</p>
-                        <p>Please click the button below to create a MCC-LRC Account:</p>
-                        <p><a style='color: white;' href='http://mcc-lrc.com/signup?code=$hashedCode' class='button'>Register</a></p>
-                        <p>If you did not request this registration, please ignore this email.</p>
-                    </div>
-                </div>
-            </body>
-        </html>
-        ";
-
-            $mail->send();
-            $_SESSION['status'] = "Registration link sent. Please check your email on Outlook.";
-            $_SESSION['status_code'] = "success";
-            header("Location: ms_verify");
-            exit(0);
-        } catch (Exception $e) {
-            error_log("Mailer Error: " . $mail->ErrorInfo);
-            $_SESSION['status'] = "Unable to send the registration link at this moment.";
-            $_SESSION['status_code'] = "error";
-            header("Location: ms_verify");
-            exit(0);
-        }
-    } else {
+    if (!$stmt->execute()) {
         error_log("MySQL execute error: " . $stmt->error);
         $_SESSION['status'] = "Database error. Please try again later.";
+        $_SESSION['status_code'] = "error";
+        header("Location: ms_verify");
+        exit(0);
+    }
+
+    // Hash the verification code with argon2i for the URL
+    $argon2i_hashed_code = password_hash($verification_code, PASSWORD_ARGON2I);
+
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 2; // Set to 2 for detailed debug output
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'mcclearningresourcecenter2.0@gmail.com'; // Use environment variable
+        $mail->Password   = 'mbuq bvbh wtst tnsr'; // Use environment variable
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+
+        $mail->setFrom('mcclearningresourcecenter2.0@gmail.com', 'MCC Learning Resource Center');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'MCC-LRC Creating Account';
+        $mail->Body = "
+        <html>
+        <head>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 0;
+                }
+                .container {
+                    width: 80%;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                }
+                .header {
+                    text-align: center;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid #ddd;
+                }
+                .logo {
+                    max-width: 150px;
+                    height: auto;
+                }
+                .content {
+                    padding: 20px 0;
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #007bff;
+                    text-decoration: none;
+                    color: white;
+                    border-radius: 4px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='header'>
+                    <img src='https://mcc-lrc.com/images/mcc-lrc.png' alt='Logo'>
+                </div>
+                <div class='content'>
+                    <p>Hello,</p>
+                    <p>Please click the button below to create a MCC-LRC Account:</p>
+                    <p><a style='color: white;' href='http://mcc-lrc.com/signup?code=$argon2i_hashed_code' class='button'>Register</a></p>
+                    <p>If you did not request this registration, please ignore this email.</p>
+                </div>
+            </div>
+        </body>
+    </html>
+    ";
+
+        $mail->send();
+        $_SESSION['status'] = "Registration link sent. Please check your email on Outlook.";
+        $_SESSION['status_code'] = "success";
+        header("Location: ms_verify");
+        exit(0);
+    } catch (Exception $e) {
+        error_log("Mailer Error: " . $mail->ErrorInfo);
+        $_SESSION['status'] = "Unable to send the registration link at this moment.";
         $_SESSION['status_code'] = "error";
         header("Location: ms_verify");
         exit(0);
