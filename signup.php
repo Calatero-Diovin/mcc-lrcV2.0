@@ -321,7 +321,7 @@ include('signup_script.php');
 
                     <div class="field" style="margin-top:-2px;">
                         <div class="label">Email</div>
-                        <input type="email" placeholder="MS 365 Email" name="email" value="<?= htmlspecialchars($username); ?>" readonly required/>
+                        <input type="email" placeholder="MS 365 Email" name="email" value="<?=$code_row['username'];?>" readonly required/>
                     </div>
 
                     <div class="field">
