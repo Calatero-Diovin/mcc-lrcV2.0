@@ -126,22 +126,49 @@ include('config/dbcon.php');
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
         });
-    </script>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-            <?php unset($_SESSION['login_success']); // Clear session variable ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
-                showConfirmButton: true
-            }).then(() => {
-                window.location.href = './admin/.'; // Redirect after showing SweetAlert
-            });
-        <?php endif; ?>
-    });
-</script>
 
+        // Function to request and check location permissions
+        function requestLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    // Success callback
+                    function (position) {
+                        console.log('Location access granted');
+                    },
+                    // Error callback
+                    function (error) {
+                        if (error.code === error.PERMISSION_DENIED) {
+                            alert("Please allow location access for the best experience.");
+                            setTimeout(requestLocation, 5000); // Retry after 5 seconds
+                        }
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Call the function to request location access on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            requestLocation();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+                <?php unset($_SESSION['login_success']); // Clear session variable ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    showConfirmButton: true
+                }).then(() => {
+                    window.location.href = './admin/.'; // Redirect after showing SweetAlert
+                });
+            <?php endif; ?>
+        });
+    </script>
+
+</body>
 </html>
