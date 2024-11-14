@@ -158,7 +158,7 @@ include('config/dbcon.php');
                             alert("Location access was lost. The form will reload.");
                             setTimeout(function() {
                                 window.location.reload(); // Reload page after 5 seconds if location is lost
-                            }, 5000);
+                            }, 3000);
                         }
                     }
                 );
