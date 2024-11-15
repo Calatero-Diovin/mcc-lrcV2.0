@@ -137,7 +137,7 @@ if (isset($_POST['registration_link'])) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>Please click the button below to create a MCC-LRC Account:</p>
-                        <p><a style='color: white;' href='http://mcc-lrc.com/signup.php?code=$verification_code' class='button'>Register</a></p>
+                        <p><a style='color: white;' href='http://localhost/mcc-lrcV2.0/signup.php?code=$verification_code' class='button'>Register</a></p>
                         <p>If you did not request this registration, please ignore this email.</p>
                     </div>
                 </div>
