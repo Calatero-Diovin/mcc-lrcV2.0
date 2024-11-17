@@ -28,7 +28,7 @@ if (isset($_POST['admin_login_btn'])) {
     $response_keys = json_decode($response, true);
 
     if (intval($response_keys["success"]) !== 1) {
-        $_SESSION['status'] = "Please complete the reCAPTCHA.";
+        $_SESSION['status'] = "Please complete the CAPTCHA.";
         $_SESSION['status_code'] = "error";
         header("Location: admin_login.php");
         exit(0);

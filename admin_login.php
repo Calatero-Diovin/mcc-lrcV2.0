@@ -107,7 +107,7 @@ if (strpos($request, '.php') !== false) {
                                 </div>
                                 <div class="form-floating mb-3">
                                     <div class="h-captcha" data-sitekey="efeaffaa-08fc-4c18-9b88-9d44d18c8a48"></div>
-                                    <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
+                                    <div class="invalid-feedback">Please complete the CAPTCHA.</div>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
