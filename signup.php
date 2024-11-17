@@ -918,7 +918,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
 
     if (!isChecked) {
         Swal.fire({
-            title: "Please check the box",
+            title: "Please check the box to agree the Terms and Condition.",
             icon: "error",
             confirmButtonText: "OK"
         });
