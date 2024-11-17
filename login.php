@@ -21,7 +21,7 @@ if (strpos($request, '.php') !== false) {
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
-     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+     <script src="https://hcaptcha.com/1/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
@@ -117,7 +117,7 @@ if (strpos($request, '.php') !== false) {
                                              </div>
                                         </div>
                                         <div class="mb-3">
-                                             <div class="g-recaptcha" data-sitekey="6LfRLn8qAAAAAKokcSvsU4844IJCKlDJAesJS4sH"></div>
+                                             <div class="h-captcha" data-sitekey="efeaffaa-08fc-4c18-9b88-9d44d18c8a48"></div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">

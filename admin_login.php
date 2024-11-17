@@ -41,7 +41,7 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
-     <script src="https://www.google.com/recaptcha/api.js?render=your-v3-site-key"></script>
+     <script src="https://hcaptcha.com/1/api.js" async defer></script>
 
 
 </head>
@@ -106,7 +106,7 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <div class="g-recaptcha" data-sitekey="6LfRLn8qAAAAAKokcSvsU4844IJCKlDJAesJS4sH"></div>
+                                    <div class="h-captcha" data-sitekey="efeaffaa-08fc-4c18-9b88-9d44d18c8a48"></div>
                                     <div class="invalid-feedback">Please complete the reCAPTCHA.</div>
                                 </div>
                             </div>
