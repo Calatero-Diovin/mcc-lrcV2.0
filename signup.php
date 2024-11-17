@@ -158,6 +158,9 @@ if (strpos($request, '.php') !== false) {
             .containers .card {
                 flex: 1 1 45%;
             }
+            .modal-title {
+                font-size: 10px;
+            }
         }
 
         @media(min-width: 900px) {
@@ -165,6 +168,104 @@ if (strpos($request, '.php') !== false) {
                 flex: 1 1 30%;
             }
         }
+
+        /* Modal background */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+/* Modal content box */
+.modal-dialog1 {
+  width: 80%;
+  max-width: 600px;
+  margin: 100px auto;
+}
+
+.modal-content1 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Modal header */
+.modal-header1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Close button */
+.close-btn1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #aaa;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.close-btn1:hover,
+.close-btn1:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Modal body */
+.modal-body1 {
+  max-height: 400px;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  padding: 20px;
+}
+
+/* Modal footer */
+.modal-footer11 {
+  text-align: right;
+}
+
+.btn-close1 {
+    padding: 8px;
+    padding-left: 15px;
+    padding-right:15px;
+    margin-top: 10px;
+    background-color: #dc3545;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.btn-close1:hover {
+    background-color: #bb2d3b;
+}
+
+.modal-footer1 .close-btn1 {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer1 .close-btn1:hover {
+  background-color: #c82333;
+}
+
     </style>
 </head>
 
@@ -386,9 +487,101 @@ if (strpos($request, '.php') !== false) {
                         <p id="error_cpassword"></p>
                     </div>
 
-                    <div class="form-check" style="margin-left:-20px;margin-top:-30px;">
+                    <div class="form-check" style="margin-left:-20px; margin-top:-30px;">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                        <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#" target="_blank">Terms and Conditions</a></label>
+                        <label class="form-check-label" for="exampleCheck1">
+                            I agree to the 
+                            <a href="#" id="openModalLink" data-bs-toggle="modal" data-bs-target="#myModal">Terms and Conditions</a>
+                        </label>
+                    </div>
+
+                    <!-- The Modal -->
+                    <div class="modal1" id="myModal">
+                    <div class="modal-dialog1 modal-dialog-scrollable">
+                        <div class="modal-content1">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header1">
+                            <h4 class="modal-title1">Terms and Condition</h4>
+                            <button type="button" class="close-btn1" data-bs-dismiss="modal" id="closeModalBtn">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body1" style="text-align:left;">
+                            <h3 style="margin-bottom:5px;">General Terms and Conditions for DPA of 2012 Compliance</h3>
+                            <p style="margin-bottom:5px;font-weight:bold;">1. Principles of Data Privacy</p>
+                            <p style="magin-bottom:5px;">Organizations must adhere to these principles when handling personal data:</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li><b>Transparency:</b> Inform data subjects about how their data will be collected, processed, and used.</li>
+                                <li><b>Legitimate Purpose:</b> Collect data only for lawful and specific purposes.</li>
+                                <li><b>Proportionality:</b> Collect and process only data that is necessary for the declared purpose.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">2. Data Subject Rights</p>
+                            <p style="magin-bottom:5px;">Individuals have the right to:</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Be informed about the processing of their personal data.</li>
+                                <li>Access their data.</li>
+                                <li>Object to data processing.</li>
+                                <li>Correct or update their data.</li>
+                                <li>Erase or block their data under certain conditions.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">3. Consent</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Obtain explicit, informed, and voluntary consent from the data subject before processing personal data.</li>
+                                <li>Clearly state the purpose of data collection at the time of obtaining consent.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">4. Security Measures</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Implement organizational, physical, and technical security measures to protect personal data from unauthorized access, processing, and disposal.</li>
+                                <li>Regularly review and update security measures to address emerging threats.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">5. Data Processing Standards</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Process data lawfully and in compliance with the declared purposes.</li>
+                                <li>Retain data only for as long as necessary to fulfill the purpose of processing.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">6. Data Sharing and Transfer</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Obtain consent before sharing personal data with third parties, except when allowed by law.</li>
+                                <li>Ensure third parties comply with the same data protection standards.</li>
+                                <li>For international data transfers, ensure the recipient country has adequate data protection measures.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">7. Data Breach Management</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Notify the National Privacy Commission (NPC) and affected individuals within 72 hours of discovering a breach that poses a risk to data subjects.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">8. Appointment of a Data Protection Officer (DPO)</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Designate a DPO responsible for ensuring compliance with the DPA and acting as the point of contact for the NPC and data subjects.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">9. Regular Compliance Audits</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Conduct regular privacy impact assessments and audits to ensure compliance with the DPA and its implementing rules.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">10. Accountability</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Maintain records of processing activities.</li>
+                                <li>Train staff on data privacy principles and policies.</li>
+                            </ul>
+                            <hr style="margin-top:20px;margin-bottom:10px;">
+                            <p style="margin-bottom:5px;font-weight:bold;">Penalties for Non-Compliance</p>
+                            <p style="magin-bottom:5px;">The DPA of 2012 imposes penalties for violations, including:</p>
+                            <ul style="margin-left:25px;margin-bottom:7px;">
+                                <li>Fines ranging from PHP 500,000 to PHP 5 million.</li>
+                                <li>Imprisonment ranging from 1 to 6 years, depending on the severity of the violation.</li>
+                            </ul>
+                            <p style="margin-bottom:5px;font-weight:bold;">Regulatory Authority</p>
+                            <p style="magin-bottom:5px;">The <b>National Privacy Commission (NPC)</b> oversees the enforcement of the DPA and issues guidelines and advisories to ensure compliance.</p>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer1">
+                            <button type="button" class="btn btn-danger btn-close1" data-bs-dismiss="modal" id="closeModalBtnFooter">Close</button>
+                        </div>
+
+                        </div>
+                    </div>
                     </div>
 
                     <div class="field btns">
@@ -456,25 +649,30 @@ nextBtnFirst.addEventListener("click", function (event) {
     // Regular expression to check for alphabetic characters only
     const nameRegex = /^[A-Za-z\s]*$/;
 
-    if (!lastname || !nameRegex.test(lastname)) {
+    // Check if the fields contain only letters and spaces and no leading or only spaces
+    const isValidName = (name) => {
+        return name.trim() !== "" && nameRegex.test(name) && !/^\s/.test(name); // checks for leading spaces
+    };
+
+    if (!lastname || !isValidName(lastname)) {
         Swal.fire({
-            title: "Please fill lastname field with letters only.",
+            title: "Please fill lastname field with letters only, no space first or space only",
             icon: "error",
             confirmButtonText: "OK"
         });
         return;
     }
-    if (!firstname || !nameRegex.test(firstname)) {
+    if (!firstname || !isValidName(firstname)) {
         Swal.fire({
-            title: "Please fill firstname field with letters only.",
+            title: "Please fill firstname field with letters only, no space first or space only",
             icon: "error",
             confirmButtonText: "OK"
         });
         return;
     }
-    if (middlename && !nameRegex.test(middlename)) {
+    if (middlename && !isValidName(middlename)) {
         Swal.fire({
-            title: "Please fill middlename field with letters only.",
+            title: "Please fill middlename field with letters only, no space first or space only",
             icon: "error",
             confirmButtonText: "OK"
         });
@@ -635,29 +833,33 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
-  const namePattern = /^[A-Za-z\s]+$/; // Regex for alphabetic characters and spaces
+  const namePattern = /^[A-Za-z\s]+$/;
 
-  if (!cellphone || !contactPerson || !personCellNo|| !email) {
+  const isValidName = (name) => {
+    return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
+  };
+
+  if (!cellphone || !contactPerson || !personCellNo || !email) {
     Swal.fire({
-      title: "Please fill this field.",
+      title: "Please fill all the fields.",
       icon: "error",
       confirmButtonText: "OK"
     });
     return;
   }
 
-  if(!email) {
+  if (!email) {
     Swal.fire({
-        title: "Please fill email.",
-        icon: "error",
-        confirmButtonText: "OK"
+      title: "Please fill in the email.",
+      icon: "error",
+      confirmButtonText: "OK"
     });
     return;
   }
 
-  if (!namePattern.test(contactPerson)) {
+  if (!isValidName(contactPerson)) {
     Swal.fire({
-      title: "Contact Person's name must only contain letters and spaces.",
+      title: "Contact Person's name must contain only letters and spaces, and must not start with a space.",
       icon: "error",
       confirmButtonText: "OK"
     });
@@ -997,6 +1199,27 @@ prevBtnFifth.addEventListener("click", function (event) {
                 studentIDInput.value = '';
             }
         });
+
+
+        // Access the modal and the close button
+    const modal = document.getElementById("myModal");
+    const openModalLink = document.getElementById("openModalLink");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const closeModalBtnFooter = document.getElementById("closeModalBtnFooter");
+
+    // Add event listener for the close button in the header
+    closeModalBtn.addEventListener("click", function() {
+        modal.style.display = "none"; // Hide the modal
+    });
+
+    // Add event listener for the close button in the footer
+    closeModalBtnFooter.addEventListener("click", function() {
+        modal.style.display = "none"; // Hide the modal
+    });
+
+    openModalLink.addEventListener("click", function(){
+        modal.style.display = "block";
+    });
     </script>
 
     <?php
