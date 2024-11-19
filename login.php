@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('include/session.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
