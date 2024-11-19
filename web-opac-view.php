@@ -18,7 +18,7 @@ include('includes/url.php');
                         <div class="row">
                             <?php
                             if (isset($_GET['id']) || isset($_GET['title']) || isset($_GET['author']) || isset($_GET['copyright_date']) || isset($_GET['isbn'])) {
-                                $book_id = encryptor('decrypt', $_GET['id']);
+                                $book_id = filter_var(encryptor('decrypt', $_GET['id']), FILTER_VALIDATE_INT);
                                 $book_title = encryptor('decrypt', $_GET['title']);
                                 $author = encryptor('decrypt', $_GET['author']);
                                 $copyright_date = encryptor('decrypt', $_GET['copyright_date']);
@@ -29,10 +29,10 @@ include('includes/url.php');
                                                            COUNT(book.accession_number) AS copy_count, 
                                                            SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
                                                       FROM book 
-                                                      WHERE book_id = ? AND title = ? AND author = ? AND copyright_date = ? AND isbn = ?
+                                                      WHERE title = ?
                                                       GROUP BY title, author, copyright_date, isbn
                                                       ORDER BY title, author, copyright_date, isbn DESC");
-                                $query->bind_param('issss', $book_id, $book_title, $author, $copyright_date, $isbn);
+                                $query->bind_param('s', $book_title);
                                 $query->execute();
                                 $result = $query->get_result();
 
