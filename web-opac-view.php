@@ -18,11 +18,11 @@ include('includes/url.php');
                         <div class="row">
                             <?php
                             if (isset($_GET['id']) || isset($_GET['title']) || isset($_GET['author']) || isset($_GET['copyright_date']) || isset($_GET['isbn'])) {
-                                $book_id = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['id']));
-                                $book_title = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['title']));
-                                $author = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['author']));
-                                $copyright_date = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['copyright_date']));
-                                $isbn = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['isbn']));
+                                $book_id = encryptor('decrypt', $_GET['id']);
+                                $book_title = encryptor('decrypt', $_GET['title']);
+                                $author = encryptor('decrypt', $_GET['author']);
+                                $copyright_date = encryptor('decrypt', $_GET['copyright_date']);
+                                $isbn = encryptor('decrypt', $_GET['isbn']);
 
                                 $query = $con->prepare("SELECT 
                                                            book.*, 
