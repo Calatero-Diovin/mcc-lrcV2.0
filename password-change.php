@@ -122,7 +122,7 @@ if ($result->num_rows > 0) {
                         </div>
                         <form action="password-reset-code.php" method="POST" class="needs-validation" novalidate style="margin-top:30px;" onsubmit="return validatePassword()">
                             <!-- Add hidden input field to pass email -->
-                            <input type="text" name="email" value="<?php echo htmlspecialchars($email); ?>"> 
+                            <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>"> 
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
