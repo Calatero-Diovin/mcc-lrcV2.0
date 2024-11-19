@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 include('includes/header.php');
 include('includes/navbar.php');
 include('admin/config/dbcon.php');
+include('includes/url.php');
 
 if (empty($_SESSION['auth'])) {
   header('Location: .');

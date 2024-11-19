@@ -4,6 +4,7 @@ ob_start(); // Start output buffering
 include('includes/header.php');
 include('includes/navbar.php');
 include('admin/config/dbcon.php');
+include('includes/url.php');
 
 if (!isset($_SESSION['auth'])) {
     header('Location: .');
