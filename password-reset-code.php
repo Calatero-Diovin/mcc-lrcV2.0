@@ -2,6 +2,8 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/url.php');
+
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -11,6 +13,7 @@ include('./admin/config/dbcon.php');
     require 'phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 function send_password_reset($get_name, $get_email, $token) {
+    $code = encryptor('encrypt', $token);
     $mail = new PHPMailer(true);
 
     try {
@@ -78,7 +81,7 @@ function send_password_reset($get_name, $get_email, $token) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>We received a request to reset your password. Click the button below to reset it:</p>
-                        <p><a style='color: white;' href='https://mcc-lrc.com/password-change.php?token=" . urlencode($token) . "&email=" . urlencode($get_email) . "' class='button'>Reset Password</a></p>
+                        <p><a style='color: white;' href='https://mcc-lrc.com/password-change.php?token=$code' class='button'>Reset Password</a></p>
                         <p>If you did not request a password reset, please ignore this email.</p>
                     </div>
                 </div>

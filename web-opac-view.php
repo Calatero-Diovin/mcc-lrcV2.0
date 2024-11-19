@@ -3,6 +3,7 @@ ob_start(); // Start output buffering
 include('includes/header.php');
 include('includes/navbar.php');
 include('admin/config/dbcon.php');
+include('includes/url.php');
 ?>
 
 <div class="container">
@@ -16,9 +17,12 @@ include('admin/config/dbcon.php');
                     <section class="section profile">
                         <div class="row">
                             <?php
-                            if (isset($_GET['id']) || isset($_GET['title'])) {
-                                $book_id = mysqli_real_escape_string($con, $_GET['id']);
-                                $book_title = mysqli_real_escape_string($con, $_GET['title']);
+                            if (isset($_GET['id']) || isset($_GET['title']) || isset($_GET['author']) || isset($_GET['copyright_date']) || isset($_GET['isbn'])) {
+                                $book_id = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['id']));
+                                $book_title = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['title']));
+                                $author = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['author']));
+                                $copyright_date = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['copyright_date']));
+                                $isbn = encryptor('decrypt', mysqli_real_escape_string($con, $_GET['isbn']));
 
                                 $query = $con->prepare("SELECT 
                                                            book.*, 

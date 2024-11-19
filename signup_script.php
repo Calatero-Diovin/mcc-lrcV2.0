@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/url.php');
 
 // Check if 'code' is provided in the URL
 if (!isset($_GET['code']) || empty($_GET['code'])) {
@@ -9,7 +10,7 @@ if (!isset($_GET['code']) || empty($_GET['code'])) {
     exit;
 }
 
-$code = $_GET['code'];
+$code = encryptor('decrypt', $_GET['code']);
 
 // Prepare query to fetch the verification code and its creation time
 $code_query = "SELECT username, created_at FROM ms_account WHERE verification_code = ?";

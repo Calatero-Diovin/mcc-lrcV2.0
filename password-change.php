@@ -2,47 +2,54 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/url.php');
 
+// Get the current request URL
 $request = $_SERVER['REQUEST_URI'];
 
+// Redirect to remove .php extension
 if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
     $new_url = str_replace('.php', '', $request);
     header("Location: $new_url", true, 301);
     exit();
 }
 
-// Check if 'code' is present in the URL
-if (!isset($_GET['email']) || empty($_GET['email'])) {
-    // Redirect to a 404 error page
+// Validate 'token' parameter
+if (!isset($_GET['token']) || empty($_GET['token'])) {
     header("HTTP/1.0 404 Not Found");
-    exit; // Ensure no further code is executed
+    echo "Error: Email parameter is missing.";
+    exit;
 }
 
-$email = $_GET['email'];
+$token = encryptor('decrypt', $_GET['token']);
 
-// Prepare and execute user query
-$user_query = $con->prepare("SELECT * FROM user WHERE email = ?");
-$user_query->bind_param("s", $email);
-$user_query->execute();
-$user_result = $user_query->get_result();
-if($user_result->num_rows > 0){
-$user_row = $user_result->fetch_assoc();
+// Combine queries for both 'user' and 'faculty' tables
+$query = $con->prepare("
+    SELECT * FROM (
+        SELECT 'user' AS type, email, verify_token FROM user
+        UNION ALL
+        SELECT 'faculty' AS type, email, verify_token FROM faculty
+    ) AS combined
+    WHERE verify_token = ?
+");
+$query->bind_param("s", $token);
+$query->execute();
+$result = $query->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    // Use $row['type'] to determine if it's a user or faculty
+    if ($row['type'] === 'user') {
+        // Process user-specific logic
+        $email = $row['email'];
+    } elseif ($row['type'] === 'faculty') {
+        // Process faculty-specific logic
+        $email = $row['email'];
+    }
 } else {
     header("HTTP/1.0 404 Not Found");
-    exit; // Ensure no further code is executed
-}
-
-// Prepare and execute faculty query
-$faculty_query = $con->prepare("SELECT * FROM faculty WHERE email = ?");
-$faculty_query->bind_param("s", $email);
-$faculty_query->execute();
-$faculty_result = $faculty_query->get_result();
-if($faculty_result->num_rows > 0){
-$faculty_row = $faculty_result->fetch_assoc();
-} else {
-    header("HTTP/1.0 404 Not Found");
-    exit; // Ensure no further code is executed
+    exit;
 }
 ?>
 <!DOCTYPE html>

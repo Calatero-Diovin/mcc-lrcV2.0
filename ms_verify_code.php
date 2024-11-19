@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 ob_start();
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/url.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -62,30 +63,10 @@ if (isset($_POST['registration_link'])) {
         exit(0);
     }
 
-if (!empty($current_code)) {
-    $current_time = new DateTime();
-    $code_time = new DateTime($created_at);
-
-    $current_time_timestamp = $current_time->getTimestamp();
-    $code_time_timestamp = $code_time->getTimestamp();
-
-    if (($current_time_timestamp - $code_time_timestamp) > 3600) {
-        // Invalidate the expired code
-        $stmt = $con->prepare("UPDATE ms_account SET verification_code = NULL WHERE username = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->close();
-    } else {
-        $_SESSION['status'] = "An active verification code already exists. Please wait before requesting a new one.";
-        $_SESSION['status_code'] = "error";
-        header("Location: ms_verify.php");
-        exit(0);
-    }
-}
-
-
     // Generate a new verification code
     $verification_code = md5(rand());
+
+    $code = encryptor('encrypt', $verification_code);
 
     $stmt = $con->prepare("UPDATE ms_account SET verification_code = ?, created_at = NOW() WHERE username = ?");
     if (!$stmt) {
@@ -135,7 +116,7 @@ if (!empty($current_code)) {
                     <div class='content'>
                         <p>Hello,</p>
                         <p>Please click the button below to create a MCC-LRC Account:</p>
-                        <p><a style='color: white;' href='https://mcc-lrc.com/signup.php?code=$verification_code' class='button'>Register</a></p>
+                        <p><a style='color: white;' href='https://mcc-lrc.com/signup.php?code=$code' class='button'>Register</a></p>
                         <p>If you did not request this registration, please ignore this email.</p>
                     </div>
                 </div>

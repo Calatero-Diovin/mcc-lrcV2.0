@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
+include('includes/url.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -19,7 +20,7 @@ if (!isset($_GET['token']) || empty($_GET['token'])) {
     exit; // Ensure no further code is executed
 }
 
-$token = $_GET['token'];
+$token = encryptor('decrypt', $_GET['token']);
 
 // Prepare and execute user query
 $user_query = $con->prepare("SELECT * FROM admin WHERE confirm_password = ?");
