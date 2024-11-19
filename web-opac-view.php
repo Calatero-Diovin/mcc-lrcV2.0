@@ -29,10 +29,10 @@ include('includes/url.php');
                                                            COUNT(book.accession_number) AS copy_count, 
                                                            SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
                                                       FROM book 
-                                                      WHERE title = ?
+                                                      WHERE title = ? AND author = ? AND copyright_date = ? AND isbn = ?
                                                       GROUP BY title, author, copyright_date, isbn
                                                       ORDER BY title, author, copyright_date, isbn DESC");
-                                $query->bind_param('s', $book_title);
+                                $query->bind_param('ssss', $book_title, $author, $copyright_date, $isbn);
                                 $query->execute();
                                 $result = $query->get_result();
 
