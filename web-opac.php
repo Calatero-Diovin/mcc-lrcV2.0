@@ -63,7 +63,7 @@ include('includes/url.php');
             <div class="card mt-1">
               <div class="card-body pt-3 d-md-flex d-sm-block">
                 <div class="col-xl-2">
-                  <a href="web-opac-view.php?id=<?= encryptor('encrypt', urlencode($book['book_id'])); ?>&title=<?= encryptor('encrypt',urlencode($book['title'])); ?>&author=<?= encryptor('encrypt',urlencode($book['author'])); ?>&copyright_date=<?= encryptor('encrypt',urlencode($book['copyright_date'])); ?>&isbn=<?= encryptor('encrypt',urlencode($book['isbn'])); ?>" class="text-decoration-none">
+                  <a href="web-opac-view.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" class="text-decoration-none">
                     <?php if ($book['book_image'] != ""): ?>
                     <img src="uploads/books_img/<?php echo htmlspecialchars($book['book_image']); ?>" width="100px" alt="">
                     <?php else: ?>
@@ -74,7 +74,7 @@ include('includes/url.php');
                 <div class="col-xl-10">
                   <div class="row mt-3">
                     <div class="col-lg-12 col-md-12 fs-6">
-                      <a href="web-opac-view.php?id=<?= encryptor('encrypt', urlencode($book['book_id'])); ?>&title=<?= encryptor('encrypt',urlencode($book['title'])); ?>&author=<?= encryptor('encrypt',urlencode($book['author'])); ?>&copyright_date=<?= encryptor('encrypt',urlencode($book['copyright_date'])); ?>&isbn=<?= encryptor('encrypt',urlencode($book['isbn'])); ?>" style="text-decoration: none" class="fw-bold">
+                      <a href="web-opac-view.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" style="text-decoration: none" class="fw-bold">
                         <?= htmlspecialchars($book['title']) ?>
                       </a>
                       (<?= htmlspecialchars($book['copyright_date']) ?>)
@@ -110,7 +110,7 @@ include('includes/url.php');
                 foreach ($query_run as $book) {
             ?>
             <div class="col-12 col-md-3" data-aos="zoom-in">
-              <a style="text-decoration: none !important;" href="web-opac-view.php?id=<?= encryptor('encrypt', urlencode($book['book_id'])); ?>&title=<?= encryptor('encrypt',urlencode($book['title'])); ?>&author=<?= encryptor('encrypt',urlencode($book['author'])); ?>&copyright_date=<?= encryptor('encrypt',urlencode($book['copyright_date'])); ?>&isbn=<?= encryptor('encrypt',urlencode($book['isbn'])); ?>">
+              <a style="text-decoration: none !important;" href="web-opac-view.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>">
                 <div class="card h-100 shadow">
                   <?php if ($book['book_image'] != ""): ?>
                     <p class="text-center"><?php echo htmlspecialchars($book['title']) ?></p>
