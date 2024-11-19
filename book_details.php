@@ -28,19 +28,22 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
                     <section class="section profile">
                         <div class="row">
                             <?php
-                            if (isset($_GET['id']) || isset($_GET['title'])) {
-                                $book_id = mysqli_real_escape_string($con, $_GET['id']);
-                                $book_title = mysqli_real_escape_string($con, $_GET['title']);
+                            if (isset($_GET['id']) || isset($_GET['title']) || isset($_GET['author']) || isset($_GET['copyright_date']) || isset($_GET['isbn'])) {
+                                $book_id = filter_var(encryptor('decrypt', $_GET['id']), FILTER_VALIDATE_INT);
+                                $book_title = encryptor('decrypt', $_GET['title']);
+                                $author = encryptor('decrypt', $_GET['author']);
+                                $copyright_date = encryptor('decrypt', $_GET['copyright_date']);
+                                $isbn = encryptor('decrypt', $_GET['isbn']);
 
                                 $query = $con->prepare("SELECT 
                                                            book.*, 
                                                            COUNT(book.accession_number) AS copy_count, 
                                                            SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count
                                                       FROM book 
-                                                      WHERE title = ? 
-                                                      GROUP BY title 
-                                                      ORDER BY title DESC");
-                                $query->bind_param('s', $book_title);
+                                                      WHERE title = ? AND author = ? AND copyright_date = ? AND isbn = ?
+                                                      GROUP BY title, author, copyright_date, isbn 
+                                                      ORDER BY title, author, copyright_date, isbn DESC");
+                                $query->bind_param('ssss', $book_title, $author, $copyright_date, $isbn);
                                 $query->execute();
                                 $result = $query->get_result();
 
