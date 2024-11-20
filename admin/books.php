@@ -264,12 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     ]);
     
-    initializeTable('#example2', [
-        {
-            targets: 1,
-            visible: false
-        }
-    ]); // No columnDefs for the second table
+    initializeTable('#example2', []); // No columnDefs for the second table
 });
 </script>
 
