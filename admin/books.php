@@ -131,7 +131,7 @@ include('includes/url.php');
             <?php
         }
     } else {
-        echo "<tr><td colspan='9' style='text-align: center;'>No records found</td></tr>";
+        // echo "<tr><td colspan='9' style='text-align: center;'>No records found</td></tr>";
     }
     ?>
 </tbody>
@@ -200,7 +200,7 @@ include('includes/url.php');
                                                         <?php
                                                     }
                                                 } else {
-                                                    echo "<tr><td colspan='7' style='text-align: center;'>No records found</td></tr>";
+                                                    // echo "<tr><td colspan='7' style='text-align: center;'>No records found</td></tr>";
                                                 }                                           
                                                 ?>
                                             </tbody>
