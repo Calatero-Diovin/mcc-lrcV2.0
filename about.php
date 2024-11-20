@@ -349,7 +349,6 @@ include('includes/navbar.php');
                               <a href="https://www.youtube.com/watch?v=bIzChSbj0OU"
                                    class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
                                         class="bi bi-youtube"></i></a>
-
                          </div>
                          <!-- Grid column -->
                     </div>
