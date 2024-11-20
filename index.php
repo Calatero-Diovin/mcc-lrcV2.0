@@ -75,7 +75,7 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
             <div class="card mt-1">
               <div class="card-body pt-3 d-md-flex d-sm-block">
                 <div class="col-xl-2">
-                  <a href="book_details.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" class="text-decoration-none">
+                  <a href="book_details.php?a=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&b=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&c=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&d=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&e=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" class="text-decoration-none">
                     <?php if ($book['book_image'] != ""): ?>
                     <img src="uploads/books_img/<?php echo htmlspecialchars($book['book_image']); ?>" width="100px" alt="">
                     <?php else: ?>
@@ -86,7 +86,7 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
                 <div class="col-xl-10">
                   <div class="row mt-3">
                     <div class="col-lg-12 col-md-12 fs-6">
-                      <a href="book_details.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" style="text-decoration: none" class="fw-bold">
+                      <a href="book_details.php?a=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&b=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&c=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&d=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&e=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>" style="text-decoration: none" class="fw-bold">
                         <?= htmlspecialchars($book['title']) ?>
                       </a>
                       (<?= htmlspecialchars($book['copyright_date']) ?>)
@@ -122,7 +122,7 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
                 foreach ($query_run as $book) {
             ?>
             <div class="col-12 col-md-3" data-aos="zoom-in">
-              <a style="text-decoration: none !important;" href="book_details.php?id=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&isbn=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>">
+              <a style="text-decoration: none !important;" href="book_details.php?a=<?= urlencode(encryptor('encrypt', $book['book_id'])); ?>&b=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&c=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&d=<?= urlencode(encryptor('encrypt', $book['copyright_date'])); ?>&e=<?= urlencode(encryptor('encrypt', $book['isbn'])); ?>">
                 <div class="card h-100 shadow">
                   <?php if ($book['book_image'] != ""): ?>
                     <p class="text-center"><?php echo htmlspecialchars($book['title']) ?></p>

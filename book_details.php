@@ -29,12 +29,12 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
                     <section class="section profile">
                         <div class="row">
                             <?php
-                            if (isset($_GET['id']) || isset($_GET['title']) || isset($_GET['author']) || isset($_GET['copyright_date']) || isset($_GET['isbn'])) {
-                                $book_id = filter_var(encryptor('decrypt', $_GET['id']), FILTER_VALIDATE_INT);
-                                $book_title = encryptor('decrypt', $_GET['title']);
-                                $author = encryptor('decrypt', $_GET['author']);
-                                $copyright_date = encryptor('decrypt', $_GET['copyright_date']);
-                                $isbn = encryptor('decrypt', $_GET['isbn']);
+                            if (isset($_GET['a']) || isset($_GET['b']) || isset($_GET['c']) || isset($_GET['d']) || isset($_GET['e'])) {
+                                $book_id = filter_var(encryptor('decrypt', $_GET['a']), FILTER_VALIDATE_INT);
+                                $book_title = encryptor('decrypt', $_GET['b']);
+                                $author = encryptor('decrypt', $_GET['c']);
+                                $copyright_date = encryptor('decrypt', $_GET['d']);
+                                $isbn = encryptor('decrypt', $_GET['e']);
 
                                 $query = $con->prepare("SELECT 
                                                            book.*, 
