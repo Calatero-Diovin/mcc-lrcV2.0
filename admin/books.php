@@ -54,7 +54,6 @@ include('includes/url.php');
                                         <table id="example" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th style="display:none;"></th>
                                                     <th>Image</th>
                                                     <th>Title</th>
@@ -90,7 +89,6 @@ include('includes/url.php');
         foreach ($query_run as $book) {
             ?>
             <tr>
-                <td class="auto-id" style="text-align: center;"></td>
                 <td style="display: none;"><?= htmlspecialchars($book['accession_numbers']); ?></td>
                 <td>
                     <center>
