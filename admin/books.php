@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
             visible: false
         },
         {
-            target: 3,
+            target: 2,
             width: "100px"
         }
     ]);
