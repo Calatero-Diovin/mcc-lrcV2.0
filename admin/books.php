@@ -261,18 +261,9 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             targets: 1,
             visible: false
-        },
-        {
-            target: 2,
-            width: "10px"
         }
     ]);
 
-    initializeTable('#example2', [
-        {
-            target: 1,
-            width: "100px"
-        }
-    ]); // Add responsive configuration here as well
+    initializeTable('#example2', []); // Add responsive configuration here as well
 });
 </script>
