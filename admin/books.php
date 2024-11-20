@@ -101,7 +101,7 @@ include('includes/url.php');
                         <?php endif; ?>
                     </center>
                 </td>
-                <td class="multiline-title"><?= htmlspecialchars($book['title']); ?></td>
+                <td><?= htmlspecialchars($book['title']); ?></td>
                 <td><?= htmlspecialchars($book['author']); ?></td>
                 <td><?= htmlspecialchars($book['copyright_date']); ?></td>
                 <td><?= htmlspecialchars($book['publisher']); ?></td>
@@ -264,7 +264,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     ]);
     
-    initializeTable('#example2', []); // No columnDefs for the second table
+    initializeTable('#example2', [
+        {
+            targets: 1,
+            visible: false
+        }
+    ]); // No columnDefs for the second table
 });
 </script>
 
