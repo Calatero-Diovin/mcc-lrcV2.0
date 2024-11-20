@@ -2,6 +2,7 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
+include('includes/url.php');
 
 // Check which tab to show
 $activeTab = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab' : 'details-tab';
@@ -89,10 +90,10 @@ $activeTabPane = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab-p
                                 <div class="card-body">
                                     <?php
                                     if (isset($_GET['title']) || isset($_GET['copyright_date']) || isset($_GET['author']) || isset($_GET['isbn'])) {
-                                        $book_title = mysqli_real_escape_string($con, $_GET['title']);
-                                        $copyright_date = mysqli_real_escape_string($con, $_GET['copyright_date']);
-                                        $author = mysqli_real_escape_string($con, $_GET['author']);
-                                        $isbn = mysqli_real_escape_string($con, $_GET['isbn']);
+                                        $book_title = encryptor('decrypt',$_GET['title']);
+                                        $copyright_date = encryptor('decrypt',$_GET['copyright_date']);
+                                        $author = encryptor('decrypt',$_GET['author']);
+                                        $isbn = encryptor('decrypt',$_GET['isbn']);
                                         $query = "SELECT book.*, category.classname, COUNT(book.accession_number) AS copy_count,
                                                   SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count 
                                                   FROM book 

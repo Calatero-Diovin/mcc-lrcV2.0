@@ -2,6 +2,7 @@
 include('authentication.php');
 include('./includes/header.php'); 
 include('./includes/sidebar.php'); 
+include('includes/url.php');
 ?>
 
 <main id="main" class="main">
@@ -24,10 +25,10 @@ include('./includes/sidebar.php');
                               <?php
                               if(isset($_GET['title']) || isset($_GET['copyright_date']) || isset($_GET['author']) || isset($_GET['isbn']))
                               {
-                                   $book_title = mysqli_real_escape_string($con, $_GET['title']);
-                                   $copyright_date = mysqli_real_escape_string($con, $_GET['copyright_date']);
-                                   $author = mysqli_real_escape_string($con, $_GET['author']);
-                                   $isbn = mysqli_real_escape_string($con, $_GET['isbn']);
+                                   $book_title = encryptor('decrypt',$_GET['title']);
+                                   $copyright_date = encryptor('decrypt',$_GET['copyright_date']);
+                                   $author = encryptor('decrypt',$_GET['author']);
+                                   $isbn = encryptor('decrypt',$_GET['isbn']);
 
                                    $query = "SELECT * FROM book LEFT JOIN category ON book.category_id = category.category_id WHERE title='$book_title' AND copyright_date='$copyright_date' AND author='$author' AND isbn='$isbn'"; 
                                    $query_run = mysqli_query($con, $query);
