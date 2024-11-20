@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             target: 2,
-            width: "100px"
+            width: "10px"
         }
     ]);
 
