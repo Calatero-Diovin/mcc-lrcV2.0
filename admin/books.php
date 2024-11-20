@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             new DataTable(tableSelector, {
-                responsive: true,
+                responsive: true, // Ensure responsiveness for both tables
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
@@ -263,8 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
             visible: false
         }
     ]);
-    
-    initializeTable('#example2', []); // No columnDefs for the second table
+
+    initializeTable('#example2', []); // Add responsive configuration here as well
 });
 </script>
-
