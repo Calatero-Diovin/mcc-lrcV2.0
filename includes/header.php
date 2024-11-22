@@ -43,36 +43,78 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
 <html lang="en">
 
 <head>
-     <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1" />
-     <link rel="icon" href="./images/mcc-lrc.png">
-     <title>MCC Learning Resource Center</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dynamically inject meta charset
+            var metaCharset = document.createElement('meta');
+            metaCharset.setAttribute('charset', 'utf-8');
+            document.head.appendChild(metaCharset);
 
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" />
-     <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+            // Dynamically inject meta viewport
+            var metaViewport = document.createElement('meta');
+            metaViewport.setAttribute('name', 'viewport');
+            metaViewport.setAttribute('content', 'width=device-width, initial-scale=1');
+            document.head.appendChild(metaViewport);
 
-     <!-- Bootstrap Icon -->
-     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+            // Dynamically inject favicon
+            var linkIcon = document.createElement('link');
+            linkIcon.setAttribute('rel', 'icon');
+            linkIcon.setAttribute('href', './images/mcc-lrc.png');
+            document.head.appendChild(linkIcon);
 
-     <!-- Iconscout cdn link -->
-     <link rel="stylesheet" href="assets/css/line.css">
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+            // Dynamically inject title
+            var titleTag = document.createElement('title');
+            titleTag.innerText = 'MCC Learning Resource Center';
+            document.head.appendChild(titleTag);
 
-     <!-- Custom CSS Styling -->
-     <link rel="stylesheet" href="assets/css/style.css">
-     <link rel="stylesheet" href="assets/css/jquery-ui.css">
-     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
-     <link href="assets/css/sweetalert2.min.css" rel="stylesheet" />
+            // Dynamically inject Bootstrap CSS
+            var bootstrapCss = document.createElement('link');
+            bootstrapCss.setAttribute('rel', 'stylesheet');
+            bootstrapCss.setAttribute('href', 'assets/css/bootstrap5.min.css');
+            document.head.appendChild(bootstrapCss);
 
-     <!-- Alertify JS cdn link -->
-     <link rel="stylesheet" href="assets/css/alertify.min.css" />
-     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+            // Dynamically inject Bootstrap Icons CSS
+            var bootstrapIconsCss = document.createElement('link');
+            bootstrapIconsCss.setAttribute('rel', 'stylesheet');
+            bootstrapIconsCss.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css');
+            document.head.appendChild(bootstrapIconsCss);
 
-     <!-- Animation -->
-     <link rel="stylesheet" href="assets/css/aos.css" />
+            // Dynamically inject custom CSS
+            var customCss = document.createElement('link');
+            customCss.setAttribute('rel', 'stylesheet');
+            customCss.setAttribute('href', 'assets/css/style.css');
+            document.head.appendChild(customCss);
+
+            // Dynamically inject jQuery UI CSS
+            var jqueryUiCss = document.createElement('link');
+            jqueryUiCss.setAttribute('rel', 'stylesheet');
+            jqueryUiCss.setAttribute('href', 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
+            document.head.appendChild(jqueryUiCss);
+
+            // Dynamically inject SweetAlert2 CSS
+            var sweetAlert2Css = document.createElement('link');
+            sweetAlert2Css.setAttribute('rel', 'stylesheet');
+            sweetAlert2Css.setAttribute('href', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css');
+            document.head.appendChild(sweetAlert2Css);
+
+            // Dynamically inject Alertify CSS
+            var alertifyCss = document.createElement('link');
+            alertifyCss.setAttribute('rel', 'stylesheet');
+            alertifyCss.setAttribute('href', 'assets/css/alertify.min.css');
+            document.head.appendChild(alertifyCss);
+
+            var alertifyBootstrapCss = document.createElement('link');
+            alertifyBootstrapCss.setAttribute('rel', 'stylesheet');
+            alertifyBootstrapCss.setAttribute('href', 'assets/css/alertify.bootstraptheme.min.css');
+            document.head.appendChild(alertifyBootstrapCss);
+
+            // Dynamically inject Animation CSS
+            var aosCss = document.createElement('link');
+            aosCss.setAttribute('rel', 'stylesheet');
+            aosCss.setAttribute('href', 'assets/css/aos.css');
+            document.head.appendChild(aosCss);
+        });
+    </script>
 </head>
 
 <body>
