@@ -1,11 +1,6 @@
 <!-- Login Validation -->
 <script src="assets/js/validation.js"></script>
 
-
-
-<!-- Show and hide Password -->
-<script src="assets/js/show-hide-password.js"></script>
-
 <!-- Format Number  -->
 <script src="assets/js/format_number.js"></script>
 <!-- Dissable Future Date -->
