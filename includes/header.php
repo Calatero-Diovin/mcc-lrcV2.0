@@ -1,6 +1,8 @@
 <?php
 
-include('includes/session.php');
+include('session.php');
+include('security_headers.php');
+
 
 $request = $_SERVER['REQUEST_URI'];
 
