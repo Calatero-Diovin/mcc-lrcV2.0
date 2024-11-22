@@ -28,6 +28,7 @@ if (strpos($request, '.php') !== false) {
      <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
      <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
      <!-- Iconscout cdn link -->
      <link rel="stylesheet" href="assets/css/line.css">
@@ -109,13 +110,15 @@ if (strpos($request, '.php') !== false) {
                                              </div>
                                         </div>
                                         <div class="form-floating mb-3">
-                                             <span class="password-show-toggle js-password-show-toggle"><span class="uil"></span></span>
-                                             <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
-                                             <label for="password">Password</label>
-                                             <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                                  Please enter your password.
-                                             </div>
-                                        </div>
+    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+    <label for="password">Password</label>
+    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please enter your password.
+    </div>
+    <span class="position-absolute end-0 top-50 translate-middle-y me-3" style="cursor: pointer;">
+        <i class="fa fa-eye" id="togglePassword"></i>
+    </span>
+</div>
                                         <div class="mb-3">
                                              <div class="h-captcha" data-sitekey="efeaffaa-08fc-4c18-9b88-9d44d18c8a48"></div>
                                         </div>
@@ -149,6 +152,20 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom JS link -->
      <script src="assets/js/script.js"></script>
+
+     <script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+
+    togglePassword.addEventListener("click", function () {
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // Toggle the eye icon
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+    });
+</script>
 
      <script>
      document.addEventListener('DOMContentLoaded', function() {
