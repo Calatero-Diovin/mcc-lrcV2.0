@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 include('includes/url.php');
+include('includes/security_headers.php');
 
 // Check if 'code' is provided in the URL
 if (!isset($_GET['code']) || empty($_GET['code'])) {

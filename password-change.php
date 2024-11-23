@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('./admin/config/dbcon.php');
 include('includes/url.php');
+include('includes/security_headers.php');
 
 // Get the current request URL
 $request = $_SERVER['REQUEST_URI'];
