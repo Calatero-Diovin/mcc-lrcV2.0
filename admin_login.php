@@ -188,22 +188,5 @@ if (strpos($request, '.php') !== false) {
             requestLocation();
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-                <?php unset($_SESSION['login_success']); // Clear session variable ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    showConfirmButton: true
-                }).then(() => {
-                    window.location.href = 'admin/.'; // Redirect after showing SweetAlert
-                });
-            <?php endif; ?>
-        });
-    </script>
-
 </body>
 </html>
