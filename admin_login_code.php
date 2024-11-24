@@ -76,7 +76,7 @@ if (isset($_POST['admin_login_btn'])) {
                     $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
                     $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
                 } else {
-                    $_SESSION['status'] = "Invalid email, password, or admin type.";
+                    $_SESSION['status'] = "Invalid credentials.Try again...";
                 }
                 $_SESSION['status_code'] = "error";
                 header("Location: admin_login.php");
@@ -89,7 +89,7 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
                 $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
             } else {
-                $_SESSION['status'] = "Invalid email, password, or admin type.";
+                $_SESSION['status'] = "Invalid credentials.Try again...";
             }
             $_SESSION['status_code'] = "error";
             header("Location: admin_login.php");

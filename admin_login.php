@@ -73,15 +73,34 @@ if (strpos($request, '.php') !== false) {
                             $lockout_time_remaining = $_SESSION['lockout_time'] - time();
                             $minutes_remaining = ceil($lockout_time_remaining / 60);
                             ?>
-                            <div class="alert alert-danger">
-                                Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).
+                            <div id="lockout-message" class="alert alert-danger">
+                                Too many failed attempts. Please try again in <span id="lockout-timer"><?php echo $minutes_remaining; ?></span> minute(s).
                             </div>
+                            <script>
+                                // Start countdown timer for lockout
+                                let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
+                                
+                                // Function to update the timer every second
+                                function updateLockoutTimer() {
+                                    if (lockoutTimeRemaining <= 0) {
+                                        document.getElementById('lockout-message').style.display = 'none';
+                                    } else {
+                                        let minutes = Math.floor(lockoutTimeRemaining / 60);
+                                        let seconds = lockoutTimeRemaining % 60;
+                                        document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                                        lockoutTimeRemaining--;
+                                    }
+                                }
+
+                                // Update every second
+                                setInterval(updateLockoutTimer, 1000);
+                            </script>
                         <?php endif; ?>
 
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required disabled>
+                                    <select class="form-select" id="admin_type" name="admin_type" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -92,14 +111,14 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
                                         Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
                                     <label for="password">Password</label>
                                     <span class="password-show-toggle js-password-show-toggle">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -114,7 +133,7 @@ if (strpos($request, '.php') !== false) {
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled>Login</button>
+                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
