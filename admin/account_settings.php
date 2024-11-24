@@ -152,59 +152,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
      </section>
 </main>
 
-<script>
-     document.getElementById('Phone').addEventListener('input', function () {
-        var phoneInput = this.value.trim();
-        
-        // Remove non-numeric characters
-        phoneInput = phoneInput.replace(/\D/g, '');
-        
-        // Check if the number starts with "09" and is exactly 11 digits long
-        if (/^09\d{9}$/.test(phoneInput)) {
-            this.setCustomValidity('');
-        } else {
-            this.setCustomValidity('Phone number must start with "09" and be exactly 11 digits long.');
-        }
-        
-        // Show or hide the validation message
-        var isValid = /^09\d{9}$/.test(phoneInput);
-        this.classList.toggle('is-invalid', !isValid);
-        
-        // Clear error message if "09" is typed again
-        if (phoneInput.startsWith('09')) {
-            this.setCustomValidity('');
-            this.classList.remove('is-invalid');
-        }
-    });
-
-     // Regex to allow alphabetic characters, spaces between words, and prevent leading spaces
-     const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*$/;
-
-     // Function to validate the name input as the user types
-     function validateNameInput(inputId) {
-     const input = document.getElementById(inputId).value;
-          
-          // If the input doesn't match the valid format, process it
-          if (input && !nameRegex.test(input)) {
-               // Replace the invalid input with the valid part of the input
-               const validInput = input.replace(/[^A-Za-z ]/g, '').trim();
-               
-               // If there was invalid input, reset the field to the sanitized value
-               if (validInput !== input) {
-                    document.getElementById(inputId).value = validInput;
-                    Swal.fire({
-                         icon: 'error',
-                         title: 'Invalid Format',
-                         confirmButtonText: 'OK',
-                         showConfirmButton: true,
-                         timer: 2000, // Show alert for 2 seconds before auto-closing
-                    });
-               }
-          }
-     }
-</script>
-
 <?php
+include('account_script.php');
 include('includes/footer.php');
 include('./includes/script.php');
 include('message.php');
