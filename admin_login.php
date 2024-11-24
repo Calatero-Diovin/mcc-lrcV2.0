@@ -107,7 +107,7 @@ if (strpos($request, '.php') !== false) {
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <select class="form-select" id="admin_type" name="admin_type" required disabled>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -118,14 +118,14 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
                                         Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled>
                                     <label for="password">Password</label>
                                     <span class="password-show-toggle js-password-show-toggle">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
