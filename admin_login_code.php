@@ -21,9 +21,10 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
 
 if (isset($_POST['admin_login_btn'])) {
 
-    $secret_key = 'ES_a968a3a6eef2407f9aae120817e2b82b';
+    $secret_key = 'ES_a968a3a6eef2407f9aae120817e2b82b'; // Replace with your actual secret key
     $hcaptcha_response = $_POST['h-captcha-response'];
 
+    // Verify CAPTCHA response with hCaptcha API
     $response = file_get_contents("https://hcaptcha.com/siteverify?secret=$secret_key&response=$hcaptcha_response");
     $response_keys = json_decode($response, true);
 
@@ -38,21 +39,26 @@ if (isset($_POST['admin_login_btn'])) {
     $password = $_POST['password'];
     $admin_type = $_POST['admin_type'];
 
+    // Prepare the SQL query
     $admin_login_query = "SELECT * FROM admin WHERE email = ? AND admin_type = ?";
 
+    // Check if the query preparation is successful
     if ($stmt = mysqli_prepare($con, $admin_login_query)) {
         mysqli_stmt_bind_param($stmt, 'ss', $email, $admin_type);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
+        // If the query returns a matching record
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password'])) {
-                session_regenerate_id(true); // Regenerate session ID
-                // Reset login attempts on successful login
+                session_regenerate_id(true); // Regenerate session ID to prevent session fixation
+
+                // Reset login attempts and lockout time on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
 
+                // Store the admin information in session
                 $admin_id = $data['admin_id'];
                 $admin_name = $data['firstname'] . ' ' . $data['lastname'];
                 $admin_email = $data['email'];
@@ -66,14 +72,17 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
+                // Set session variable for successful login
                 $_SESSION['login_success'] = true;
+
+                // Redirect to the login page to trigger the SweetAlert on client side
                 header("Location: admin_login.php");
                 exit(0);
             } else {
                 // Increment login attempts on failure
                 $_SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] >= 3) {
-                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                    $_SESSION['lockout_time'] = time() + 300; // Lockout for 5 minutes
                     $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
                 } else {
                     $_SESSION['status'] = "Invalid email, password, or admin type.";
@@ -83,10 +92,10 @@ if (isset($_POST['admin_login_btn'])) {
                 exit(0);
             }
         } else {
-            // Increment login attempts on failure
+            // Increment login attempts on failure if no matching record is found
             $_SESSION['login_attempts']++;
             if ($_SESSION['login_attempts'] >= 3) {
-                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                $_SESSION['lockout_time'] = time() + 300; // Lockout for 5 minutes
                 $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
             } else {
                 $_SESSION['status'] = "Invalid email, password, or admin type.";
@@ -96,6 +105,7 @@ if (isset($_POST['admin_login_btn'])) {
             exit(0);
         }
 
+        // Close the prepared statement
         mysqli_stmt_close($stmt);
     } else {
         $_SESSION['status'] = "Something went wrong.";
