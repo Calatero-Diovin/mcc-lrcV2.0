@@ -79,11 +79,21 @@ if (strpos($request, '.php') !== false) {
                             <script>
                                 // Start countdown timer for lockout
                                 let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
-                                
+
+                                // Disable form inputs and login button during lockout
+                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+                                const loginButton = document.querySelector('[name="admin_login_btn"]');
+                                formInputs.forEach(input => input.disabled = true);
+                                loginButton.disabled = true;
+
                                 // Function to update the timer every second
                                 function updateLockoutTimer() {
                                     if (lockoutTimeRemaining <= 0) {
                                         document.getElementById('lockout-message').style.display = 'none';
+
+                                        // Enable the form inputs and login button once lockout is over
+                                        formInputs.forEach(input => input.disabled = false);
+                                        loginButton.disabled = false;
                                     } else {
                                         let minutes = Math.floor(lockoutTimeRemaining / 60);
                                         let seconds = lockoutTimeRemaining % 60;
