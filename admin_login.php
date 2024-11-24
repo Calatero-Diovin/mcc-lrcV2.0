@@ -68,11 +68,7 @@ if (strpos($request, '.php') !== false) {
                             </center>
                         </div>
 
-                        <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
-                            <?php
-                            $lockout_time_remaining = $_SESSION['lockout_time'] - time();
-                            $minutes_remaining = ceil($lockout_time_remaining / 60);
-                            ?>
+                        <?php if ($lockout_time_remaining > 0): ?>
                             <div id="lockout-message" class="alert alert-danger">
                                 Too many failed attempts. Please try again in <span id="lockout-timer"><?php echo $minutes_remaining; ?></span> minute(s).
                             </div>
@@ -90,9 +86,10 @@ if (strpos($request, '.php') !== false) {
                                     // Function to update the timer every second
                                     function updateLockoutTimer() {
                                         if (lockoutTimeRemaining <= 0) {
+                                            // Lockout time expired, hide the lockout message
                                             document.getElementById('lockout-message').style.display = 'none';
-
-                                            // Enable the form inputs and login button once lockout is over
+                                            
+                                            // Enable form inputs and login button after lockout
                                             formInputs.forEach(input => input.disabled = false);
                                             loginButton.disabled = false;
                                         } else {
