@@ -177,25 +177,30 @@ if (isset($_SESSION['auth_admin']['admin_id']))
         }
     });
 
-    // Regex to allow alphabetic characters, spaces between words, and prevent leading spaces
-    const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*$/;
+     // Regex to allow alphabetic characters, spaces between words, and prevent leading spaces
+     const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*$/;
 
      // Function to validate the name input as the user types
      function validateNameInput(inputId) {
      const input = document.getElementById(inputId).value;
           
-          // If input is invalid, show SweetAlert error
+          // If the input doesn't match the valid format, process it
           if (input && !nameRegex.test(input)) {
-               Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid Format',
-                    confirmButtonText: 'OK',
-                    showConfirmButton: true,
-                    timer: 2000, // Show alert for 2 seconds before auto-closing
-               }).then(() => {
-                    // Reset the input field after SweetAlert closes
-                    document.getElementById(inputId).value = '';
-               });
+               // Replace the invalid input with the valid part of the input
+               const validInput = input.replace(/[^A-Za-z ]/g, '').trim();
+               
+               // If there was invalid input, reset the field to the sanitized value
+               if (validInput !== input) {
+                    document.getElementById(inputId).value = validInput;
+                    Swal.fire({
+                         icon: 'error',
+                         title: 'Invalid Format',
+                         text: 'Please enter only alphabetic characters (spaces are allowed between names, but cannot start or be only spaces).',
+                         confirmButtonText: 'OK',
+                         showConfirmButton: true,
+                         timer: 2000, // Show alert for 2 seconds before auto-closing
+                    });
+               }
           }
      }
 </script>
