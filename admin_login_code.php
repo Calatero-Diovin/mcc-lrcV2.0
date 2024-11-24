@@ -22,7 +22,7 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
 if (isset($_POST['admin_login_btn'])) {
 
     $secret_key = 'ES_506523bb213e4a78ba0318bc784532c6'; // Replace with your actual secret key
-    $hcaptcha_response = $_POST['h-captcha'];
+    $hcaptcha_response = $_POST['h-captcha-response'];
 
     // Verify CAPTCHA response with hCaptcha API
     $response = file_get_contents("https://hcaptcha.com/siteverify?secret=$secret_key&response=$hcaptcha_response");
