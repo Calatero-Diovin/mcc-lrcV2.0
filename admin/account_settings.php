@@ -192,6 +192,9 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                     confirmButtonText: 'OK',
                     showConfirmButton: true,
                     timer: 2000, // Show alert for 2 seconds before auto-closing
+               }).then(() => {
+                    // Reset the input field after SweetAlert closes
+                    document.getElementById(inputId).value = '';
                });
           }
      }
