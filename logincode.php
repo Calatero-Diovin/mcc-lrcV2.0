@@ -6,12 +6,12 @@ include('./admin/config/dbcon.php');
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
-    $_SESSION['lockout_time'] = null;
+    $_SESSION['lockout_times'] = null;
 }
 
 // Check if user is locked out
-if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
-    $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+if ($_SESSION['lockout_times'] && time() < $_SESSION['lockout_times']) {
+    $lockout_time_remaining = $_SESSION['lockout_times'] - time();
     $minutes_remaining = ceil($lockout_time_remaining / 60);
     $_SESSION['status'] = "Too many failed attempts. Please try again in $minutes_remaining minute(s).";
     $_SESSION['status_code'] = "error";
@@ -51,7 +51,7 @@ if (isset($_POST['login_btn'])) {
             if (password_verify($password, $hashed_password)) {
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
-                $_SESSION['lockout_time'] = null;
+                $_SESSION['lockout_times'] = null;
 
                 if ($role == 'student') {
                     $user_id = $data['user_id'];  
@@ -90,10 +90,10 @@ if (isset($_POST['login_btn'])) {
                 // Increment login attempts on failure
                 $_SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] >= 3) {
-                    $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                    $_SESSION['lockout_times'] = time() + 300; // Lock out for 5 minutes
                     $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
                 } else {
-                    $_SESSION['status'] = "Incorrect ID no. or Password";
+                    $_SESSION['status'] = "Invalid credentials.Try again...";
                 }
                 $_SESSION['status_code'] = "error";
             }
@@ -101,10 +101,10 @@ if (isset($_POST['login_btn'])) {
             // Increment login attempts on failure
             $_SESSION['login_attempts']++;
             if ($_SESSION['login_attempts'] >= 3) {
-                $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
+                $_SESSION['lockout_times'] = time() + 300; // Lock out for 5 minutes
                 $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
             } else {
-                $_SESSION['status'] = "Incorrect ID no. or Password";
+                $_SESSION['status'] = "Invalid credentials.Try again...";
             }
             $_SESSION['status_code'] = "error";
         }

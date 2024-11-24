@@ -85,7 +85,7 @@ if (strpos($request, '.php') !== false) {
                                    </center>
                               </div>
 
-                              <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                              <?php if (isset($_SESSION['lockout_times']) && time() < $_SESSION['lockout_times']): ?>
                                    <?php
                                    $lockout_time_remaining = $_SESSION['lockout_time'] - time();
                                    $minutes_remaining = ceil($lockout_time_remaining / 60);
