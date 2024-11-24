@@ -199,20 +199,7 @@ if (strpos($request, '.php') !== false) {
                 title: 'Login Successful',
                 showConfirmButton: false, // Hide the confirm button
                 timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
-                timerProgressBar: true, // Show the timer progress bar
-                toast: true, // Enable toast mode for better progress bar
-                position: 'top-center', // Position the toast in the top-center
-                didOpen: () => {
-                    const timerInterval = setInterval(() => {
-                        const progressBar = Swal.getHtmlContainer().querySelector('.swal2-progress-bar');
-                        if (progressBar) {
-                            progressBar.style.transition = 'none'; // Disable smooth transition
-                        }
-                    }, 10);
-                },
-                willClose: () => {
-                    clearInterval(timerInterval); // Clear interval on close
-                }
+                timerProgressBar: true, // Optional: Show the timer progress bar
             }).then(() => {
                 window.location.href = './admin/.'; // Redirect after the timer completes
             });
