@@ -27,8 +27,7 @@
 <script src="assets/js/jspdf.umd.min.js"></script>
 <script src="assets/js/jspdf.plugin.autotable.min.js"></script>
 <script src="assets/js/xlsx.full.min.js"></script>
-<script src="assets/js/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
 
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
