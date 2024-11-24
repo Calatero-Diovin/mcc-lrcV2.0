@@ -87,14 +87,14 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="firstname" type="text"
                                                             class="form-control" id="firstname"
-                                                            value="<?=$admin['firstname']?>" pattern="[A-Za-z]+"></div>
+                                                            value="<?=$admin['firstname']?>" oninput="validateNameInput('firstname')"></div>
                                              </div>
 
                                              <div class="row mb-3">
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
-                                                  <div class="col-md-8 col-lg-9"> <input name="middlename" type="text"
-                                                            class="form-control" value="<?=$admin['middlename']?>" pattern="[A-Za-z]+">
+                                                  <div class="col-md-8 col-lg-9"> <input name="middlename" type="text" id="middlename"
+                                                            class="form-control" value="<?=$admin['middlename']?>" oninput="validateNameInput('middlename')">
                                                   </div>
                                              </div>
                                              <div class="row mb-3">
@@ -102,7 +102,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Lastname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="lastname" type="text"
                                                             class="form-control" id="lastname"
-                                                            value="<?=$admin['lastname']?>" pattern="[A-Za-z]+">
+                                                            value="<?=$admin['lastname']?>" oninput="validateNameInput('lastname')">
                                                   </div>
                                              </div>
 
@@ -176,6 +176,25 @@ if (isset($_SESSION['auth_admin']['admin_id']))
             this.classList.remove('is-invalid');
         }
     });
+
+    // Regex to allow alphabetic characters, spaces between words, and prevent leading spaces
+    const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*$/;
+
+     // Function to validate the name input as the user types
+     function validateNameInput(inputId) {
+     const input = document.getElementById(inputId).value;
+          
+          // If input is invalid, show SweetAlert error
+          if (input && !nameRegex.test(input)) {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Format',
+                    confirmButtonText: 'OK',
+                    showConfirmButton: true,
+                    timer: 2000, // Show alert for 2 seconds before auto-closing
+               });
+          }
+     }
 </script>
 
 <?php
