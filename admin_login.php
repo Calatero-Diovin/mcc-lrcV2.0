@@ -30,6 +30,7 @@ if (strpos($request, '.php') !== false) {
      <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
      <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 
      <!-- Iconscout cdn link -->
      <link rel="stylesheet" href="assets/css/line.css">
@@ -189,6 +190,7 @@ if (strpos($request, '.php') !== false) {
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
