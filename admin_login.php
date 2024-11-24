@@ -68,41 +68,42 @@ if (strpos($request, '.php') !== false) {
                             </center>
                         </div>
 
-                        <?php if ($lockout_time_remaining > 0): ?>
+                        <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                            <?php
+                            $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                            $minutes_remaining = ceil($lockout_time_remaining / 60);
+                            ?>
                             <div id="lockout-message" class="alert alert-danger">
                                 Too many failed attempts. Please try again in <span id="lockout-timer"><?php echo $minutes_remaining; ?></span> minute(s).
                             </div>
                             <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Start countdown timer for lockout
-                                    let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
-                                    const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-                                    const loginButton = document.querySelector('[name="admin_login_btn"]');
-                                    
-                                    // Disable form inputs and login button during lockout
-                                    formInputs.forEach(input => input.disabled = true);
-                                    loginButton.disabled = true;
+                                // Start countdown timer for lockout
+                                let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
 
-                                    // Function to update the timer every second
-                                    function updateLockoutTimer() {
-                                        if (lockoutTimeRemaining <= 0) {
-                                            // Lockout time expired, hide the lockout message
-                                            document.getElementById('lockout-message').style.display = 'none';
-                                            
-                                            // Enable form inputs and login button after lockout
-                                            formInputs.forEach(input => input.disabled = false);
-                                            loginButton.disabled = false;
-                                        } else {
-                                            let minutes = Math.floor(lockoutTimeRemaining / 60);
-                                            let seconds = lockoutTimeRemaining % 60;
-                                            document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                                            lockoutTimeRemaining--;
-                                        }
+                                // Disable form inputs and login button during lockout
+                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+                                const loginButton = document.querySelector('[name="admin_login_btn"]');
+                                formInputs.forEach(input => input.disabled = true);
+                                loginButton.disabled = true;
+
+                                // Function to update the timer every second
+                                function updateLockoutTimer() {
+                                    if (lockoutTimeRemaining <= 0) {
+                                        document.getElementById('lockout-message').style.display = 'none';
+
+                                        // Enable the form inputs and login button once lockout is over
+                                        formInputs.forEach(input => input.disabled = false);
+                                        loginButton.disabled = false;
+                                    } else {
+                                        let minutes = Math.floor(lockoutTimeRemaining / 60);
+                                        let seconds = lockoutTimeRemaining % 60;
+                                        document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                                        lockoutTimeRemaining--;
                                     }
+                                }
 
-                                    // Update every second
-                                    setInterval(updateLockoutTimer, 1000);
-                                });
+                                // Update every second
+                                setInterval(updateLockoutTimer, 1000);
                             </script>
                         <?php endif; ?>
 
