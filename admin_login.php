@@ -73,9 +73,6 @@ if (strpos($request, '.php') !== false) {
                             $lockout_time_remaining = $_SESSION['lockout_time'] - time();
                             $minutes_remaining = ceil($lockout_time_remaining / 60);
                             ?>
-                            <div id="lockout-message" class="alert alert-danger">
-                                Too many failed attempts. Please try again in <span id="lockout-timer"><?php echo $minutes_remaining; ?></span> minute(s).
-                            </div>
                             <script>
                                 // Start countdown timer for lockout
                                 let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
