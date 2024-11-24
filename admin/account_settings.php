@@ -195,7 +195,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                     Swal.fire({
                          icon: 'error',
                          title: 'Invalid Format',
-                         text: 'Please enter only alphabetic characters (spaces are allowed between names, but cannot start or be only spaces).',
                          confirmButtonText: 'OK',
                          showConfirmButton: true,
                          timer: 2000, // Show alert for 2 seconds before auto-closing
