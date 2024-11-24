@@ -77,33 +77,35 @@ if (strpos($request, '.php') !== false) {
                                 Too many failed attempts. Please try again in <span id="lockout-timer"><?php echo $minutes_remaining; ?></span> minute(s).
                             </div>
                             <script>
-                                // Start countdown timer for lockout
-                                let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Start countdown timer for lockout
+                                    let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
+                                    const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+                                    const loginButton = document.querySelector('[name="admin_login_btn"]');
+                                    
+                                    // Disable form inputs and login button during lockout
+                                    formInputs.forEach(input => input.disabled = true);
+                                    loginButton.disabled = true;
 
-                                // Disable form inputs and login button during lockout
-                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-                                const loginButton = document.querySelector('[name="admin_login_btn"]');
-                                formInputs.forEach(input => input.disabled = true);
-                                loginButton.disabled = true;
+                                    // Function to update the timer every second
+                                    function updateLockoutTimer() {
+                                        if (lockoutTimeRemaining <= 0) {
+                                            document.getElementById('lockout-message').style.display = 'none';
 
-                                // Function to update the timer every second
-                                function updateLockoutTimer() {
-                                    if (lockoutTimeRemaining <= 0) {
-                                        document.getElementById('lockout-message').style.display = 'none';
-
-                                        // Enable the form inputs and login button once lockout is over
-                                        formInputs.forEach(input => input.disabled = false);
-                                        loginButton.disabled = false;
-                                    } else {
-                                        let minutes = Math.floor(lockoutTimeRemaining / 60);
-                                        let seconds = lockoutTimeRemaining % 60;
-                                        document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                                        lockoutTimeRemaining--;
+                                            // Enable the form inputs and login button once lockout is over
+                                            formInputs.forEach(input => input.disabled = false);
+                                            loginButton.disabled = false;
+                                        } else {
+                                            let minutes = Math.floor(lockoutTimeRemaining / 60);
+                                            let seconds = lockoutTimeRemaining % 60;
+                                            document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                                            lockoutTimeRemaining--;
+                                        }
                                     }
-                                }
 
-                                // Update every second
-                                setInterval(updateLockoutTimer, 1000);
+                                    // Update every second
+                                    setInterval(updateLockoutTimer, 1000);
+                                });
                             </script>
                         <?php endif; ?>
 
