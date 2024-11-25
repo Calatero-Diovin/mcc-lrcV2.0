@@ -32,18 +32,9 @@
                     Swal.fire({
                          icon: 'error',
                          title: 'Invalid Format',
-                         showConfirmButton: false,
-                         timer: 2000,
-                         didOpen: () => {
-                         Swal.showLoading();
-                         const timer = Swal.getPopup().querySelector("b");
-                         timerInterval = setInterval(() => {
-                              timer.textContent = `${Swal.getTimerLeft()}`;
-                         }, 100);
-                         },
-                         willClose: () => {
-                         clearInterval(timerInterval);
-                         }
+                         showConfirmButton: false, // Hide the confirm button
+                         timer: 2000, // Set the timer to 3 seconds (3000 milliseconds)
+                         timerProgressBar: true, // Optional: Show the timer progress bar
                     });
                }
           }
