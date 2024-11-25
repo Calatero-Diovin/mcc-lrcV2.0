@@ -19,6 +19,21 @@
         }
     });
 
+    document.getElementById('firstName').addEventListener('input', function () {
+     var firstNameInput = this.value.trim();
+
+     // Check if the name is not empty and doesn't consist of only spaces
+     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput) && firstNameInput !== '') {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid name. Spaces alone are not allowed.');
+     }
+     
+     // Determine if the input is valid
+     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput) && firstNameInput !== '';
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
     function validateNameInput(inputId) {
         const inputElement = document.getElementById(inputId);
         const currentValue = inputElement.value;
