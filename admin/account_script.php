@@ -78,5 +78,21 @@
      var isValid = /^[A-Za-z]+(?:, [A-Za-z]+){2}$/.test(addressInput);
      this.classList.toggle('is-invalid', !isValid);
      });
-     
+
+     document.getElementById('ImageUpload').addEventListener('change', function () {
+     var file = this.files[0]; // Get the selected file
+     var fileName = file ? file.name : '';
+     var fileExtension = fileName.split('.').pop().toLowerCase();
+
+     // Check if the file extension is one of the allowed types: png, jpg, jpeg
+     if (['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Only PNG, JPG, and JPEG image formats are allowed.');
+     }
+
+     // Toggle the invalid class based on the validity of the file type
+     this.classList.toggle('is-invalid', !['png', 'jpg', 'jpeg'].includes(fileExtension));
+     });
+
 </script>

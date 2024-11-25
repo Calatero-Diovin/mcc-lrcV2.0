@@ -77,7 +77,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             <input type="hidden" name="old_admin_image"
                                                                  value="<?=$admin['admin_image'];?>">
                                                             <input type="file" name="admin_image" class="form-control"
-                                                                 autocomplete="off">
+                                                                 autocomplete="off" id="ImageUpload" accept="image/png, image/jpg, image/jpeg">
 
                                                        </div>
                                                   </div>
