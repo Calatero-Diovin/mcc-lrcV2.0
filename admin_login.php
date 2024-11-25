@@ -217,21 +217,21 @@ if (strpos($request, '.php') !== false) {
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-            <?php unset($_SESSION['login_success']); // Clear session variable ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
-                showConfirmButton: false, // Hide the confirm button
-                timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
-                timerProgressBar: true, // Optional: Show the timer progress bar
-            }).then(() => {
-                window.location.href = './admin/.'; // Redirect after the timer completes
-            });
-        <?php endif; ?>
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+                <?php unset($_SESSION['login_success']); // Clear session variable ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    showConfirmButton: false, // Hide the confirm button
+                    timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
+                    timerProgressBar: true, // Optional: Show the timer progress bar
+                }).then(() => {
+                    window.location.href = './admin/.'; // Redirect after the timer completes
+                });
+            <?php endif; ?>
+        });
+    </script>
 
 </body>
 </html>

@@ -120,15 +120,15 @@ if (strpos($request, '.php') !== false) {
                                              </div>
                                         </div>
                                         <div class="form-floating mb-3">
-    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
-    <label for="password">Password</label>
-    <div id="validationServerUsernameFeedback" class="invalid-feedback">
-        Please enter your password.
-    </div>
-    <span class="position-absolute end-0 top-50 translate-middle-y me-3" style="cursor: pointer;">
-        <i class="fa fa-eye" id="togglePassword"></i>
-    </span>
-</div>
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+                                        <label for="password">Password</label>
+                                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                                             Please enter your password.
+                                        </div>
+                                        <span class="position-absolute end-0 top-50 translate-middle-y me-3" style="cursor: pointer;">
+                                             <i class="fa fa-eye" id="togglePassword"></i>
+                                        </span>
+                                        </div>
                                         <div class="mb-3">
                                              <div class="h-captcha" data-sitekey="efeaffaa-08fc-4c18-9b88-9d44d18c8a48"></div>
                                         </div>
@@ -214,6 +214,23 @@ if (strpos($request, '.php') !== false) {
     }
 });
      </script>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['login_succes']) && $_SESSION['login_succes']): ?>
+                <?php unset($_SESSION['login_succes']); // Clear session variable ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    showConfirmButton: false, // Hide the confirm button
+                    timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
+                    timerProgressBar: true, // Optional: Show the timer progress bar
+                }).then(() => {
+                    window.location.href = 'index.php'; // Redirect after the timer completes
+                });
+            <?php endif; ?>
+        });
+    </script>
 
      <?php
      // Include scripts and message handling here

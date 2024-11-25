@@ -73,8 +73,8 @@ if (isset($_POST['login_btn'])) {
                         'email' => $user_email,
                     ];
 
-                    $_SESSION['message_success'] = "Welcome to Web OPAC";
-                    header("Location: index");
+                    $_SESSION['login_succes'] = true;
+                    header("Location: login.php");
                     exit(0);
                 } elseif ($status == 'pending') {
                     $_SESSION['status'] = "Your account is still pending for approval! Please wait..";
