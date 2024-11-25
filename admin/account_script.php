@@ -23,14 +23,14 @@
      var firstNameInput = this.value.trim();
 
      // Check if the name is not empty and doesn't consist of only spaces
-     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput) && firstNameInput !== '') {
+     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid name. Spaces alone are not allowed.');
      }
      
      // Determine if the input is valid
-     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput) && firstNameInput !== '';
+     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
