@@ -94,7 +94,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="middlename" type="text" id="middlename"
-                                                            class="form-control" value="<?=$admin['middlename']?>" oninput="validateNameInput('middlename')" onblur="checkInputOnBlur('firstname')">
+                                                            class="form-control" value="<?=$admin['middlename']?>" oninput="validateNameInput('middlename')" onblur="checkInputOnBlur('middlename')">
                                                   </div>
                                              </div>
                                              <div class="row mb-3">
@@ -102,7 +102,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Lastname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="lastname" type="text"
                                                             class="form-control" id="lastname"
-                                                            value="<?=$admin['lastname']?>" oninput="validateNameInput('lastname')" onblur="checkInputOnBlur('firstname')">
+                                                            value="<?=$admin['lastname']?>" oninput="validateNameInput('lastname')" onblur="checkInputOnBlur('lastname')">
                                                   </div>
                                              </div>
 
