@@ -64,27 +64,19 @@
      this.classList.toggle('is-invalid', !isValid);
      });
 
-    
+     document.getElementById('Address').addEventListener('input', function () {
+     var addressInput = this.value.trim();
 
-    function validateAddressFormat(inputId) {
-        const inputElement = document.getElementById(inputId);
-        const currentValue = inputElement.value.trim(); // Removes leading/trailing spaces
-
-        // Define the regex pattern for the address format "Patao, Bantayan, Cebu"
-        const addressPattern = /^[A-Za-z]+(?:, [A-Za-z]+){2}$/;
-
-        // If the address does not match the format, show a SweetAlert error
-        if (!addressPattern.test(currentValue)) {
-            Swal.fire({
-               icon: 'error',
-               title: 'Please enter the address in the format: "Barangay, Municipality, Province".',
-               showConfirmButton: false,
-               timer: 3000,
-               timerProgressBar: true,
-            });
-
-            inputElement.focus(); // Focus back on the input field for correction
-            inputElement.value = ''; // Clear the input if invalid
-        }
-    }
+     // Check if the name is not empty and doesn't consist of only spaces
+     if (/^[A-Za-z]+(?:, [A-Za-z]+){2}$/.test(addressInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter the address in the format: "Barangay, Municipality, Province".');
+     }
+     
+     // Determine if the input is valid
+     var isValid = /^[A-Za-z]+(?:, [A-Za-z]+){2}$/.test(addressInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+     
 </script>
