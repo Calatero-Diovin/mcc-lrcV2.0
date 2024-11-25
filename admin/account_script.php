@@ -35,32 +35,32 @@
      });
 
      document.getElementById('middlename').addEventListener('input', function () {
-     var firstNameInput = this.value.trim();
+     var middleNameInput = this.value.trim();
 
      // Check if the name is not empty and doesn't consist of only spaces
-     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput)) {
+     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(middleNameInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid name. Spaces alone are not allowed.');
      }
      
      // Determine if the input is valid
-     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput);
+     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(middleNameInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
      document.getElementById('lastname').addEventListener('input', function () {
-     var firstNameInput = this.value.trim();
+     var lastNameInput = this.value.trim();
 
      // Check if the name is not empty and doesn't consist of only spaces
-     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput)) {
+     if (/^[A-Za-z]+([ A-Za-z]*)$/.test(lastNameInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid name. Spaces alone are not allowed.');
      }
      
      // Determine if the input is valid
-     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(firstNameInput);
+     var isValid = /^[A-Za-z]+([ A-Za-z]*)$/.test(lastNameInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
