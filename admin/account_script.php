@@ -47,4 +47,24 @@
                     inputElement.value = ''; // Clear the input if only spaces were entered
           }
     }
+
+    function validateAddressFormat(inputId) {
+        const inputElement = document.getElementById(inputId);
+        const currentValue = inputElement.value.trim(); // Removes leading/trailing spaces
+
+        // Define the regex pattern for the address format "Patao, Bantayan, Cebu"
+        const addressPattern = /^[A-Za-z]+(?:, [A-Za-z]+){2}$/;
+
+        // If the address does not match the format, show a SweetAlert error
+        if (!addressPattern.test(currentValue)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please enter the address in the format: "Barangay, Municipality, Province".',
+                confirmButtonText: 'Ok'
+            });
+
+            inputElement.focus(); // Focus back on the input field for correction
+            inputElement.value = ''; // Clear the input if invalid
+        }
+    }
 </script>
