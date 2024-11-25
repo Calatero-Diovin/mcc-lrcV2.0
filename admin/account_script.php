@@ -23,10 +23,22 @@
         const inputElement = document.getElementById(inputId);
         const currentValue = inputElement.value;
 
-        // Replace any non-alphabetical characters (including spaces) with an empty string
-        const validatedValue = currentValue.replace(/[^A-Za-z]/g, '');
+        // Remove any non-alphabetical characters except spaces (to allow names with spaces)
+        const validatedValue = currentValue.replace(/[^A-Za-z ]/g, '');
 
         // Update the input field with the validated value
         inputElement.value = validatedValue;
+    }
+
+    function checkInputOnBlur(inputId) {
+        const inputElement = document.getElementById(inputId);
+        const currentValue = inputElement.value.trim(); // Removes leading/trailing spaces
+
+        // If the input is empty or only contains spaces, show an error or prevent form submission
+        if (currentValue === '') {
+            alert('Please enter a valid name.');
+            inputElement.focus(); // Focus back on the input field for correction
+            inputElement.value = ''; // Clear the input if only spaces were entered
+        }
     }
 </script>
