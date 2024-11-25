@@ -32,9 +32,9 @@
                     Swal.fire({
                          icon: 'error',
                          title: 'Invalid Format',
-                         confirmButtonText: 'OK',
-                         showConfirmButton: true,
-                         timer: 2000,
+                         showConfirmButton: false, // Hide the confirm button
+                         timer: 2000, // Set the timer to 3 seconds (3000 milliseconds)
+                         loadingSpinner: true // Optional: Show the timer progress bar
                     });
                }
           }
