@@ -35,10 +35,16 @@
         const currentValue = inputElement.value.trim(); // Removes leading/trailing spaces
 
         // If the input is empty or only contains spaces, show an error or prevent form submission
-        if (currentValue === '') {
-            alert('Please enter a valid name.');
-            inputElement.focus(); // Focus back on the input field for correction
-            inputElement.value = ''; // Clear the input if only spaces were entered
-        }
+          if (currentValue === '') {
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Please enter a valid name. Spaces alone are not allowed.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    });
+                    inputElement.focus(); // Focus back on the input field for correction
+                    inputElement.value = ''; // Clear the input if only spaces were entered
+          }
     }
 </script>
