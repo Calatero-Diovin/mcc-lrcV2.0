@@ -58,9 +58,11 @@
         // If the address does not match the format, show a SweetAlert error
         if (!addressPattern.test(currentValue)) {
             Swal.fire({
-                icon: 'error',
-                title: 'Please enter the address in the format: "Barangay, Municipality, Province".',
-                confirmButtonText: 'Ok'
+               icon: 'error',
+               title: 'Please enter the address in the format: "Barangay, Municipality, Province".',
+               showConfirmButton: false,
+               timer: 3000,
+               timerProgressBar: true,
             });
 
             inputElement.focus(); // Focus back on the input field for correction
