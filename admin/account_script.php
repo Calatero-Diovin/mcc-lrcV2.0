@@ -19,7 +19,7 @@
         }
     });
 
-    document.getElementById('firstName').addEventListener('input', function () {
+    document.getElementById('firstname').addEventListener('input', function () {
      var firstNameInput = this.value.trim();
 
      // Check if the name is not empty and doesn't consist of only spaces
