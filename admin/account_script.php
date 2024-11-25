@@ -19,27 +19,14 @@
         }
     });
 
-     const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*$/;
+    function validateNameInput(inputId) {
+        const inputElement = document.getElementById(inputId);
+        const currentValue = inputElement.value;
 
-     function validateNameInput(inputId) {
-     const input = document.getElementById(inputId).value;
-          
-          if (input && !nameRegex.test(input)) {
-               const validInput = input.replace(/[^A-Za-z ]/g, '').trim();
-               
-               if (validInput !== input) {
-                    document.getElementById(inputId).value = validInput;
-                    Swal.fire({
-                         icon: 'error',
-                         title: 'Invalid Format',
-                         showConfirmButton: false, // Hide the confirm button
-                         timer: 2000, // Set the timer to 3 seconds (3000 milliseconds)
-                         timerProgressBar: true, // Optional: Show the timer progress bar
-                         didOpen: () => {
-                         Swal.showLoading();
-                         }
-                    });
-               }
-          }
-     }
+        // Replace any non-alphabetical characters (including spaces) with an empty string
+        const validatedValue = currentValue.replace(/[^A-Za-z]/g, '');
+
+        // Update the input field with the validated value
+        inputElement.value = validatedValue;
+    }
 </script>
