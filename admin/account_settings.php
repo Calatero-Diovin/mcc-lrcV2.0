@@ -87,7 +87,11 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="firstname" type="text"
                                                             class="form-control" id="firstname"
-                                                            value="<?=$admin['firstname']?>"></div>
+                                                            value="<?=$admin['firstname']?>">
+                                                            <div class="invalid-feedback">
+                                                            Please enter a valid firstname. Spaces alone are not allowed.
+                                                                 </div>
+                                                       </div>
                                              </div>
 
                                              <div class="row mb-3">
@@ -120,7 +124,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             maxlength="11"
                                                             value="<?=$admin['phone_number']?>">
                                                             <div class="invalid-feedback">
-                                                                      Phon number must start with "09" and be exactly 11 digits long.
+                                                                      Phone number must start with "09" and be exactly 11 digits long.
                                                                  </div>
                                                        </div>
                                              </div>
