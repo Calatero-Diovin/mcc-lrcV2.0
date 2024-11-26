@@ -67,7 +67,6 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
      <link rel="stylesheet" href="assets/css/jquery-ui.css">
      <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
-     <link href="assets/css/sweetalert2.min.css" rel="stylesheet" />
 
      <!-- Alertify JS cdn link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
