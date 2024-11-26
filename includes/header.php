@@ -49,11 +49,13 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
      <meta name="viewport" content="width=device-width, initial-scale=1" />
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
+     <script src="https://hcaptcha.com/1/api.js" async defer></script>
 
      <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" />
      <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
      <!-- Bootstrap Icon -->
      <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
@@ -74,6 +76,7 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
 
      <!-- Animation -->
      <link rel="stylesheet" href="assets/css/aos.css" />
+     <link rel="stylesheet" href="assets/css/login.css">
 </head>
 
 <body>
