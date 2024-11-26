@@ -225,7 +225,7 @@ if (strpos($request, '.php') !== false) {
                     timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
                     timerProgressBar: true, // Optional: Show the timer progress bar
                 }).then(() => {
-                    window.location.href = './admin/index.php'; // Redirect after the timer completes
+                    window.location.href = './admin/.'; // Redirect after the timer completes
                 });
             <?php endif; ?>
         });
