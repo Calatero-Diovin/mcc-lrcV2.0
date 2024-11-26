@@ -2,6 +2,7 @@
 ini_set('session.cookie_httponly', 1);
 session_start();
 include('includes/security_headers.php');
+include('includes/header.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
