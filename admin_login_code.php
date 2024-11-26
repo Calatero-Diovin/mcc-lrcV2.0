@@ -66,7 +66,7 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
-                $_SESSION['login_success'] = true;
+                $_SESSION['login_successes'] = true;
                 header("Location: admin_login.php");
                 exit(0);
             } else {
