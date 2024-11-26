@@ -214,7 +214,7 @@ if (strpos($request, '.php') !== false) {
         });
     </script>
 
-    <!-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
@@ -225,11 +225,11 @@ if (strpos($request, '.php') !== false) {
                     timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
                     timerProgressBar: true, // Optional: Show the timer progress bar
                 }).then(() => {
-                    window.location.href = './admin/.'; // Redirect after the timer completes
+                    window.location.href = './admin/index.php'; // Redirect after the timer completes
                 });
             <?php endif; ?>
         });
-    </script> -->
+    </script>
 
 <?php 
 include('includes/script.php'); 
