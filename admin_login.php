@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
-include('admin/config/dbcon.php');
+include('./admin/config/dbcon.php');
 include('includes/session.php');
 include('includes/security_headers.php');
 
@@ -24,13 +24,14 @@ if (strpos($request, '.php') !== false) {
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" href="images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
+     <script src="https://hcaptcha.com/1/api.js" async defer></script>
 
      <!-- Alertify JS link -->
      <link rel="stylesheet" href="assets/css/alertify.min.css" />
      <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
      <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
      <!-- Iconscout cdn link -->
      <link rel="stylesheet" href="assets/css/line.css">
@@ -44,7 +45,6 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
-     <script src="https://hcaptcha.com/1/api.js" async defer></script>
 
 
 </head>
@@ -156,7 +156,6 @@ if (strpos($request, '.php') !== false) {
             </div>
         </div>
     </section>
-    <?php include('includes/script.php'); include('message.php'); ?>
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
             const password = document.getElementById('password');
@@ -215,7 +214,6 @@ if (strpos($request, '.php') !== false) {
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
@@ -233,5 +231,9 @@ if (strpos($request, '.php') !== false) {
         });
     </script>
 
+<?php 
+include('includes/script.php'); 
+include('message.php'); 
+?>
 </body>
 </html>
