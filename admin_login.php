@@ -4,6 +4,7 @@ session_start();
 include('./admin/config/dbcon.php');
 include('includes/session.php');
 include('includes/security_headers.php');
+include('includes/header.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
