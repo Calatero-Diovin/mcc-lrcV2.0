@@ -4,7 +4,7 @@ session_start();
 include('./admin/config/dbcon.php');
 include('includes/session.php');
 include('includes/security_headers.php');
-include('includes/header.php');
+include('./includes/header.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -233,7 +233,7 @@ if (strpos($request, '.php') !== false) {
     </script>
 
 <?php 
-include('includes/script.php'); 
+include('./includes/script.php'); 
 include('message.php'); 
 ?>
 </body>
