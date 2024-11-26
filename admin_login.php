@@ -214,7 +214,7 @@ if (strpos($request, '.php') !== false) {
         });
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
@@ -229,7 +229,7 @@ if (strpos($request, '.php') !== false) {
                 });
             <?php endif; ?>
         });
-    </script>
+    </script> -->
 
 <?php 
 include('includes/script.php'); 
