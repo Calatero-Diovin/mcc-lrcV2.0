@@ -62,6 +62,7 @@ if (isset($_POST['login_btn'])) {
 
             // Verify the password
             if (password_verify($password, $hashed_password)) {
+                session_regenerate_id(true); // Regenerate session ID
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
