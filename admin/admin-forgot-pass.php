@@ -90,7 +90,7 @@ if (strpos($request, '.php') !== false) {
                                    </div>
                                    <div class="text-end mt-5 fw-bold">
                                         <p>
-                                             <a href="admin_login" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                             <a href="admin_login.php" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                         </p>
                                    </div>
                               </form>

@@ -147,7 +147,7 @@ if (strpos($request, '.php') !== false) {
                                                   <a href="password-reset.php" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
                                              <p id="admin">
-                                                  <a href="admin_login.php" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
+                                                  <a href="admin/admin_login.php" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
                                              </p>
                                         </div>
                                    </div>
