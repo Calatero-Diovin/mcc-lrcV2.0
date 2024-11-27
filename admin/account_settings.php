@@ -94,7 +94,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="middlename" type="text"
-                                                            class="form-control" value="<?=$admin['middlename']?>">
+                                                            class="form-control" id="middlename" value="<?=$admin['middlename']?>">
                                                   </div>
                                              </div>
                                              <div class="row mb-3">
@@ -153,6 +153,21 @@ if (isset($_SESSION['auth_admin']['admin_id']))
 </main>
 
 <script>
+     document.getElementById('firstname').addEventListener('input', function () {
+     var nameInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(nameInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(nameInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+     
      document.getElementById('Phone').addEventListener('input', function () {
         var phoneInput = this.value.trim();
         
