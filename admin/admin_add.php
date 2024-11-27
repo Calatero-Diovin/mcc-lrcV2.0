@@ -207,6 +207,21 @@ document.getElementById('firstname').addEventListener('input', function () {
           var isValid = alphabetPattern.test(lnInput) && this.value === lnInput; // Ensure no leading spaces
           this.classList.toggle('is-invalid', !isValid);
      });
+
+     document.getElementById('email').addEventListener('input', function () {
+     var emailInput = this.value.trim();
+     
+     var emailPattern = /^[A-Za-z0-9._%+-]+@mcclawis\.edu\.ph$/;
+
+     if (emailPattern.test(emailInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid email with the domain @mcclawis.edu.ph');
+     }
+
+     var isValid = emailPattern.test(emailInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 <?php 
 include('./includes/footer.php');
