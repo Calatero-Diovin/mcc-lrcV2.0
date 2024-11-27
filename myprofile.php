@@ -204,35 +204,35 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
 </div>
 
 <script>
-     // Get the input element by its ID
-    const firstnameInput = document.getElementById('firstname');
-    
-    // Function to validate and format the input
-    firstnameInput.addEventListener('input', function() {
-        // Trim any leading spaces
-        let value = firstnameInput.value.trim();
-        
-        // Replace multiple spaces with a single space
-        value = value.replace(/\s+/g, ' ');
+     const firstnameInput = document.getElementById('firstname');
+     // Function to handle input validation
+     firstnameInput.addEventListener('input', function() {
+     // Remove leading and trailing spaces
+     let value = firstnameInput.value.trim();
 
-        // Ensure the first character is not a space
-        if (value.startsWith(' ')) {
-            value = value.substring(1); // Remove the first character if it's a space
-        }
+     // Replace multiple consecutive spaces with a single space
+     value = value.replace(/\s+/g, ' ');
 
-        // Only allow alphabetic characters and single spaces
-        value = value.replace(/[^a-zA-Z ]/g, ''); // Allow only letters and spaces
+     // Ensure the input does not start with a space
+     if (value.startsWith(' ')) {
+          firstnameInput.value = '';
+          return;  // exit if input starts with space
+     }
 
-        // Set the value back to the input field
-        firstnameInput.value = value;
+     // Capitalize first letter of each word, and make other letters lowercase
+     value = value.replace(/\b\w/g, char => char.toUpperCase())
+                    .replace(/\B\w/g, char => char.toLowerCase());
 
-        // Check if the first letter is capitalized
-        if (value && value[0] !== value[0].toUpperCase()) {
-            firstnameInput.setCustomValidity('First name must start with a capital letter.');
-        } else {
-            firstnameInput.setCustomValidity('');
-        }
-    });
+     // Set the processed value back to the input field
+     firstnameInput.value = value;
+
+     // If input is empty or contains only spaces after trimming, mark as invalid
+     if (!value || value.trim().length === 0) {
+          firstnameInput.setCustomValidity('Please enter a valid first name.');
+     } else {
+          firstnameInput.setCustomValidity('');
+     }
+     });
 </script>
 
 <?php
