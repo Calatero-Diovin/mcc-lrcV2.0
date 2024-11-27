@@ -214,7 +214,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
     if (alphabetPattern.test(nameInput)) {
         this.setCustomValidity(''); // Valid input, remove any custom validity message
     } else {
-        this.setCustomValidity('Please enter a valid name with only letters and spaces.');
+        this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
     }
     
     // Show or hide the validation message
