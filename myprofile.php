@@ -115,18 +115,12 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  <label for="middlename" class="col-md-4 col-lg-3 col-form-label">Middlename</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input name="middlename" type="text" id="middlename" class="form-control" value="<?=$user['middlename']?>">
-                                                                      <div class="invalid-feedback">
-                                                                           Middle name must start with a capital letter.
-                                                                      </div>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
                                                                  <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Lastname</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input name="lastname" type="text" class="form-control" id="lastname" value="<?=$user['lastname']?>" required>
-                                                                      <div class="invalid-feedback">
-                                                                           Last name must start with a capital letter.
-                                                                      </div>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
@@ -202,23 +196,49 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
 
 <script>
      document.getElementById('firstname').addEventListener('input', function () {
-    var nameInput = this.value.trim();
-    
-    // Regular expression to allow only alphabetic characters (and spaces)
-    var alphabetPattern = /^[A-Za-z\s]+$/;
-    
-    // Check if the name contains only alphabetic characters and spaces
-    if (alphabetPattern.test(nameInput)) {
-        this.setCustomValidity(''); // Valid input, remove any custom validity message
-    } else {
-        this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
-    }
-    
-    // Show or hide the validation message
-    var isValid = alphabetPattern.test(nameInput);
-    this.classList.toggle('is-invalid', !isValid);
-});
+     var nameInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(nameInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(nameInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 
+     document.getElementById('middlename').addEventListener('input', function () {
+     var nameInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(nameInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(nameInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('lastname').addEventListener('input', function () {
+     var nameInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(nameInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(nameInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 
 <?php
