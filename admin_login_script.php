@@ -7,53 +7,42 @@
             this.classList.toggle('bi-eye-slash');
         });
 
-        // Select form input elements to disable initially
-        const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-        const loginButton = document.querySelector('[name="admin_login_btn"]');
-
-        // Function to request and check location permissions
-        function requestLocation() {
+        // Function to enable/disable form fields based on location permission
+        function handleLocationPermission() {
             if (navigator.geolocation) {
-                // Watch for location changes
-                const watchId = navigator.geolocation.watchPosition(
-                    // Success callback
-                    function (position) {
-                        console.log('Location access granted');
-                        // Enable form inputs and button when location is granted
-                        formInputs.forEach(input => input.disabled = false);
-                        loginButton.disabled = false;
-                    },
-                    // Error callback
-                    function (error) {
-                        if (error.code === error.PERMISSION_DENIED) {
-                            alert("Please allow location access to use this login page.");
-                            setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if denied
-                            }, 1000);
-                        }
-                        // If location access is lost, disable the form inputs and login button again
-                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            formInputs.forEach(input => input.disabled = true);
-                            loginButton.disabled = true;
-                            alert("Location access was lost. The form will reload.");
-                            setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if location is lost
-                            }, 1000);
-                        }
-                    }
-                );
-
-                // Optionally, you can stop watching the location after successful login or another event
-                // navigator.geolocation.clearWatch(watchId);
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Location is allowed, enable the form fields
+                    enableFormFields();
+                }, function(error) {
+                    // Location is denied, disable the form fields
+                    disableFormFields();
+                });
             } else {
-                alert("Geolocation is not supported by this browser.");
+                // Geolocation is not supported, disable the form fields
+                disableFormFields();
             }
         }
 
-        // Call the function to request location access on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            requestLocation();
-        });
+        // Enable the form fields
+        function enableFormFields() {
+            document.getElementById('admin_type').disabled = false;
+            document.getElementById('email').disabled = false;
+            document.getElementById('password').disabled = false;
+            document.getElementById('admin_login_btn').disabled = false;
+        }
+
+        // Disable the form fields
+        function disableFormFields() {
+            document.getElementById('admin_type').disabled = true;
+            document.getElementById('email').disabled = true;
+            document.getElementById('password').disabled = true;
+            document.getElementById('admin_login_btn').disabled = true;
+        }
+
+        // Check the location permission as soon as the page loads
+        window.onload = function() {
+            handleLocationPermission();
+        };
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
