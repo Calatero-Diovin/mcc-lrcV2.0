@@ -237,6 +237,21 @@ document.getElementById('firstname').addEventListener('input', function () {
      var isValid = phonePattern.test(phoneInput);
      this.classList.toggle('is-invalid', !isValid);
      });
+
+     document.getElementById('address').addEventListener('input', function () {
+     var addressInput = this.value.trim();
+     
+     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+     if (addressPattern.test(addressInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
+     }
+     
+     var isValid = addressPattern.test(addressInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 <?php 
 include('./includes/footer.php');
