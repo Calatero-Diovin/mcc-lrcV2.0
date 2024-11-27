@@ -4,48 +4,6 @@ session_start();
 
 include('admin/config/dbcon.php');
 
-if(isset($_POST['change_password']))
-{
-     $current_password = $_POST['current_password'];
-    $newpassword = $_POST['newpassword'];
-    $renewpassword = $_POST['renewpassword'];
-
-     // Prepare the query to validate the current password
-    $validate_query = "SELECT * FROM user WHERE password = md5(?)";
-    $stmt = $con->prepare($validate_query);
-    $stmt->bind_param("s",$current_password);
-    $stmt->execute();
-    $validate_query_run = $stmt->get_result();
-
-    if ($validate_query_run->num_rows > 0) {
-     if ($newpassword === $renewpassword) {
-         // Prepare the update password query
-         $change_pass = "UPDATE user SET password = md5(?), confirm_password = md5(?)";
-         $stmt = $con->prepare($change_pass);
-         $stmt->bind_param("ss", $newpassword, $renewpassword);
-         $change_pass_run = $stmt->execute();
-
-         if ($change_pass_run) {
-             $_SESSION['message_success'] = '<small>Password updated successfully</small>';
-             header("Location: myprofile.php");
-             exit(0);
-         } else {
-             $_SESSION['message_error'] = 'Password not updated';
-             header("Location: myprofile.php");
-             exit(0);
-         }
-     } else {
-         $_SESSION['message_error'] = '<small>Password and confirm password do not match</small>';
-         header("Location: myprofile.php");
-         exit(0);
-     }
- } else {
-     $_SESSION['message_error'] = 'Current password does not match';
-     header("Location: myprofile.php");
-     exit(0);
- }
-}
-
 
 if (isset($_SESSION['auth_stud']['stud_id']))
 {
@@ -87,11 +45,12 @@ if (isset($_POST['logout_btn'])) {
     unset($_SESSION['auth']);
     unset($_SESSION['auth_role']);
     unset($_SESSION['auth_stud']);
-    
-    // Destroy the session
     session_destroy();
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 20, '/'); 
+    }
+    $_SESSION = array();
     
-    // Set a success message (optional)
     $_SESSION['message_success'] = "Logout Successfully";
     
     // Redirect to the login page
