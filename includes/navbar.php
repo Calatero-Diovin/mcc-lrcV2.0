@@ -70,10 +70,36 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <form action="allcode.php" method="POST" id="logoutForm">
-                                        <button type="button" class="dropdown-item" name="logout_btn" id="logoutButton"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                                   <form id="logoutForm" action="allcode.php" method="POST">
+                                        <!-- Change the id to name="logout_btn" -->
+                                        <button type="button" name="logout_btn" class="dropdown-item">
+                                             <i class="bi bi-box-arrow-right"></i> Logout
+                                        </button>
                                    </form>
                               </li>
+                                   <!-- Include SweetAlert2 -->
+                                   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                   <script>
+                                        // Event listener for the logout button using the name attribute
+                                        document.querySelector("[name='logout_btn']").addEventListener("click", function(e) {
+                                             e.preventDefault();  // Prevent form submission immediately
+
+                                             // SweetAlert confirmation
+                                             Swal.fire({
+                                                  title: 'Are you sure?',
+                                                  text: 'Do you really want to log out?',
+                                                  icon: 'warning',
+                                                  showCancelButton: true,
+                                                  confirmButtonText: 'Yes, logout',
+                                                  cancelButtonText: 'Cancel'
+                                             }).then((result) => {
+                                                  if (result.isConfirmed) {
+                                                       // If confirmed, submit the form
+                                                       document.getElementById("logoutForm").submit();
+                                                  }
+                                             });
+                                        });  
+                                   </script>
                          </ul>
                     </li>
                     <?php else :?>
@@ -89,26 +115,3 @@ include('admin/config/dbcon.php');
           </div>
      </div>
 </nav>
-
-<script>
-// Add event listener to the logout button
-document.getElementById('logoutButton').addEventListener('click', function(event) {
-    event.preventDefault();  // Prevent form submission
-
-    // Show SweetAlert2 confirmation dialog
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You will be logged out of your account!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, logout',
-        cancelButtonText: 'No, stay',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // If the user confirms, submit the form
-            document.getElementById('logoutForm').submit();
-        }
-    });
-});
-</script>

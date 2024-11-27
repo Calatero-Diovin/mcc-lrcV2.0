@@ -43,19 +43,25 @@ if (isset($_POST['save_changes'])) {
     }
 }
 
-// Check if the logout button was clicked
+// Check if the logout button is clicked
 if (isset($_POST['logout_btn'])) {
-    // Unset session variables
+    // Unset individual session variables
     unset($_SESSION['auth']);
     unset($_SESSION['auth_role']);
     unset($_SESSION['auth_stud']);
     unset($_SESSION['auth_faculty']);
 
-    // Set a success message in the session
+    // Destroy the session to ensure all session data is wiped
+    session_destroy();
+
+    // Clear session variables again after session_destroy()
+    $_SESSION = array(); // This ensures the session is completely cleared
+
+    // Set a success message for the user
     $_SESSION['message_success'] = "Logout Successfully";
 
-    // Redirect to home.php after successful logout
+    // Redirect to home page (or wherever you'd like)
     header("Location: home.php");
-    exit(0); // Stop script execution after the redirect
+    exit(0);
 }
 ?>
