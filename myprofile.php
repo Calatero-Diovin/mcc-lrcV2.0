@@ -211,32 +211,32 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      });
 
      document.getElementById('middlename').addEventListener('input', function () {
-     var nameInput = this.value.trim();
+     var mnInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (alphabetPattern.test(nameInput)) {
+     if (alphabetPattern.test(mnInput)) {
           this.setCustomValidity(''); 
      } else {
           this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
-     var isValid = alphabetPattern.test(nameInput);
+     var isValid = alphabetPattern.test(mnInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
      document.getElementById('lastname').addEventListener('input', function () {
-     var nameInput = this.value.trim();
+     var lnInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (alphabetPattern.test(nameInput)) {
+     if (alphabetPattern.test(lnInput)) {
           this.setCustomValidity(''); 
      } else {
           this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
-     var isValid = alphabetPattern.test(nameInput);
+     var isValid = alphabetPattern.test(lnInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
