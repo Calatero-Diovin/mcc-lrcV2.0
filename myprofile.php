@@ -279,30 +279,30 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('Contact_person').addEventListener('input', function () {
      var cpInput = this.value.trim();
      
-     var alphabetPattern = /^[A-Za-z\s]+$/;
+     var cpPattern = /^[A-Za-z\s]+$/;
      
-     if (alphabetPattern.test(cpInput)) {
+     if (cpPattern.test(cpInput)) {
           this.setCustomValidity(''); 
      } else {
           this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
-     var isValid = alphabetPattern.test(cpInput);
+     var isValid = cpPattern.test(cpInput);
      this.classList.toggle('is-invalid', !isValid);
      });
      
      document.getElementById('Contact_person_cell').addEventListener('input', function () {
      var cpcInput = this.value.trim();
      
-     var phonePattern = /^09\d{9}$/;
+     var cpcPattern = /^09\d{9}$/;
 
-     if (phonePattern.test(cpcInput)) {
+     if (cpcPattern.test(cpcInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
      }
 
-     var isValid = phonePattern.test(cpcInput);
+     var isValid = cpcPattern.test(cpcInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
