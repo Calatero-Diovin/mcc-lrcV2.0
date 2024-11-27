@@ -223,28 +223,19 @@ if (isset($_SESSION['auth_admin']['admin_id']))
      });
 
      document.getElementById('Phone').addEventListener('input', function () {
-        var phoneInput = this.value.trim();
-        
-        // Remove non-numeric characters
-        phoneInput = phoneInput.replace(/\D/g, '');
-        
-        // Check if the number starts with "09" and is exactly 11 digits long
-        if (/^09\d{9}$/.test(phoneInput)) {
-            this.setCustomValidity('');
-        } else {
-            this.setCustomValidity('Phone number must start with "09" and be exactly 11 digits long.');
-        }
-        
-        // Show or hide the validation message
-        var isValid = /^09\d{9}$/.test(phoneInput);
-        this.classList.toggle('is-invalid', !isValid);
-        
-        // Clear error message if "09" is typed again
-        if (phoneInput.startsWith('09')) {
-            this.setCustomValidity('');
-            this.classList.remove('is-invalid');
-        }
-    });
+     var phoneInput = this.value.trim();
+     
+     var phonePattern = /^09\d{9}$/;
+
+     if (phonePattern.test(phoneInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
+     }
+
+     var isValid = phonePattern.test(phoneInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 
 <?php
