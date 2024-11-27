@@ -34,7 +34,7 @@ include('./includes/sidebar.php');
                                    {
                                        $admin = mysqli_fetch_array($query_run);
                                         ?>
-                              <form action="admin_code.php" method="POST" enctype="multipart/form-data" onsubmit="return validatePhoneNumber()">
+                              <form action="admin_code.php" method="POST" enctype="multipart/form-data">
 
                                    <div class="row d-flex justify-content-center mt-5">
                                         <input type="hidden" name="admin_id" value="<?=$admin['admin_id']?>">
@@ -78,7 +78,7 @@ include('./includes/sidebar.php');
                                                        value="<?=$admin['phone_number'];?>" id="phone_number" name="phone_number"
                                                        placeholder="09xxxxxxxxx" id="phone_number"
                                                        class="form-control format_number" autocomplete="off"
-                                                       maxlength="11" oninput="validatePhoneNumber()">
+                                                       maxlength="11">
                                              </div>
                                         </div>
 
@@ -265,7 +265,7 @@ include('./includes/sidebar.php');
         this.classList.toggle('is-invalid', !isValid);
     });
 <?php 
-include('./includes/footer.php');
-include('./includes/script.php');
-include('../message.php');
+include('includes/footer.php');
+include('includes/script.php');
+include('message.php');
 ?>

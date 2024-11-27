@@ -317,5 +317,5 @@ document.getElementById('firstname').addEventListener('input', function () {
 <?php 
 include('./includes/footer.php');
 include('includes/script.php');
-include('../message.php');
+include('message.php');
 ?>
