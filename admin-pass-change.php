@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
-include('config/dbcon.php');
+include('.admin/config/dbcon.php');
 include('includes/url.php');
 include('includes/security_headers.php');
 

@@ -1,8 +1,8 @@
 <?php
 ini_set('session.cookie_httponly', 1);
-include('../includes/session.php');
+include('includes/session.php');
 include('includes/security_headers.php');
-include('../includes/header.php');
+include('includes/header.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -207,7 +207,7 @@ if (strpos($request, '.php') !== false) {
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
                 $_SESSION['status'] = "Login Successful";
                 $_SESSION['status_code'] = "success";
-                header("Location: .");
+                header("Location: admin/.");
                 exit(0);
             <?php endif; ?>
         });

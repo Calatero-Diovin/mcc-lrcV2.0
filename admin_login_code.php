@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
-include('config/dbcon.php');
+include('./admin/config/dbcon.php');
 
 // Initialize session variables if not already set
 if (!isset($_SESSION['login_attempts'])) {
