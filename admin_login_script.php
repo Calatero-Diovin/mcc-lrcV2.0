@@ -7,9 +7,13 @@
             this.classList.toggle('bi-eye-slash');
         });
 
-       // Select form input elements to disable initially
-       const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-        const loginButton = document.querySelector('[name="admin_login_btn"]');
+        // Array of form input elements
+        const formInputs = [
+            document.getElementById('admin_type'),
+            document.getElementById('email'),
+            document.getElementById('password'),
+            document.getElementById('admin_login_btn')
+        ];
 
         // Function to request and check location permissions
         function requestLocation() {
@@ -21,30 +25,25 @@
                         console.log('Location access granted');
                         // Enable form inputs and button when location is granted
                         formInputs.forEach(input => input.disabled = false);
-                        loginButton.disabled = false;
                     },
                     // Error callback
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
                             alert("Please allow location access to use this login page.");
                             setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if denied
+                                window.location.reload(); // Reload page if denied
                             }, 1000);
                         }
                         // If location access is lost, disable the form inputs and login button again
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             formInputs.forEach(input => input.disabled = true);
-                            loginButton.disabled = true;
                             alert("Location access was lost. The form will reload.");
                             setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if location is lost
+                                window.location.reload(); // Reload page if location is lost
                             }, 1000);
                         }
                     }
                 );
-
-                // Optionally, you can stop watching the location after successful login or another event
-                // navigator.geolocation.clearWatch(watchId);
             } else {
                 alert("Geolocation is not supported by this browser.");
             }
@@ -61,8 +60,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
-
-                // Start SweetAlert with a loading state
                 Swal.fire({
                     title: 'Logging in...',
                     html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
@@ -87,7 +84,7 @@
                                 width++;
                                 progressBar.style.width = width + '%';
                             }
-                        }, 30); // Adjust the interval for speed of progress
+                        }, 30);
                     }
                 });
             <?php endif; ?>
