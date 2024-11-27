@@ -261,20 +261,28 @@ document.getElementById('Phone').addEventListener('input', function () {
     // Function to validate first name, middle name, and last name
 function validateNameInput(inputId) {
     var input = document.getElementById(inputId);
-    var value = input.value.trim();
+    var value = input.value.trim();  // Trim leading and trailing spaces
 
     // Sanitize input: remove any HTML tags
     value = value.replace(/<\/?[^>]+(>|$)/g, "");
 
-    // Check if first character is uppercase or lowercase
-    if (/^[A-Za-z]/.test(value)) {
-        input.setCustomValidity('');
+    // Check if the value is empty or consists of only spaces
+    if (value === "") {
+        input.setCustomValidity(input.placeholder + ' cannot be empty or only spaces.');
+    }
+    // Check if the value starts with a space
+    else if (/^\s/.test(value)) {
+        input.setCustomValidity(input.placeholder + ' cannot start with a space.');
+    }
+    // Check if the first character is a letter
+    else if (/^[A-Za-z]/.test(value)) {
+        input.setCustomValidity('');  // Reset custom validity if the input is valid
     } else {
         input.setCustomValidity(input.placeholder + ' must start with a letter.');
     }
 
     // Show or hide the validation message
-    var isValid = /^[A-Za-z]/.test(value);
+    var isValid = /^[A-Za-z]/.test(value) && value !== "" && !/^\s/.test(value);
     input.classList.toggle('is-invalid', !isValid);
 }
 
