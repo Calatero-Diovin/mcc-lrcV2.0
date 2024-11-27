@@ -4,6 +4,9 @@ session_start();
 include('admin/config/dbcon.php');
 ?>
 
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
      <?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+ 1); ?>
      <div class="container-fluid mx-5">
@@ -67,9 +70,8 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <form action="allcode.php" method="POST">
-                                        <button type="submit" name="logout_btn" class="dropdown-item"><i
-                                                  class="bi bi-box-arrow-right"></i> Logout</button>
+                                   <form action="allcode.php" method="POST" id="logoutForm">
+                                        <button type="button" class="dropdown-item" id="logoutButton"><i class="bi bi-box-arrow-right"></i> Logout</button>
                                    </form>
                               </li>
                          </ul>
@@ -87,3 +89,26 @@ include('admin/config/dbcon.php');
           </div>
      </div>
 </nav>
+
+<script>
+// Add event listener to the logout button
+document.getElementById('logoutButton').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent form submission
+
+    // Show SweetAlert2 confirmation dialog
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out of your account!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, logout',
+        cancelButtonText: 'No, stay',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If the user confirms, submit the form
+            document.getElementById('logoutForm').submit();
+        }
+    });
+});
+</script>
