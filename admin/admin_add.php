@@ -105,12 +105,15 @@ include('./includes/sidebar.php');
 
                                    <div class="row d-flex justify-content-center">
                                         <div class="col-12 col-md-5">
-                                             <div class="mb-3 mt-2">
-                                                  <label for="password">Password</label>
-                                                  <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
-                                                  <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
-                                                  <label class="form-check-label" for="showPassword">Show Password</label>
-                                             </div>
+                                            <div class="mb-3 mt-2">
+                                                <label for="password">Password</label>
+                                                <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
+                                                
+                                                <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
+                                                <label class="form-check-label" for="showPassword">Show Password</label>
+
+                                                <div id="passwordStrengthMessage" class="mt-2"></div>
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-4">
                                              <div class="mb-3 mt-2">
@@ -269,6 +272,47 @@ document.getElementById('firstname').addEventListener('input', function () {
         // Toggle the 'is-invalid' class based on isValid status
         this.classList.toggle('is-invalid', !isValid);
     });
+
+    // Function to check the strength of the password
+    function checkPasswordStrength() {
+        var password = document.getElementById('password').value;
+        var strengthMessage = document.getElementById('passwordStrengthMessage');
+        var isValid = true; // Assume the password is valid initially
+        
+        // Regular expression to check for the required password conditions:
+        var uppercasePattern = /[A-Z]/g;
+        var lowercasePattern = /[a-z]/g;
+        var numberPattern = /\d/g;
+        var specialCharPattern = /[^A-Za-z0-9]/g;
+        
+        var uppercaseCount = (password.match(uppercasePattern) || []).length;
+        var lowercaseCount = (password.match(lowercasePattern) || []).length;
+        var numberCount = (password.match(numberPattern) || []).length;
+        var specialCharCount = (password.match(specialCharPattern) || []).length;
+        
+        // Validate the password based on the new criteria
+        if (uppercaseCount >= 2 && lowercaseCount >= 2 && numberCount >= 3 && specialCharCount >= 1 && password.length >= 8) {
+            strengthMessage.textContent = "Strong password!";
+            strengthMessage.style.color = "green";
+        } else {
+            isValid = false;
+            if (password.length < 8) {
+                strengthMessage.textContent = "Password should be at least 8 characters long.";
+            } else if (uppercaseCount < 2) {
+                strengthMessage.textContent = "Password must have at least 2 uppercase letters.";
+            } else if (lowercaseCount < 2) {
+                strengthMessage.textContent = "Password must have at least 2 lowercase letters.";
+            } else if (numberCount < 3) {
+                strengthMessage.textContent = "Password must have at least 3 numbers.";
+            } else if (specialCharCount < 1) {
+                strengthMessage.textContent = "Password must have at least 1 special character.";
+            }
+            strengthMessage.style.color = "red";
+        }
+        
+        // Toggle the 'is-invalid' class based on isValid status
+        document.getElementById('password').classList.toggle('is-invalid', !isValid);
+    }
 </script>
 <?php 
 include('./includes/footer.php');
