@@ -107,7 +107,7 @@ include('./includes/sidebar.php');
                                         <div class="col-12 col-md-5">
                                             <div class="mb-3 mt-2">
                                                 <label for="password">Password</label>
-                                                <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
+                                                <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="10" required oninput="checkPasswordStrength()">
                                                 
                                                 <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                 <label class="form-check-label" for="showPassword">Show Password</label>
@@ -291,21 +291,21 @@ document.getElementById('firstname').addEventListener('input', function () {
         var specialCharCount = (password.match(specialCharPattern) || []).length;
         
         // Validate the password based on the new criteria
-        if (uppercaseCount >= 2 && lowercaseCount >= 2 && numberCount >= 3 && specialCharCount >= 1 && password.length >= 8) {
+        if (uppercaseCount >= 2 && lowercaseCount >= 2 && numberCount >= 3 && specialCharCount >= 1 && password.length >= 10) {
             strengthMessage.textContent = "Strong password!";
             strengthMessage.style.color = "green";
         } else {
             isValid = false;
             if (password.length < 8) {
-                strengthMessage.textContent = "Password should be at least 8 characters long.";
+                strengthMessage.textContent = "Password should be at least 10 characters long.";
             } else if (uppercaseCount < 2) {
                 strengthMessage.textContent = "Password must have at least 2 uppercase letters.";
             } else if (lowercaseCount < 2) {
                 strengthMessage.textContent = "Password must have at least 2 lowercase letters.";
             } else if (numberCount < 3) {
                 strengthMessage.textContent = "Password must have at least 3 numbers.";
-            } else if (specialCharCount < 1) {
-                strengthMessage.textContent = "Password must have at least 1 special character.";
+            } else if (specialCharCount < 3) {
+                strengthMessage.textContent = "Password must have at least 3 special character.";
             }
             strengthMessage.style.color = "red";
         }
