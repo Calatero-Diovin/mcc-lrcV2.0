@@ -223,7 +223,7 @@ document.getElementById('firstname').addEventListener('input', function () {
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     document.getElementById('Phone').addEventListener('input', function () {
+     document.getElementById('phone_number').addEventListener('input', function () {
      var phoneInput = this.value.trim();
      
      var phonePattern = /^09\d{9}$/;
