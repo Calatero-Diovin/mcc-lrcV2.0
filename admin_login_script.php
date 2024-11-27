@@ -60,12 +60,34 @@
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
+
+                // Start SweetAlert with a loading state
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    showConfirmButton: true
-                }).then(() => {
-                    window.location.href = 'admin/.'; // Redirect after showing SweetAlert
+                    title: 'Logging in...',
+                    html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        // Custom progress bar logic
+                        let progressBar = document.getElementById('progress-bar');
+                        let width = 0;
+                        let interval = setInterval(() => {
+                            if (width >= 100) {
+                                clearInterval(interval);
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Login Successful',
+                                    showConfirmButton: false, // No confirm button
+                                    timer: 1500, // Auto-close the alert after 1.5 seconds
+                                }).then(() => {
+                                    window.location.href = 'admin/.'; // Redirect after showing SweetAlert
+                                });
+                            } else {
+                                width++;
+                                progressBar.style.width = width + '%';
+                            }
+                        }, 30); // Adjust the interval for speed of progress
+                    }
                 });
             <?php endif; ?>
         });
