@@ -71,3 +71,9 @@
             <?php endif; ?>
         });
     </script>
+    <?php
+        include('includes/script.php');
+        include('message.php'); 
+    ?>
+    </body>
+    </html>
