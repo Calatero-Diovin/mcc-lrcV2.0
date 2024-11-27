@@ -1,7 +1,5 @@
 <?php
 ini_set('session.cookie_httponly', 1);
-session_start();
-include('./admin/config/dbcon.php');
 include('includes/session.php');
 include('includes/security_headers.php');
 include('includes/header.php');
@@ -46,6 +44,7 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom CSS Styling -->
      <link rel="stylesheet" href="assets/css/login.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 
 
 </head>
@@ -108,7 +107,7 @@ if (strpos($request, '.php') !== false) {
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required>
+                                    <select class="form-select" id="admin_type" name="admin_type" required disabled>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -119,14 +118,14 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required >
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled>
                                     <label for="email">Email</label>
                                     <div id="validationServerEmailFeedback" class="invalid-feedback">
                                         Please enter your email
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required >
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled>
                                     <label for="password">Password</label>
                                     <span class="password-show-toggle js-password-show-toggle">
                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -141,7 +140,7 @@ if (strpos($request, '.php') !== false) {
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
+                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
@@ -164,6 +163,70 @@ if (strpos($request, '.php') !== false) {
             password.setAttribute('type', type);
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
+        });
+
+        // Select form input elements to disable initially
+        const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+        const loginButton = document.querySelector('[name="admin_login_btn"]');
+
+        // Function to request and check location permissions
+        function requestLocation() {
+            if (navigator.geolocation) {
+                // Watch for location changes
+                const watchId = navigator.geolocation.watchPosition(
+                    // Success callback
+                    function (position) {
+                        console.log('Location access granted');
+                        // Enable form inputs and button when location is granted
+                        formInputs.forEach(input => input.disabled = false);
+                        loginButton.disabled = false;
+                    },
+                    // Error callback
+                    function (error) {
+                        if (error.code === error.PERMISSION_DENIED) {
+                            alert("Please allow location access to use this login page.");
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page after 5 seconds if denied
+                            }, 1000);
+                        }
+                        // If location access is lost, disable the form inputs and login button again
+                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
+                            formInputs.forEach(input => input.disabled = true);
+                            loginButton.disabled = true;
+                            alert("Location access was lost. The form will reload.");
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page after 5 seconds if location is lost
+                            }, 1000);
+                        }
+                    }
+                );
+
+                // Optionally, you can stop watching the location after successful login or another event
+                // navigator.geolocation.clearWatch(watchId);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Call the function to request location access on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            requestLocation();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['login_successes']) && $_SESSION['login_successes']): ?>
+                <?php unset($_SESSION['login_successes']); // Clear session variable ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    showConfirmButton: false, // Hide the confirm button
+                    timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
+                    timerProgressBar: true, // Optional: Show the timer progress bar
+                }).then(() => {
+                    window.location.href = 'admin/.'; // Redirect after the timer completes
+                });
+            <?php endif; ?>
         });
     </script>
 

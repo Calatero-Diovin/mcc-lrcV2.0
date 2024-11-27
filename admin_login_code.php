@@ -21,7 +21,6 @@ if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
 
 if (isset($_POST['admin_login_btn'])) {
 
-    // CAPTCHA validation
     $secret_key = 'ES_506523bb213e4a78ba0318bc784532c6';
     $hcaptcha_response = $_POST['h-captcha-response'];
 
@@ -39,14 +38,6 @@ if (isset($_POST['admin_login_btn'])) {
     $password = $_POST['password'];
     $admin_type = $_POST['admin_type'];
 
-    // Input validation (basic email format check)
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['status'] = "Invalid email format.";
-        $_SESSION['status_code'] = "error";
-        header("Location: admin_login.php");
-        exit(0);
-    }
-
     $admin_login_query = "SELECT * FROM admin WHERE email = ? AND admin_type = ?";
 
     if ($stmt = mysqli_prepare($con, $admin_login_query)) {
@@ -57,8 +48,7 @@ if (isset($_POST['admin_login_btn'])) {
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password'])) {
-                session_regenerate_id(true); // Regenerate session ID for security
-
+                session_regenerate_id(true); // Regenerate session ID
                 // Reset login attempts on successful login
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
@@ -69,15 +59,15 @@ if (isset($_POST['admin_login_btn'])) {
                 $admin_type = $data['admin_type'];
 
                 $_SESSION['auth'] = true;
-                $_SESSION['auth_role'] = $admin_type;
+                $_SESSION['auth_role'] = "$admin_type";
                 $_SESSION['auth_admin'] = [
                     'admin_id' => $admin_id,
                     'admin_name' => $admin_name,
                     'email' => $admin_email,
                 ];
 
-                // Redirect to the admin dashboard
-                header("Location: admin/index.php");
+                $_SESSION['login_successes'] = true;
+                header("Location: admin_login.php");
                 exit(0);
             } else {
                 // Increment login attempts on failure
@@ -86,7 +76,7 @@ if (isset($_POST['admin_login_btn'])) {
                     $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
                     $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
                 } else {
-                    $_SESSION['status'] = "Invalid credentials. Try again...";
+                    $_SESSION['status'] = "Invalid credentials.Try again...";
                 }
                 $_SESSION['status_code'] = "error";
                 header("Location: admin_login.php");
@@ -99,7 +89,7 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
                 $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
             } else {
-                $_SESSION['status'] = "Invalid credentials. Try again...";
+                $_SESSION['status'] = "Invalid credentials.Try again...";
             }
             $_SESSION['status_code'] = "error";
             header("Location: admin_login.php");
@@ -108,7 +98,7 @@ if (isset($_POST['admin_login_btn'])) {
 
         mysqli_stmt_close($stmt);
     } else {
-        $_SESSION['status'] = "Something went wrong with the login query.";
+        $_SESSION['status'] = "Something went wrong.";
         $_SESSION['status_code'] = "error";
         header("Location: admin_login.php");
         exit(0);
