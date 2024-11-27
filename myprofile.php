@@ -247,7 +247,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
     if (addressPattern.test(addressInput)) {
         this.setCustomValidity(''); // Valid input, remove any custom validity message
     } else {
-        this.setCustomValidity('Please enter a valid address in the format: City, Municipality, Province');
+        this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
     }
     
     // Show or hide the validation message
