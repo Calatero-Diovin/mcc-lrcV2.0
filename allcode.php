@@ -49,6 +49,9 @@ if (isset($_POST['logout_btn'])) {
     unset($_SESSION['auth_stud']);
     unset($_SESSION['auth_faculty']);
     session_destroy();
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 30, '/'); 
+    }
     $_SESSION = array();
 
     $_SESSION['message_success'] = "Logout Successfully";
