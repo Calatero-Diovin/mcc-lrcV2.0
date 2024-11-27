@@ -155,6 +155,11 @@ if (strpos($request, '.php') !== false) {
             </div>
         </div>
     </section>
+    <!-- Alertify JS link -->
+    <script src="assets/js/alertify.min.js"></script>
+
+<!-- Custom JS link -->
+<script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
@@ -164,7 +169,10 @@ if (strpos($request, '.php') !== false) {
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
         });
+        </script>
 
+
+        <script>
         // Select form input elements to disable initially
         const formInputs = document.querySelectorAll('#admin_type, #email, #password');
         const loginButton = document.querySelector('[name="admin_login_btn"]');
@@ -212,8 +220,9 @@ if (strpos($request, '.php') !== false) {
         document.addEventListener('DOMContentLoaded', function () {
             requestLocation();
         });
+        </script>
 
-
+        <script>
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_successes']) && $_SESSION['login_successes']): ?>
                 <?php unset($_SESSION['login_successes']); // Clear session variable ?>
