@@ -67,41 +67,21 @@ if (strpos($request, '.php') !== false) {
                             </center>
                         </div>
 
-                        <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
-                            <?php
-                            $lockout_time_remaining = $_SESSION['lockout_time'] - time();
-                            $minutes_remaining = ceil($lockout_time_remaining / 60);
-                            ?>
-                            <script>
-                                // Start countdown timer for lockout
-                                let lockoutTimeRemaining = <?php echo $lockout_time_remaining; ?>;
-
-                                // Disable form inputs and login button during lockout
-                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-                                const loginButton = document.querySelector('[name="admin_login_btn"]');
-                                formInputs.forEach(input => input.disabled = true);
-                                loginButton.disabled = true;
-
-                                // Function to update the timer every second
-                                function updateLockoutTimer() {
-                                    if (lockoutTimeRemaining <= 0) {
-                                        document.getElementById('lockout-message').style.display = 'none';
-
-                                        // Enable the form inputs and login button once lockout is over
-                                        formInputs.forEach(input => input.disabled = false);
-                                        loginButton.disabled = false;
-                                    } else {
-                                        let minutes = Math.floor(lockoutTimeRemaining / 60);
-                                        let seconds = lockoutTimeRemaining % 60;
-                                        document.getElementById('lockout-timer').textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                                        lockoutTimeRemaining--;
-                                    }
-                                }
-
-                                // Update every second
-                                setInterval(updateLockoutTimer, 1000);
-                            </script>
-                        <?php endif; ?>
+                        <?php if (isset($_SESSION['lockout_times']) && time() < $_SESSION['lockout_times']): ?>
+                                   <?php
+                                   $lockout_time_remaining = $_SESSION['lockout_times'] - time();
+                                   $minutes_remaining = ceil($lockout_time_remaining / 60);
+                                   ?>
+                                   <script>
+                                        // Lockout detected, disable form elements
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                             document.getElementById('admin_type').disabled = true;
+                                             document.getElementById('email').disabled = true;
+                                             document.getElementById('password').disabled = true;
+                                             document.querySelector('button[type="submit"]').disabled = true;
+                                        });
+                                   </script>
+                              <?php endif; ?>
 
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
@@ -160,7 +140,6 @@ if (strpos($request, '.php') !== false) {
 
 <!-- Custom JS link -->
 <script src="assets/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
             const password = document.getElementById('password');
@@ -224,8 +203,8 @@ if (strpos($request, '.php') !== false) {
 
         <script>
         document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_successes']) && $_SESSION['login_successes']): ?>
-                <?php unset($_SESSION['login_successes']); // Clear session variable ?>
+            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+                <?php unset($_SESSION['login_success']); // Clear session variable ?>
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful',
@@ -233,7 +212,7 @@ if (strpos($request, '.php') !== false) {
                     timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
                     timerProgressBar: true, // Optional: Show the timer progress bar
                 }).then(() => {
-                    window.location.href = 'admin/.'; // Redirect after the timer completes
+                    window.location.href = 'admin/index.php'; // Redirect after the timer completes
                 });
             <?php endif; ?>
         });
