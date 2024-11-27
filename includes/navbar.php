@@ -70,7 +70,7 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <form action="allcode.php" method="POST" id="logoutForm">
+                                   <form action="../allcode.php" method="POST" id="logoutForm">
                                         <button type="button" class="dropdown-item" id="logoutButton"><i class="bi bi-box-arrow-right"></i> Logout</button>
                                    </form>
                               </li>
