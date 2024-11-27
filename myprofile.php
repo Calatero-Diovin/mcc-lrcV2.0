@@ -277,32 +277,32 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      });
 
      document.getElementById('Contact_person').addEventListener('input', function () {
-     var conperInput = this.value.trim();
+     var cpInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (alphabetPattern.test(conperInput)) {
+     if (alphabetPattern.test(cpInput)) {
           this.setCustomValidity(''); 
      } else {
           this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
-     var isValid = alphabetPattern.test(conperInput);
+     var isValid = alphabetPattern.test(cpInput);
      this.classList.toggle('is-invalid', !isValid);
      });
      
      document.getElementById('Contact_person_cell').addEventListener('input', function () {
-     var concellInput = this.value.trim();
+     var cpcInput = this.value.trim();
      
      var phonePattern = /^09\d{9}$/;
 
-     if (phonePattern.test(concellInput)) {
+     if (phonePattern.test(cpcInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
      }
 
-     var isValid = phonePattern.test(concellInput);
+     var isValid = phonePattern.test(cpcInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
