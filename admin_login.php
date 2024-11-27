@@ -213,9 +213,8 @@ if (strpos($request, '.php') !== false) {
         document.addEventListener('DOMContentLoaded', function () {
             requestLocation();
         });
-    </script>
 
-    <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_successes']) && $_SESSION['login_successes']): ?>
                 <?php unset($_SESSION['login_successes']); // Clear session variable ?>
