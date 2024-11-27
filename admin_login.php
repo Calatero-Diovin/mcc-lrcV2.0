@@ -232,7 +232,6 @@ if (strpos($request, '.php') !== false) {
 
 <?php 
 include('includes/script.php'); 
-include('message.php'); 
 ?>
 </body>
 </html>

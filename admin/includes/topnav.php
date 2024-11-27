@@ -1,4 +1,4 @@
-<?php // include('authentication.php'); ?>
+<?php include('authentication.php'); ?>
 <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Logo -->
     <div class="d-flex align-items-center">
