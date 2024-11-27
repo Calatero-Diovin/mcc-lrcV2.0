@@ -204,35 +204,24 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
 </div>
 
 <script>
-     const firstnameInput = document.getElementById('firstname');
-     // Function to handle input validation
-     firstnameInput.addEventListener('input', function() {
-     // Remove leading and trailing spaces
-     let value = firstnameInput.value.trim();
+     document.getElementById('firstname').addEventListener('input', function () {
+    var nameInput = this.value.trim();
+    
+    // Regular expression to allow only alphabetic characters (and spaces)
+    var alphabetPattern = /^[A-Za-z\s]+$/;
+    
+    // Check if the name contains only alphabetic characters and spaces
+    if (alphabetPattern.test(nameInput)) {
+        this.setCustomValidity(''); // Valid input, remove any custom validity message
+    } else {
+        this.setCustomValidity('Please enter a valid name with only letters and spaces.');
+    }
+    
+    // Show or hide the validation message
+    var isValid = alphabetPattern.test(nameInput);
+    this.classList.toggle('is-invalid', !isValid);
+});
 
-     // Replace multiple consecutive spaces with a single space
-     value = value.replace(/\s+/g, ' ');
-
-     // Ensure the input does not start with a space
-     if (value.startsWith(' ')) {
-          firstnameInput.value = '';
-          return;  // exit if input starts with space
-     }
-
-     // Capitalize first letter of each word, and make other letters lowercase
-     value = value.replace(/\b\w/g, char => char.toUpperCase())
-                    .replace(/\B\w/g, char => char.toLowerCase());
-
-     // Set the processed value back to the input field
-     firstnameInput.value = value;
-
-     // If input is empty or contains only spaces after trimming, mark as invalid
-     if (!value || value.trim().length === 0) {
-          firstnameInput.setCustomValidity('Please enter a valid first name.');
-     } else {
-          firstnameInput.setCustomValidity('');
-     }
-     });
 </script>
 
 <?php
