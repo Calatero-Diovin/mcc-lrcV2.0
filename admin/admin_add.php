@@ -152,19 +152,61 @@ function togglePassword() {
 }
 
 document.getElementById('firstname').addEventListener('input', function () {
-    var nameInput = this.value.trim();
-     
-    var alphabetPattern = /^[A-Za-z\s]+$/;
-     
-    if (alphabetPattern.test(nameInput)) {
-        this.setCustomValidity(''); 
-    } else {
-        this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
-    }
-     
-    var isValid = alphabetPattern.test(nameInput);
-    this.classList.toggle('is-invalid', !isValid);
-    });
+          var nameInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== nameInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(nameInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(nameInput) && this.value === nameInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('middlename').addEventListener('input', function () {
+          var mnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== mnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(mnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(mnInput) && this.value === mnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('lastname').addEventListener('input', function () {
+          var lnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== lnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(lnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(lnInput) && this.value === lnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 <?php 
 include('./includes/footer.php');
