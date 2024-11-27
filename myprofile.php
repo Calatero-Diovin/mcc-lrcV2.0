@@ -150,13 +150,13 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                 <label for="contact_person" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
+                                                                 <label for="Contact_person" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input name="contact_person" type="text" class="form-control" id="Contact_person" value="<?=$user['contact_person']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                 <label for="contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
+                                                                 <label for="Contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input type="text" class="form-control" name="contact_person_cell" id="Contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
                                                                  </div>
