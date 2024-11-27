@@ -7,44 +7,72 @@
             this.classList.toggle('bi-eye-slash');
         });
 
-        // Function to enable/disable form fields based on location permission
-        function handleLocationPermission() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Location is allowed, enable the form fields and refresh the page
-                    enableFormFields();
-                    location.reload(); // Reload the page if location access is granted
-                }, function(error) {
-                    // Location is denied, disable the form fields and refresh the page
-                    disableFormFields();
-                    location.reload(); // Reload the page if location access is denied
+        // Array of form input elements
+        const formInputs = [
+            document.getElementById('admin_type'),
+            document.getElementById('email'),
+            document.getElementById('password'),
+            document.getElementById('admin_login_btn')
+        ];
+
+        // Function to request location access using Permissions API (Chrome and Edge)
+        function requestLocation() {
+            // Check if Permissions API is available
+            if (navigator.permissions) {
+                navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+                    if (result.state === 'granted') {
+                        // Permission already granted, enable form
+                        console.log('Location access granted');
+                        enableForm();
+                    } else if (result.state === 'prompt') {
+                        // Permission not yet granted, request location
+                        console.log('Location permission prompt');
+                        requestGeolocation();
+                    } else if (result.state === 'denied') {
+                        // Permission denied, show instructions to enable
+                        console.log('Location access denied');
+                        showDeniedMessage();
+                    }
                 });
             } else {
-                // Geolocation is not supported, disable the form fields
-                disableFormFields();
+                // Permissions API not supported, fallback to geolocation request
+                requestGeolocation();
             }
         }
 
-        // Enable the form fields
-        function enableFormFields() {
-            document.getElementById('admin_type').disabled = false;
-            document.getElementById('email').disabled = false;
-            document.getElementById('password').disabled = false;
+        // Request location permission using geolocation API (for Chrome/Edge)
+        function requestGeolocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        console.log('Location access granted');
+                        enableForm();
+                    },
+                    function(error) {
+                        console.log('Location access denied or error');
+                        showDeniedMessage();
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        // Enable form fields after location is granted
+        function enableForm() {
+            formInputs.forEach(input => input.disabled = false);
             document.getElementById('admin_login_btn').disabled = false;
         }
 
-        // Disable the form fields
-        function disableFormFields() {
-            document.getElementById('admin_type').disabled = true;
-            document.getElementById('email').disabled = true;
-            document.getElementById('password').disabled = true;
-            document.getElementById('admin_login_btn').disabled = true;
+        // Show instructions to enable location manually
+        function showDeniedMessage() {
+            alert('Location access was denied. Please enable location manually in your browser settings.');
         }
 
-        // Check the location permission as soon as the page loads
-        window.onload = function() {
-            handleLocationPermission();
-        };
+        // Trigger the location request on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            requestLocation();
+        });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
