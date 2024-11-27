@@ -61,7 +61,7 @@ if (isset($_POST['logout_btn'])) {
     $_SESSION['message_success'] = "Logout Successfully";
 
     // Redirect to home page (or wherever you'd like)
-    header("Location: home.php");
+    header("Location: .");
     exit(0);
 }
 ?>
