@@ -1,65 +1,6 @@
 <?php
-ini_set('session.cookie_httponly', 1);
-session_start();
-include('./admin/config/dbcon.php');
-
-$request = $_SERVER['REQUEST_URI'];
-
-if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
-    $new_url = str_replace('.php', '', $request);
-    header("Location: $new_url", true, 301);
-    exit();
-}
+include('login_head.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="./images/mcc-lrc.png">
-     <title>MCC Learning Resource Center</title>
-     <script src="https://hcaptcha.com/1/api.js" async defer></script>
-
-     <!-- Alertify JS link -->
-     <link rel="stylesheet" href="assets/css/alertify.min.css" />
-     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-     <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
-     <!-- Iconscout cdn link -->
-     <link rel="stylesheet" href="assets/css/line.css">
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-     
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
-
-     <!-- Bootstrap Icon -->
-     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
-
-     <!-- Custom CSS Styling -->
-     <link rel="stylesheet" href="assets/css/login.css">
-
-     <style>
-          .back {
-               font-size: 30px;
-               color: black;
-          }
-          .back:hover {
-               color: gray;
-          }
-          
-          @media (max-width: 900px) {
-               #admin {
-                    display: none;
-               }
-          }
-     </style>
-</head>
-
-<body>
      <section class="d-flex mt-1 flex-column justify-content-center align-items-center">
           <div class="container-xl">
                <div class="col mx-auto rounded shadow bg-white">
@@ -143,56 +84,6 @@ if (strpos($request, '.php') !== false) {
                </div>
           </div>
      </section>
-
-     <!-- Alertify JS link -->
-     <script src="assets/js/alertify.min.js"></script>
-
-     <!-- Custom JS link -->
-     <script src="assets/js/script.js"></script>
-
-     <script>
-     document.addEventListener('DOMContentLoaded', function() {
-    const roleSelect = document.getElementById('role_as');
-    const studentIdLabel = document.getElementById('student_id_label');
-    const studentIdInput = document.getElementById('student_id');
-
-    // Function to setup the input field based on role
-    function setupInputField() {
-        if (roleSelect.value === 'faculty' || roleSelect.value === 'staff') {
-            studentIdLabel.textContent = 'Username';
-            studentIdInput.placeholder = 'Enter your username';
-            studentIdInput.removeAttribute('maxlength'); // No limit for username
-            studentIdInput.removeEventListener('input', formatStudentID); // No formatting
-        } else {
-            studentIdLabel.textContent = 'Student ID No.';
-            studentIdInput.placeholder = 'Enter your Student ID No. (e.g., 2021-1055)';
-            studentIdInput.setAttribute('maxlength', '9'); // Limit for student ID
-            studentIdInput.addEventListener('input', formatStudentID); // Add formatting
-        }
-    }
-
-    // Event listener for role select change
-    roleSelect.addEventListener('change', setupInputField);
-
-    // Initial setup based on default role selection
-    setupInputField();
-
-    function formatStudentID(event) {
-        let value = studentIdInput.value;
-
-        // Allow only digits and a single dash
-        if (/[^0-9-]/.test(value)) {
-            studentIdInput.value = value.replace(/[^0-9-]/g, '');
-        }
-    }
-});
-     </script>
-
-     <?php
-     // Include scripts and message handling here
-     include('includes/script.php');
-     include('message.php'); 
-     ?>
-</body>
-
-</html>
+<?php
+include('login_script.php');
+?>
