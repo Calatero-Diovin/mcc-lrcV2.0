@@ -231,6 +231,21 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
+     document.getElementById('cp').addEventListener('input', function () {
+     var cpInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(cpInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(cpInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
      document.getElementById('Address').addEventListener('input', function () {
      var addressInput = this.value.trim();
      
@@ -261,36 +276,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     document.getElementById('email').addEventListener('input', function () {
-     var emailInput = this.value.trim();
-     
-     var emailPattern = /^[A-Za-z0-9._%+-]+@mcclawis\.edu\.ph$/;
-
-     if (emailPattern.test(emailInput)) {
-          this.setCustomValidity('');
-     } else {
-          this.setCustomValidity('Please enter a valid email with the domain @mcclawis.edu.ph');
-     }
-
-     var isValid = emailPattern.test(emailInput);
-     this.classList.toggle('is-invalid', !isValid);
-     });
-
-     document.getElementById('cp').addEventListener('input', function () {
-     var cpInput = this.value.trim();
-     
-     var alphabetPattern = /^[A-Za-z\s]+$/;
-     
-     if (alphabetPattern.test(cpInput)) {
-          this.setCustomValidity(''); 
-     } else {
-          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
-     }
-     
-     var isValid = alphabetPattern.test(cpInput);
-     this.classList.toggle('is-invalid', !isValid);
-     });
-     
      document.getElementById('cpc').addEventListener('input', function () {
      var cpcInput = this.value.trim();
      
@@ -303,6 +288,21 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      }
 
      var isValid = phonePattern.test(cpcInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('email').addEventListener('input', function () {
+     var emailInput = this.value.trim();
+     
+     var emailPattern = /^[A-Za-z0-9._%+-]+@mcclawis\.edu\.ph$/;
+
+     if (emailPattern.test(emailInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid email with the domain @mcclawis.edu.ph');
+     }
+
+     var isValid = emailPattern.test(emailInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
