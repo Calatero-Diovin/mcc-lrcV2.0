@@ -119,9 +119,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             class="form-control" id="Phone"
                                                             maxlength="11"
                                                             value="<?=$admin['phone_number']?>">
-                                                            <div class="invalid-feedback">
-                                                                      Phone number must start with "09" and be exactly 11 digits long.
-                                                                 </div>
                                                        </div>
                                              </div>
                                              <div class="row mb-3">
