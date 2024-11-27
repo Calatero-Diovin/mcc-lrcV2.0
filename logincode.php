@@ -36,6 +36,19 @@ if (isset($_POST['login_btn'])) {
         exit(0);
     }
 
+    $secret_key = 'ES_107e8aafc7d14c13b7e3f856836d88bf';
+    $hcaptcha_response = $_POST['h-captcha-response'];
+
+    $response = file_get_contents("https://hcaptcha.com/siteverify?secret=$secret_key&response=$hcaptcha_response");
+    $response_keys = json_decode($response, true);
+
+    if (intval($response_keys["success"]) !== 1) {
+        $_SESSION['status'] = "Please complete the CAPTCHA.";
+        $_SESSION['status_code'] = "error";
+        header("Location: admin_login.php");
+        exit(0);
+    }
+
     // Prepare and execute the SQL statement
     $stmt = mysqli_stmt_init($con);
     if (mysqli_stmt_prepare($stmt, $login_query)) {

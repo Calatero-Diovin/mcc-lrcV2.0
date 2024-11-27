@@ -59,6 +59,7 @@ include('login_head.php');
                                         </div>
                                         <div class="mb-3">
                                              <div class="h-captcha" data-sitekey="026a7b60-39a2-4eba-86d8-cc6e29a254fe"></div>
+                                             <div class="invalid-feedback">Please complete the CAPTCHA.</div>
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
