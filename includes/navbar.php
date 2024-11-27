@@ -4,9 +4,6 @@ session_start();
 include('admin/config/dbcon.php');
 ?>
 
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
      <?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+ 1); ?>
      <div class="container-fluid mx-5">
@@ -70,36 +67,10 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <form id="logoutForm" action="allcode.php" method="POST">
-                                        <!-- Change the id to name="logout_btn" -->
-                                        <button type="button" name="logout_btn" class="dropdown-item">
-                                             <i class="bi bi-box-arrow-right"></i> Logout
-                                        </button>
-                                   </form>
+                                   <button type="button" name="logout_btn" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-right"></i> Logout
+                                   </button>
                               </li>
-                                   <!-- Include SweetAlert2 -->
-                                   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                   <script>
-                                        // Event listener for the logout button using the name attribute
-                                        document.querySelector("[name='logout_btn']").addEventListener("click", function(e) {
-                                             e.preventDefault();  // Prevent form submission immediately
-
-                                             // SweetAlert confirmation
-                                             Swal.fire({
-                                                  title: 'Are you sure?',
-                                                  text: 'Do you really want to log out?',
-                                                  icon: 'warning',
-                                                  showCancelButton: true,
-                                                  confirmButtonText: 'Yes, logout',
-                                                  cancelButtonText: 'Cancel'
-                                             }).then((result) => {
-                                                  if (result.isConfirmed) {
-                                                       // If confirmed, submit the form
-                                                       document.getElementById("logoutForm").submit();
-                                                  }
-                                             });
-                                        });  
-                                   </script>
                          </ul>
                     </li>
                     <?php else :?>
@@ -115,3 +86,55 @@ include('admin/config/dbcon.php');
           </div>
      </div>
 </nav>
+
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
+
+<script>
+    // Event listener for the logout button
+    document.querySelector("[name='logout_btn']").addEventListener("click", function(e) {
+        e.preventDefault();  // Prevent form submission
+
+        // SweetAlert confirmation
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to log out?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, logout',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, make an AJAX request
+                $.ajax({
+                    url: 'allcode.php',   // Target PHP script
+                    method: 'POST',
+                    data: { logout_btn: true },  // Data to send with the request
+                    success: function(response) {
+                        // Handle success response (e.g., redirect)
+                        if (response.success) {
+                            // If logout is successful, redirect
+                            window.location.href = 'home.php';  // Redirect to home or login page
+                        } else {
+                            // Show an error if logout fails
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong. Please try again later.'
+                            });
+                        }
+                    },
+                    error: function() {
+                        // Handle AJAX error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'There was an error processing your request.'
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
