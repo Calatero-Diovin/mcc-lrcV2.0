@@ -150,15 +150,15 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                 <label for="Contact_person" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
+                                                                 <label for="cp" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
                                                                  <div class="col-md-8 col-lg-9">
-                                                                      <input name="contact_person" type="text" class="form-control" id="Contact_person" value="<?=$user['contact_person']?>" required>
+                                                                      <input name="contact_person" type="text" class="form-control" id="cp" value="<?=$user['contact_person']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                 <label for="Contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
+                                                                 <label for="cpc" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
                                                                  <div class="col-md-8 col-lg-9">
-                                                                      <input type="text" class="form-control" name="contact_person_cell" id="Contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
+                                                                      <input type="text" class="form-control" name="contact_person_cell" id="cpc" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="text-center">
@@ -276,33 +276,33 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     document.getElementById('Contact_person').addEventListener('input', function () {
+     document.getElementById('cp').addEventListener('input', function () {
      var cpInput = this.value.trim();
      
-     var cpPattern = /^[A-Za-z\s]+$/;
+     var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (cpPattern.test(cpInput)) {
+     if (alphabetPattern.test(cpInput)) {
           this.setCustomValidity(''); 
      } else {
           this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
-     var isValid = cpPattern.test(cpInput);
+     var isValid = alphabetPattern.test(cpInput);
      this.classList.toggle('is-invalid', !isValid);
      });
      
-     document.getElementById('Contact_person_cell').addEventListener('input', function () {
+     document.getElementById('cpc').addEventListener('input', function () {
      var cpcInput = this.value.trim();
      
-     var cpcPattern = /^09\d{9}$/;
+     var phonePattern = /^09\d{9}$/;
 
-     if (cpcPattern.test(cpcInput)) {
+     if (phonePattern.test(cpcInput)) {
           this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
      }
 
-     var isValid = cpcPattern.test(cpcInput);
+     var isValid = phonePattern.test(cpcInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
