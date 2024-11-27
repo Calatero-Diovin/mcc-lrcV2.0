@@ -46,7 +46,6 @@ if (strpos($request, '.php') !== false) {
      <link rel="stylesheet" href="assets/css/login.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 
-
 </head>
 
 <body>
@@ -156,6 +155,7 @@ if (strpos($request, '.php') !== false) {
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.js"></script>
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
             const password = document.getElementById('password');
