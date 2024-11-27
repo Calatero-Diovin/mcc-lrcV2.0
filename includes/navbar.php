@@ -67,9 +67,10 @@ include('admin/config/dbcon.php');
                                    <hr class="dropdown-divider">
                               </li>
                               <li>
-                                   <button type="button" name="logout_btn" class="dropdown-item">
-                                        <i class="bi bi-box-arrow-right"></i> Logout
-                                   </button>
+                                   <form action="allcode.php" method="POST">
+                                        <button type="submit" name="logout_btn" class="dropdown-item"><i
+                                                  class="bi bi-box-arrow-right"></i> Logout</button>
+                                   </form>
                               </li>
                          </ul>
                     </li>
@@ -86,51 +87,3 @@ include('admin/config/dbcon.php');
           </div>
      </div>
 </nav>
-
-<script>
-    // Event listener for the logout button
-    document.querySelector("[name='logout_btn']").addEventListener("click", function(e) {
-        e.preventDefault();  // Prevent form submission
-
-        // SweetAlert confirmation
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'Do you really want to log out?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, logout',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If confirmed, make an AJAX request
-                $.ajax({
-                    url: 'allcode.php',   // Target PHP script
-                    method: 'POST',
-                    data: { logout_btn: true },  // Data to send with the request
-                    success: function(response) {
-                        // Handle success response (e.g., redirect)
-                        if (response.success) {
-                            // If logout is successful, redirect
-                            window.location.href = 'home.php';  // Redirect to home or login page
-                        } else {
-                            // Show an error if logout fails
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong. Please try again later.'
-                            });
-                        }
-                    },
-                    error: function() {
-                        // Handle AJAX error
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'There was an error processing your request.'
-                        });
-                    }
-                });
-            }
-        });
-    });
-</script>

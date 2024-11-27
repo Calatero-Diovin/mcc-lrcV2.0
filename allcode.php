@@ -3,25 +3,6 @@ session_start();
 
 include('admin/config/dbcon.php');
 
-// Check if the AJAX request has been made for logout
-if (isset($_POST['logout_btn'])) {
-    // Unset individual session variables
-    unset($_SESSION['auth']);
-    unset($_SESSION['auth_role']);
-    unset($_SESSION['auth_stud']);
-    unset($_SESSION['auth_faculty']);
-
-    // Destroy the session to ensure all session data is wiped
-    session_destroy();
-
-    // Clear session variables again after session_destroy()
-    $_SESSION = array(); // This ensures the session is completely cleared
-
-    // Return a JSON response indicating success
-    echo json_encode(['success' => true]);
-    exit();  // Make sure no further code is executed
-}
-
 if (isset($_SESSION['auth_stud']['stud_id'])) {
     $id_session = $_SESSION['auth_stud']['stud_id'];
 } elseif (isset($_SESSION['auth_faculty']['faculty_id'])) {
@@ -62,4 +43,25 @@ if (isset($_POST['save_changes'])) {
     }
 }
 
+// Check if the logout button is clicked
+if (isset($_POST['logout_btn'])) {
+    // Unset individual session variables
+    unset($_SESSION['auth']);
+    unset($_SESSION['auth_role']);
+    unset($_SESSION['auth_stud']);
+    unset($_SESSION['auth_faculty']);
+
+    // Destroy the session to ensure all session data is wiped
+    session_destroy();
+
+    // Clear session variables again after session_destroy()
+    $_SESSION = array(); // This ensures the session is completely cleared
+
+    // Set a success message for the user
+    $_SESSION['message_success'] = "Logout Successfully";
+
+    // Redirect to home page (or wherever you'd like)
+    header("Location: home.php");
+    exit(0);
+}
 ?>
