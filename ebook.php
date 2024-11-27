@@ -37,7 +37,7 @@ if($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &&
 
                               <div class="col-md-3">
                                    <div class="card h-100 shadow">
-                                        <a href="web_opac_view_pdf.php?id=<?=$ebook['web_opac_id']; ?>">
+                                        <a href="web_opac_view_pdf.php?id=<?=encryptor('encrypt', $ebook['web_opac_id']); ?>">
                                              <img src="uploads/ebook_img/<?=$ebook['opac_image'];?>"
                                                   class="card-img-top" alt="...">
                                              <!-- <div class="card-body">

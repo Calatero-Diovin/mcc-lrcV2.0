@@ -1,8 +1,9 @@
 <?php
 include('admin/config/dbcon.php');
+include('includes/url.php');
 if(isset($_GET['id']))
 {
-     $book_id = mysqli_real_escape_string($con, $_GET['id']);
+     $book_id = encryptor('decrypt', $_GET['id']);
 
      $query = "SELECT * FROM web_opac WHERE web_opac_id ='$book_id'"; 
      $query_run = mysqli_query($con, $query);
