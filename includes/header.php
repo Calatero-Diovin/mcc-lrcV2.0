@@ -1,5 +1,9 @@
 <?php
 
+include('session.php');
+include('security_headers.php');
+
+
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {

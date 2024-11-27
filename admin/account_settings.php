@@ -75,9 +75,9 @@ if (isset($_SESSION['auth_admin']['admin_id']))
 
                                                        <div class="pt-2">
                                                             <input type="hidden" name="old_admin_image"
-                                                                 value="<?=$admin['admin_image'];?>">
+                                                                 value="<?=$admin['admin_image'];?>" id="ImageUpload" accept="image/png, image/jpg, image/jpeg">
                                                             <input type="file" name="admin_image" class="form-control"
-                                                                 autocomplete="off">
+                                                                 autocomplete="off" id="ImageUpload" accept="image/png, image/jpg, image/jpeg">
 
                                                        </div>
                                                   </div>
@@ -87,13 +87,14 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                        class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="firstname" type="text"
                                                             class="form-control" id="firstname"
-                                                            value="<?=$admin['firstname']?>"></div>
+                                                            value="<?=$admin['firstname']?>">
+                                                       </div>
                                              </div>
 
                                              <div class="row mb-3">
                                                   <label for="middlename"
                                                        class="col-md-4 col-lg-3 col-form-label">Middlename</label>
-                                                  <div class="col-md-8 col-lg-9"> <input name="middlename" type="text"
+                                                  <div class="col-md-8 col-lg-9"> <input name="middlename" type="text" id="middlename"
                                                             class="form-control" value="<?=$admin['middlename']?>">
                                                   </div>
                                              </div>
@@ -110,7 +111,7 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                   <label for="Address"
                                                        class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                   <div class="col-md-8 col-lg-9"> <input name="address" type="text"
-                                                            class="form-control" id="Address" value="<?=$admin['address']?>"></div>
+                                                            class="form-control" id="Address" value="<?=$admin['address']?>" onblur="validateAddressFormat('Address')"></div>
                                              </div>
                                              <div class="row mb-3">
                                                   <label for="Phone"
@@ -119,9 +120,6 @@ if (isset($_SESSION['auth_admin']['admin_id']))
                                                             class="form-control" id="Phone"
                                                             maxlength="11"
                                                             value="<?=$admin['phone_number']?>">
-                                                            <div class="invalid-feedback">
-                                                                      Phone number must start with "09" and be exactly 11 digits long.
-                                                                 </div>
                                                        </div>
                                              </div>
                                              <div class="row mb-3">
@@ -152,33 +150,8 @@ if (isset($_SESSION['auth_admin']['admin_id']))
      </section>
 </main>
 
-<script>
-     document.getElementById('Phone').addEventListener('input', function () {
-        var phoneInput = this.value.trim();
-        
-        // Remove non-numeric characters
-        phoneInput = phoneInput.replace(/\D/g, '');
-        
-        // Check if the number starts with "09" and is exactly 11 digits long
-        if (/^09\d{9}$/.test(phoneInput)) {
-            this.setCustomValidity('');
-        } else {
-            this.setCustomValidity('Phone number must start with "09" and be exactly 11 digits long.');
-        }
-        
-        // Show or hide the validation message
-        var isValid = /^09\d{9}$/.test(phoneInput);
-        this.classList.toggle('is-invalid', !isValid);
-        
-        // Clear error message if "09" is typed again
-        if (phoneInput.startsWith('09')) {
-            this.setCustomValidity('');
-            this.classList.remove('is-invalid');
-        }
-    });
-</script>
-
 <?php
+include('account_script.php');
 include('includes/footer.php');
 include('./includes/script.php');
 include('message.php');

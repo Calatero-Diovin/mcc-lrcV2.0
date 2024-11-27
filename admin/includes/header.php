@@ -1,4 +1,5 @@
 <?php
+include('security_headers.php');
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {
@@ -46,8 +47,6 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Custom CSS -->
      <link href="assets/css/style.css" rel="stylesheet" />
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
-     <link href="assets/css/sweetalert2.min.css" rel="stylesheet" />
 
      <!-- Animation -->
      <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
@@ -56,8 +55,7 @@ if (strpos($request, '.php') !== false) {
 
      <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
 
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.9/dist/sweetalert2.min.css" rel="stylesheet">
 
 
 </head>

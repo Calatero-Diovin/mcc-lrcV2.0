@@ -1,6 +1,11 @@
 @font-face {
     font-family: bootstrap-icons;
+<<<<<<< HEAD
     src: url(fonts/bootstrap-icons.woff2?524846017b983fc8ded9325d94ed40f3) format("woff2"), url(fonts/bootstrap-icons.woff?524846017b983fc8ded9325d94ed40f3) format("woff")
+=======
+    src: url("../font/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf") format("woff2"),
+    url("../font/fonts/bootstrap-icons.woff?8d200481aa7f02a2d63a331fc782cfaf") format("woff");
+>>>>>>> 3a106c078e9a9e1babbad9b6ef2b81369610508e
 }
 
 .bi::before,
