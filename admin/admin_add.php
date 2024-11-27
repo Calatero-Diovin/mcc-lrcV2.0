@@ -222,6 +222,21 @@ document.getElementById('firstname').addEventListener('input', function () {
      var isValid = emailPattern.test(emailInput);
      this.classList.toggle('is-invalid', !isValid);
      });
+
+     document.getElementById('Phone').addEventListener('input', function () {
+     var phoneInput = this.value.trim();
+     
+     var phonePattern = /^09\d{9}$/;
+
+     if (phonePattern.test(phoneInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
+     }
+
+     var isValid = phonePattern.test(phoneInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 <?php 
 include('./includes/footer.php');
