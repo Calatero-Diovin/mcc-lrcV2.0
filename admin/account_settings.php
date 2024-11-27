@@ -172,6 +172,44 @@ if (isset($_SESSION['auth_admin']['admin_id']))
           this.classList.toggle('is-invalid', !isValid);
      });
 
+     document.getElementById('middlename').addEventListener('input', function () {
+          var mnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== mnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(mnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(mnInput) && this.value === mnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('lastname').addEventListener('input', function () {
+          var mnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== mnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(mnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(mnInput) && this.value === mnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
      document.getElementById('Phone').addEventListener('input', function () {
         var phoneInput = this.value.trim();
         
