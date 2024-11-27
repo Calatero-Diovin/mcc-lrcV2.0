@@ -264,6 +264,7 @@ include('./includes/sidebar.php');
         // Toggle the 'is-invalid' class based on isValid status
         this.classList.toggle('is-invalid', !isValid);
     });
+    </script>
 <?php 
 include('includes/footer.php');
 include('includes/script.php');
