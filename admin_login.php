@@ -205,15 +205,10 @@ if (strpos($request, '.php') !== false) {
         document.addEventListener('DOMContentLoaded', function () {
             <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
                 <?php unset($_SESSION['login_success']); // Clear session variable ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    showConfirmButton: false, // Hide the confirm button
-                    timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
-                    timerProgressBar: true, // Optional: Show the timer progress bar
-                }).then(() => {
-                    window.location.href = 'admin/index.php'; // Redirect after the timer completes
-                });
+                $_SESSION['status'] = "Login Successful";
+                $_SESSION['status_code'] = "success";
+                header("Location: ./admin/.");
+                exit(0);
             <?php endif; ?>
         });
     </script>
