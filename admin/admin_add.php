@@ -97,7 +97,7 @@ include('./includes/sidebar.php');
                                                        <label for="">Profile Image</label>
                                                        <span class=" text-muted"><small>(Optional)</small></span>
                                                   </div>
-                                                  <input type="file" id="admin_image" name="admin_image" class="form-control">
+                                                  <input type="file" id="admin_image" name="admin_image" class="form-control" accept=".jpg,.jpeg,.png">
                                              </div>
                                         </div>
 
@@ -110,10 +110,6 @@ include('./includes/sidebar.php');
                                                   <input type="password" id="password" name="password" class="form-control" style="margin-bottom: 5px;" minlength="8" required oninput="checkPasswordStrength()">
                                                   <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
                                                   <label class="form-check-label" for="showPassword">Show Password</label>
-                                                  <small id="password_warning" class="text-danger"></small>
-                                                  <div id="password_strength" class="progress mt-2" style="height: 5px; display: none;">
-                                                       <div id="strength_bar" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                                                  </div>
                                              </div>
                                         </div>
                                         <div class="col-12 col-md-4">
@@ -252,6 +248,17 @@ document.getElementById('firstname').addEventListener('input', function () {
      var isValid = addressPattern.test(addressInput);
      this.classList.toggle('is-invalid', !isValid);
      });
+
+     document.getElementById('admin_image').addEventListener('change', function () {
+        var file = this.files[0];
+        if (file) {
+            var allowedExtensions = ['image/jpeg', 'image/png'];
+            if (!allowedExtensions.includes(file.type)) {
+                alert('Please upload a valid image file (JPEG, PNG).');
+                this.value = ''; // Reset file input
+            }
+        }
+    });
 </script>
 <?php 
 include('./includes/footer.php');
