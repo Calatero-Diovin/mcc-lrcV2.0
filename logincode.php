@@ -45,7 +45,7 @@ if (isset($_POST['login_btn'])) {
     if (intval($response_keys["success"]) !== 1) {
         $_SESSION['status'] = "Please complete the CAPTCHA.";
         $_SESSION['status_code'] = "error";
-        header("Location: admin_login.php");
+        header("Location: login.php");
         exit(0);
     }
 
