@@ -141,9 +141,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input type="text" class="form-control format_number" name="phone" id="Phone" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['cell_no']?>" required>
-                                                                      <div class="invalid-feedback">
-                                                                           Phone number must start with "09" and be exactly 11 digits long.
-                                                                      </div>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
@@ -238,22 +235,37 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      });
 
      document.getElementById('Address').addEventListener('input', function () {
-    var addressInput = this.value.trim();
-    
-    // Regular expression to validate the address format like "Patao, Bantayan, Cebu"
-    var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+     var addressInput = this.value.trim();
+     
+     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
 
-    // Check if the address matches the pattern
-    if (addressPattern.test(addressInput)) {
-        this.setCustomValidity(''); // Valid input, remove any custom validity message
-    } else {
-        this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
-    }
-    
-    // Show or hide the validation message
-    var isValid = addressPattern.test(addressInput);
-    this.classList.toggle('is-invalid', !isValid);
-});
+     if (addressPattern.test(addressInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
+     }
+     
+     var isValid = addressPattern.test(addressInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('Phone').addEventListener('input', function () {
+     var phoneInput = this.value.trim();
+     
+     // Regular expression to check if the phone number starts with "09" and is exactly 11 digits long
+     var phonePattern = /^09\d{9}$/;
+
+     // Check if the phone number matches the pattern
+     if (phonePattern.test(phoneInput)) {
+          this.setCustomValidity(''); // Valid input, remove any custom validity message
+     } else {
+          this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
+     }
+
+     // Show or hide the validation message
+     var isValid = phonePattern.test(phoneInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 
 <?php
