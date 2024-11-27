@@ -210,6 +210,21 @@ if (isset($_SESSION['auth_admin']['admin_id']))
           this.classList.toggle('is-invalid', !isValid);
      });
 
+     document.getElementById('Address').addEventListener('input', function () {
+     var addressInput = this.value.trim();
+     
+     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+     if (addressPattern.test(addressInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
+     }
+     
+     var isValid = addressPattern.test(addressInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
      document.getElementById('Phone').addEventListener('input', function () {
         var phoneInput = this.value.trim();
         
