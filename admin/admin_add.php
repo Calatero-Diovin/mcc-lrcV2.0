@@ -251,13 +251,23 @@ document.getElementById('firstname').addEventListener('input', function () {
 
      document.getElementById('admin_image').addEventListener('change', function () {
         var file = this.files[0];
+        var isValid = true; // Assume the file is valid initially
+
         if (file) {
             var allowedExtensions = ['image/jpeg', 'image/png'];
+            // If the file type is not valid, set isValid to false
             if (!allowedExtensions.includes(file.type)) {
-                alert('Please upload a valid image file (JPEG, PNG).');
-                this.value = ''; // Reset file input
+                isValid = false;
+                // Optionally, set a custom validation message
+                this.setCustomValidity('Please upload a valid image file (JPEG, PNG).');
+            } else {
+                // Clear any custom validation message if the file is valid
+                this.setCustomValidity('');
             }
         }
+
+        // Toggle the 'is-invalid' class based on isValid status
+        this.classList.toggle('is-invalid', !isValid);
     });
 </script>
 <?php 
