@@ -152,13 +152,13 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                             <div class="row mb-3">
                                                                  <label for="contact_person" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
                                                                  <div class="col-md-8 col-lg-9">
-                                                                      <input name="contact_person" type="text" class="form-control" id="contact_person" value="<?=$user['contact_person']?>" required>
+                                                                      <input name="contact_person" type="text" class="form-control" id="Contact_person" value="<?=$user['contact_person']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
                                                                  <label for="contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
                                                                  <div class="col-md-8 col-lg-9">
-                                                                      <input type="text" class="form-control format_number" name="contact_person_cell" id="contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
+                                                                      <input type="text" class="form-control format_number" name="contact_person_cell" id="Contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="text-center">
@@ -276,7 +276,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     document.getElementById('contact_person').addEventListener('input', function () {
+     document.getElementById('Contact_person').addEventListener('input', function () {
      var conperInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
@@ -290,7 +290,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      var isValid = alphabetPattern.test(conperInput);
      this.classList.toggle('is-invalid', !isValid);
      });
-     document.getElementById('contact_person_cell').addEventListener('input', function () {
+     document.getElementById('Contact_person_cell').addEventListener('input', function () {
      var concellInput = this.value.trim();
      
      var phonePattern = /^09\d{9}$/;
