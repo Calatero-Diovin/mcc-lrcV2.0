@@ -158,7 +158,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                             <div class="row mb-3">
                                                                  <label for="contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
                                                                  <div class="col-md-8 col-lg-9">
-                                                                      <input type="text" class="form-control format_number" name="contact_person_cell" id="Contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
+                                                                      <input type="text" class="form-control" name="contact_person_cell" id="Contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
                                                                  </div>
                                                             </div>
                                                             <div class="text-center">
@@ -186,61 +186,55 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
 </div>
 
 <script>
-     // Firstname Validation
      document.getElementById('firstname').addEventListener('input', function () {
      var nameInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     // Ensure no leading or trailing spaces and only alphabetic characters
-     if (nameInput && alphabetPattern.test(nameInput)) {
+     if (alphabetPattern.test(nameInput)) {
           this.setCustomValidity(''); 
      } else {
-          this.setCustomValidity('Please enter a valid name with only letters (no spaces first or only spaces).');
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
      var isValid = alphabetPattern.test(nameInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Middlename Validation (Same logic as Firstname)
      document.getElementById('middlename').addEventListener('input', function () {
      var mnInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (mnInput && alphabetPattern.test(mnInput)) {
+     if (alphabetPattern.test(mnInput)) {
           this.setCustomValidity(''); 
      } else {
-          this.setCustomValidity('Please enter a valid name with only letters (no spaces first or only spaces).');
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
      var isValid = alphabetPattern.test(mnInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Lastname Validation (Same logic as Firstname)
      document.getElementById('lastname').addEventListener('input', function () {
      var lnInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (lnInput && alphabetPattern.test(lnInput)) {
+     if (alphabetPattern.test(lnInput)) {
           this.setCustomValidity(''); 
      } else {
-          this.setCustomValidity('Please enter a valid name with only letters (no spaces first or only spaces).');
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
      var isValid = alphabetPattern.test(lnInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Address Validation (Optional improvement for more flexibility)
      document.getElementById('Address').addEventListener('input', function () {
      var addressInput = this.value.trim();
      
-     // More flexible regex for addresses (e.g., Barangay, Municipality, Province, optional parts)
-     var addressPattern = /^[A-Za-z0-9\s,]+$/;  // Allows alphanumeric characters and commas, no strict parts.
+     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
 
      if (addressPattern.test(addressInput)) {
           this.setCustomValidity('');
@@ -252,7 +246,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Phone Validation
      document.getElementById('Phone').addEventListener('input', function () {
      var phoneInput = this.value.trim();
      
@@ -268,7 +261,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Email Validation
      document.getElementById('email').addEventListener('input', function () {
      var emailInput = this.value.trim();
      
@@ -284,23 +276,21 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      this.classList.toggle('is-invalid', !isValid);
      });
 
-     // Contact Person Validation (Same as Name fields)
      document.getElementById('Contact_person').addEventListener('input', function () {
      var conperInput = this.value.trim();
      
      var alphabetPattern = /^[A-Za-z\s]+$/;
      
-     if (conperInput && alphabetPattern.test(conperInput)) {
+     if (alphabetPattern.test(conperInput)) {
           this.setCustomValidity(''); 
      } else {
-          this.setCustomValidity('Please enter a valid name with only letters (no spaces first or only spaces).');
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
      }
      
      var isValid = alphabetPattern.test(conperInput);
      this.classList.toggle('is-invalid', !isValid);
      });
-
-     // Contact Person Cell (Phone Number) Validation
+     
      document.getElementById('Contact_person_cell').addEventListener('input', function () {
      var concellInput = this.value.trim();
      
