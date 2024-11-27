@@ -41,14 +41,14 @@ if (isset($_POST['save_changes'])) {
     }
 }
 
-// if (isset($_POST['logout_btn'])) {
-//     unset($_SESSION['auth']);
-//     unset($_SESSION['auth_role']);
-//     unset($_SESSION['auth_stud']);
-//     unset($_SESSION['auth_faculty']);
+if (isset($_POST['logout_btn'])) {
+    unset($_SESSION['auth']);
+    unset($_SESSION['auth_role']);
+    unset($_SESSION['auth_stud']);
+    unset($_SESSION['auth_faculty']);
 
-//     $_SESSION['message_success'] = "Logout Successfully";
-//     header("Location: .");
-//     exit(0);
-// }
+    $_SESSION['message_success'] = "Logout Successfully";
+    header("Location: .");
+    exit(0);
+}
 ?>
