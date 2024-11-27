@@ -134,10 +134,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                            value="<?=$user['address']?>" 
                                                                            required
                                                                            pattern="^[A-Za-z]+, [A-Za-z]+, [A-Za-z]+$"
-                                                                           title="Please enter the address in the format: City, Municipality, Province"
-                                                                           oninput="validateAddress(this)"
                                                                       >
-                                                                      <small id="addressError" class="form-text text-danger" style="display: none;">Please enter the address in the format: City, Municipality, Province</small>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
@@ -239,6 +236,24 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      var isValid = alphabetPattern.test(lnInput);
      this.classList.toggle('is-invalid', !isValid);
      });
+
+     document.getElementById('Address').addEventListener('input', function () {
+    var addressInput = this.value.trim();
+    
+    // Regular expression to validate the address format like "Patao, Bantayan, Cebu"
+    var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+    // Check if the address matches the pattern
+    if (addressPattern.test(addressInput)) {
+        this.setCustomValidity(''); // Valid input, remove any custom validity message
+    } else {
+        this.setCustomValidity('Please enter a valid address in the format: City, Municipality, Province');
+    }
+    
+    // Show or hide the validation message
+    var isValid = addressPattern.test(addressInput);
+    this.classList.toggle('is-invalid', !isValid);
+});
 </script>
 
 <?php
