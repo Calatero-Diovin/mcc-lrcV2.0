@@ -52,7 +52,7 @@ if (isset($_POST['logout_btn'])) {
     $_SESSION = array();
 
     $_SESSION['message_success'] = "Logout Successfully";
-    header("Location: home.php");
+    header("Location: .");
     exit(0);
 }
 ?>
