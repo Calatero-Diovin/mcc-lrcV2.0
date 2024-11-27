@@ -159,9 +159,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  <label for="contact_person_cell" class="col-md-4 col-lg-3 col-form-label">Contact Person Cellphone Number</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input type="text" class="form-control format_number" name="contact_person_cell" id="contact_person_cell" placeholder="09xxxxxxxxx" maxlength="11" value="<?=$user['person_cell_no']?>" required>
-                                                                      <div class="invalid-feedback">
-                                                                           Contact Person's phone number must start with "09" and be exactly 11 digits long.
-                                                                      </div>
                                                                  </div>
                                                             </div>
                                                             <div class="text-center">
@@ -252,18 +249,59 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('Phone').addEventListener('input', function () {
      var phoneInput = this.value.trim();
      
-     // Regular expression to check if the phone number starts with "09" and is exactly 11 digits long
      var phonePattern = /^09\d{9}$/;
 
-     // Check if the phone number matches the pattern
      if (phonePattern.test(phoneInput)) {
-          this.setCustomValidity(''); // Valid input, remove any custom validity message
+          this.setCustomValidity('');
      } else {
           this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
      }
 
-     // Show or hide the validation message
      var isValid = phonePattern.test(phoneInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('email').addEventListener('input', function () {
+     var emailInput = this.value.trim();
+     
+     var emailPattern = /^[A-Za-z0-9._%+-]+@mcclawis\.edu\.ph$/;
+
+     if (emailPattern.test(emailInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid email with the domain @mcclawis.edu.ph');
+     }
+
+     var isValid = emailPattern.test(emailInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('contact_person').addEventListener('input', function () {
+     var conperInput = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(conperInput)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(conperInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+     document.getElementById('contact_person_cell').addEventListener('input', function () {
+     var concellInput = this.value.trim();
+     
+     var phonePattern = /^09\d{9}$/;
+
+     if (phonePattern.test(concellInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
+     }
+
+     var isValid = phonePattern.test(concellInput);
      this.classList.toggle('is-invalid', !isValid);
      });
 </script>
