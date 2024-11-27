@@ -65,7 +65,7 @@ include('admin_login_head.php');
                                 </div>
                             </div>
                             <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled>Login</button>
+                                <button type="submit" name="admin_login_btn" id="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled>Login</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
