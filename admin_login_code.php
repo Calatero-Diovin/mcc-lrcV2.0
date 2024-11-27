@@ -77,7 +77,7 @@ if (isset($_POST['admin_login_btn'])) {
                 ];
 
                 // Redirect to the admin dashboard
-                header("Location: admin/.");
+                header("Location: admin/index.php");
                 exit(0);
             } else {
                 // Increment login attempts on failure
