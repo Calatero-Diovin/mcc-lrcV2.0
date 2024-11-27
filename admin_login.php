@@ -1,3 +1,6 @@
+<?php
+include('admin_login_head.php');
+?>
 <section class="d-flex mt-4 flex-column justify-content-center align-items-center">
         <div class="container-xl">
             <div class="col mx-auto rounded shadow bg-white">
