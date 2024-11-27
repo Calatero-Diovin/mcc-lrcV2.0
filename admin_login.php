@@ -108,7 +108,7 @@ if (strpos($request, '.php') !== false) {
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="admin_type" name="admin_type" required disabled>
+                                    <select class="form-select" id="admin_type" name="admin_type" required>
                                         <option value="" selected disabled>Select Admin Type</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Staff">Staff</option>
@@ -119,29 +119,7 @@ if (strpos($request, '.php') !== false) {
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required disabled>
-                                    <label for="email">Email</label>
-                                    <div id="validationServerEmailFeedback" class="invalid-feedback">
-                                        Please enter your email
-                                    </div>
-                                </div>
-                                <div class="form-floating mb-3 position-relative">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required disabled>
-                                    <label for="password">Password</label>
-                                    <span class="password-show-toggle js-password-show-toggle">
-                                        <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                    </span>
-                                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                        Please enter your password.
-                                    </div>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <div class="h-captcha" data-sitekey="026a7b60-39a2-4eba-86d8-cc6e29a254fe"></div>
-                                    <div class="invalid-feedback">Please complete the CAPTCHA.</div>
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2 md-3 mb-3">
-                                <button type="submit" name="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" disabled <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required>Login</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                             <p>
