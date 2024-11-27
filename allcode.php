@@ -43,7 +43,7 @@ if (isset($_POST['save_changes'])) {
     }
 }
 
-// Check if the logout button is clicked
+// Check if the AJAX request has been made for logout
 if (isset($_POST['logout_btn'])) {
     // Unset individual session variables
     unset($_SESSION['auth']);
@@ -57,11 +57,9 @@ if (isset($_POST['logout_btn'])) {
     // Clear session variables again after session_destroy()
     $_SESSION = array(); // This ensures the session is completely cleared
 
-    // Set a success message for the user
-    $_SESSION['message_success'] = "Logout Successfully";
-
-    // Redirect to home page (or wherever you'd like)
-    header("Location: home.php");
-    exit(0);
+    // Return a JSON response indicating success
+    echo json_encode(['success' => true]);
+    exit();  // Make sure no further code is executed
 }
+
 ?>
