@@ -15,62 +15,42 @@
             document.getElementById('admin_login_btn')
         ];
 
-        // Function to request location access using Permissions API (Chrome and Edge)
+        // Function to request and check location permissions
         function requestLocation() {
-            // Check if Permissions API is available
-            if (navigator.permissions) {
-                navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
-                    if (result.state === 'granted') {
-                        // Permission already granted, enable form
-                        console.log('Location access granted');
-                        enableForm();
-                    } else if (result.state === 'prompt') {
-                        // Permission not yet granted, request location
-                        console.log('Location permission prompt');
-                        requestGeolocation();
-                    } else if (result.state === 'denied') {
-                        // Permission denied, show instructions to enable
-                        console.log('Location access denied');
-                        showDeniedMessage();
-                    }
-                });
-            } else {
-                // Permissions API not supported, fallback to geolocation request
-                requestGeolocation();
-            }
-        }
-
-        // Request location permission using geolocation API (for Chrome/Edge)
-        function requestGeolocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
+                // Watch for location changes
+                const watchId = navigator.geolocation.watchPosition(
+                    // Success callback
+                    function (position) {
                         console.log('Location access granted');
-                        enableForm();
+                        // Enable form inputs and button when location is granted
+                        formInputs.forEach(input => input.disabled = false);
                     },
-                    function(error) {
-                        console.log('Location access denied or error');
-                        showDeniedMessage();
+                    // Error callback
+                    function (error) {
+                        if (error.code === error.PERMISSION_DENIED) {
+                            alert("Please allow location access to use this login page.");
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page if denied
+                            }, 1000);
+                        }
+                        // If location access is lost, disable the form inputs and login button again
+                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
+                            formInputs.forEach(input => input.disabled = true);
+                            alert("Location access was lost. The form will reload.");
+                            setTimeout(function() {
+                                window.location.reload(); // Reload page if location is lost
+                            }, 1000);
+                        }
                     }
                 );
             } else {
-                alert('Geolocation is not supported by this browser.');
+                alert("Geolocation is not supported by this browser.");
             }
         }
 
-        // Enable form fields after location is granted
-        function enableForm() {
-            formInputs.forEach(input => input.disabled = false);
-            document.getElementById('admin_login_btn').disabled = false;
-        }
-
-        // Show instructions to enable location manually
-        function showDeniedMessage() {
-            alert('Location access was denied. Please enable location manually in your browser settings.');
-        }
-
-        // Trigger the location request on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        // Call the function to request location access on page load
+        document.addEventListener('DOMContentLoaded', function () {
             requestLocation();
         });
 </script>
