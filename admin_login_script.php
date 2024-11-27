@@ -11,11 +11,13 @@
         function handleLocationPermission() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    // Location is allowed, enable the form fields
+                    // Location is allowed, enable the form fields and refresh the page
                     enableFormFields();
+                    location.reload(); // Reload the page if location access is granted
                 }, function(error) {
-                    // Location is denied, disable the form fields
+                    // Location is denied, disable the form fields and refresh the page
                     disableFormFields();
+                    location.reload(); // Reload the page if location access is denied
                 });
             } else {
                 // Geolocation is not supported, disable the form fields
