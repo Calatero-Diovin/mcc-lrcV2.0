@@ -100,7 +100,7 @@ include('./includes/sidebar.php');
                                                   <input type="hidden" name="old_admin_image"
                                                        value="<?=$admin['admin_image'];?>">
                                                   <input type="file" name="admin_image" class="form-control"
-                                                       autocomplete="off" id="admin_image">
+                                                       autocomplete="off" id="admin_image" accept=".jpg,.jpeg,.png">
                                              </div>
                                         </div>
                                    </div>
@@ -142,199 +142,128 @@ include('./includes/sidebar.php');
      </section>
 </main>
 <script>
- function validateNameInput(inputField) {
-        const value = inputField.value;
-        const xssPattern = /<[^>]*>/; // Regex pattern to detect HTML tags
+ document.getElementById('firstname').addEventListener('input', function () {
+          var nameInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== nameInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(nameInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(nameInput) && this.value === nameInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
 
-        // Check for XSS tags
-        if (xssPattern.test(value)) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'Your name cannot contain HTML tags.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            });
-            inputField.value = ''; // Clear the input field
-            inputField.focus(); // Refocus on the input field
+     document.getElementById('middlename').addEventListener('input', function () {
+          var mnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== mnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(mnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(mnInput) && this.value === mnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('lastname').addEventListener('input', function () {
+          var lnInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== lnInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(lnInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(lnInput) && this.value === lnInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('email').addEventListener('input', function () {
+     var emailInput = this.value.trim();
+     
+     var emailPattern = /^[A-Za-z0-9._%+-]+@mcclawis\.edu\.ph$/;
+
+     if (emailPattern.test(emailInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid email with the domain @mcclawis.edu.ph');
+     }
+
+     var isValid = emailPattern.test(emailInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('phone_number').addEventListener('input', function () {
+     var phoneInput = this.value.trim();
+     
+     var phonePattern = /^09\d{9}$/;
+
+     if (phonePattern.test(phoneInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid phone number starting with 09 and exactly 11 digits.');
+     }
+
+     var isValid = phonePattern.test(phoneInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('address').addEventListener('input', function () {
+     var addressInput = this.value.trim();
+     
+     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+
+     if (addressPattern.test(addressInput)) {
+          this.setCustomValidity('');
+     } else {
+          this.setCustomValidity('Please enter a valid address in the format: Barangay, Municipality, Province');
+     }
+     
+     var isValid = addressPattern.test(addressInput);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('admin_image').addEventListener('change', function () {
+        var file = this.files[0];
+        var isValid = true; // Assume the file is valid initially
+
+        if (file) {
+            var allowedExtensions = ['image/jpeg', 'image/png'];
+            // If the file type is not valid, set isValid to false
+            if (!allowedExtensions.includes(file.type)) {
+                isValid = false;
+                // Optionally, set a custom validation message
+                this.setCustomValidity('Please upload a valid image file (JPEG, PNG).');
+            } else {
+                // Clear any custom validation message if the file is valid
+                this.setCustomValidity('');
+            }
         }
-    }
 
-    // Attach event listeners to the input fields
-    document.getElementById('firstname').addEventListener('input', function() {
-        validateNameInput(this);
+        // Toggle the 'is-invalid' class based on isValid status
+        this.classList.toggle('is-invalid', !isValid);
     });
-    document.getElementById('middlename').addEventListener('input', function() {
-        validateNameInput(this);
-    });
-    document.getElementById('lastname').addEventListener('input', function() {
-        validateNameInput(this);
-    });
-
-    function validatePhoneNumber() {
-        const phoneInput = document.getElementById('phone_number');
-        const warning = document.getElementById('phone_warning');
-
-        // Remove non-numeric characters
-        const cleanedInput = phoneInput.value.replace(/\D/g, '');
-
-        // Check if the input starts with "09"
-        if (cleanedInput.length > 09 && !cleanedInput.startsWith('09')) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'Phone number must start with "09".',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                phoneInput.value = ''; // Clear the input
-            });
-            return;
-        } else {
-            warning.textContent = ''; // Clear the warning if valid
-        }
-
-        // Ensure the maximum length of 11 digits
-        if (cleanedInput.length > 11) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'Phone number cannot exceed 11 digits.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                phoneInput.value = cleanedInput.substring(0, 11); // Trim to 11 digits
-            });
-            return;
-        }
-
-        // Set the cleaned input back to the input field
-        phoneInput.value = cleanedInput;
-    }
-
-function validateAddress() {
-        const addressInput = document.getElementById('address').value;
-        const addressPattern = /^[A-Za-z\s]+,\s*[A-Za-z\s]+,\s*[A-Za-z\s]+$/; // Regex for "City, Municipality, Province"
-
-        if (!addressPattern.test(addressInput)) {
-            Swal.fire({
-                title: 'Invalid Address Format!',
-                text: 'Please enter the address in the format: "Patao, Bantayan, Cebu".',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                document.getElementById('address').value = ''; // Clear the input
-            });
-        }
-        // No success message for valid addresses
-    }
-
-    // Attach event listener to the address input field for the blur event
-    document.getElementById('address').addEventListener('blur', validateAddress);
-
-    function validatePhoneNumber() {
-        const phoneInput = document.getElementById('phone_number');
-        const warning = document.getElementById('phone_warning');
-
-        // Remove non-numeric characters
-        const cleanedInput = phoneInput.value.replace(/\D/g, '');
-
-        // Check if the input starts with "09"
-        if (cleanedInput.length > 09 && !cleanedInput.startsWith('09')) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'Phone number must start with "09".',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                phoneInput.value = ''; // Clear the input
-            });
-            return;
-        } else {
-            warning.textContent = ''; // Clear the warning if valid
-        }
-
-        // Ensure the maximum length of 11 digits
-        if (cleanedInput.length > 11) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'Phone number cannot exceed 11 digits.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                phoneInput.value = cleanedInput.substring(0, 11); // Trim to 11 digits
-            });
-            return;
-        }
-
-        // Set the cleaned input back to the input field
-        phoneInput.value = cleanedInput;
-    }
-
-     // Function to check for XSS tags and email domain
-     function validateEmail(input) {
-        const xssPattern = /<[^>]*>/;
-        const validDomain = /@mcclawis\.edu\.ph$/; // Regex for the valid domain
-
-        // Check for XSS tags
-        if (xssPattern.test(input)) {
-            Swal.fire({
-                title: 'Invalid Input!',
-                text: 'XSS tags are not allowed.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                // Clear the input field
-                document.getElementById('email').value = '';
-            });
-            return true; // Return true if XSS is found
-        }
-
-        // Check for valid email domain
-        if (!validDomain.test(input)) {
-            Swal.fire({
-                title: 'Invalid Email!',
-                text: 'Please use an email address ending with @mcclawis.edu.ph.',
-                icon: 'error',
-                confirmButtonText: 'Okay'
-            }).then(() => {
-                // Clear the input field
-                document.getElementById('email').value = '';
-            });
-            return true; // Return true if invalid email
-        }
-
-        return false; // Return false if everything is valid
-    }
-
-    // Attach event listener to the email input field
-    document.getElementById('email').addEventListener('input', function() {
-        validateEmail(this.value);
-    });
-
-    function validateImage() {
-    const fileInput = document.getElementById('admin_image');
-    const file = fileInput.files[0]; // Get the first file
-    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-
-    // Check if a file is selected
-    if (!file) {
-        return; // No file selected, do nothing
-    }
-
-    // Check if the file extension is valid
-    if (!allowedExtensions.exec(file.name)) {
-        Swal.fire({
-            title: 'Invalid File Format!',
-            text: 'Please upload an image in JPEG, JPG, or PNG format.',
-            icon: 'error',
-            confirmButtonText: 'Okay'
-        }).then(() => {
-            fileInput.value = ''; // Clear the input
-        });
-    }
-}
-
-// Attach event listener to the file input field
-document.getElementById('admin_image').addEventListener('change', validateImage);
-
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
