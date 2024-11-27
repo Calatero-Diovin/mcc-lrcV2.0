@@ -109,9 +109,6 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
                                                                  <label for="firstname" class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                                                  <div class="col-md-8 col-lg-9">
                                                                       <input name="firstname" type="text" class="form-control" id="firstname" value="<?=$user['firstname']?>" required>
-                                                                      <div class="invalid-feedback">
-                                                                           First name must start with a capital letter and cannot have leading spaces or multiple spaces.
-                                                                      </div>
                                                                  </div>
                                                             </div>
                                                             <div class="row mb-3">
