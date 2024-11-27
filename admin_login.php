@@ -165,21 +165,6 @@ if (strpos($request, '.php') !== false) {
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
         });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_successes']) && $_SESSION['login_successes']): ?>
-                <?php unset($_SESSION['login_successes']); // Clear session variable ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    showConfirmButton: false, // Hide the confirm button
-                    timer: 3000, // Set the timer to 3 seconds (3000 milliseconds)
-                    timerProgressBar: true, // Optional: Show the timer progress bar
-                }).then(() => {
-                    window.location.href = './admin/.'; // Redirect after the timer completes
-                });
-            <?php endif; ?>
-        });
     </script>
 
 <?php 

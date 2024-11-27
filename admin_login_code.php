@@ -66,8 +66,8 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
-                $_SESSION['login_successes'] = true;
-                header("Location: admin_login.php");
+                // $_SESSION['login_successes'] = true;
+                header("Location: admin/.");
                 exit(0);
             } else {
                 // Increment login attempts on failure
