@@ -255,12 +255,12 @@ $(document).ready(function() {
     // Validate book image file type
     $('#book_image_input').on('change', function() {
         const file = this.files[0];
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
         if (file && !allowedTypes.includes(file.type)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid File Type',
-                text: 'Only JPG, JPEG, PNG, and GIF files are allowed.',
+                text: 'Only JPG, JPEG, and PNG files are allowed.',
                 confirmButtonText: 'OK'
             });
             $(this).val(''); // Clear the input
