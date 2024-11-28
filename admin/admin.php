@@ -2,6 +2,7 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('includes/sidebar.php'); 
+include('includes/url.php');
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -70,7 +71,7 @@ include('includes/sidebar.php');
                                                   <td class=" justify-content-center">
                                                        <div class="btn-group" style="background: #DFF6FF;  ">
                                                             <!-- View Admin Action-->
-                                                            <a href="admin_view.php?id=<?=$admin['admin_id']; ?>"
+                                                            <a href="admin_view.php?v=<?=encryptor('encrypt',$admin['admin_id']); ?>"
                                                                  name="view_admin"
                                                                  class="viewAdminBtn btn btn-sm  border text-primary"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -78,7 +79,7 @@ include('includes/sidebar.php');
                                                                  <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                             <!-- Edit Admin Action-->
-                                                            <a href="admin_edit.php?id=<?= $admin['admin_id']; ?>"
+                                                            <a href="admin_edit.php?e=<?= encryptor('encrypt',$admin['admin_id']); ?>"
                                                                  name="update_admin"
                                                                  class="btn btn-sm  border text-success"
                                                                  data-bs-toggle="tooltip" data-bs-placement="bottom"

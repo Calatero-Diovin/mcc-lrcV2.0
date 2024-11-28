@@ -27,8 +27,8 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-body">
                               <?php
-                              if (isset($_GET['id'])) {
-                                   $admin_id = $_GET['id']; // No need to escape when using prepared statements
+                              if (isset($_GET['v'])) {
+                                   $admin_id = filter_var(encryptor('decrypt', $_GET['v']), FILTER_VALIDATE_INT); 
                                
                                    $query = "SELECT * FROM admin WHERE admin_id = ?";
                                    $stmt = $con->prepare($query);
