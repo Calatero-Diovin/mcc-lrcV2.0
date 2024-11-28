@@ -174,7 +174,7 @@ if (isset($_POST['edit_admin'])) {
         
         // You can use AJAX to trigger the SweetAlert OTP prompt
         header("Location: admin_edit.php?e=" . encryptor('encrypt', $admin_id));
-        exit(0);
+        exit;
     } catch (Exception $e) {
         $_SESSION['status'] = "Mailer Error: {$mail->ErrorInfo}";
         $_SESSION['status_code'] = "error";

@@ -269,7 +269,7 @@ include('./includes/sidebar.php');
 <script>
     $(document).ready(function() {
         <?php if (isset($_SESSION['status']) && $_SESSION['status_code'] == 'info') { ?>
-            // Show SweetAlert OTP input when session is set with 'info'
+            // Session message indicates that OTP is sent, show SweetAlert OTP input
             Swal.fire({
                 title: 'Enter OTP',
                 html: `
