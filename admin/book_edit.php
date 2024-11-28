@@ -98,7 +98,7 @@ include('./includes/sidebar.php');
                                              <div class="mb-2 input-group-sm">
                                                   <label for="">Image</label>
                                                   <input type="hidden" name="old_book_image" value="<?=$book['book_image'];?>">
-                                                  <input type="file" name="book_image" class="form-control" autocomplete="off" accept=".jpg,.jpeg,.png" onchange="validateImage(this)">
+                                                  <input type="file" id="book_image_input" name="book_image" class="form-control" autocomplete="off" accept=".jpg,.jpeg,.png" onchange="validateImage(this)">
                                              </div>
                                         </div>
                                    </div>
