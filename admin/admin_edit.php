@@ -269,9 +269,6 @@ include('./includes/sidebar.php');
 
 <script>
         <?php 
-        // Clear session messages to avoid them being displayed on the page
-        unset($_SESSION['status']);
-        unset($_SESSION['status_code']);
         if (isset($_SESSION['status']) && $_SESSION['status_code'] == 'info') { ?>
             // Session message indicates that OTP is sent, show SweetAlert OTP input
             Swal.fire({
