@@ -159,6 +159,25 @@ include('./includes/sidebar.php');
      this.classList.toggle('is-invalid', !isValid);
      });
 
+     document.getElementById('publisher').addEventListener('input', function () {
+        var publisherInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (publisherInput === "") {
+            this.setCustomValidity('Publisher name cannot be empty or just spaces.');
+        } else if (this.value !== publisherInput) {
+            this.setCustomValidity('Publisher name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(publisherInput)) {
+            this.setCustomValidity('Publisher name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = publisherInput !== "" && this.value === publisherInput && !dangerousCharsPattern.test(publisherInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
     document.getElementById('book_file').addEventListener('change', function () {
      var file = this.files[0]; // Get the selected file
 
