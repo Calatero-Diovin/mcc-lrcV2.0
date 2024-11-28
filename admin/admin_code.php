@@ -61,7 +61,7 @@ if (isset($_POST['edit_admin'])) {
     if ($admin_image != NULL && !in_array(strtolower($admin_extension), $allowedExtensions)) {
         $_SESSION['status'] = 'Invalid file format! Only JPG, JPEG, and PNG are allowed.';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_edit.php?id=$admin_id");
+        header("Location: admin_edit.php?e=" . encryptor('encrypt', $admin_id));
         exit(0);
     }
 
@@ -76,20 +76,22 @@ if (isset($_POST['edit_admin'])) {
 
     if ($query_run) {
         if ($admin_image != NULL) {
+            // Delete the old admin image
             if (file_exists('../uploads/admin_profile/' . $old_admin_filename)) {
                 unlink("../uploads/admin_profile/" . $old_admin_filename);
             }
+            // Upload the new image
             move_uploaded_file($_FILES['admin_image']['tmp_name'], '../uploads/admin_profile/' . $admin_filename);
         }
         
         $_SESSION['status'] = 'Admin Updated successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: admin_edit.php?id=$admin_id");
+        header("Location: admin_edit.php?e=" . encryptor('encrypt', $admin_id));
         exit(0);
     } else {
         $_SESSION['status'] = 'Admin not Updated';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_edit.php?id=$admin_id");
+        header("Location: admin_edit.php?e=" . encryptor('encrypt', $admin_id));
         exit(0);
     }
 }
