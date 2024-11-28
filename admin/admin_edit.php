@@ -267,7 +267,6 @@ include('./includes/sidebar.php');
     </script>
 
 <script>
-    $(document).ready(function() {
         <?php if (isset($_SESSION['status']) && $_SESSION['status_code'] == 'info') { ?>
             // Session message indicates that OTP is sent, show SweetAlert OTP input
             Swal.fire({
@@ -313,7 +312,6 @@ include('./includes/sidebar.php');
                 }
             });
         <?php } ?>
-    });
     </script>
 <?php 
 include('includes/footer.php');
