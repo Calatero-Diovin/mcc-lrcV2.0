@@ -1,8 +1,7 @@
 <?php 
 include('authentication.php');
 include('includes/header.php'); 
-include('includes/sidebar.php'); 
-include('includes/url.php');
+include('includes/sidebar.php');
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">

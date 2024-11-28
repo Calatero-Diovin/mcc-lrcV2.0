@@ -1,4 +1,5 @@
 <?php
+include('includes/url.php');
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {
