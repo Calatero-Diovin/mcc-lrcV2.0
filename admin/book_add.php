@@ -416,7 +416,7 @@ function checkAccessionNumberExists(accessionNumber) {
     });
 
     document.getElementById('copyright_year').addEventListener('input', function () {
-        var currentYear = new Date().getFullYear(); // Get the current year
+        var currentYear = new Now().getFullYear(); // Get the current year
         var copyrightYearInput = this.value.trim(); // Remove leading and trailing spaces
         
         // Regular expression to match exactly 4 digits
