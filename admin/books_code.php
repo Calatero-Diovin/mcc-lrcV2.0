@@ -58,7 +58,7 @@ if (isset($_POST['delete_book'])) {
                 mysqli_commit($con);
                 $_SESSION['status'] = "Book accession number '$accession_number' deleted successfully";
                 $_SESSION['status_code'] = "success";
-                header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&tab=copies");
+                header("Location: book_views.php?title=" . urlencode(encryptor('encrypt',$title)) . "&copyright_date=" . urlencode(encryptor('encrypt',$copyright_date)) . "&author=" . urlencode(encryptor('encrypt',$author)) . "&isbn=" . urlencode(encryptor('encrypt',$isbn)) . "&tab=copies");
                 exit(0);
             } else {
                 throw new Exception("Failed to delete book accession number '$accession_number'");
@@ -68,7 +68,7 @@ if (isset($_POST['delete_book'])) {
             mysqli_rollback($con);
             $_SESSION['status'] = $e->getMessage();
             $_SESSION['status_code'] = "error";
-            header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=" . urlencode($copyright_date) . "&author=" . urlencode($author) . "&isbn=" . urlencode($isbn) . "&tab=copies");
+            header("Location: book_views.php?title=" . urlencode(encryptor('encrypt',$title)) . "&copyright_date=" . urlencode(encryptor('encrypt',$copyright_date)) . "&author=" . urlencode(encryptor('encrypt',$author)) . "&isbn=" . urlencode(encryptor('encrypt',$isbn)) . "&tab=copies");
             exit(0);
         }
     } else {
@@ -176,7 +176,7 @@ if (isset($_POST['update_accession_number'])) {
             }
         }
 
-        header("Location: book_views.php?title=" . urlencode($title) . "&copyright_date=". urlencode($copyright_date) . "&author=". urlencode($author) . "&isbn=". urlencode($isbn) . "&tab=copies");
+        header("Location: book_views.php?title=" . urlencode(encryptor('encrypt',$title)) . "&copyright_date=" . urlencode(encryptor('encrypt',$copyright_date)) . "&author=" . urlencode(encryptor('encrypt',$author)) . "&isbn=" . urlencode(encryptor('encrypt',$isbn)) . "&tab=copies");
         exit();
     }
 }
