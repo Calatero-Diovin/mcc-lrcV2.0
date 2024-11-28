@@ -3,9 +3,6 @@ include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
 
-// Clear session messages to avoid them being displayed on the page
-unset($_SESSION['status']);
-unset($_SESSION['status_code']);
 ?>
 <main id="main" class="main">
      <div class="pagetitle">
@@ -273,6 +270,9 @@ unset($_SESSION['status_code']);
 <script>
         <?php if (isset($_SESSION['status']) && $_SESSION['status_code'] == 'info') { ?>
             // Session message indicates that OTP is sent, show SweetAlert OTP input
+            // Clear session messages to avoid them being displayed on the page
+               unset($_SESSION['status']);
+               unset($_SESSION['status_code']);
             Swal.fire({
                 title: 'Enter OTP',
                 html: `
