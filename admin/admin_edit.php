@@ -2,6 +2,10 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
+
+// Clear session messages to avoid them being displayed on the page
+unset($_SESSION['status']);
+unset($_SESSION['status_code']);
 ?>
 <main id="main" class="main">
      <div class="pagetitle">
