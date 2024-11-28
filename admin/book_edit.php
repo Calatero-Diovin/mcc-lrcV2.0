@@ -2,7 +2,6 @@
 include('authentication.php');
 include('./includes/header.php'); 
 include('./includes/sidebar.php'); 
-include('includes/url.php');
 ?>
 
 <main id="main" class="main">

@@ -2,7 +2,6 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
-include('includes/url.php');
 
 // Check which tab to show
 $activeTab = isset($_GET['tab']) && $_GET['tab'] == 'copies' ? 'copies-tab' : 'details-tab';

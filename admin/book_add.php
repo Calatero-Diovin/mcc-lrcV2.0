@@ -33,13 +33,13 @@ include('./includes/sidebar.php');
                                         <label for="title">Title</label>
                                         <input type="text" id="title_search" class="form-control" placeholder="Search for a title" oninput="searchTitles()" autocomplete="off" onblur="sanitizeInput(this)">
                                         <div id="title_results" class="search-results"></div>
-                                        <input type="text" name="title" id="title" class="form-control mt-2" placeholder="Or type a new title" required onblur="sanitizeInput(this)">
+                                        <input type="text" name="title" id="title" class="form-control mt-2" placeholder="Or type a new title" required>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="author">Author</label>
-                                        <input type="text" name="author" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" id="author" name="author" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -47,13 +47,13 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="isbn">ISBN</label>
-                                        <input type="text" name="isbn" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" id="isbn" name="isbn" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="publisher">Publisher</label>
-                                        <input type="text" name="publisher" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" id="publisher" name="publisher" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -61,13 +61,13 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="copyright_date">Copyright Year</label>
-                                        <input type="text" id="copyright_date" name="copyright_date" onblur="sanitizeInput(this)" class="form-control" autocomplete="off" pattern="\d{4}">
+                                        <input type="text" id="copyright_date" name="copyright_date" class="form-control" autocomplete="off" pattern="\d{4}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="place_publication">Place of Publication</label>
-                                        <input type="text" name="place_publication" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" id="place_publication" name="place_publication" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ include('./includes/sidebar.php');
                                 <div class="col-12 col-md-5">
                                     <div class="mb-2 input-group-sm">
                                         <label for="call_number">Call Number</label>
-                                        <input type="text" name="call_number" id="book_call_number" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" name="call_number" id="book_call_number" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
@@ -103,7 +103,7 @@ include('./includes/sidebar.php');
                                         $category_run = mysqli_query($con, $category);
                                         if(mysqli_num_rows($category_run) > 0) {
                                         ?>
-                                        <select name="lrc_location" id="lrc_location" class="form-control">
+                                        <select name="lrc_location" id="lrc_location" class="form-control" required>
                                             <option value=""></option>
                                             <?php
                                             foreach($category_run as $category_item) {
@@ -120,9 +120,9 @@ include('./includes/sidebar.php');
                                         ?>
                                         <br>
                                         <label for="subject">Subject/s</label>
-                                        <input type="text" name="subject" class="form-control mb-2" onblur="sanitizeInput(this)">
-                                        <input type="text" name="subject1" class="form-control mb-2" onblur="sanitizeInput(this)">
-                                        <input type="text" name="subject2" class="form-control" onblur="sanitizeInput(this)">
+                                        <input type="text" id="subject" name="subject" class="form-control mb-2">
+                                        <input type="text" id="subject1" name="subject1" class="form-control mb-2">
+                                        <input type="text" id="subject2" name="subject2" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5">
@@ -131,8 +131,8 @@ include('./includes/sidebar.php');
                                             <label for="book_image">Book Image</label>
                                             <span class="text-muted"><small>(Optional)</small></span>
                                         </div>
-                                        <input type="file" name="book_image" id="book_image_input" class="form-control">
-                                        <input type="text" id="book_image_name" class="form-control mt-2" readonly>
+                                        <input type="file" name="book_image" id="book_image_input" class="form-control" accept=".jpg,.jpeg,.png">
+                                        <input type="hidden" id="book_image_name" class="form-control mt-2" readonly>
                                         <!-- Hidden input to hold the existing image filename -->
                                         <input type="hidden" name="existing_image" id="existing_image">
                                     </div>
@@ -222,6 +222,7 @@ function generateAccessionFields() {
         input.name = 'accession_number_' + i;
         input.className = 'form-control mb-2';
         input.placeholder = 'Accession Number ' + i;
+        input.id = 'accession_number';
         input.required = true;
         container.appendChild(input);
     }
@@ -342,3 +343,218 @@ function checkAccessionNumberExists(accessionNumber) {
     background-color: #f1f1f1;
 }
 </style>
+
+<script>
+    document.getElementById('title').addEventListener('input', function () {
+          var titleInput = this.value.trim();
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; 
+          
+          if (this.value !== titleInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(titleInput)) {
+               this.setCustomValidity(''); 
+          } else {
+               this.setCustomValidity('Please enter a valid title with only letters and no leading/trailing spaces.');
+          }
+          
+          var isValid = alphabetPattern.test(titleInput) && this.value === titleInput;
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('author').addEventListener('input', function () {
+          var authorInput = this.value.trim();
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/;
+          
+          if (this.value !== authorInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(authorInput)) {
+               this.setCustomValidity('');
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          var isValid = alphabetPattern.test(authorInput) && this.value === authorInput;
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('isbn').addEventListener('input', function () {
+        var isbnInput = this.value.trim(); 
+        
+        var isbnPattern = /^[0-9-]+$/;
+        
+        if (this.value !== isbnInput) {
+            this.setCustomValidity('ISBN cannot start with a space.');
+        } else if (isbnPattern.test(isbnInput)) {
+            this.setCustomValidity('');
+        } else {
+            this.setCustomValidity('Please enter a valid ISBN with only numbers and dashes.');
+        }
+        
+        var isValid = isbnPattern.test(isbnInput) && this.value === isbnInput;
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('publisher').addEventListener('input', function () {
+        var publisherInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (publisherInput === "") {
+            this.setCustomValidity('Publisher name cannot be empty or just spaces.');
+        } else if (this.value !== publisherInput) {
+            this.setCustomValidity('Publisher name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(publisherInput)) {
+            this.setCustomValidity('Publisher name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = publisherInput !== "" && this.value === publisherInput && !dangerousCharsPattern.test(publisherInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('copyright_year').addEventListener('input', function () {
+        var currentYear = new Date().getFullYear(); // Get the current year
+        var copyrightYearInput = this.value.trim(); // Remove leading and trailing spaces
+        
+        // Regular expression to match exactly 4 digits
+        var yearPattern = /^\d{4}$/;
+
+        // Check if the input is a valid 4-digit number and is not the current year
+        if (!yearPattern.test(copyrightYearInput)) {
+            this.setCustomValidity('Please enter a valid 4-digit year.');
+        } else if (parseInt(copyrightYearInput) === currentYear) {
+            // If the input year is the same as the current year, it's invalid
+            this.setCustomValidity('Copyright year cannot be the current year.');
+        } else {
+            this.setCustomValidity(''); // Clear any previous error message
+        }
+        
+        // Check validity and toggle the invalid class
+        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) !== currentYear;
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('place_publication').addEventListener('input', function () {
+        var placepubInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (placepubInput === "") {
+            this.setCustomValidity('Place Publication name cannot be empty or just spaces.');
+        } else if (this.value !== placepubInput) {
+            this.setCustomValidity('Place Publication name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(placepubInput)) {
+            this.setCustomValidity('Place Publication name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = placepubInput !== "" && this.value === placepubInput && !dangerousCharsPattern.test(placepubInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('book_call_number').addEventListener('input', function () {
+        var callnumInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (callnumInput === "") {
+            this.setCustomValidity('Call number name cannot be empty or just spaces.');
+        } else if (this.value !== callnumInput) {
+            this.setCustomValidity('Call number name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(callnumInput)) {
+            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = callnumInput !== "" && this.value === callnumInput && !dangerousCharsPattern.test(callnumInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject').addEventListener('input', function () {
+        var subjectInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (this.value !== subjectInput) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subjectInput)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subjectInput !== "" && this.value === subjectInput && !dangerousCharsPattern.test(subjectInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject1').addEventListener('input', function () {
+        var subject1Input = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (this.value !== subject1Input) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subject1Input)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subject1Input !== "" && this.value === subject1Input && !dangerousCharsPattern.test(subject1Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject2').addEventListener('input', function () {
+        var subject2Input = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\'&]/;
+        
+        if (this.value !== subject2Input) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subject2Input)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subject2Input !== "" && this.value === subject2Input && !dangerousCharsPattern.test(subject2Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('book_image_input').addEventListener('change', function () {
+        var file = this.files[0];
+        var isValid = true;
+
+        if (file) {
+            var allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedExtensions.includes(file.type)) {
+                isValid = false;
+                this.setCustomValidity('Please upload a valid image file (JPEG, JPG, PNG).');
+            } else {
+                this.setCustomValidity('');
+            }
+        }
+
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('accession_number').addEventListener('input', function () {
+        var accessionNumberInput = this.value.trim(); 
+        
+        var numberPattern = /^\d+$/;
+
+        if (!numberPattern.test(accessionNumberInput)) {
+            this.setCustomValidity('Accession number must contain only numbers.');
+        } else {
+            this.setCustomValidity('');
+        }
+
+        var isValid = numberPattern.test(accessionNumberInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+</script>
