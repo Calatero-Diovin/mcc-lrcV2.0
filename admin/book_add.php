@@ -104,7 +104,7 @@ include('./includes/sidebar.php');
                                         if(mysqli_num_rows($category_run) > 0) {
                                         ?>
                                         <select name="lrc_location" id="lrc_location" class="form-control" required>
-                                            <option value=""></option>
+                                            <option value="" selected disabled>Select LRC Location</option>
                                             <?php
                                             foreach($category_run as $category_item) {
                                             ?>
