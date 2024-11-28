@@ -320,25 +320,6 @@ function validateNameInput(inputField) {
         this.classList.toggle('is-invalid', !isValid);
     });
 
-    document.getElementById('call_number').addEventListener('input', function () {
-        var callnumInput = this.value.trim();
-        
-        var dangerousCharsPattern = /[<>\"\']/;
-        
-        if (callnumInput === "") {
-            this.setCustomValidity('Call number name cannot be empty or just spaces.');
-        } else if (this.value !== callnumInput) {
-            this.setCustomValidity('Call number name cannot start with a space.');
-        } else if (dangerousCharsPattern.test(callnumInput)) {
-            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \'.');
-        } else {
-            this.setCustomValidity('');
-        }
-        
-        var isValid = callnumInput !== "" && this.value === callnumInput && !dangerousCharsPattern.test(callnumInput);
-        this.classList.toggle('is-invalid', !isValid);
-    });
-
     document.getElementById('subject').addEventListener('input', function () {
         var subjectInput = this.value.trim();
         
@@ -387,6 +368,25 @@ function validateNameInput(inputField) {
         }
         
         var isValid = subject2Input !== "" && this.value === subject2Input && !dangerousCharsPattern.test(subject2Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('call_number').addEventListener('input', function () {
+        var callnumInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (callnumInput === "") {
+            this.setCustomValidity('Call number name cannot be empty or just spaces.');
+        } else if (this.value !== callnumInput) {
+            this.setCustomValidity('Call number name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(callnumInput)) {
+            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = callnumInput !== "" && this.value === callnumInput && !dangerousCharsPattern.test(callnumInput);
         this.classList.toggle('is-invalid', !isValid);
     });
 
