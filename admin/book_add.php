@@ -401,14 +401,14 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('publisher').addEventListener('input', function () {
         var publisherInput = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (publisherInput === "") {
             this.setCustomValidity('Publisher name cannot be empty or just spaces.');
         } else if (this.value !== publisherInput) {
             this.setCustomValidity('Publisher name cannot start with a space.');
         } else if (dangerousCharsPattern.test(publisherInput)) {
-            this.setCustomValidity('Publisher name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Publisher name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
@@ -420,14 +420,14 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('place_publication').addEventListener('input', function () {
         var placepubInput = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (placepubInput === "") {
             this.setCustomValidity('Place Publication name cannot be empty or just spaces.');
         } else if (this.value !== placepubInput) {
             this.setCustomValidity('Place Publication name cannot start with a space.');
         } else if (dangerousCharsPattern.test(placepubInput)) {
-            this.setCustomValidity('Place Publication name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Place Publication name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
@@ -439,14 +439,14 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('book_call_number').addEventListener('input', function () {
         var callnumInput = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (callnumInput === "") {
             this.setCustomValidity('Call number name cannot be empty or just spaces.');
         } else if (this.value !== callnumInput) {
             this.setCustomValidity('Call number name cannot start with a space.');
         } else if (dangerousCharsPattern.test(callnumInput)) {
-            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
@@ -458,12 +458,12 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('subject').addEventListener('input', function () {
         var subjectInput = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (this.value !== subjectInput) {
             this.setCustomValidity('Subject name cannot start with a space.');
         } else if (dangerousCharsPattern.test(subjectInput)) {
-            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
@@ -475,12 +475,12 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('subject1').addEventListener('input', function () {
         var subject1Input = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (this.value !== subject1Input) {
             this.setCustomValidity('Subject name cannot start with a space.');
         } else if (dangerousCharsPattern.test(subject1Input)) {
-            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
@@ -492,12 +492,12 @@ function checkAccessionNumberExists(accessionNumber) {
     document.getElementById('subject2').addEventListener('input', function () {
         var subject2Input = this.value.trim();
         
-        var dangerousCharsPattern = /[<>\"\'&]/;
+        var dangerousCharsPattern = /[<>\"\']/;
         
         if (this.value !== subject2Input) {
             this.setCustomValidity('Subject name cannot start with a space.');
         } else if (dangerousCharsPattern.test(subject2Input)) {
-            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \', &.');
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }

@@ -107,8 +107,8 @@ include('./includes/sidebar.php');
                                              <div class="mb-2 input-group-sm">
                                                   <label for="subject">Subject/s</label>
                                                   <input type="text" id="subject" name="subject" value="<?=$book['subject'];?>" class="form-control mb-2">
-                                                  <input type="text" id="subject" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2">
-                                                  <input type="text" id="subject" name="subject2" value="<?=$book['subject2'];?>" class="form-control">
+                                                  <input type="text" id="subject1" name="subject1" value="<?=$book['subject1'];?>" class="form-control mb-2">
+                                                  <input type="text" id="subject2" name="subject2" value="<?=$book['subject2'];?>" class="form-control">
                                              </div>
                                         </div>
                                    </div>
@@ -146,18 +146,17 @@ include('../message.php');
 
 <script>
     $(document).ready(function() {
-        // Restrict input to numeric values only
-        $('#copyright_date').on('keypress', function(event) {
-            var key = String.fromCharCode(event.which);
-            if (!/[0-9]/.test(key)) {
-                event.preventDefault();
-            }
-        });
+    // Restrict input to numeric values only
+    $('#copyright_date').on('keypress', function(event) {
+        var key = String.fromCharCode(event.which);
+        if (!/[0-9]/.test(key)) {
+            event.preventDefault();
+        }
     });
 
     // Ensure the year is not greater than the current year
-    function validateForm() {
-        var inputYear = parseInt($('#copyright_date').val(), 10);
+    $('#copyright_date').on('change', function() {
+        var inputYear = parseInt($(this).val(), 10);
         var currentYear = new Date().getFullYear();
         if (inputYear > currentYear) {
             Swal.fire({
@@ -166,22 +165,28 @@ include('../message.php');
                 text: 'Year cannot be greater than the current year.',
                 confirmButtonText: 'OK'
             });
-            return false; // Prevent form submission
+            $(this).val(''); // Clear the input
         }
-        return true; // Allow form submission
-    }
+    });
 
-function validateImage(input) {
-    const file = input.files[0];
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    
-    if (file) {
-        if (!allowedTypes.includes(file.type)) {
-            alert('Invalid file type! Please upload an image file (JPG, JPEG, or PNG).');
-            input.value = ''; // Clear the input
+    // Validate book image file type
+    $('#book_image_input').on('change', function() {
+        const file = this.files[0];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (file && !allowedTypes.includes(file.type)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid File Type',
+                text: 'Only JPG, JPEG, and PNG files are allowed.',
+                confirmButtonText: 'OK'
+            });
+            $(this).val(''); // Clear the input
+            $('#book_image_name').val(''); // Clear the filename input
+        } else {
+            $('#book_image_name').val(file ? file.name : '');
         }
-    }
-}
+    });
+});
 
 function validateNameInput(inputField) {
         const value = inputField.value;
@@ -220,5 +225,203 @@ function validateNameInput(inputField) {
     });
     document.getElementById('subject').addEventListener('input', function() {
         validateNameInput(this);
+    });
+</script>
+
+<script>
+     document.getElementById('title').addEventListener('input', function () {
+        var titleInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (titleInput === "") {
+            this.setCustomValidity('Title name cannot be empty or just spaces.');
+        } else if (this.value !== titleInput) {
+            this.setCustomValidity('Title name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(titleInput)) {
+            this.setCustomValidity('Title name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = titleInput !== "" && this.value === titleInput && !dangerousCharsPattern.test(titleInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('publisher').addEventListener('input', function () {
+        var publisherInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (publisherInput === "") {
+            this.setCustomValidity('Publisher name cannot be empty or just spaces.');
+        } else if (this.value !== publisherInput) {
+            this.setCustomValidity('Publisher name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(publisherInput)) {
+            this.setCustomValidity('Publisher name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = publisherInput !== "" && this.value === publisherInput && !dangerousCharsPattern.test(publisherInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('place_publication').addEventListener('input', function () {
+        var placepubInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (placepubInput === "") {
+            this.setCustomValidity('Place Publication name cannot be empty or just spaces.');
+        } else if (this.value !== placepubInput) {
+            this.setCustomValidity('Place Publication name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(placepubInput)) {
+            this.setCustomValidity('Place Publication name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = placepubInput !== "" && this.value === placepubInput && !dangerousCharsPattern.test(placepubInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject').addEventListener('input', function () {
+        var subjectInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (this.value !== subjectInput) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subjectInput)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subjectInput !== "" && this.value === subjectInput && !dangerousCharsPattern.test(subjectInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject1').addEventListener('input', function () {
+        var subject1Input = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (this.value !== subject1Input) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subject1Input)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subject1Input !== "" && this.value === subject1Input && !dangerousCharsPattern.test(subject1Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('subject2').addEventListener('input', function () {
+        var subject2Input = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (this.value !== subject2Input) {
+            this.setCustomValidity('Subject name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(subject2Input)) {
+            this.setCustomValidity('Subject name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = subject2Input !== "" && this.value === subject2Input && !dangerousCharsPattern.test(subject2Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('book_call_number').addEventListener('input', function () {
+        var callnumInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (callnumInput === "") {
+            this.setCustomValidity('Call number name cannot be empty or just spaces.');
+        } else if (this.value !== callnumInput) {
+            this.setCustomValidity('Call number name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(callnumInput)) {
+            this.setCustomValidity('Call number name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = callnumInput !== "" && this.value === callnumInput && !dangerousCharsPattern.test(callnumInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('author').addEventListener('input', function () {
+          var authorInput = this.value.trim();
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/;
+          
+          if (this.value !== authorInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(authorInput)) {
+               this.setCustomValidity('');
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          var isValid = alphabetPattern.test(authorInput) && this.value === authorInput;
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('isbn').addEventListener('input', function () {
+        var isbnInput = this.value.trim(); 
+        
+        var isbnPattern = /^[0-9-]+$/;
+        
+        if (this.value !== isbnInput) {
+            this.setCustomValidity('ISBN cannot start with a space.');
+        } else if (isbnPattern.test(isbnInput)) {
+            this.setCustomValidity('');
+        } else {
+            this.setCustomValidity('Please enter a valid ISBN with only numbers and dashes.');
+        }
+        
+        var isValid = isbnPattern.test(isbnInput) && this.value === isbnInput;
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+     document.getElementById('copyright_year').addEventListener('input', function () {
+        var currentYear = new Date().getFullYear();
+        var copyrightYearInput = this.value.trim();
+        
+        var yearPattern = /^\d{4}$/;
+
+        if (!yearPattern.test(copyrightYearInput)) {
+            this.setCustomValidity('Please enter a valid 4-digit year.');
+        } else if (parseInt(copyrightYearInput) === currentYear) {
+            this.setCustomValidity('Copyright year cannot be the current year.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) !== currentYear;
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('book_image_input').addEventListener('change', function () {
+        var file = this.files[0];
+        var isValid = true;
+
+        if (file) {
+            var allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedExtensions.includes(file.type)) {
+                isValid = false;
+                this.setCustomValidity('Please upload a valid image file (JPEG, JPG, PNG).');
+            } else {
+                this.setCustomValidity('');
+            }
+        }
+
+        this.classList.toggle('is-invalid', !isValid);
     });
 </script>
