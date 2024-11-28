@@ -23,9 +23,9 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-body">
                               <?php
-                              if(isset($_GET['id']))
+                              if(isset($_GET['e']))
                               {
-                                   $admin_id = encryptor('decrypt',$_GET['id']);
+                                   $admin_id = filter_var(encryptor('decrypt',$_GET['e']), FILTER_VALIDATE_INT);
 
                                    $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
                                    $query_run = mysqli_query($con, $query);
