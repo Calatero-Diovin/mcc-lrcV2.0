@@ -136,7 +136,7 @@ include('./includes/sidebar.php');
           this.classList.toggle('is-invalid', !isValid);
      });
 
-     document.getElementById('copyright_year').addEventListener('input', function () {
+     document.getElementById('copyright_date').addEventListener('input', function () {
         var currentYear = new Date().getFullYear();
         var copyrightYearInput = this.value.trim();
         
