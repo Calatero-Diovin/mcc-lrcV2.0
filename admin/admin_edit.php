@@ -25,7 +25,7 @@ include('./includes/sidebar.php');
                               <?php
                               if(isset($_GET['id']))
                               {
-                                   $admin_id = filter_var(encryptor('decrypt',$_GET['id']), FILTER_VALIDATE_INT);
+                                   $admin_id = encryptor('decrypt',$_GET['id']);
 
                                    $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
                                    $query_run = mysqli_query($con, $query);
