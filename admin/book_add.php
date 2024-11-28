@@ -507,20 +507,25 @@ function checkAccessionNumberExists(accessionNumber) {
     });
 
     document.getElementById('copyright_year').addEventListener('input', function () {
-        var currentYear = new Date().getFullYear();
+        var currentYear = new Date().getFullYear();  // Dynamically get the current year
         var copyrightYearInput = this.value.trim();
         
         var yearPattern = /^\d{4}$/;
 
+        // Check if the input is a valid 4-digit year
         if (!yearPattern.test(copyrightYearInput)) {
             this.setCustomValidity('Please enter a valid 4-digit year.');
-        } else if (parseInt(copyrightYearInput) === currentYear) {
-            this.setCustomValidity('Copyright year cannot be the current year.');
-        } else {
+        } 
+        // Check if the input year is greater than the current year
+        else if (parseInt(copyrightYearInput) > currentYear) {
+            this.setCustomValidity('Copyright year cannot be in the future.');
+        } 
+        // Valid case: years up to the current year
+        else {
             this.setCustomValidity('');
         }
-        
-        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) !== currentYear;
+
+        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) <= currentYear;
         this.classList.toggle('is-invalid', !isValid);
     });
 
