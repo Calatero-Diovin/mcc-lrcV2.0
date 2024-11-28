@@ -1,5 +1,6 @@
 <?php
 include('authentication.php');
+include('includes/url.php');
 
 
 if(isset($_POST['delete_admin']))
