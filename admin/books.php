@@ -66,74 +66,74 @@ include('includes/sidebar.php');
                                                 </tr>
                                             </thead>
                                             <tbody>
-    <?php
-    $query = "
-    SELECT 
-        book.title,
-        book.copyright_date,
-        book.author,
-        book.isbn,
-        GROUP_CONCAT(book.accession_number ORDER BY book.accession_number SEPARATOR ', ') AS accession_numbers,
-        COUNT(book.accession_number) AS copy_count, 
-        SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count,
-        MAX(book.book_image) AS book_image,
-        MAX(book.publisher) AS publisher,
-        MAX(book.call_number) AS call_number
-    FROM book 
-    GROUP BY book.title, book.copyright_date, book.author, book.isbn
-    ORDER BY book.title DESC, book.copyright_date, book.author, book.isbn DESC";
-    
-    $query_run = mysqli_query($con, $query);
+                                                <?php
+                                                $query = "
+                                                SELECT 
+                                                    book.title,
+                                                    book.copyright_date,
+                                                    book.author,
+                                                    book.isbn,
+                                                    GROUP_CONCAT(book.accession_number ORDER BY book.accession_number SEPARATOR ', ') AS accession_numbers,
+                                                    COUNT(book.accession_number) AS copy_count, 
+                                                    SUM(CASE WHEN book.status = 'available' THEN 1 ELSE 0 END) AS available_count,
+                                                    MAX(book.book_image) AS book_image,
+                                                    MAX(book.publisher) AS publisher,
+                                                    MAX(book.call_number) AS call_number
+                                                FROM book 
+                                                GROUP BY book.title, book.copyright_date, book.author, book.isbn
+                                                ORDER BY book.title DESC, book.copyright_date, book.author, book.isbn DESC";
+                                                
+                                                $query_run = mysqli_query($con, $query);
 
-    if (mysqli_num_rows($query_run)) {
-        foreach ($query_run as $book) {
-            ?>
-            <tr>
-                <td class="auto-id" style="text-align: center;"></td>
-                <td style="display: none;"><?= htmlspecialchars($book['accession_numbers']); ?></td>
-                <td>
-                    <center>
-                        <?php if (!empty($book['book_image'])): ?>
-                            <img src="../uploads/books_img/<?= htmlspecialchars($book['book_image']); ?>" alt="" width="60px" height="60px">
-                        <?php else: ?>
-                            <img src="../uploads/books_img/book_image.jpg" alt="" width="60px" height="60px">
-                        <?php endif; ?>
-                    </center>
-                </td>
-                <td><?= htmlspecialchars($book['title']); ?></td>
-                <td><?= htmlspecialchars($book['author']); ?></td>
-                <td><?= htmlspecialchars($book['copyright_date']); ?></td>
-                <td><?= htmlspecialchars($book['publisher']); ?></td>
-                <td><?= htmlspecialchars($book['call_number']); ?></td>
-                <td>
-                    <a href="book_views.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
-                        <?= htmlspecialchars($book['available_count']); ?> of <?= htmlspecialchars($book['copy_count']); ?> available
-                    </a>
-                </td>
-                <td class="justify-content-center">
-                    <div class="btn-group" style="background: #DFF6FF;">
-                        <!-- View Book Action -->
-                        <a href="book_views.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
-                            <i class="bi bi-eye-fill"></i>
-                        </a>
-                        <!-- Edit Book Action -->
-                        <a href="book_edit.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <!-- Delete Book Action -->
-                        <!-- <a href="javascript:void(0);" onclick="confirmDelete('<?= urlencode($book['title']); ?>', '<?= urlencode($book['copyright_date']); ?>', '<?= urlencode($book['author']); ?>', '<?= urlencode($book['isbn']); ?>')" class="btn btn-sm border text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Book">
-                            <i class="bi bi-trash-fill"></i>
-                        </a> -->
-                    </div>
-                </td>
-            </tr>
-            <?php
-        }
-    } else {
-        // echo "<tr><td colspan='9' style='text-align: center;'>No records found</td></tr>";
-    }
-    ?>
-</tbody>
+                                                if (mysqli_num_rows($query_run)) {
+                                                    foreach ($query_run as $book) {
+                                                        ?>
+                                                        <tr>
+                                                            <td class="auto-id" style="text-align: center;"></td>
+                                                            <td style="display: none;"><?= htmlspecialchars($book['accession_numbers']); ?></td>
+                                                            <td>
+                                                                <center>
+                                                                    <?php if (!empty($book['book_image'])): ?>
+                                                                        <img src="../uploads/books_img/<?= htmlspecialchars($book['book_image']); ?>" alt="" width="60px" height="60px">
+                                                                    <?php else: ?>
+                                                                        <img src="../uploads/books_img/book_image.jpg" alt="" width="60px" height="60px">
+                                                                    <?php endif; ?>
+                                                                </center>
+                                                            </td>
+                                                            <td><?= htmlspecialchars($book['title']); ?></td>
+                                                            <td><?= htmlspecialchars($book['author']); ?></td>
+                                                            <td><?= htmlspecialchars($book['copyright_date']); ?></td>
+                                                            <td><?= htmlspecialchars($book['publisher']); ?></td>
+                                                            <td><?= htmlspecialchars($book['call_number']); ?></td>
+                                                            <td>
+                                                                <a href="book_views.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>&tab=copies" id="hover" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Copies">
+                                                                    <?= htmlspecialchars($book['available_count']); ?> of <?= htmlspecialchars($book['copy_count']); ?> available
+                                                                </a>
+                                                            </td>
+                                                            <td class="justify-content-center">
+                                                                <div class="btn-group" style="background: #DFF6FF;">
+                                                                    <!-- View Book Action -->
+                                                                    <a href="book_views.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>" class="viewBookBtn btn btn-sm border text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Book">
+                                                                        <i class="bi bi-eye-fill"></i>
+                                                                    </a>
+                                                                    <!-- Edit Book Action -->
+                                                                    <a href="book_edit.php?title=<?= urlencode(encryptor('encrypt', $book['title'])); ?>&copyright_date=<?= urlencode(encryptor('encrypt',$book['copyright_date'])); ?>&author=<?= urlencode(encryptor('encrypt', $book['author'])); ?>&isbn=<?= urlencode(encryptor('encrypt',$book['isbn'])); ?>" class="btn btn-sm border text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Book">
+                                                                        <i class="bi bi-pencil-fill"></i>
+                                                                    </a>
+                                                                    <!-- Delete Book Action -->
+                                                                    <!-- <a href="javascript:void(0);" onclick="confirmDelete('<?= urlencode($book['title']); ?>', '<?= urlencode($book['copyright_date']); ?>', '<?= urlencode($book['author']); ?>', '<?= urlencode($book['isbn']); ?>')" class="btn btn-sm border text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete Book">
+                                                                        <i class="bi bi-trash-fill"></i>
+                                                                    </a> -->
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                } else {
+                                                    // echo "<tr><td colspan='9' style='text-align: center;'>No records found</td></tr>";
+                                                }
+                                                ?>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

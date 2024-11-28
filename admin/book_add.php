@@ -346,21 +346,23 @@ function checkAccessionNumberExists(accessionNumber) {
 
 <script>
     document.getElementById('title').addEventListener('input', function () {
-          var titleInput = this.value.trim();
-          
-          var alphabetPattern = /^[A-Za-z\s]+$/; 
-          
-          if (this.value !== titleInput) {
-               this.setCustomValidity('Name cannot start with a space.');
-          } else if (alphabetPattern.test(titleInput)) {
-               this.setCustomValidity(''); 
-          } else {
-               this.setCustomValidity('Please enter a valid title with only letters and no leading/trailing spaces.');
-          }
-          
-          var isValid = alphabetPattern.test(titleInput) && this.value === titleInput;
-          this.classList.toggle('is-invalid', !isValid);
-     });
+        var titleInput = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (titleInput === "") {
+            this.setCustomValidity('Title name cannot be empty or just spaces.');
+        } else if (this.value !== titleInput) {
+            this.setCustomValidity('Title name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(titleInput)) {
+            this.setCustomValidity('Title name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = titleInput !== "" && this.value === titleInput && !dangerousCharsPattern.test(titleInput);
+        this.classList.toggle('is-invalid', !isValid);
+    });
 
      document.getElementById('author').addEventListener('input', function () {
           var authorInput = this.value.trim();
