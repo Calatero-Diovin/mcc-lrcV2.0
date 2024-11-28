@@ -159,7 +159,7 @@ include('./includes/sidebar.php');
      this.classList.toggle('is-invalid', !isValid);
      });
 
-    document.getElementById('pdf_file').addEventListener('change', function () {
+    document.getElementById('book_file').addEventListener('change', function () {
      var file = this.files[0]; // Get the selected file
 
      // Check if a file was selected
