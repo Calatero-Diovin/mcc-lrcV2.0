@@ -1,8 +1,7 @@
 <?php 
 include('authentication.php');
 include('includes/header.php'); 
-include('./includes/sidebar.php');
-include('includes/url.php'); 
+include('includes/sidebar.php');
 ?>
 
 <style>
