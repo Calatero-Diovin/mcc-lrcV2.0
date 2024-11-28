@@ -320,7 +320,7 @@ function validateNameInput(inputField) {
         this.classList.toggle('is-invalid', !isValid);
     });
 
-    document.getElementById('book_call_number').addEventListener('input', function () {
+    document.getElementById('call_number').addEventListener('input', function () {
         var callnumInput = this.value.trim();
         
         var dangerousCharsPattern = /[<>\"\']/;
