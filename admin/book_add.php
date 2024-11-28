@@ -415,28 +415,6 @@ function checkAccessionNumberExists(accessionNumber) {
         this.classList.toggle('is-invalid', !isValid);
     });
 
-    document.getElementById('copyright_year').addEventListener('input', function () {
-        var currentYear = new Date().getFullYear(); // Get the current year
-        var copyrightYearInput = this.value.trim(); // Remove leading and trailing spaces
-        
-        // Regular expression to match exactly 4 digits
-        var yearPattern = /^\d{4}$/;
-
-        // Check if the input is a valid 4-digit number and is not the current year
-        if (!yearPattern.test(copyrightYearInput)) {
-            this.setCustomValidity('Please enter a valid 4-digit year.');
-        } else if (parseInt(copyrightYearInput) === currentYear) {
-            // If the input year is the same as the current year, it's invalid
-            this.setCustomValidity('Copyright year cannot be the current year.');
-        } else {
-            this.setCustomValidity(''); // Clear any previous error message
-        }
-        
-        // Check validity and toggle the invalid class
-        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) !== currentYear;
-        this.classList.toggle('is-invalid', !isValid);
-    });
-
     document.getElementById('place_publication').addEventListener('input', function () {
         var placepubInput = this.value.trim();
         
@@ -523,6 +501,24 @@ function checkAccessionNumberExists(accessionNumber) {
         }
         
         var isValid = subject2Input !== "" && this.value === subject2Input && !dangerousCharsPattern.test(subject2Input);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('copyright_year').addEventListener('input', function () {
+        var currentYear = new Date().getFullYear();
+        var copyrightYearInput = this.value.trim();
+        
+        var yearPattern = /^\d{4}$/;
+
+        if (!yearPattern.test(copyrightYearInput)) {
+            this.setCustomValidity('Please enter a valid 4-digit year.');
+        } else if (parseInt(copyrightYearInput) === currentYear) {
+            this.setCustomValidity('Copyright year cannot be the current year.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) !== currentYear;
         this.classList.toggle('is-invalid', !isValid);
     });
 
