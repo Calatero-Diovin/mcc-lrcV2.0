@@ -169,12 +169,11 @@ if (isset($_POST['edit_admin'])) {
 
         $mail->send();
 
-        $_SESSION['status'] = 'OTP has been sent to your email. Please verify to proceed.';
-        $_SESSION['status_code'] = "info";
-        
-        // You can use AJAX to trigger the SweetAlert OTP prompt
-        header("Location: admin_edit.php?e=" . encryptor('encrypt', $admin_id));
-        exit(0);
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'OTP has been sent to your email. Please verify to proceed.'
+        ]);
+        exit;
     } catch (Exception $e) {
         $_SESSION['status'] = "Mailer Error: {$mail->ErrorInfo}";
         $_SESSION['status_code'] = "error";
