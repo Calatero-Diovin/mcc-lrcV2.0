@@ -284,6 +284,23 @@ function validateNameInput(inputField) {
         this.classList.toggle('is-invalid', !isValid);
     });
 
+    document.getElementById('isbn').addEventListener('input', function () {
+        var isbnInput = this.value.trim(); 
+        
+        var isbnPattern = /^[0-9-]+$/;
+        
+        if (this.value !== isbnInput) {
+            this.setCustomValidity('ISBN cannot start with a space.');
+        } else if (isbnPattern.test(isbnInput)) {
+            this.setCustomValidity('');
+        } else {
+            this.setCustomValidity('Please enter a valid ISBN with only numbers and dashes.');
+        }
+        
+        var isValid = isbnPattern.test(isbnInput) && this.value === isbnInput;
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
     document.getElementById('place_publication').addEventListener('input', function () {
         var placepubInput = this.value.trim();
         
@@ -370,23 +387,6 @@ function validateNameInput(inputField) {
         }
         
         var isValid = callnumInput !== "" && this.value === callnumInput && !dangerousCharsPattern.test(callnumInput);
-        this.classList.toggle('is-invalid', !isValid);
-    });
-
-     document.getElementById('isbn').addEventListener('input', function () {
-        var isbnInput = this.value.trim(); 
-        
-        var isbnPattern = /^[0-9-]+$/;
-        
-        if (this.value !== isbnInput) {
-            this.setCustomValidity('ISBN cannot start with a space.');
-        } else if (isbnPattern.test(isbnInput)) {
-            this.setCustomValidity('');
-        } else {
-            this.setCustomValidity('Please enter a valid ISBN with only numbers and dashes.');
-        }
-        
-        var isValid = isbnPattern.test(isbnInput) && this.value === isbnInput;
         this.classList.toggle('is-invalid', !isValid);
     });
 
