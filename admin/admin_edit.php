@@ -2,7 +2,6 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
-
 ?>
 <main id="main" class="main">
      <div class="pagetitle">
@@ -24,9 +23,9 @@ include('./includes/sidebar.php');
                          </div>
                          <div class="card-body">
                               <?php
-                              if(isset($_GET['e']))
+                              if(isset($_GET['id']))
                               {
-                                   $admin_id = filter_var(encryptor('decrypt',$_GET['e']), FILTER_VALIDATE_INT);
+                                   $admin_id = filter_var(encryptor('decrypt',$_GET['id']), FILTER_VALIDATE_INT);
 
                                    $query = "SELECT * FROM admin WHERE admin_id ='$admin_id'"; 
                                    $query_run = mysqli_query($con, $query);
@@ -265,58 +264,6 @@ include('./includes/sidebar.php');
         // Toggle the 'is-invalid' class based on isValid status
         this.classList.toggle('is-invalid', !isValid);
     });
-    </script>
-
-<script>
-        <?php 
-        if (isset($_SESSION['status']) && $_SESSION['status_code'] == 'info') { ?>
-            // Session message indicates that OTP is sent, show SweetAlert OTP input
-            Swal.fire({
-                title: 'Enter OTP',
-                html: `
-                    <input type="text" id="otp_input" class="swal2-input" placeholder="Enter OTP">
-                `,
-                confirmButtonText: 'Verify OTP',
-                focusConfirm: false,
-                preConfirm: () => {
-                    const otp = document.getElementById('otp_input').value;
-                    if (!otp) {
-                        Swal.showValidationMessage('Please enter OTP');
-                        // Clear session messages to avoid them being displayed on the page
-                         unset($_SESSION['status']);
-                         unset($_SESSION['status_code']);
-                    } else {
-                        return otp;
-                    }
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If OTP is confirmed, proceed with verifying it via AJAX
-                    const otp = result.value;
-                    const admin_id = "<?php echo encryptor('encrypt', $admin_id); ?>"; // Encrypted admin_id
-
-                    $.ajax({
-                        url: 'admin_code.php',
-                        method: 'POST',
-                        data: {
-                            otp: otp,
-                            admin_id: admin_id
-                        },
-                        success: function(response) {
-                            const data = JSON.parse(response);
-                            if (data.status == 'success') {
-                                Swal.fire('OTP Verified', 'You can now update your admin profile.', 'success').then(() => {
-                                    // Redirect to the admin edit page after OTP verification
-                                    location.href = 'admin_edit.php?e=<?php echo encryptor('encrypt', $admin_id); ?>';
-                                });
-                            } else {
-                                Swal.fire('Invalid OTP', 'Please try again.', 'error');
-                            }
-                        }
-                    });
-                }
-            });
-        <?php } ?>
     </script>
 <?php 
 include('includes/footer.php');
