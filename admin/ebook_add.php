@@ -137,7 +137,7 @@ include('./includes/sidebar.php');
      });
 
      document.getElementById('copyright_date').addEventListener('input', function () {
-     var currentYear = new Date().getFullYear();
+     var currentYear = 2024;  // Set current year to 2024
      var copyrightYearInput = this.value.trim();
      
      var yearPattern = /^\d{4}$/;
@@ -146,20 +146,16 @@ include('./includes/sidebar.php');
      if (!yearPattern.test(copyrightYearInput)) {
           this.setCustomValidity('Please enter a valid 4-digit year.');
      } 
-     // Check if the input year is the current year
-     else if (parseInt(copyrightYearInput) === currentYear) {
-          this.setCustomValidity('Copyright year cannot be the current year.');
-     } 
-     // Check if the input year is greater than the current year
+     // Check if the input year is greater than the current year (2024)
      else if (parseInt(copyrightYearInput) > currentYear) {
           this.setCustomValidity('Copyright year cannot be in the future.');
      } 
-     // Valid case: a past year
+     // Valid case: 2024 is allowed
      else {
           this.setCustomValidity('');
      }
 
-     var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) < currentYear;
+     var isValid = yearPattern.test(copyrightYearInput) && parseInt(copyrightYearInput) <= currentYear;
      this.classList.toggle('is-invalid', !isValid);
      });
 
