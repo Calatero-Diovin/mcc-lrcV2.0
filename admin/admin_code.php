@@ -113,7 +113,7 @@ if (isset($_POST['add_admin'])) {
     if (strpos($email, '@mcclawis.edu.ph') === false) {
         $_SESSION['status'] = 'Email must be from @mcclawis.edu.ph domain';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_add");
+        header("Location: admin_add.php");
         exit(0);
     }
 
