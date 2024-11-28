@@ -178,6 +178,23 @@ include('./includes/sidebar.php');
      }
      });
 
+     document.getElementById('book_image_input').addEventListener('change', function () {
+        var file = this.files[0];
+        var isValid = true;
+
+        if (file) {
+            var allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedExtensions.includes(file.type)) {
+                isValid = false;
+                this.setCustomValidity('Please upload a valid image file (JPEG, JPG, PNG).');
+            } else {
+                this.setCustomValidity('');
+            }
+        }
+
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
     $(document).ready(function() {
      // Restrict input to numeric values only
      $('#copyright_date').on('keypress', function(event) {
