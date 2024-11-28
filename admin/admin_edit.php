@@ -282,6 +282,9 @@ include('./includes/sidebar.php');
                     const otp = document.getElementById('otp_input').value;
                     if (!otp) {
                         Swal.showValidationMessage('Please enter OTP');
+                        // Clear session messages to avoid them being displayed on the page
+                         unset($_SESSION['status']);
+                         unset($_SESSION['status_code']);
                     } else {
                         return otp;
                     }
