@@ -84,12 +84,12 @@ if (isset($_POST['edit_admin'])) {
         
         $_SESSION['status'] = 'Admin Updated successfully';
         $_SESSION['status_code'] = "success";
-        header("Location: admin_edit.php?e=<?= encryptor('encrypt',$admin_id); ?>");
+        header("Location: admin_edit.php?e=" . encryptor('encrypt',$admin_id));
         exit(0);
     } else {
         $_SESSION['status'] = 'Admin not Updated';
         $_SESSION['status_code'] = "error";
-        header("Location: admin_edit.php?e=<?= encryptor('encrypt',$admin_id); ?>");
+        header("Location: admin_edit.php?e=" . encryptor('encrypt',$admin_id));
         exit(0);
     }
 }
