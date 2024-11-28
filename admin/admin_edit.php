@@ -22,14 +22,6 @@ include('./includes/sidebar.php');
                               <a href="admin.php" class="btn btn-primary">Back</a>
                          </div>
                          <div class="card-body">
-                         <?php
-                              // Display status message if it exists (for OTP)
-                              if (isset($_SESSION['status'])) {
-                                   echo '<div class="alert ' . $_SESSION['status_code'] . '">' . $_SESSION['status'] . '</div>';
-                                   unset($_SESSION['status']);
-                                   unset($_SESSION['status_code']);
-                              }
-                              ?>
                               <?php
                               if(isset($_GET['e']))
                               {
