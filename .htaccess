@@ -35,7 +35,8 @@ RewriteEngine On
     # Remove X-Powered-By header
     Header unset X-Powered-By
     
-
+    SSLCipherSuite HIGH:!aNULL:!MD5:!3DES:!RC4:!TLS_RSA_WITH_AES_128_CBC_SHA:!TLS_RSA_WITH_AES_128_GCM_SHA256:!TLS_RSA_WITH_AES_256_CBC_SHA:!TLS_RSA_WITH_AES_256_GCM_SHA384
+    SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
