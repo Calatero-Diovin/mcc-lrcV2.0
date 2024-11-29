@@ -27,6 +27,9 @@ RewriteEngine On
 
     # Permissions Policy (formerly Feature Policy)
     Header always set Permissions-Policy "geolocation=(self 'https://mcc-lrc.com'), microphone=()"
+
+    # To set cookies
+    Header always set Set-Cookie "sess=123; path=/; HttpOnly; Secure; SameSite=Strict"
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
