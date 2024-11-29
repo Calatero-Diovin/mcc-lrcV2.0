@@ -24,6 +24,9 @@ RewriteEngine On
     
     # Improve cacheability of static assets
     Header always set Cache-Control "public, max-age=31536000, immutable"
+
+    # Permissions Policy (formerly Feature Policy)
+    Header always set Permissions-Policy "geolocation=(self 'https://example.com'), microphone=()"
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
