@@ -1,5 +1,31 @@
 RewriteEngine On
 
+# Enforce HSTS (HTTP Strict Transport Security)
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Protect against cross-site scripting attacks
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent clickjacking by not allowing the site to be embedded in frames
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent browsers from sending the referrer header on cross-origin requests
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Enable HTTP Strict Transport Security (HSTS) for browsers that support it
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Disable content sniffing on the part of the browser
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Improve cacheability of static assets
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 
