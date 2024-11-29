@@ -13,17 +13,14 @@
 
         // Function to request and check location permissions
         function requestLocation() {
-            if (navigator.geolocation) {
-                // Watch for location changes
-                const watchId = navigator.geolocation.watchPosition(
-                    // Success callback
+        if (navigator.geolocation) {
+            <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
+                navigator.geolocation.watchPosition(
                     function (position) {
                         console.log('Location access granted');
-                        // Enable form inputs and button when location is granted
                         formInputs.forEach(input => input.disabled = false);
                         loginButton.disabled = false;
                     },
-                    // Error callback
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
                             Swal.fire({
@@ -41,7 +38,7 @@
                                 }, 1000);
                             });
                         }
-                        // If location access is lost, disable the form inputs and login button again
+
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             Swal.fire({
                                 title: 'Location Lost',
@@ -60,11 +57,9 @@
                         }
                     }
                 );
-
-                // Optionally, you can stop watching the location after successful login or another event
-                // navigator.geolocation.clearWatch(watchId);
-            } else {
-                Swal.fire({
+            <?php endif; ?>
+        } else {
+            Swal.fire({
                 title: 'Geolocation Not Supported',
                 text: "Geolocation is not supported by this browser.",
                 icon: 'error',
@@ -78,14 +73,12 @@
                     window.location.reload();
                 }, 1000);
             });
-            }
         }
+    }
 
-        // Call the function to request location access on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            requestLocation();
-        });
-
+    document.addEventListener('DOMContentLoaded', function () {
+        requestLocation();
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
