@@ -19,16 +19,16 @@ include('admin_login_head.php');
                         </center>
                     </div>
 
-                    <?php if (isset($_SESSION['lockout_times']) && time() < $_SESSION['lockout_times']): ?>
+                    <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
                         <?php
-                            $lockout_time_remaining = $_SESSION['lockout_times'] - time();
-                            $minutes_remaining = ceil($lockout_time_remaining / 60);
+                        $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                        $minutes_remaining = ceil($lockout_time_remaining / 60);
                         ?>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
                                 const formInputs = document.querySelectorAll('#admin_type, #email, #password');
                                 const loginButton = document.getElementById('admin_login_btn');
-                                            
+                                
                                 formInputs.forEach(input => input.disabled = true);
                                 loginButton.disabled = true;
 
@@ -54,7 +54,7 @@ include('admin_login_head.php');
                     <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                         <div class="col-md-12">
                             <div class="form-floating mb-3">
-                                <select class="form-select" id="admin_type" name="admin_type" required <?php if (isset($lockout_time_remaining)); ?> disabled>
+                                <select class="form-select" id="admin_type" name="admin_type" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
                                     <option value="" selected disabled>Select Admin Type</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Staff">Staff</option>
@@ -65,14 +65,14 @@ include('admin_login_head.php');
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php if (isset($lockout_time_remaining)); ?> disabled>
+                                <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
                                 <label for="email">Email</label>
                                 <div id="validationServerEmailFeedback" class="invalid-feedback">
                                     Please enter your email
                                 </div>
                             </div>
                             <div class="form-floating mb-3 position-relative">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required <?php if (isset($lockout_time_remaining)); ?> disabled>
+                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
                                 <label for="password">Password</label>
                                 <span class="password-show-toggle js-password-show-toggle">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -87,7 +87,7 @@ include('admin_login_head.php');
                             </div>
                         </div>
                         <div class="d-grid gap-2 md-3 mb-3">
-                            <button type="submit" name="admin_login_btn" id="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php if (isset($lockout_time_remaining)); ?> disabled>Login</button>
+                            <button type="submit" name="admin_login_btn" id="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <p>
