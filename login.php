@@ -23,13 +23,42 @@ include('login_head.php');
                                    </center>
                               </div>
 
-                              <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                              <?php if (isset($_SESSION['lockout_times']) && time() < $_SESSION['lockout_times']): ?>
                                    <?php
-                                   $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                                   $lockout_time_remaining = $_SESSION['lockout_times'] - time();
                                    $minutes_remaining = ceil($lockout_time_remaining / 60);
                                    ?>
-                                   <strong class="text-danger text-center">Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).</strong>
-                              <?php endif; ?>
+                                   <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                             // Disable form fields if lockout is active
+                                             const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+                                             const loginButton = document.getElementById('admin_login_btn');
+                                             
+                                             // Disable the form elements
+                                             formInputs.forEach(input => input.disabled = true);
+                                             loginButton.disabled = true;
+
+                                             // Show SweetAlert with loader
+                                             Swal.fire({
+                                                  title: 'Account Locked',
+                                                  text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
+                                                  icon: 'warning',
+                                                  showConfirmButton: false,  // No confirm button
+                                                  allowOutsideClick: false,  // Prevent clicking outside the modal
+                                                  allowEscapeKey: false,     // Prevent closing with the Escape key
+                                                  didOpen: () => {
+                                                       // Show the loading spinner
+                                                       Swal.showLoading();
+                                                  }
+                                             }).then(() => {
+                                                  setTimeout(function() {
+                                                       // Reload page after a short delay if needed
+                                                       window.location.reload(); // Optionally reload the page to reset the session or other necessary actions
+                                                  }, 1000);
+                                             });
+                                        });
+                                   </script>
+                                   <?php endif; ?>
                               <form action="logincode.php" method="POST" class="needs-validation" novalidate>
                                    <div class="col-md-12 mb-3">
                                         <label for="role_as" class="form-label">Login As:</label>
