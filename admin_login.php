@@ -27,8 +27,8 @@ include('admin_login_head.php');
                                    <script>
                                         // Lockout detected, disable form elements
                                         document.addEventListener('DOMContentLoaded', function() {
-                                             document.getElementById('role_as').disabled = true;
-                                             document.getElementById('student_id').disabled = true;
+                                             document.getElementById('admin_type').disabled = true;
+                                             document.getElementById('email').disabled = true;
                                              document.getElementById('password').disabled = true;
                                              document.querySelector('button[type="submit"]').disabled = true;
                                         });
