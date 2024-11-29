@@ -1,5 +1,17 @@
 <?php
 
+// Start session (if using PHP sessions)
+session_start();
+
+// Set the cookie
+setcookie("PHPSESSID", session_id(), [
+    "path" => "/",
+    "secure" => true,        // Only send cookie over HTTPS
+    "httponly" => true,      // Prevent JavaScript from accessing cookie
+    "samesite" => "Strict",  // Prevent sending cookies in cross-site requests
+    "domain" => "mcc-lrc.com"  // Optional: specify a domain for the cookie
+]);
+
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {
