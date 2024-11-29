@@ -30,11 +30,9 @@
                                     Swal.showLoading();
                                 }
                             }).then(() => {
-                                // Prompt the user to manually enable location
-                                if (result.isConfirmed) {
-                                    // The user clicked "Enable Location"
+                                setTimeout(function() {
                                     window.location.reload();
-                                }
+                                }, 1000);
                             });
                         }
 
