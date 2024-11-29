@@ -12,48 +12,51 @@
 
     function requestLocation() {
         if (navigator.geolocation) {
-                const watchId = navigator.geolocation.watchPosition(
-                    function (position) {
-                        console.log('Location access granted');
-                        formInputs.forEach(input => input.disabled = false);
-                        loginButton.disabled = false;
-                    },
-                    function (error) {
-                        if (error.code === error.PERMISSION_DENIED) {
-                            Swal.fire({
-                                title: 'Permission Denied',
-                                text: "Please allow location access to use this login page.",
-                                icon: 'warning',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
-                            });
-                        }
-
-                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            Swal.fire({
-                                title: 'Location Lost',
-                                text: "Location access was lost. The form will reload.",
-                                icon: 'error',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
-                            });
-                        }
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    console.log('Location access granted');
+                    formInputs.forEach(input => input.disabled = false);
+                    loginButton.disabled = false;
+                },
+                function (error) {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        Swal.fire({
+                            title: 'Permission Denied',
+                            text: "Please allow location access to use this login page.",
+                            icon: 'warning',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Enable Location',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        }).then((result) => {
+                            // Prompt the user to manually enable location
+                            if (result.isConfirmed) {
+                                // The user clicked "Enable Location"
+                                window.location.reload();
+                            }
+                        });
                     }
-                );
+
+                    if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
+                        Swal.fire({
+                            title: 'Location Lost',
+                            text: "Location access was lost. The form will reload.",
+                            icon: 'error',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        }).then(() => {
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+                        });
+                    }
+                }
+            );
         } else {
             Swal.fire({
                 title: 'Geolocation Not Supported',
