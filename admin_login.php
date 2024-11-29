@@ -30,8 +30,28 @@ include('admin_login_head.php');
                                 const formInputs = document.querySelectorAll('#admin_type, #email, #password');
                                 const loginButton = document.getElementById('admin_login_btn');
                                 
+                                // Disable the form elements
                                 formInputs.forEach(input => input.disabled = true);
                                 loginButton.disabled = true;
+
+                                // Show SweetAlert with loader
+                                Swal.fire({
+                                    title: 'Account Locked',
+                                    text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
+                                    icon: 'warning',
+                                    showConfirmButton: false,  // No confirm button
+                                    allowOutsideClick: false,  // Prevent clicking outside the modal
+                                    allowEscapeKey: false,     // Prevent closing with the Escape key
+                                    didOpen: () => {
+                                        // Show the loading spinner
+                                        Swal.showLoading();
+                                    }
+                                }).then(() => {
+                                    setTimeout(function() {
+                                        // Reload page after a short delay if needed
+                                        window.location.reload(); // Optionally reload the page to reset the session or other necessary actions
+                                    }, 1000);
+                                });
                             });
                         </script>
                     <?php endif; ?>
@@ -88,139 +108,3 @@ include('admin_login_head.php');
         </div>
     </div>
 </section>
-
-<script>
-    document.getElementById('togglePassword').addEventListener('click', function (e) {
-        const password = document.getElementById('password');
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.classList.toggle('bi-eye');
-        this.classList.toggle('bi-eye-slash');
-    });
-
-    // Select form input elements to disable initially
-    const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-    const loginButton = document.querySelector('[name="admin_login_btn"]');
-
-    // Function to request and check location permissions
-    function requestLocation() {
-        if (navigator.geolocation) {
-            // Check if lockout is active, if not, proceed with enabling the form
-            <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                // Watch for location changes
-                const watchId = navigator.geolocation.watchPosition(
-                    // Success callback
-                    function (position) {
-                        console.log('Location access granted');
-                        // Enable form inputs and button when location is granted
-                        formInputs.forEach(input => input.disabled = false);
-                        loginButton.disabled = false;
-                    },
-                    // Error callback
-                    function (error) {
-                        if (error.code === error.PERMISSION_DENIED) {
-                            Swal.fire({
-                                title: 'Permission Denied',
-                                text: "Please allow location access to use this login page.",
-                                icon: 'warning',
-                                showConfirmButton: false, // Hide the confirm button
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    // Show a loading spinner
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload(); // Reload page after 1 second
-                                }, 1000);
-                            });
-                        }
-
-                        // If location access is lost, disable the form inputs and login button again
-                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            Swal.fire({
-                                title: 'Location Lost',
-                                text: "Location access was lost. The form will reload.",
-                                icon: 'error',
-                                showConfirmButton: false, // Hide the confirm button
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    // Show a loading spinner
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload(); // Reload page after 1 second
-                                }, 1000);
-                            });
-                        }
-                    }
-                );
-            <?php endif; ?>
-        } else {
-            Swal.fire({
-                title: 'Geolocation Not Supported',
-                text: "Geolocation is not supported by this browser.",
-                icon: 'error',
-                showConfirmButton: false, // Hide the confirm button
-                allowOutsideClick: false,
-                didOpen: () => {
-                    // Show a loading spinner for immediate redirection or handling
-                    Swal.showLoading();
-                }
-            }).then(() => {
-                setTimeout(function() {
-                    window.location.reload(); // Reload page after 1 second
-                }, 1000);
-            });
-        }
-    }
-
-    // Call the function to request location access on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        requestLocation();
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-                <?php unset($_SESSION['login_success']); // Clear session variable ?>
-                Swal.fire({
-                    title: 'Logging in...',
-                    html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        // Custom progress bar logic
-                        let progressBar = document.getElementById('progress-bar');
-                        let width = 0;
-                        let interval = setInterval(() => {
-                            if (width >= 100) {
-                                clearInterval(interval);
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Login Successful',
-                                    showConfirmButton: false, // No confirm button
-                                    timer: 1500, // Auto-close the alert after 1.5 seconds
-                                }).then(() => {
-                                    window.location.href = 'admin/.'; // Redirect after showing SweetAlert
-                                });
-                            } else {
-                                width++;
-                                progressBar.style.width = width + '%';
-                            }
-                        }, 30);
-                    }
-                });
-            <?php endif; ?>
-        });
-    </script>
-
-<?php
-    include('includes/script.php');
-    include('message.php'); 
-?>
-</body>
-</html>
