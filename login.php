@@ -31,8 +31,8 @@ include('login_head.php');
                                    <script>
                                         document.addEventListener('DOMContentLoaded', function() {
                                              // Disable form fields if lockout is active
-                                             const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-                                             const loginButton = document.getElementById('admin_login_btn');
+                                             const formInputs = document.querySelectorAll('#role_as, #student_id, #password');
+                                             const loginButton = document.getElementById('user_login_btn');
                                              
                                              // Disable the form elements
                                              formInputs.forEach(input => input.disabled = true);
@@ -94,7 +94,7 @@ include('login_head.php');
                                         </div>
                                    </div>
                                    <div class="d-grid gap-2 md-3">
-                                        <button type="submit" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
+                                        <button type="submit" id="user_login_btn" name="login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg">Login</button>
                                         <div class="text-center mb-3">
                                              <p>
                                                   Don't have an account?
