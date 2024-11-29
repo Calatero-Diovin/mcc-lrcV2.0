@@ -1,6 +1,7 @@
 <?php
 include('admin_login_head.php');
 ?>
+
 <section class="d-flex mt-4 flex-column justify-content-center align-items-center">
     <div class="container-xl">
         <div class="col mx-auto rounded shadow bg-white">
@@ -27,13 +28,17 @@ include('admin_login_head.php');
                         <div class="alert alert-danger">
                             Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).
                         </div>
+                        <?php
+                        $disabled = "disabled"; // Disable fields if locked out
+                        ?>
+                    <?php else: ?>
+                        <?php $disabled = ""; ?> <!-- Enable fields if not locked out -->
                     <?php endif; ?>
 
                     <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
                         <div class="col-md-12">
                             <div class="form-floating mb-3">
-                                <select class="form-select" id="admin_type" name="admin_type" required 
-                                    <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                <select class="form-select" id="admin_type" name="admin_type" required <?php echo $disabled; ?>>
                                     <option value="" selected disabled>Select Admin Type</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Staff">Staff</option>
@@ -44,16 +49,14 @@ include('admin_login_head.php');
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required 
-                                    <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                <input type="email" id="email" class="form-control" name="email" placeholder="Email" autocomplete="off" required <?php echo $disabled; ?>>
                                 <label for="email">Email</label>
                                 <div id="validationServerEmailFeedback" class="invalid-feedback">
                                     Please enter your email
                                 </div>
                             </div>
                             <div class="form-floating mb-3 position-relative">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required 
-                                    <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>
+                                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required <?php echo $disabled; ?>>
                                 <label for="password">Password</label>
                                 <span class="password-show-toggle js-password-show-toggle">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -68,8 +71,7 @@ include('admin_login_head.php');
                             </div>
                         </div>
                         <div class="d-grid gap-2 md-3 mb-3">
-                            <button type="submit" name="admin_login_btn" id="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" 
-                                <?php echo (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) ? 'disabled' : ''; ?>>Login</button>
+                            <button type="submit" name="admin_login_btn" id="admin_login_btn" class="btn btn-primary text-light font-weight-bolder btn-lg" <?php echo $disabled; ?>>Login</button>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <p>
@@ -85,4 +87,5 @@ include('admin_login_head.php');
         </div>
     </div>
 </section>
+
 <?php include('admin_login_script.php'); ?>
