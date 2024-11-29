@@ -26,19 +26,37 @@
                     // Error callback
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
-                            alert("Please allow location access to use this login page.");
-                            setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if denied
-                            }, 1000);
+                            Swal.fire({
+                                title: 'Permission Denied',
+                                text: "Please allow location access to use this login page.",
+                                icon: 'warning',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            }).then(() => {
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
+                            });
                         }
                         // If location access is lost, disable the form inputs and login button again
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            formInputs.forEach(input => input.disabled = true);
-                            loginButton.disabled = true;
-                            alert("Location access was lost. The form will reload.");
-                            setTimeout(function() {
-                                window.location.reload(); // Reload page after 5 seconds if location is lost
-                            }, 1000);
+                            Swal.fire({
+                                title: 'Location Lost',
+                                text: "Location access was lost. The form will reload.",
+                                icon: 'error',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            }).then(() => {
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
+                            });
                         }
                     }
                 );
@@ -46,7 +64,20 @@
                 // Optionally, you can stop watching the location after successful login or another event
                 // navigator.geolocation.clearWatch(watchId);
             } else {
-                alert("Geolocation is not supported by this browser.");
+                Swal.fire({
+                title: 'Geolocation Not Supported',
+                text: "Geolocation is not supported by this browser.",
+                icon: 'error',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            }).then(() => {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            });
             }
         }
 
