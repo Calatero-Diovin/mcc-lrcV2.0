@@ -19,14 +19,20 @@ include('admin_login_head.php');
                             </center>
                         </div>
 
-                        <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                        <?php if (isset($_SESSION['lockout_times']) && time() < $_SESSION['lockout_times']): ?>
                             <?php
-                            $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                            $lockout_time_remaining = $_SESSION['lockout_times'] - time();
                             $minutes_remaining = ceil($lockout_time_remaining / 60);
                             ?>
-                            <div class="alert alert-danger">
-                                Too many failed attempts. Please try again in <?php echo $minutes_remaining; ?> minute(s).
-                            </div>
+                            <script>
+                                    // Lockout detected, disable form elements
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                    document.getElementById('admin_type').disabled = true;
+                                    document.getElementById('email').disabled = true;
+                                    document.getElementById('password').disabled = true;
+                                    document.querySelector('button[type="submit"]').disabled = true;
+                                });
+                            </script>
                         <?php endif; ?>
 
                         <form action="admin_login_code.php" method="POST" class="needs-validation" novalidate>
