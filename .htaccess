@@ -38,6 +38,9 @@ RewriteEngine On
     php_value session.cookie_secure 1       # Ensure cookies are only sent over HTTPS
     php_value session.cookie_httponly 1      # Prevent JavaScript from accessing the session cookie
 
+    # Remove X-Powered-By header
+    Header unset X-Powered-By
+
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
