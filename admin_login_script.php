@@ -13,7 +13,7 @@
     function requestLocation() {
         if (navigator.geolocation) {
             <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                const watchId = navigator.geolocation.watchPosition(
+                navigator.geolocation.watchPosition(
                     function (position) {
                         console.log('Location access granted');
                         formInputs.forEach(input => input.disabled = false);
