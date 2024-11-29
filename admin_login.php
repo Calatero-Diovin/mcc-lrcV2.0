@@ -32,9 +32,6 @@ include('admin_login_head.php');
                                 
                                 formInputs.forEach(input => input.disabled = true);
                                 loginButton.disabled = true;
-
-                                // Optionally, display lockout message or countdown
-                                alert('You are locked out. Try again in <?php echo $minutes_remaining; ?> minutes.');
                             });
                         </script>
                     <?php endif; ?>
