@@ -43,6 +43,7 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
 <head>
      <meta charset="utf-8" />
      <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <meta name="probely-verification" content='3caf94ea-51ea-413a-a15e-ea7a28f12033' />
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
 
