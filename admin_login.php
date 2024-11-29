@@ -30,8 +30,28 @@ include('admin_login_head.php');
                                 const formInputs = document.querySelectorAll('#admin_type, #email, #password');
                                 const loginButton = document.getElementById('admin_login_btn');
                                 
+                                // Disable the form elements
                                 formInputs.forEach(input => input.disabled = true);
                                 loginButton.disabled = true;
+
+                                // Show SweetAlert with loader
+                                Swal.fire({
+                                    title: 'Account Locked',
+                                    text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
+                                    icon: 'warning',
+                                    showConfirmButton: false,  // No confirm button
+                                    allowOutsideClick: false,  // Prevent clicking outside the modal
+                                    allowEscapeKey: false,     // Prevent closing with the Escape key
+                                    didOpen: () => {
+                                        // Show the loading spinner
+                                        Swal.showLoading();
+                                    }
+                                }).then(() => {
+                                    setTimeout(function() {
+                                        // Reload page after a short delay if needed
+                                        window.location.reload(); // Optionally reload the page to reset the session or other necessary actions
+                                    }, 1000);
+                                });
                             });
                         </script>
                     <?php endif; ?>
@@ -88,3 +108,4 @@ include('admin_login_head.php');
         </div>
     </div>
 </section>
+<?php include('admin_login_script.php'); ?>
