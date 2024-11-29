@@ -124,6 +124,7 @@ include('admin_login_head.php');
                                 text: "Please allow location access to use this login page.",
                                 icon: 'warning',
                                 showConfirmButton: false, // Hide the confirm button
+                                allowOutsideClick: false,
                                 didOpen: () => {
                                     // Show a loading spinner
                                     Swal.showLoading();
@@ -142,6 +143,7 @@ include('admin_login_head.php');
                                 text: "Location access was lost. The form will reload.",
                                 icon: 'error',
                                 showConfirmButton: false, // Hide the confirm button
+                                allowOutsideClick: false,
                                 didOpen: () => {
                                     // Show a loading spinner
                                     Swal.showLoading();
@@ -161,6 +163,7 @@ include('admin_login_head.php');
                 text: "Geolocation is not supported by this browser.",
                 icon: 'error',
                 showConfirmButton: false, // Hide the confirm button
+                allowOutsideClick: false,
                 didOpen: () => {
                     // Show a loading spinner for immediate redirection or handling
                     Swal.showLoading();
