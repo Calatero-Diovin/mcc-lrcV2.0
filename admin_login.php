@@ -27,10 +27,10 @@ include('admin_login_head.php');
                                    <script>
                                         // Lockout detected, disable form elements
                                         document.addEventListener('DOMContentLoaded', function() {
-                                             document.getElementById('admin_type').disabled = false;
-                                             document.getElementById('email').disabled = false;
-                                             document.getElementById('password').disabled = false;
-                                             document.querySelector('button[type="submit"]').disabled = false;
+                                             document.getElementById('admin_type').disabled = true;
+                                             document.getElementById('email').disabled = true;
+                                             document.getElementById('password').disabled = true;
+                                             document.querySelector('button[type="submit"]').disabled = true;
                                         });
                                    </script>
                               <?php endif; ?>
