@@ -7,13 +7,12 @@
         this.classList.toggle('bi-eye-slash');
     });
 
-    const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-    const loginButton = document.querySelector('[name="admin_login_btn"]');
+     const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+        const loginButton = document.querySelector('[name="admin_login_btn"]');
 
-    function requestLocation() {
-        if (navigator.geolocation) {
-            <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                navigator.geolocation.watchPosition(
+        function requestLocation() {
+            if (navigator.geolocation) {
+                const watchId = navigator.geolocation.watchPosition(
                     function (position) {
                         console.log('Location access granted');
                         formInputs.forEach(input => input.disabled = false);
@@ -36,7 +35,6 @@
                                 }, 1000);
                             });
                         }
-
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             Swal.fire({
                                 title: 'Location Lost',
@@ -55,28 +53,28 @@
                         }
                     }
                 );
-            <?php endif; ?>
-        } else {
-            Swal.fire({
-                title: 'Geolocation Not Supported',
-                text: "Geolocation is not supported by this browser.",
-                icon: 'error',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            }).then(() => {
-                setTimeout(function() {
-                    window.location.reload();
-                }, 1000);
-            });
-        }
-    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        requestLocation();
-    });
+            } else {
+                Swal.fire({
+                    title: 'Geolocation Not Supported',
+                    text: "Geolocation is not supported by this browser.",
+                    icon: 'error',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                }).then(() => {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            requestLocation();
+        });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
