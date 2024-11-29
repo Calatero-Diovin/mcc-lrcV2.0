@@ -13,8 +13,6 @@ if (!isset($_SESSION['login_attempts'])) {
 if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
     $lockout_time_remaining = $_SESSION['lockout_time'] - time();
     $minutes_remaining = ceil($lockout_time_remaining / 60);
-    $_SESSION['status'] = "Too many failed attempts. Please try again in $minutes_remaining minute(s).";
-    $_SESSION['status_code'] = "error";
     header("Location: admin_login.php");
     exit(0);
 }
@@ -74,7 +72,6 @@ if (isset($_POST['admin_login_btn'])) {
                 $_SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] >= 3) {
                     $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                    $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
                 } else {
                     $_SESSION['status'] = "Invalid Credentials. Please try again...";
                 }
@@ -87,7 +84,6 @@ if (isset($_POST['admin_login_btn'])) {
             $_SESSION['login_attempts']++;
             if ($_SESSION['login_attempts'] >= 3) {
                 $_SESSION['lockout_time'] = time() + 300; // Lock out for 5 minutes
-                $_SESSION['status'] = "Too many failed attempts. You are locked out for 5 minutes.";
             } else {
                 $_SESSION['status'] = "Invalid Credentials. Please try again...";
             }
