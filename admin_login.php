@@ -20,6 +20,7 @@ include('admin_login_head.php');
                     </div>
 
                     <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                        <?php unset($_SESSION['lockout_time']); ?>
                         <?php
                         $lockout_time_remaining = $_SESSION['lockout_time'] - time();
                         $minutes_remaining = ceil($lockout_time_remaining / 60);
