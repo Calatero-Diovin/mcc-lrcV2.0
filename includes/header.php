@@ -6,7 +6,7 @@ session_start();
 // Set the cookie
 setcookie("PHPSESSID", session_id(), [
     "path" => "/",
-    "secure" => true,        // Only send cookie over HTTPS
+    "secure" => false,        // Only send cookie over HTTPS
     "httponly" => true,      // Prevent JavaScript from accessing cookie
     "samesite" => "Strict",  // Prevent sending cookies in cross-site requests
     "domain" => "mcc-lrc.com"  // Optional: specify a domain for the cookie
