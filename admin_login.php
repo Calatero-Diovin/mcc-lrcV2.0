@@ -26,12 +26,6 @@ include('admin_login_head.php');
                         ?>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-                                const loginButton = document.getElementById('admin_login_btn');
-                                
-                                formInputs.forEach(input => input.disabled = true);
-                                loginButton.disabled = true;
-
                                 Swal.fire({
                                     title: 'Account Locked',
                                     text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",

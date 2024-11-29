@@ -12,64 +12,48 @@
 
     function requestLocation() {
         if (navigator.geolocation) {
-            <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                let timeout = 15000; // 15 seconds timeout to detect if the user hasn't responded
-                let permissionDenied = false;
-
-                // Show an alert after the timeout if the user hasn't interacted
-                let timeoutAlert = setTimeout(() => {
-                    if (!permissionDenied) {
-                        Swal.fire({
-                            title: 'Location Access Needed',
-                            text: "Please grant location access to continue with the login process.",
-                            icon: 'warning',
-                            showConfirmButton: true,
-                            allowOutsideClick: false,
-                            confirmButtonText: 'Allow Location',
-                        }).then(() => {
-                            // Optional: You could reload the page or redirect to help page
-                            window.location.reload();
-                        });
-                    }
-                }, timeout);
-
-                navigator.geolocation.getCurrentPosition(
+                const watchId = navigator.geolocation.watchPosition(
                     function (position) {
-                        clearTimeout(timeoutAlert);  // Clear the timeout if permission is granted
                         console.log('Location access granted');
                         formInputs.forEach(input => input.disabled = false);
                         loginButton.disabled = false;
                     },
                     function (error) {
-                        clearTimeout(timeoutAlert);  // Clear the timeout if permission is denied
                         if (error.code === error.PERMISSION_DENIED) {
-                            permissionDenied = true;
                             Swal.fire({
-                                title: 'Location Permission Denied',
+                                title: 'Permission Denied',
                                 text: "Please allow location access to use this login page.",
                                 icon: 'warning',
-                                showConfirmButton: true,
+                                showConfirmButton: false,
                                 allowOutsideClick: false,
-                                confirmButtonText: 'Enable Location',
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
                             }).then(() => {
-                                window.location.reload(); // Optional: Reload or redirect to help
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
                             });
                         }
 
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             Swal.fire({
-                                title: 'Location Error',
-                                text: "Location request failed. Please try again.",
+                                title: 'Location Lost',
+                                text: "Location access was lost. The form will reload.",
                                 icon: 'error',
-                                showConfirmButton: true,
+                                showConfirmButton: false,
                                 allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
                             }).then(() => {
-                                window.location.reload(); // Optional: Reload the page
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
                             });
                         }
                     }
                 );
-            <?php endif; ?>
         } else {
             Swal.fire({
                 title: 'Geolocation Not Supported',
@@ -94,40 +78,40 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-            <?php unset($_SESSION['login_success']); ?>
-            Swal.fire({
-                title: 'Logging in...',
-                html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    let progressBar = document.getElementById('progress-bar');
-                    let width = 0;
-                    let interval = setInterval(() => {
-                        if (width >= 100) {
-                            clearInterval(interval);
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Login Successful',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                timer: 1500, 
-                            }).then(() => {
-                                window.location.href = 'admin/.'; 
-                            });
-                        } else {
-                            width++;
-                            progressBar.style.width = width + '%';
-                        }
-                    }, 30);
-                }
-            });
-        <?php endif; ?>
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+                <?php unset($_SESSION['login_success']); ?>
+                Swal.fire({
+                    title: 'Logging in...',
+                    html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        let progressBar = document.getElementById('progress-bar');
+                        let width = 0;
+                        let interval = setInterval(() => {
+                            if (width >= 100) {
+                                clearInterval(interval);
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Login Successful',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    timer: 1500, 
+                                }).then(() => {
+                                    window.location.href = 'admin/.'; 
+                                });
+                            } else {
+                                width++;
+                                progressBar.style.width = width + '%';
+                            }
+                        }, 30);
+                    }
+                });
+            <?php endif; ?>
+        });
+    </script>
 
 <?php
     include('includes/script.php');
