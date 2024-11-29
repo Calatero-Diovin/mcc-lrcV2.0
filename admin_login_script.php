@@ -7,13 +7,9 @@
             this.classList.toggle('bi-eye-slash');
         });
 
-        // Array of form input elements
-        const formInputs = [
-            document.getElementById('admin_type'),
-            document.getElementById('email'),
-            document.getElementById('password'),
-            document.getElementById('admin_login_btn')
-        ];
+        // Select form input elements to disable initially
+        const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+        const loginButton = document.querySelector('[name="admin_login_btn"]');
 
         // Function to request and check location permissions
         function requestLocation() {
@@ -25,25 +21,30 @@
                         console.log('Location access granted');
                         // Enable form inputs and button when location is granted
                         formInputs.forEach(input => input.disabled = false);
+                        loginButton.disabled = false;
                     },
                     // Error callback
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
                             alert("Please allow location access to use this login page.");
                             setTimeout(function() {
-                                window.location.reload(); // Reload page if denied
+                                window.location.reload(); // Reload page after 5 seconds if denied
                             }, 1000);
                         }
                         // If location access is lost, disable the form inputs and login button again
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
                             formInputs.forEach(input => input.disabled = true);
+                            loginButton.disabled = true;
                             alert("Location access was lost. The form will reload.");
                             setTimeout(function() {
-                                window.location.reload(); // Reload page if location is lost
+                                window.location.reload(); // Reload page after 5 seconds if location is lost
                             }, 1000);
                         }
                     }
                 );
+
+                // Optionally, you can stop watching the location after successful login or another event
+                // navigator.geolocation.clearWatch(watchId);
             } else {
                 alert("Geolocation is not supported by this browser.");
             }
