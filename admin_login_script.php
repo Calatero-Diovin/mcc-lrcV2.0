@@ -13,16 +13,37 @@
     function requestLocation() {
         if (navigator.geolocation) {
             <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
+                let timeout = 15000; // 15 seconds timeout to detect if the user hasn't responded
+                let permissionDenied = false;
+
+                // Show an alert after the timeout if the user hasn't interacted
+                let timeoutAlert = setTimeout(() => {
+                    if (!permissionDenied) {
+                        Swal.fire({
+                            title: 'Location Access Needed',
+                            text: "Please grant location access to continue with the login process.",
+                            icon: 'warning',
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Allow Location',
+                        }).then(() => {
+                            // Optional: You could reload the page or redirect to help page
+                            window.location.reload();
+                        });
+                    }
+                }, timeout);
+
                 navigator.geolocation.getCurrentPosition(
                     function (position) {
+                        clearTimeout(timeoutAlert);  // Clear the timeout if permission is granted
                         console.log('Location access granted');
-                        // Enable the form inputs if location access is granted
                         formInputs.forEach(input => input.disabled = false);
                         loginButton.disabled = false;
                     },
                     function (error) {
+                        clearTimeout(timeoutAlert);  // Clear the timeout if permission is denied
                         if (error.code === error.PERMISSION_DENIED) {
-                            // Show SweetAlert when the user denies location access
+                            permissionDenied = true;
                             Swal.fire({
                                 title: 'Location Permission Denied',
                                 text: "Please allow location access to use this login page.",
@@ -31,25 +52,19 @@
                                 allowOutsideClick: false,
                                 confirmButtonText: 'Enable Location',
                             }).then(() => {
-                                // Optional: You could redirect to a help page or reload
-                                window.location.reload();
+                                window.location.reload(); // Optional: Reload or redirect to help
                             });
                         }
+
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            // Handle case where location is unavailable or request timed out
                             Swal.fire({
-                                title: 'Location Lost',
-                                text: "Location access was lost. The form will reload.",
+                                title: 'Location Error',
+                                text: "Location request failed. Please try again.",
                                 icon: 'error',
-                                showConfirmButton: false,
+                                showConfirmButton: true,
                                 allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
                             }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
+                                window.location.reload(); // Optional: Reload the page
                             });
                         }
                     }
