@@ -41,6 +41,8 @@ RewriteEngine On
     # Remove X-Powered-By header
     Header unset X-Powered-By
 
+    Header unset set-cookie
+
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
