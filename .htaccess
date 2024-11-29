@@ -28,6 +28,16 @@ RewriteEngine On
     # Permissions Policy (formerly Feature Policy)
     Header always set Permissions-Policy "geolocation=(self 'https://mcc-lrc.com'), microphone=()"
 
+    # Set the session cookie lifetime to 1 hour (3600 seconds)
+    php_value session.cookie_lifetime 3600
+
+    # Set the session data's maximum lifetime to 1 hour (3600 seconds)
+    php_value session.gc_maxlifetime 3600
+
+    # Optionally, you can enforce secure and HttpOnly cookie flags for sessions
+    php_value session.cookie_secure 1       # Ensure cookies are only sent over HTTPS
+    php_value session.cookie_httponly 1      # Prevent JavaScript from accessing the session cookie
+    
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-d
