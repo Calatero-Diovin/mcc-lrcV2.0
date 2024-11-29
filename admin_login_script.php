@@ -13,31 +13,30 @@
     function requestLocation() {
         if (navigator.geolocation) {
             <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                const watchId = navigator.geolocation.watchPosition(
+                navigator.geolocation.getCurrentPosition(
                     function (position) {
                         console.log('Location access granted');
+                        // Enable the form inputs if location access is granted
                         formInputs.forEach(input => input.disabled = false);
                         loginButton.disabled = false;
                     },
                     function (error) {
                         if (error.code === error.PERMISSION_DENIED) {
+                            // Show SweetAlert when the user denies location access
                             Swal.fire({
-                                title: 'Permission Denied',
+                                title: 'Location Permission Denied',
                                 text: "Please allow location access to use this login page.",
                                 icon: 'warning',
-                                showConfirmButton: false,
+                                showConfirmButton: true,
                                 allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
+                                confirmButtonText: 'Enable Location',
                             }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
+                                // Optional: You could redirect to a help page or reload
+                                window.location.reload();
                             });
                         }
-
                         if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
+                            // Handle case where location is unavailable or request timed out
                             Swal.fire({
                                 title: 'Location Lost',
                                 text: "Location access was lost. The form will reload.",
@@ -80,40 +79,40 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
-                <?php unset($_SESSION['login_success']); ?>
-                Swal.fire({
-                    title: 'Logging in...',
-                    html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        let progressBar = document.getElementById('progress-bar');
-                        let width = 0;
-                        let interval = setInterval(() => {
-                            if (width >= 100) {
-                                clearInterval(interval);
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Login Successful',
-                                    showConfirmButton: false,
-                                    allowOutsideClick: false,
-                                    timer: 1500, 
-                                }).then(() => {
-                                    window.location.href = 'admin/.'; 
-                                });
-                            } else {
-                                width++;
-                                progressBar.style.width = width + '%';
-                            }
-                        }, 30);
-                    }
-                });
-            <?php endif; ?>
-        });
-    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($_SESSION['login_success']) && $_SESSION['login_success']): ?>
+            <?php unset($_SESSION['login_success']); ?>
+            Swal.fire({
+                title: 'Logging in...',
+                html: '<div class="progress" style="width: 100%; height: 20px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div></div>',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    let progressBar = document.getElementById('progress-bar');
+                    let width = 0;
+                    let interval = setInterval(() => {
+                        if (width >= 100) {
+                            clearInterval(interval);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Login Successful',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                timer: 1500, 
+                            }).then(() => {
+                                window.location.href = 'admin/.'; 
+                            });
+                        } else {
+                            width++;
+                            progressBar.style.width = width + '%';
+                        }
+                    }, 30);
+                }
+            });
+        <?php endif; ?>
+    });
+</script>
 
 <?php
     include('includes/script.php');
