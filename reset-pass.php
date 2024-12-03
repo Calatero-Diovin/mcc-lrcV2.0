@@ -79,14 +79,14 @@ if (strpos($request, '.php') !== false) {
                                    </center>
                               </div>
                               <div class="col-md-12">
-                                <div class="form-floating mb-3 p-3" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
+                                <a href="" class="form-floating mb-3 p-3" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
                                     <span><i class="bi bi-envelope" style="font-size: 2rem; color: #007bff;"></i></span>
-                                    <a href="javascript:void(0);" class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via OTP</a>
-                                </div>
-                                <div class="form-floating mb-3 p-3" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
+                                    <p class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via OTP</p>
+                                </a>
+                                <a href="password-reset.php" class="form-floating mb-3 p-3" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
                                     <span><i class="bi bi-link-45deg" style="font-size: 2rem; color: #007bff;"></i></span>
-                                    <a href="password-reset.php" class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via Link</a>
-                                </div>
+                                    <p class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via Link</p>
+                                </a>
                               </div>
                                    <div class="text-end mt-5 fw-bold">
                                         <p>
