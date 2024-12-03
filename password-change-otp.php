@@ -13,6 +13,12 @@ if (strpos($request, '.php') !== false) {
     header("Location: $new_url", true, 301);
     exit();
 }
+
+// Check if the email is stored in the session (after OTP verification)
+if (!isset($_SESSION['email_for_reset'])) {
+    header("Location: password-reset-otp.php"); // Redirect if the user didn't verify OTP
+    exit(0);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,12 +86,17 @@ if (strpos($request, '.php') !== false) {
                             <center>
                                 <h4 class="m-0">Set New Password</h4>
                                 <p class="fs-4 fw-semibold text-primary">Enter new password.</p>
+                                <?php if (isset($_SESSION['status'])): ?>
+                                    <div class="alert alert-<?php echo $_SESSION['status_code']; ?>" role="alert">
+                                        <?php
+                                        echo $_SESSION['status']; // Display the status message
+                                        unset($_SESSION['status']); // Clear status message after displaying it
+                                        ?>
+                                    </div>
+                                <?php endif; ?>
                             </center>
                         </div>
-                        <form action="password-reset-code.php" method="POST" class="needs-validation" novalidate style="margin-top:30px;" onsubmit="return validatePassword()">
-                            <!-- Add hidden input field to pass email -->
-                            <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>"> 
-
+                        <form action="password-reset-otp-code.php" method="POST" class="needs-validation" novalidate style="margin-top:30px;" onsubmit="return validatePassword()">
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" id="passwordInput" class="form-control" name="new_password" placeholder="New Password" required>
@@ -131,28 +142,6 @@ if (strpos($request, '.php') !== false) {
             if (xssPattern.test(password) || xssPattern.test(cpassword)) {
                 swal("Invalid Input", "I got your IP Address.", "error");
                 isValid = false;
-            }
-
-            // Regular expression for strong password
-            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-            if (!strongPasswordPattern.test(password)) {
-                swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
-                isValid = false;
-            }
-
-            if (password.length < 8) {
-                document.getElementById("passwordLengthFeedback").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("passwordLengthFeedback").style.display = "none";
-            }
-
-            if (password !== cpassword) {
-                document.getElementById("passwordMatchFeedback").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("passwordMatchFeedback").style.display = "none";
             }
 
             return isValid;
