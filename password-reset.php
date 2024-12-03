@@ -42,7 +42,7 @@ if (strpos($request, '.php') !== false) {
 
      <style>
           .back {
-               font-size: 30px;
+               font-size: 25px;
                color: black;
           }
           .back:hover {
