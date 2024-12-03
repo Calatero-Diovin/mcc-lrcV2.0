@@ -144,7 +144,7 @@ if (isset($_POST['password_reset_link'])) {
         $get_name = $row['firstname'];
         $get_email = $row['email'];
 
-        $update_token_faculty = "UPDATE faculty SET verify_token='$token', token_used=0 WHERE email='$get_email'";
+        $update_token_faculty = "UPDATE faculty SET verify_token='$token', token_used = 0 WHERE email='$get_email'";
         $update_token_run_faculty = mysqli_query($con, $update_token_faculty);
 
         if ($update_token_run_faculty) {
@@ -315,13 +315,7 @@ if (isset($_GET['token'])) {
     if ($result->num_rows > 0) {
         // OTP is valid and not used
         $row = $result->fetch_assoc();
-        $user_email = $row['email'];  // Get the email associated with the OTP
-        
-        // Mark OTP as used (if you wish to prevent further usage)
-        $update_otp = "UPDATE user SET token_used = 1 WHERE email = ?";
-        $stmt = $con->prepare($update_otp);
-        $stmt->bind_param("s", $user_email);
-        $stmt->execute();
+        $user_email = $row['email'];
 
         $_SESSION['email_for_reset'] = $user_email;  // Store email in session to use for password reset
         $_SESSION['status'] = "OTP verified successfully!";
@@ -346,13 +340,7 @@ if (isset($_GET['token'])) {
     if ($result->num_rows > 0) {
         // OTP is valid and not used
         $row = $result->fetch_assoc();
-        $user_email = $row['email'];  // Get the email associated with the OTP
-        
-        // Mark OTP as used (if you wish to prevent further usage)
-        $update_otp = "UPDATE faculty SET token_used = 1 WHERE email = ?";
-        $stmt = $con->prepare($update_otp);
-        $stmt->bind_param("s", $user_email);
-        $stmt->execute();
+        $user_email = $row['email'];
 
         $_SESSION['email_for_reset'] = $user_email;  // Store email in session to use for password reset
         $_SESSION['status'] = "OTP verified successfully!";
