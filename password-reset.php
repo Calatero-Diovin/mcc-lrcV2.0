@@ -56,6 +56,9 @@ if (strpos($request, '.php') !== false) {
           <div class="container">
                <div class="col mx-auto rounded shadow bg-white">
                     <div class="row">
+                    <a href="reset-pass.php" class="back">
+                              <i class="bi bi-arrow-left-circle-fill m-3"></i>
+                         </a>
                          <div class="col-md-6 ">
                               <div class="">
                                    <img src="images/mcc-lrc.png" alt="logo"
