@@ -48,6 +48,14 @@ if (strpos($request, '.php') !== false) {
           .back:hover {
                color: gray;
           }
+          .reset-option:hover {
+            color: #0056b3;
+        }
+
+        .form-floating:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
      </style>
 </head>
 
