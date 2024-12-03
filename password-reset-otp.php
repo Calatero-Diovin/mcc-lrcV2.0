@@ -135,7 +135,7 @@ if (strpos($request, '.php') !== false) {
                         Swal.fire({
                             icon: 'info',
                             title: 'Enter OTP',
-                            input: 'text', 
+                            input: 'tel', 
                             inputPlaceholder: 'Enter OTP',
                             showCancelButton: false,
                             allowOutsideClick: false,
