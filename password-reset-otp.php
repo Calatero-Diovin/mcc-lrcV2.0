@@ -71,7 +71,7 @@ if (strpos($request, '.php') !== false) {
                                         <p class="fs-4 fw-semibold text-primary">Enter your email to reset your password</p>
                                    </center>
                               </div>
-                              <form action="password-reset-code.php" method="POST" class="needs-validation" novalidate
+                              <form action="password-reset-otp-code.php" method="POST" class="needs-validation" novalidate
                               style="margin-top:30px;">
                                    <div class="col-md-12">
                                         <div class="form-floating mb-3">
