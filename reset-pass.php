@@ -75,6 +75,7 @@ if (strpos($request, '.php') !== false) {
                                             <span><i class="bi bi-envelope"></i></span>
                                              <a href="" style="text-decoration: none;">Reset via OTP</a>
                                         </div>
+                                        <br>
                                         <div class="form-floating mb-3 p-4 btn btn-default">
                                             <span><i class="bi bi-link-45deg"></i></span>
                                              <a href="password-reset.php" style="text-decoration: none;">Reset via Link</a>
