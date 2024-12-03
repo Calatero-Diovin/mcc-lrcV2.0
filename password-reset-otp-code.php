@@ -179,7 +179,7 @@ if (isset($_POST['password-change'])) {
     // Validate if the passwords match
     if ($new_password !== $cpassword) {
         $_SESSION['status'] = "Passwords do not match. Please try again.";
-        $_SESSION['status_code'] = "error";
+        $_SESSION['status_code'] = "warning";
         header("Location: password-change-otp.php");  // Redirect back to the form
         exit(0);
     }
