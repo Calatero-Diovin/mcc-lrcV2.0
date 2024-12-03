@@ -70,7 +70,7 @@ if (strpos($request, '.php') !== false) {
                                         </h4>
                                    </center>
                               </div>
-                                   <div class="col-md-12">
+                                   <div class="col-md-12 text-decoration-none">
                                         <div class="form-floating mb-3 p-4">
                                             <span><i class="bi bi-envelope"></i></span>
                                              <a href="">Reset via OTP</a>
