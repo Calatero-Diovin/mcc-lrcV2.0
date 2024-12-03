@@ -86,14 +86,6 @@ if (!isset($_SESSION['email_for_reset'])) {
                             <center>
                                 <h4 class="m-0">Set New Password</h4>
                                 <p class="fs-4 fw-semibold text-primary">Enter new password.</p>
-                                <?php if (isset($_SESSION['status'])): ?>
-                                    <div class="alert alert-<?php echo $_SESSION['status_code']; ?>" role="alert">
-                                        <?php
-                                        echo $_SESSION['status']; // Display the status message
-                                        unset($_SESSION['status']); // Clear status message after displaying it
-                                        ?>
-                                    </div>
-                                <?php endif; ?>
                             </center>
                         </div>
                         <form action="password-reset-otp-code.php" method="POST" class="needs-validation" novalidate style="margin-top:30px;" onsubmit="return validatePassword()">
