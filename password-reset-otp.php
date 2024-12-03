@@ -103,14 +103,11 @@ if (strpos($request, '.php') !== false) {
      </section>
 
      <script>
-          // Function to validate the form
           (function() {
                'use strict';
 
-               // Fetch all the forms we want to apply custom Bootstrap validation styles to
                var forms = document.querySelectorAll('.needs-validation');
 
-               // Loop over them and prevent submission
                Array.prototype.slice.call(forms)
                     .forEach(function(form) {
                          form.addEventListener('submit', function(event) {
@@ -135,16 +132,15 @@ if (strpos($request, '.php') !== false) {
                         allowOutsideClick: false,
                         showConfirmButton: true
                     }).then(() => {
-                        // Show the second SweetAlert for OTP input
                         Swal.fire({
                             icon: 'info',
                             title: 'Enter OTP',
-                            input: 'text',  // OTP input field
+                            input: 'text', 
                             inputPlaceholder: 'Enter OTP',
                             showCancelButton: false,
                             allowOutsideClick: false,
                             confirmButtonText: 'Submit',
-                            timer: 30000,  // 30 seconds timer
+                            timer: 3600000,
                             timerProgressBar: true,
                             didOpen: () => {
                                 Swal.showLoading();
@@ -154,12 +150,11 @@ if (strpos($request, '.php') !== false) {
                                     Swal.showValidationMessage('OTP is required');
                                     return false;
                                 }
-                                return token;  // Return OTP to be sent for processing
+                                return token;
                             }
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                const token = result.value;  // The OTP entered by the user
-                                // Redirect to password-reset-otp-code.php with OTP as a query parameter
+                                const token = result.value;
                                 window.location.href = `password-reset-otp-code.php?token=${token}`;
                             }
                         });
