@@ -70,16 +70,16 @@ if (strpos($request, '.php') !== false) {
                                         </h4>
                                    </center>
                               </div>
-                                   <div class="col-md-12">
-                                        <div class="form-floating mb-3 p-4" style="border: 2px solid black;border-radius: 20px;">
-                                            <span><i class="bi bi-envelope" style="font-size: 2rem;"></i></span>
-                                             <a href="" style="text-decoration: none;">Reset via OTP</a>
-                                        </div>
-                                        <div class="form-floating mb-3 p-4" style="border: 2px solid black;border-radius: 20px;">
-                                            <span><i class="bi bi-link-45deg" style="font-size: 2rem;"></i></span>
-                                             <a href="password-reset.php" style="text-decoration: none;">Reset via Link</a>
-                                        </div>
-                                   </div>
+                              <div class="col-md-12">
+                                <div class="form-floating mb-3 p-4" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
+                                    <span><i class="bi bi-envelope" style="font-size: 2rem; color: #007bff;"></i></span>
+                                    <a href="javascript:void(0);" class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via OTP</a>
+                                </div>
+                                <div class="form-floating mb-3 p-4" style="border: 2px solid #ddd; border-radius: 20px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.3s;">
+                                    <span><i class="bi bi-link-45deg" style="font-size: 2rem; color: #007bff;"></i></span>
+                                    <a href="password-reset.php" class="reset-option" style="text-decoration: none; font-size: 1.2rem; color: #007bff; font-weight: bold; transition: color 0.3s;">Reset via Link</a>
+                                </div>
+                              </div>
                                    <div class="text-end mt-5 fw-bold">
                                         <p>
                                              <a href="login" class="text-primary text-decoration-none fw-semibold">User Login</a>
