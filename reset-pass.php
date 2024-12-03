@@ -71,12 +71,11 @@ if (strpos($request, '.php') !== false) {
                                    </center>
                               </div>
                                    <div class="col-md-12">
-                                        <div class="form-floating mb-3 p-4 btn btn-default">
+                                        <div class="form-floating mb-3 p-4" style="border: 2px solid whitesomke;">
                                             <span><i class="bi bi-envelope"></i></span>
                                              <a href="" style="text-decoration: none;">Reset via OTP</a>
                                         </div>
-                                        <br>
-                                        <div class="form-floating mb-3 p-4 btn btn-default">
+                                        <div class="form-floating mb-3 p-4" style="border: 2px solid whitesomke;">
                                             <span><i class="bi bi-link-45deg"></i></span>
                                              <a href="password-reset.php" style="text-decoration: none;">Reset via Link</a>
                                         </div>
