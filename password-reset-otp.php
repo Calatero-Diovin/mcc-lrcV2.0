@@ -124,6 +124,52 @@ if (strpos($request, '.php') !== false) {
                     });
           })();
      </script>
+     <?php
+        if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OTP sent to your outlook. Please check your ibox.',
+                        allowOutsideClick: false,
+                        showConfirmButton: true
+                    }).then(() => {
+                        // Show the second SweetAlert for OTP input
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Enter OTP',
+                            input: 'text',  // OTP input field
+                            inputPlaceholder: 'Enter OTP',
+                            showCancelButton: false,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Submit',
+                            timer: 30000,  // 30 seconds timer
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                            preConfirm: (token) => {
+                                if (!token) {
+                                    Swal.showValidationMessage('OTP is required');
+                                    return false;
+                                }
+                                return token;  // Return OTP to be sent for processing
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const token = result.value;  // The OTP entered by the user
+                                // Redirect to password-reset-otp-code.php with OTP as a query parameter
+                                window.location.href = `password-reset-otp-code.php?token=${token}`;
+                            }
+                        });
+                    });
+                });
+            </script>
+            <?php
+            unset($_SESSION['email_success']);
+        }
+     ?>
 <?php include('includes/script.php'); ?>
 </body>
 

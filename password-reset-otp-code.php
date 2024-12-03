@@ -168,10 +168,58 @@ if (isset($_POST['password_reset_link'])) {
     }
 }
 
+
+
 if (isset($_POST['password-change'])) {
-    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $email = $_SESSION['email_for_reset'];
     $new_password = mysqli_real_escape_string($con, $_POST['new_password']);
-    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    $hashed_password = password_hash($new_password, PASSWORD_ARGON2I);
+
+    // Validate if the passwords match
+    if ($new_password !== $cpassword) {
+        $_SESSION['status'] = "Passwords do not match. Please try again.";
+        $_SESSION['status_code'] = "error";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
+
+    // Password strength validation (at least 8 characters, one uppercase, one number)
+    if (strlen($new_password) < 10) {
+        $_SESSION['status'] = "Password must be at least 8 characters long.";
+        $_SESSION['status_code'] = "warning";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
+
+    if (!preg_match('/[A-Z]/', $new_password)) {
+        $_SESSION['status'] = "Password must contain at least one uppercase letter.";
+        $_SESSION['status_code'] = "warning";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
+
+    if (!preg_match('/[a-z]/', $new_password)) {
+        $_SESSION['status'] = "Password must contain at least one lowercase letter.";
+        $_SESSION['status_code'] = "warning";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
+
+    if (!preg_match('/[0-9]/', $new_password)) {
+        $_SESSION['status'] = "Password must contain at least one number.";
+        $_SESSION['status_code'] = "warning";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
+
+    // Check if the password contains at least one special character
+    if (!preg_match('/[\W_]/', $new_password)) {  // \W matches any non-word character (not a letter or number), _ includes the underscore
+        $_SESSION['status'] = "Password must contain at least one special character.";
+        $_SESSION['status_code'] = "warning";
+        header("Location: password-change-otp.php");  // Redirect back to the form
+        exit(0);
+    }
 
     // User table check
     $check_email_user = "SELECT email, token_used FROM user WHERE email='$email'";
@@ -184,24 +232,28 @@ if (isset($_POST['password-change'])) {
 
         // Check if token is used
         if ($token_used == 0) {
-            $update_password_user = "UPDATE user SET password='$hashed_password', token_used=1 WHERE email='$get_email'";
-            $update_password_run_user = mysqli_query($con, $update_password_user);
 
-            if ($update_password_run_user) {
-                $_SESSION['status'] = 'Password successfully changed.';
-                $_SESSION['status_code'] = 'success';
-                header('Location: login.php');
+            $update_password_user = "UPDATE user SET password= ?, token_used = 1 WHERE email = ?";
+            $stmt = $con->prepare($update_password_user);
+            $stmt->bind_param("ss", $hashed_password, $get_email);
+            $update_run = $stmt->execute();
+
+            if ($update_run) {
+                $_SESSION['status'] = "Your password has been successfully updated.";
+                $_SESSION['status_code'] = "success";
+                unset($_SESSION['email_for_reset']);
+                header("Location: login.php");
                 exit(0);
             } else {
-                $_SESSION['status'] = 'Failed to update the password. Please try again.';
-                $_SESSION['status_code'] = 'error';
-                header('Location: password-change.php');
+                $_SESSION['status'] = "Failed to update password. Please try again.";
+                $_SESSION['status_code'] = "error";
+                header("Location: password-change-otp.php");
                 exit(0);
             }
         } else {
-            $_SESSION['status'] = 'Link already been used. Please request a new password reset link.';
+            $_SESSION['status'] = 'OTP already been used. Please request a new password reset otp.';
             $_SESSION['status_code'] = 'error';
-            header('Location: password-reset.php');
+            header('Location: password-reset-otp.php');
             exit(0);
         }
     }
@@ -217,31 +269,108 @@ if (isset($_POST['password-change'])) {
 
         // Check if token is used
         if ($token_used == 0) {
-            $update_password_faculty = "UPDATE faculty SET password='$hashed_password', token_used=1 WHERE email='$get_email'";
-            $update_password_run_faculty = mysqli_query($con, $update_password_faculty);
+            $update_password_faculty = "UPDATE faculty SET password= ?, token_used = 1 WHERE email = ?";
+            $stmt = $con->prepare($update_password_faculty);
+            $stmt->bind_param("ss", $hashed_password, $get_email);
+            $update_password_run_faculty = $stmt->execute();
 
             if ($update_password_run_faculty) {
                 $_SESSION['status'] = 'Password successfully changed.';
                 $_SESSION['status_code'] = 'success';
-                header('Location: login');
+                unset($_SESSION['email_for_reset']);
+                header('Location: login.php');
                 exit(0);
             } else {
                 $_SESSION['status'] = 'Failed to update the password. Please try again.';
                 $_SESSION['status_code'] = 'error';
-                header('Location: password-change');
+                header('Location: password-change-otp.php');
                 exit(0);
             }
         } else {
-            $_SESSION['status'] = 'Link already been used. Please request a new password reset link.';
+            $_SESSION['status'] = 'OTP already been used. Please request a new password reset otp.';
             $_SESSION['status_code'] = 'error';
-            header('Location: password-reset.php');
+            header('Location: password-reset-otp.php');
             exit(0);
         }
     } else {
         $_SESSION['status'] = 'Something went wrong.';
         $_SESSION['status_code'] = 'error';
-        header('Location: password-change');
+        header('Location: password-change-otp.php');
         exit(0);
     }
+}
+
+
+
+if (isset($_GET['token'])) {
+    $token_entered = mysqli_real_escape_string($conn, $_GET['token']);
+
+    // Query the database to check if the OTP is valid and matches
+    $check_otp_query = "SELECT * FROM user WHERE verify_token = ? AND token_used = 0";
+    $stmt = $conn->prepare($check_otp_query);
+    $stmt->bind_param("s", $token_entered);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // OTP is valid and not used
+        $row = $result->fetch_assoc();
+        $user_email = $row['email'];  // Get the email associated with the OTP
+        
+        // Mark OTP as used (if you wish to prevent further usage)
+        $update_otp = "UPDATE user SET token_used = 1 WHERE email = ?";
+        $stmt = $conn->prepare($update_otp);
+        $stmt->bind_param("s", $user_email);
+        $stmt->execute();
+
+        $_SESSION['email_for_reset'] = $user_email;  // Store email in session to use for password reset
+        $_SESSION['status'] = "OTP verified successfully!";
+        $_SESSION['status_code'] = "success";
+        header("Location: password-change-otp.php");  // Redirect to the page for password reset
+        exit(0);
+    } else {
+        // OTP is either invalid or already used
+        $_SESSION['status'] = "Invalid OTP or OTP has already been used.";
+        $_SESSION['status_code'] = "error";
+        header("Location: password-reset-otp.php");  // Redirect back to OTP page
+        exit(0);
+    }
+
+    // Query the database to check if the OTP is valid and matches
+    $check_otp_query = "SELECT * FROM faculty WHERE verify_token = ? AND token_used = 0";
+    $stmt = $conn->prepare($check_otp_query);
+    $stmt->bind_param("s", $token_entered);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // OTP is valid and not used
+        $row = $result->fetch_assoc();
+        $user_email = $row['email'];  // Get the email associated with the OTP
+        
+        // Mark OTP as used (if you wish to prevent further usage)
+        $update_otp = "UPDATE faculty SET token_used = 1 WHERE email = ?";
+        $stmt = $conn->prepare($update_otp);
+        $stmt->bind_param("s", $user_email);
+        $stmt->execute();
+
+        $_SESSION['email_for_reset'] = $user_email;  // Store email in session to use for password reset
+        $_SESSION['status'] = "OTP verified successfully!";
+        $_SESSION['status_code'] = "success";
+        header("Location: password-change-otp.php");  // Redirect to the page for password reset
+        exit(0);
+    } else {
+        // OTP is either invalid or already used
+        $_SESSION['status'] = "Invalid OTP or OTP has already been used.";
+        $_SESSION['status_code'] = "error";
+        header("Location: password-reset-otp.php");  // Redirect back to OTP page
+        exit(0);
+    }
+} else {
+    // If OTP is not provided
+    $_SESSION['status'] = "OTP is missing.";
+    $_SESSION['status_code'] = "error";
+    header("Location: password-reset-otp.php");  // Redirect back to OTP page
+    exit(0);
 }
 ?>
