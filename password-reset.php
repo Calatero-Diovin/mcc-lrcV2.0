@@ -90,7 +90,7 @@ if (strpos($request, '.php') !== false) {
                                         <button type="submit" name="password_reset_link"
                                              class="btn btn-primary text-light font-weight-bolder btn-lg">Send Password Reset Link</button>
                                    </div>
-                                   <div class="mt-3 d-flex justify-content-between align-items-center">
+                                   <div class="mt-5 d-flex justify-content-between align-items-center">
                                         <p>
                                              <a href="reset-pass.php" class="text-primary text-decoration-none fw-semibold">Back</a>
                                         </p>
