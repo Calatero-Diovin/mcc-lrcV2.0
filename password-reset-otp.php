@@ -145,7 +145,7 @@ if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
                         showCancelButton: false,
                         allowOutsideClick: false,
                         confirmButtonText: 'Submit',
-                        timer: 3600000,  // 1 hour timer
+                        timer: 1800000,  // 1 hour timer
                         timerProgressBar: true,
                         didOpen: () => {
                             Swal.showLoading();
