@@ -103,7 +103,7 @@ include('login_head.php');
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                         <p>
-                                                  <a href="password-reset.php" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
+                                                  <a href="reset-pass.php" class="text-primary text-decoration-none fw-semibold">Forgot Password?</a>
                                              </p>
                                              <p id="admin">
                                                   <a href="admin_login.php" class="text-primary text-decoration-none fw-semibold">Admin Login</a>
