@@ -122,49 +122,58 @@ if (strpos($request, '.php') !== false) {
           })();
      </script>
      <?php
-        if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
-            ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
+if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if OTP dialog was already shown using localStorage
+            if (!localStorage.getItem('otpShown')) {
+                // Show the success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'OTP sent to your outlook. Please check your inbox.',
+                    allowOutsideClick: false,
+                    showConfirmButton: true
+                }).then(() => {
+                    // Show OTP input dialog after success message
                     Swal.fire({
-                        icon: 'success',
-                        title: 'OTP sent to your outlook. Please check your ibox.',
+                        icon: 'info',
+                        title: 'Enter OTP',
+                        text: 'This is valid for 1 hour.',
+                        input: 'tel',
+                        inputPlaceholder: 'Enter OTP',
+                        showCancelButton: false,
                         allowOutsideClick: false,
-                        showConfirmButton: true
+                        confirmButtonText: 'Submit',
+                        timer: 3600000,  // 1 hour timer
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        preConfirm: (token) => {
+                            if (!token) {
+                                Swal.showValidationMessage('OTP is required');
+                                return false;
+                            }
+                            return token;
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const token = result.value;
+                            window.location.href = `password-reset-otp-code.php?token=${token}`;
+                        }
                     }).then(() => {
-                        Swal.fire({
-                            icon: 'info',
-                            title: 'Enter OTP',
-                            input: 'tel', 
-                            inputPlaceholder: 'Enter OTP',
-                            showCancelButton: false,
-                            allowOutsideClick: false,
-                            confirmButtonText: 'Submit',
-                            timer: 3600000,
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading();
-                            },
-                            preConfirm: (token) => {
-                                if (!token) {
-                                    Swal.showValidationMessage('OTP is required');
-                                    return false;
-                                }
-                                return token;
-                            }
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                const token = result.value;
-                                window.location.href = `password-reset-otp-code.php?token=${token}`;
-                            }
-                        });
+                        // Mark that the OTP dialog has been shown
+                        localStorage.setItem('otpShown', 'true');
                     });
                 });
-            </script>
-            <?php
-            unset($_SESSION['email_success']);
-        }
-     ?>
+            }
+        });
+    </script>
+    <?php
+    unset($_SESSION['email_success']);
+}
+?>
 <?php include('includes/script.php'); ?>
 </body>
 
