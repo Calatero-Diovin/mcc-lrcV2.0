@@ -160,7 +160,7 @@ if (strpos($request, '.php') !== false) {
                             if (result.isConfirmed) {
                                 const token = result.value;  // The OTP entered by the user
                                 // Redirect to password-reset-otp-code.php with OTP as a query parameter
-                                window.location.href = `password-reset-otp-code.php?token=${token}`;
+                                window.location.href = `password-change-otp.php?token=${token}`;
                             }
                         });
                     });
