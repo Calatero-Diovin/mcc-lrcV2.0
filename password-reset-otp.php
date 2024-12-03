@@ -122,58 +122,54 @@ if (strpos($request, '.php') !== false) {
           })();
      </script>
      <?php
-if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
-    ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check if OTP dialog was already shown using localStorage
-            if (!localStorage.getItem('otpShown')) {
-                // Show the success message
-                Swal.fire({
-                    icon: 'success',
-                    title: 'OTP sent to your outlook. Please check your inbox.',
-                    allowOutsideClick: false,
-                    showConfirmButton: true
-                }).then(() => {
-                    // Show OTP input dialog after success message
+        if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Show the OTP dialog even if the page is refreshed if it's the first time
                     Swal.fire({
-                        icon: 'info',
-                        title: 'Enter OTP',
-                        text: 'This is valid for 1 hour.',
-                        input: 'tel',
-                        inputPlaceholder: 'Enter OTP',
-                        showCancelButton: false,
+                        icon: 'success',
+                        title: 'OTP sent to your outlook. Please check your inbox.',
                         allowOutsideClick: false,
-                        confirmButtonText: 'Submit',
-                        timer: 1800000,  // 1 hour timer
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        },
-                        preConfirm: (token) => {
-                            if (!token) {
-                                Swal.showValidationMessage('OTP is required');
-                                return false;
-                            }
-                            return token;
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const token = result.value;
-                            window.location.href = `password-reset-otp-code.php?token=${token}`;
-                        }
+                        showConfirmButton: true
                     }).then(() => {
-                        // Mark that the OTP dialog has been shown
-                        localStorage.setItem('otpShown', 'true');
+                        // Show OTP input dialog after success message
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Enter OTP',
+                            text: 'This is valid for 30 minutes.',
+                            input: 'tel',
+                            inputPlaceholder: 'Enter OTP',
+                            showCancelButton: false,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Submit',
+                            timer: 1800000,  // 30 minutes timer (30 * 60 * 1000 ms)
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                            preConfirm: (token) => {
+                                if (!token) {
+                                    Swal.showValidationMessage('OTP is required');
+                                    return false;
+                                }
+                                return token;
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const token = result.value;
+                                window.location.href = `password-reset-otp-code.php?token=${token}`;
+                                // Mark that the OTP dialog has been shown by setting the flag
+                                localStorage.setItem('otpShown', 'true');
+                            }
+                        });
                     });
                 });
-            }
-        });
-    </script>
-    <?php
-    unset($_SESSION['email_success']);
-}
-?>
+            </script>
+            <?php
+            unset($_SESSION['email_success']);
+        }
+     ?>
 <?php include('includes/script.php'); ?>
 </body>
 
