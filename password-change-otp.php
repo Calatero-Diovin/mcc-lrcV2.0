@@ -16,7 +16,7 @@ if (strpos($request, '.php') !== false) {
 
 // Check if the email is stored in the session (after OTP verification)
 if (!isset($_SESSION['email_for_reset'])) {
-    $_SESSION['status'] = "Send OTP First.";
+    $_SESSION['status'] = "Vefiry OTP first.";
     $_SESSION['status_code'] = "error";
     header("Location: password-reset-otp.php"); // Redirect if the user didn't verify OTP
     exit(0);
