@@ -173,7 +173,7 @@ if (isset($_POST['password_reset_link'])) {
 if (isset($_POST['password-change'])) {
     $email = $_SESSION['email_for_reset'];
     $new_password = mysqli_real_escape_string($con, $_POST['new_password']);
-    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
     $hashed_password = password_hash($new_password, PASSWORD_ARGON2I);
 
     // Validate if the passwords match
@@ -303,11 +303,11 @@ if (isset($_POST['password-change'])) {
 
 
 if (isset($_GET['token'])) {
-    $token_entered = mysqli_real_escape_string($conn, $_GET['token']);
+    $token_entered = mysqli_real_escape_string($con, $_GET['token']);
 
     // Query the database to check if the OTP is valid and matches
     $check_otp_query = "SELECT * FROM user WHERE verify_token = ? AND token_used = 0";
-    $stmt = $conn->prepare($check_otp_query);
+    $stmt = $con->prepare($check_otp_query);
     $stmt->bind_param("s", $token_entered);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -319,7 +319,7 @@ if (isset($_GET['token'])) {
         
         // Mark OTP as used (if you wish to prevent further usage)
         $update_otp = "UPDATE user SET token_used = 1 WHERE email = ?";
-        $stmt = $conn->prepare($update_otp);
+        $stmt = $con->prepare($update_otp);
         $stmt->bind_param("s", $user_email);
         $stmt->execute();
 
@@ -338,7 +338,7 @@ if (isset($_GET['token'])) {
 
     // Query the database to check if the OTP is valid and matches
     $check_otp_query = "SELECT * FROM faculty WHERE verify_token = ? AND token_used = 0";
-    $stmt = $conn->prepare($check_otp_query);
+    $stmt = $con->prepare($check_otp_query);
     $stmt->bind_param("s", $token_entered);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -350,7 +350,7 @@ if (isset($_GET['token'])) {
         
         // Mark OTP as used (if you wish to prevent further usage)
         $update_otp = "UPDATE faculty SET token_used = 1 WHERE email = ?";
-        $stmt = $conn->prepare($update_otp);
+        $stmt = $con->prepare($update_otp);
         $stmt->bind_param("s", $user_email);
         $stmt->execute();
 
