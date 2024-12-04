@@ -2,7 +2,6 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 <div class="jumbotron h-50" style="background-color: #0D4C92">
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
@@ -79,16 +78,6 @@ include('includes/navbar.php');
     </footer>
 </div>
 <!-- End of .container -->
-<script>
-    window.onloadTurnstileCallback = function () {
-  turnstile.render("#myWIdget", {
-    sitekey: "0x4AAAAAAA1cj1xWKBKX4sg0",
-    callback: function (token) {
-      console.log(`Challenge Success ${token}`);
-    },
-  });
-};
-</script>
 <?php 
 include('includes/script.php');
 include('message.php'); 

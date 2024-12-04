@@ -3,6 +3,25 @@ ini_set('session.cookie_httponly', 1);
 session_start(); 
 include('admin/config/dbcon.php');
 ?>
+<script>
+    window.onloadTurnstileCallback = function () {
+  turnstile.render("#myWIdget", {
+    sitekey: "0x4AAAAAAA1cj1xWKBKX4sg0",
+    callback: function (token) {
+      console.log(`Challenge Success ${token}`);
+      setTimeout(() => {
+        document.querySelector(".")
+      }, 2000);
+    },
+  });
+};
+</script>
+
+<style>
+     #id {
+          display: none;
+     }
+</style>
 
 <nav class="navbar navbar-expand-lg" style="background: #0096FF;">
      <?php  $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], "/")+ 1); ?>
@@ -18,7 +37,7 @@ include('admin/config/dbcon.php');
                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-pills nav-justified">
                     <?php if(isset($_SESSION['auth_stud'])) :?>
                     <li class="nav-item">
-                         <a class="nav-link text-white <?=$page == 'index.php' || $page == 'book_details' ? 'active': '' ?> fw-semibold"
+                         <a id="home" class="nav-link text-white <?=$page == 'index.php' || $page == 'book_details' ? 'active': '' ?> fw-semibold"
                               href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
