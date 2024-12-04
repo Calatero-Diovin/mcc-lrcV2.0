@@ -18,7 +18,7 @@ if (strpos($request, '.php') !== false) {
 if (!isset($_SESSION['email_for_reset'])) {
     $_SESSION['status'] = "Vefiry OTP first.";
     $_SESSION['status_code'] = "error";
-    header("Location: password-reset-otp.php"); // Redirect if the user didn't verify OTP
+    header("Location: includes/404.php"); // Redirect if the user didn't verify OTP
     exit(0);
 }
 ?>
