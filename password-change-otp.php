@@ -16,7 +16,7 @@ if (strpos($request, '.php') !== false) {
 
 // Check if the email is stored in the session (after OTP verification)
 if (!isset($_SESSION['email_for_reset'])) {
-    header("Location: 404.php"); // Redirect if the user didn't verify OTP
+    header("Location: /"); // Redirect if the user didn't verify OTP
     exit(0);
 }
 ?>
