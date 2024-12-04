@@ -72,7 +72,6 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
 
      <!-- Animation -->
      <link rel="stylesheet" href="assets/css/aos.css" />
-     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 </head>
 
 <body>

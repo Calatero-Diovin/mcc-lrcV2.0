@@ -3,6 +3,7 @@ ini_set('session.cookie_httponly', 1);
 session_start(); 
 include('admin/config/dbcon.php');
 ?>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
 <script>
     window.onloadTurnstileCallback = function () {
   turnstile.render("#myWIdget", {
@@ -10,7 +11,8 @@ include('admin/config/dbcon.php');
     callback: function (token) {
       console.log(`Challenge Success ${token}`);
       setTimeout(() => {
-        document.querySelector(".")
+        document.querySelector("#home").style.display = "flex";
+        document.getElementById("myWidget").style.display = "none";
       }, 2000);
     },
   });
@@ -18,7 +20,7 @@ include('admin/config/dbcon.php');
 </script>
 
 <style>
-     #id {
+     #home {
           display: none;
      }
 </style>
