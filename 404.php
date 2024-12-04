@@ -1,3 +1,14 @@
+<?php
+// Get the current request URL
+$request = $_SERVER['REQUEST_URI'];
+
+// Redirect to remove .php extension
+if (strpos($request, '.php') !== false) {
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
