@@ -16,7 +16,7 @@ if (strpos($request, '.php') !== false) {
 // Check if 'code' is present in the URL
 if (!isset($_GET['token']) || empty($_GET['token'])) {
     // Redirect to a 404 error page
-    header("HTTP/1.0 404 Not Found");
+    header("Location: 404.php");
     exit; // Ensure no further code is executed
 }
 

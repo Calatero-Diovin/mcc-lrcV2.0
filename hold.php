@@ -5,7 +5,7 @@ include('includes/navbar.php');
 include('admin/config/dbcon.php');
 
 if (!isset($_SESSION['auth'])) {
-    header('Location: .');
+    header("Location: 404.php");
     exit(0);
 }
 

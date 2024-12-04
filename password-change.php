@@ -16,8 +16,7 @@ if (strpos($request, '.php') !== false) {
 
 // Validate 'token' parameter
 if (!isset($_GET['token']) || empty($_GET['token'])) {
-    header("HTTP/1.0 404 Not Found");
-    echo "Error: Email parameter is missing.";
+    header("Location: 404.php");
     exit;
 }
 
@@ -48,7 +47,7 @@ if ($result->num_rows > 0) {
         $email = $row['email'];
     }
 } else {
-    header("HTTP/1.0 404 Not Found");
+    header("Location: 404.php");
     exit;
 }
 ?>

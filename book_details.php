@@ -7,7 +7,7 @@ include('admin/config/dbcon.php');
 include('includes/url.php');
 
 if (!isset($_SESSION['auth'])) {
-    header('Location: .');
+    header("Location: 404.php");
     exit(0);
 }
 
