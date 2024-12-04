@@ -46,6 +46,6 @@ if (strpos($request, '.php') !== false) {
     </filter>  
   </defs>  
 </svg>  
- <h2>Oops! The page you are looking for cannot be found...</h2>
+ <h2 style="text-align: center;">Oops! The page you are looking for cannot be found...</h2>
 </body>
 </html>
