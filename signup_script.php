@@ -6,7 +6,7 @@ include('includes/url.php');
 
 // Check if 'code' is provided in the URL
 if (!isset($_GET['code']) || empty($_GET['code'])) {
-    header("HTTP/1.0 404 Not Found");
+    header("Location: 404.php");
     exit;
 }
 
@@ -29,11 +29,11 @@ if ($code_result->num_rows > 0) {
     $current_time_timestamp = $current_time->getTimestamp();
 
     if (($current_time_timestamp - $created_at_timestamp) > 3600) { // 3600 seconds = 1 hour
-        header("HTTP/1.0 404 Not Found");
+        header("Location: 404.php");
         exit;
     }
 } else {
-    header("HTTP/1.0 404 Not Found");
+    header("Location: 404.php");
     exit;
 }
 
