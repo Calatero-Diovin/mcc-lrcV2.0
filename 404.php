@@ -15,7 +15,7 @@ if (strpos($request, '.php') !== false) {
 <meta property="og:image" content="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-AnonymousLogo-compressed.jpg"/> 
 <meta name='description' content='404 - Page Not Found'/> 
 <meta name='keywords' content='404 - Page Not Found'/>
-<meta name='author' content='HAXOR'/>
+<meta name='author' content='404 - Page Not Found'/>
 <link rel="stylesheet" href="https://nathanprinsley-files.prinsh.com/data-1/css/deface(02-01).css"/>
 </head>
 <body>
@@ -46,6 +46,6 @@ if (strpos($request, '.php') !== false) {
     </filter>  
   </defs>  
 </svg>  
- <h2 style="text-align: center;">Oops! The page you are looking for cannot be found...</h2>
+ <h2 style="text-align: center;">Oops! The page you are looking for cannot be found.</h2>
 </body>
 </html>
