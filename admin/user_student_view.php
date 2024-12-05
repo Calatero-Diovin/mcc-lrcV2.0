@@ -24,9 +24,9 @@ include('includes/sidebar.php');
      <section class="section profile">
           <div class="row">
                <?php
-               if(isset($_GET['id']))
+               if(isset($_GET['b']))
                {
-                    $user_id = mysqli_real_escape_string($con, $_GET['id']);
+                    $user_id = filter_var(encryptor('decrypt', $_GET['b']), FILTER_VALIDATE_INT);
 
                $query = "SELECT * FROM user WHERE user_id = '$user_id'";
                $query_run = mysqli_query($con, $query);
