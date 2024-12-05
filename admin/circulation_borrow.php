@@ -43,7 +43,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
-                                                       required maxlength="9" id="student_id_no" oninput="validateStudentID(this)">
+                                                       required maxlength="9" oninput="validateStudentID(this)">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
