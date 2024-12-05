@@ -3,7 +3,7 @@ include('authentication.php');
 include('includes/url.php');
 
 // Fetch and sanitize GET parameter
-$id=filter_var(encryptor('decrypt', $_GET['user_id']), FILTER_VALIDATE_INT);
+$id=filter_var(encryptor('decrypt', $_GET['a']), FILTER_VALIDATE_INT);
 $query=mysqli_query($con, "select * from user where user_id='$id'");
 $row = mysqli_fetch_assoc($query);
 $numb=mysqli_num_rows($query); 
