@@ -1,5 +1,6 @@
 <?php
 include('authentication.php');
+include('includes/url.php');
 
 // Fetch and sanitize GET parameter
 $id=filter_var(encryptor('decrypt', $_GET['user_id']), FILTER_VALIDATE_INT);
