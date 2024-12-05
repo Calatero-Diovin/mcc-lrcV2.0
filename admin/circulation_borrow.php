@@ -43,7 +43,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
-                                                       required oninput="sanitizeInput(this)">
+                                                       required maxlength="9" id="student_id_no" oninput="validateStudentID(this)">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -337,9 +337,30 @@ var select_box_element = document.querySelector('#select_box');
 dselect(select_box_element, {
      search: true
 });
+</script>
 
-function sanitizeInput(input) {
-    // Remove any potential XSS tags from the input
-    input.value = input.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+<script>
+    function validateStudentID(input) {
+        let value = input.value;
+        
+        // Remove any characters that are not digits or hyphen
+        value = value.replace(/[^0-9-]/g, "");
+
+        // Enforce the correct format (numbers separated by a single hyphen, e.g. "1234-1234")
+        if (value.length > 5) {
+            value = value.substring(0, 5) + '-' + value.substring(5, 9); // Limit to 9 characters
+        }
+
+        // Set the input value to the formatted value
+        input.value = value;
+
+        // Add or remove 'is-valid' and 'is-invalid' classes based on the input validity
+        if (/^\d{4}-\d{4}$/.test(value)) {
+            input.classList.add("is-valid");
+            input.classList.remove("is-invalid");
+        } else {
+            input.classList.remove("is-valid");
+            input.classList.add("is-invalid");
+        }
+    }
 </script>
