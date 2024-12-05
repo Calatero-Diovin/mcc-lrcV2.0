@@ -82,7 +82,7 @@ include('./includes/sidebar.php');
                                                                       </button>
                                                                       <ul class="dropdown-menu">
                                                                            <!-- View Student Action -->
-                                                                           <li><a href="user_student_view.php?b=<?=encryptor('encrypt',$user['user_id']);?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Student">
+                                                                           <li><a href="user_student_view.php/b=<?=encryptor('encrypt',$user['user_id']);?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Student">
                                                                                 <i class="bi bi-eye-fill"></i> View
                                                                            </a></li>
                                                                            <!-- Edit Student Action -->
