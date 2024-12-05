@@ -104,7 +104,7 @@ include('./includes/sidebar.php');
                                                                                 <i class="bi bi-trash-fill"></i> Delete
                                                                            </a></li>
                                                                            <!-- Generate ID Card Action -->
-                                                                           <li><a href="user_student_id.php?user_id=<?php echo $user['user_id']?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip"  data-bs-placement="bottom" title="Generate Library ID">
+                                                                           <li><a href="user_student_id.php?user_id=<?= encryptor('encrypt',$user['user_id']); ?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip"  data-bs-placement="bottom" title="Generate Library ID">
                                                                                 <i class="bi bi-card-heading"></i> Generate Library ID
                                                                            </a></li>
                                                                       </ul>
@@ -280,6 +280,24 @@ document.getElementById('editMName').addEventListener('input', function () {
      this.classList.toggle('is-invalid', !isValid);
 });
 
+document.getElementById('deleteReason').addEventListener('input', function () {
+        var deleteReason = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (deleteReason === "") {
+            this.setCustomValidity('Reason cannot be empty or just spaces.');
+        } else if (this.value !== deleteReason) {
+            this.setCustomValidity('Reason cannot start with a space.');
+        } else if (dangerousCharsPattern.test(deleteReason)) {
+            this.setCustomValidity('Reason cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = deleteReason !== "" && this.value === deleteReason && !dangerousCharsPattern.test(deleteReason);
+        this.classList.toggle('is-invalid', !isValid);
+    });
 // Sanitize input: remove any HTML tags
 function sanitizeInput(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
