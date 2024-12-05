@@ -263,7 +263,7 @@ function confirmDelete(facultyId) {
      fetch('user_faculty_code.php?id=' + facultyId)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('deleteFacultyId').value = data.faculty_id;
+            document.getElementById('deletefacultyId').value = data.faculty_id;
 
             var myModal = new bootstrap.Modal(document.getElementById('deleteFacultyModal'));
             myModal.show();
