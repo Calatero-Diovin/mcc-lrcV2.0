@@ -104,7 +104,7 @@ include('./includes/sidebar.php');
                                                                                 <i class="bi bi-trash-fill"></i> Delete
                                                                            </a></li>
                                                                            <!-- Generate ID Card Action -->
-                                                                           <li><a href="user_student_id.php?user_id=<?php encryptor('encrypt',$user['user_id']); ?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip"  data-bs-placement="bottom" title="Generate Library ID">
+                                                                           <li><a href="user_student_id.php?user_id=<?= encryptor('encrypt',$user['user_id']); ?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip"  data-bs-placement="bottom" title="Generate Library ID">
                                                                                 <i class="bi bi-card-heading"></i> Generate Library ID
                                                                            </a></li>
                                                                       </ul>
