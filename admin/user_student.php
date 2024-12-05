@@ -223,6 +223,63 @@ function loadStudentData(userId) {
         });
 }
 
+document.getElementById('editLName').addEventListener('input', function () {
+     var editLName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editLName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editLName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editLName) && this.value === editLName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
+document.getElementById('editFName').addEventListener('input', function () {
+     var editFName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editFName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editFName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editFName) && this.value === editFName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
+document.getElementById('editMName').addEventListener('input', function () {
+     var editMName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editMName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editMName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editMName) && this.value === editMName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
 // Sanitize input: remove any HTML tags
 function sanitizeInput(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
