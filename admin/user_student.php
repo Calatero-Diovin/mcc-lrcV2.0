@@ -298,6 +298,7 @@ document.getElementById('deleteReason').addEventListener('input', function () {
         var isValid = deleteReason !== "" && this.value === deleteReason && !dangerousCharsPattern.test(deleteReason);
         this.classList.toggle('is-invalid', !isValid);
     });
+    
 // Sanitize input: remove any HTML tags
 function sanitizeInput(input) {
     return input.replace(/<\/?[^>]+(>|$)/g, "");
