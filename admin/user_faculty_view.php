@@ -24,9 +24,9 @@ include('includes/sidebar.php');
      <section class="section profile">
           <div class="row">
                <?php
-               if(isset($_GET['id']))
+               if(isset($_GET['b']))
                {
-                    $faculty_id = mysqli_real_escape_string($con, $_GET['id']);
+                    $faculty_id = filter_var(encryptor('decrypt', $_GET['b']), FILTER_VALIDATE_INT);
 
                $query = "SELECT * FROM faculty WHERE faculty_id = '$faculty_id'";
                $query_run = mysqli_query($con, $query);

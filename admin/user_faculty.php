@@ -74,7 +74,7 @@ include('./includes/sidebar.php');
                                                                       </button>
                                                                       <ul class="dropdown-menu">
                                                                            <!-- View faculty Action -->
-                                                                           <li><a href="user_faculty_view.php?id=<?=$user['faculty_id'];?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Faculty">
+                                                                           <li><a href="user_faculty_view.php?b=<?=encryptor('encrypt',$user['faculty_id']);?>" class="dropdown-item text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Faculty">
                                                                                 <i class="bi bi-eye-fill"></i> View
                                                                            </a></li>
                                                                            <!-- Edit faculty Action -->
@@ -96,7 +96,7 @@ include('./includes/sidebar.php');
                                                                                 <i class="bi bi-trash-fill"></i> Delete
                                                                            </a></li>
                                                                            <!-- Generate ID Card Action -->
-                                                                           <li><a href="user_faculty_id.php?faculty_id=<?php echo $user['faculty_id']?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Generate Library ID">
+                                                                           <li><a href="user_faculty_id.php?a=<?= encryptor('encrypt',$user['faculty_id']); ?>" target="_blank" class="dropdown-item text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Generate Library ID">
                                                                                 <i class="bi bi-card-heading"></i> Generate Library ID
                                                                            </a></li>
                                                                       </ul>
@@ -182,6 +182,82 @@ include('../message.php');
 ?>
 
 <script>
+
+document.getElementById('editLName').addEventListener('input', function () {
+     var editLName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editLName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editLName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editLName) && this.value === editLName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
+document.getElementById('editFName').addEventListener('input', function () {
+     var editFName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editFName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editFName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editFName) && this.value === editFName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
+document.getElementById('editMName').addEventListener('input', function () {
+     var editMName = this.value.trim(); // Remove any leading or trailing spaces
+          
+     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+     // Check if input starts with a space
+     if (this.value !== editMName) {
+          this.setCustomValidity('Name cannot start with a space.');
+     } else if (alphabetPattern.test(editMName)) {
+          this.setCustomValidity(''); // If valid, clear any previous error message
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+     }
+          
+     // Check validity and toggle the invalid class
+     var isValid = alphabetPattern.test(editMName) && this.value === editMName; // Ensure no leading spaces
+     this.classList.toggle('is-invalid', !isValid);
+});
+
+document.getElementById('deleteReason').addEventListener('input', function () {
+        var deleteReason = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (deleteReason === "") {
+            this.setCustomValidity('Reason cannot be empty or just spaces.');
+        } else if (this.value !== deleteReason) {
+            this.setCustomValidity('Reason cannot start with a space.');
+        } else if (dangerousCharsPattern.test(deleteReason)) {
+            this.setCustomValidity('Reason cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = deleteReason !== "" && this.value === deleteReason && !dangerousCharsPattern.test(deleteReason);
+        this.classList.toggle('is-invalid', !isValid);
+    });
 function confirmDelete(userId) {
      fetch('user_faculty_code.php?id=' + userId)
         .then(response => response.json())

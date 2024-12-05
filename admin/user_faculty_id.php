@@ -7,7 +7,7 @@ if (!$con) {
 }
 
 // Fetch and sanitize GET parameter
-$id = intval($_GET['faculty_id']);
+$id = filter_var(encryptor('decrypt', $_GET['a']), FILTER_VALIDATE_INT);
 
 // Prepare and execute query with parameter binding to prevent SQL injection
 $query = mysqli_prepare($con, "SELECT * FROM faculty WHERE faculty_id = ?");

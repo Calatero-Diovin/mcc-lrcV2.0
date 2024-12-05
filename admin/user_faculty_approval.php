@@ -128,7 +128,26 @@ include('./includes/footer.php');
 include('./includes/script.php');
 include('../message.php');   
 ?>
-
+<script>
+     document.getElementById('denyReason').addEventListener('input', function () {
+        var denyReason = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (denyReason === "") {
+            this.setCustomValidity('Reason cannot be empty or just spaces.');
+        } else if (this.value !== denyReason) {
+            this.setCustomValidity('Reason cannot start with a space.');
+        } else if (dangerousCharsPattern.test(denyReason)) {
+            this.setCustomValidity('Reason cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = denyReason !== "" && this.value === denyReason && !dangerousCharsPattern.test(denyReason);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
      if (!$.fn.DataTable.isDataTable('#example')) {
