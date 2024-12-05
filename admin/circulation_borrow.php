@@ -347,8 +347,8 @@ dselect(select_box_element, {
         value = value.replace(/[^0-9-]/g, "");
 
         // Enforce the correct format (numbers separated by a single hyphen, e.g. "1234-1234")
-        if (value.length > 5) {
-            value = value.substring(0, 5) + '-' + value.substring(5, 9); // Limit to 9 characters
+        if (value.length > 4) {
+            value = value.substring(0, 4) + '-' + value.substring(4, 9); // Limit to 9 characters
         }
 
         // Set the input value to the formatted value
