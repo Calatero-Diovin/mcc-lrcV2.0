@@ -1,5 +1,15 @@
 <?php
 include('authentication.php');
+include('includes/url.php');
+
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
 
 // Ensure database connection
 if (!$con) {
@@ -33,16 +43,6 @@ if ($row) {
     $type = htmlspecialchars($row['role_as']);
 } else {
     die("No record found.");
-}
-
-
-$request = $_SERVER['REQUEST_URI'];
-
-if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
-    $new_url = str_replace('.php', '', $request);
-    header("Location: $new_url", true, 301);
-    exit();
 }
 ?>
 <!DOCTYPE html>

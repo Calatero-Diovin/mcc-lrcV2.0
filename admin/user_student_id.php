@@ -2,6 +2,15 @@
 include('authentication.php');
 include('includes/url.php');
 
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
+
 // Fetch and sanitize GET parameter
 $id=filter_var(encryptor('decrypt', $_GET['a']), FILTER_VALIDATE_INT);
 $query=mysqli_query($con, "select * from user where user_id='$id'");
@@ -23,19 +32,6 @@ if ($row) {
     $person_cell_no = $row['person_cell_no'];
     $course = $row['course'];
     $bdate = $row['birthdate'];
-
-    // Generate barcode
-    //$Bar = new Picqer\Barcode\BarcodeGeneratorHTML();
-    //$code = $Bar->getBarcode($serial, $Bar::TYPE_CODE_128);
-
-    $request = $_SERVER['REQUEST_URI'];
-
-if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
-    $new_url = str_replace('.php', '', $request);
-    header("Location: $new_url", true, 301);
-    exit();
-}
 }
 ?>
 <!DOCTYPE html>
