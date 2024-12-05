@@ -258,8 +258,9 @@ document.getElementById('deleteReason').addEventListener('input', function () {
         var isValid = deleteReason !== "" && this.value === deleteReason && !dangerousCharsPattern.test(deleteReason);
         this.classList.toggle('is-invalid', !isValid);
     });
-function confirmDelete(userId) {
-     fetch('user_faculty_code.php?id=' + userId)
+
+function confirmDelete(facultyId) {
+     fetch('user_faculty_code.php?id=' + facultyId)
         .then(response => response.json())
         .then(data => {
             document.getElementById('deleteFacultyId').value = data.faculty_id;
@@ -272,7 +273,7 @@ function confirmDelete(userId) {
         });
 }
 
-function loadStudentData(facultyId) {
+function loadFacultyData(facultyId) {
     fetch('user_faculty_code.php?id=' + facultyId)
         .then(response => response.json())
         .then(data => {
