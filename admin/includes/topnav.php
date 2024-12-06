@@ -100,7 +100,7 @@
                     </a>
                     </li>
                     <li class="notification-item">
-                    <a href="user_facutly_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
+                    <a href="user_faculty_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
                         <div>
                             <h4>Pending Approvals</h4>
                             <p>You have <span><?=$facultyCount;?></span> pending faculty approval(s).</p>
