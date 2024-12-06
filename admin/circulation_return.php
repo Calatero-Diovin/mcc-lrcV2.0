@@ -36,7 +36,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
-                                                       required onblur="sanitizeInput(this)">
+                                                       required id="student_id_no" oninput="formatStudentId()">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -61,7 +61,7 @@ include('./includes/sidebar.php');
                                         foreach($query_run as $row)
                                         {
                                              // echo $row['student_id_no'];
-                                             $student_id = $_GET['student_id_no'];
+                                             $student_id = encryptor('encrypt', $_GET['student_id_no']);
                                                   echo ('<script> location.href="circulation_returning.php?student_id='.$student_id.'";</script');
                                              
                                         }
@@ -226,9 +226,30 @@ var select_box_element = document.querySelector('#select_box');
 dselect(select_box_element, {
      search: true
 });
+</script>
 
-function sanitizeInput(element) {
-    const sanitizedValue = element.value.replace(/<\/?[^>]+(>|$)/g, "");
-    element.value = sanitizedValue;
+<script>
+function formatStudentId() {
+    var input = document.getElementById('student_id_no');
+    var value = input.value;
+
+    // Remove all non-numeric characters except the hyphen
+    value = value.replace(/[^0-9-]/g, '');
+
+    // Ensure only one hyphen exists, and it's placed correctly
+    var hyphenIndex = value.indexOf('-');
+    if (hyphenIndex !== -1) {
+        // If hyphen exists, ensure it's after the 4th character
+        if (hyphenIndex > 4) {
+            value = value.slice(0, 4) + '-' + value.slice(5);
+        }
+    }
+
+    // Allow only one hyphen, and the hyphen must be placed between 4th and 5th digit
+    if (value.length > 9) {
+        value = value.slice(0, 9); // Limit to a max of 9 characters (e.g., 1234-1234)
+    }
+
+    input.value = value;
 }
 </script>

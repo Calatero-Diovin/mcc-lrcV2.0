@@ -7,7 +7,7 @@ if (isset($_SESSION['auth_admin']['admin_id'])) {
     $id_session = $_SESSION['auth_admin']['admin_id'];
 }
 
-$student_id = $_GET['student_id'];
+$student_id = encryptor('decrypt',$_GET['student_id']);
 
 $user_query = "SELECT * FROM user WHERE student_id_no = ?";
 $user_stmt = $con->prepare($user_query);
