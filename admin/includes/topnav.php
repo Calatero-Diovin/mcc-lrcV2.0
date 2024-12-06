@@ -37,6 +37,9 @@
                     $user_row = mysqli_fetch_assoc($user_result);
                     $faculty_row = mysqli_fetch_assoc($faculty_result);
 
+                    $userCount = $user_row['pending_count'];
+                    $facultyCount = $faculty_row['pending_count'];
+
                     $pendingCount = $user_row['pending_count'] + $faculty_row['pending_count'];
 
                     echo '<span class="badge bg-danger badge-number">'.($total_borrowers + $pendingCount).'</span>';
@@ -92,18 +95,21 @@
                     <a href="user_student_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
                         <div>
                             <h4>Pending Approvals</h4>
-                            <p>You have <span><?=$pendingCount;?></span> pending approval(s).</p>
+                            <p>You have <span><?=$userCount;?></span> pending student approval(s).</p>
+                        </div>
+                    </a>
+                    </li>
+                    <li class="notification-item">
+                    <a href="user_facutly_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
+                        <div>
+                            <h4>Pending Approvals</h4>
+                            <p>You have <span><?=$facultyCount;?></span> pending faculty approval(s).</p>
                         </div>
                     </a>
                     </li>
                     <?php
                     }
                     ?>
-                    <li style="border-top: 1px solid skyblue;">
-                        <center>
-                            <a href="hold_list.php" style="text-decoration:underline;font-size:13px;margin-left:10px;">Show all notifications</a>
-                        </center>
-                    </li>
                 </ul>
             </li>
 
