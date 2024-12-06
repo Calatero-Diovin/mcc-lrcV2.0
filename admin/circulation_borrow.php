@@ -68,7 +68,7 @@ include('./includes/sidebar.php');
                                         foreach($query_run as $row)
                                         {
                                              // echo $row['student_id_no'];
-                                             $student_id = $_GET['student_id_no'];
+                                             $student_id = encryptor('encrypt', $_GET['student_id_no']);
                                                   echo ('<script> location.href="circulation_borrowing.php?student_id='.$student_id.'";</script');
                                              
                                         }
