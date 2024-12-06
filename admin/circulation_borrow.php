@@ -58,7 +58,7 @@ include('./includes/sidebar.php');
                                    <?php
                                   if(isset($_GET['student_id_no']))
                                   {
-                                   $student_id_no = $_GET['student_id_no'];
+                                   $student_id_no = encryptor('encrypt', $_GET['student_id_no']);
 
                                    $query = "SELECT * FROM user WHERE student_id_no='$student_id_no'";
                                    $query_run = mysqli_query($con, $query);
