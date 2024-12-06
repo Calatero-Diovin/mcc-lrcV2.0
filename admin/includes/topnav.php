@@ -86,7 +86,7 @@
                     }
 
                     // Notifications for pending users and faculty
-                    if ($pendingCount > 0) {
+                    if ($userCount > 0) {
                     ?>
                     <li>
                         <hr class="dropdown-divider" />
@@ -98,6 +98,14 @@
                             <p>You have <span><?=$userCount;?></span> pending student approval(s).</p>
                         </div>
                     </a>
+                    </li>
+                    <?php
+                    }
+
+                    if ($facultyCount > 0) {
+                    ?>
+                    <li>
+                        <hr class="dropdown-divider" />
                     </li>
                     <li class="notification-item">
                     <a href="user_faculty_approval.php" style="text-decoration:none;font-size:13px;margin-left:10px;">
