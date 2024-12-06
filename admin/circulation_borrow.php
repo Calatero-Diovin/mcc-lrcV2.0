@@ -43,7 +43,7 @@ include('./includes/sidebar.php');
                                                        value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
-                                                       required maxlength="9" oninput="validateStudentID(this)">
+                                                       required id="student_id_no" oninput="formatStudentId()">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -324,7 +324,16 @@ include('./includes/sidebar.php');
 });
 });
 </script>
-
+<script>
+function formatStudentId() {
+    var input = document.getElementById('student_id_no');
+    var value = input.value.replace(/\D/g, ''); // Remove any non-numeric characters
+    if (value.length > 4) {
+        value = value.slice(0, 4) + '-' + value.slice(4, 8); // Add hyphen after 4 digits
+    }
+    input.value = value;
+}
+</script>
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -337,30 +346,4 @@ var select_box_element = document.querySelector('#select_box');
 dselect(select_box_element, {
      search: true
 });
-</script>
-
-<script>
-    function validateStudentID(input) {
-        let value = input.value;
-        
-        // Remove any characters that are not digits or hyphen
-        value = value.replace(/[^0-9-]/g, "");
-
-        // Enforce the correct format (numbers separated by a single hyphen, e.g. "1234-1234")
-        if (value.length > 4) {
-            value = value.substring(0, 4) + '-' + value.substring(4, 9); // Limit to 9 characters
-        }
-
-        // Set the input value to the formatted value
-        input.value = value;
-
-        // Add or remove 'is-valid' and 'is-invalid' classes based on the input validity
-        if (/^\d{4}-\d{4}$/.test(value)) {
-            input.classList.add("is-valid");
-            input.classList.remove("is-invalid");
-        } else {
-            input.classList.remove("is-valid");
-            input.classList.add("is-invalid");
-        }
-    }
 </script>
