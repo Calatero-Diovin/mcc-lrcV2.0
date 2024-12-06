@@ -40,7 +40,7 @@ include('./includes/sidebar.php');
                                                   <!-- <span class="input-group-text bg-primary text-white"
                                                   id="basic-addon1">SEARCH ID</span> -->
                                                   <input type="text" name="student_id_no"
-                                                       value="<?php if(isset($_GET['student_id_no'])){echo encryptor('encrypt', $_GET['student_id_no']);}?>"
+                                                       value="<?php if(isset($_GET['student_id_no'])){echo $_GET['student_id_no'];}?>"
                                                        class="form-control" placeholder="Enter Student ID"
                                                        aria-label="Username" aria-describedby="basic-addon1" autofocus
                                                        required id="student_id_no" oninput="formatStudentId()">
