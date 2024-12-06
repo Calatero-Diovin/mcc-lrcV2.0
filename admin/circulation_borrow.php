@@ -40,10 +40,10 @@ include('./includes/sidebar.php');
                                                   <!-- <span class="input-group-text bg-primary text-white"
                                                   id="basic-addon1">SEARCH ID</span> -->
                                                   <input type="text" name="student_id_no"
-                                                  value="<?php if(isset($_GET['student_id_no'])){echo encryptor('encrypt', $_GET['student_id_no']);}?>"
-                                                  class="form-control" placeholder="Enter Student ID"
-                                                  aria-label="Student ID" aria-describedby="basic-addon1" autofocus
-                                                  required id="student_id_no" oninput="formatStudentId()">
+                                                       value="<?php if(isset($_GET['student_id_no'])){echo encryptor('encrypt', $_GET['student_id_no']);}?>"
+                                                       class="form-control" placeholder="Enter Student ID"
+                                                       aria-label="Username" aria-describedby="basic-addon1" autofocus
+                                                       required id="student_id_no" oninput="formatStudentId()">
                                                   <button class="input-group-text bg-primary text-white"
                                                        id="basic-addon1">Search</button>
                                              </div>
@@ -58,7 +58,7 @@ include('./includes/sidebar.php');
                                    <?php
                                   if(isset($_GET['student_id_no']))
                                   {
-                                   $student_id_no = encryptor('decrypt',$_GET['student_id_no']);
+                                   $student_id_no = $_GET['student_id_no'];
 
                                    $query = "SELECT * FROM user WHERE student_id_no='$student_id_no'";
                                    $query_run = mysqli_query($con, $query);
