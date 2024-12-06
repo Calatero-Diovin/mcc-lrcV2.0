@@ -327,10 +327,25 @@ include('./includes/sidebar.php');
 <script>
 function formatStudentId() {
     var input = document.getElementById('student_id_no');
-    var value = input.value.replace(/\D/g, ''); // Remove any non-numeric characters
-    if (value.length > 4) {
-        value = value.slice(0, 4) + '-' + value.slice(4, 8); // Add hyphen after 4 digits
+    var value = input.value;
+
+    // Remove all non-numeric characters except the hyphen
+    value = value.replace(/[^0-9-]/g, '');
+
+    // Ensure only one hyphen exists, and it's placed correctly
+    var hyphenIndex = value.indexOf('-');
+    if (hyphenIndex !== -1) {
+        // If hyphen exists, ensure it's after the 4th character
+        if (hyphenIndex > 4) {
+            value = value.slice(0, 4) + '-' + value.slice(5);
+        }
     }
+
+    // Allow only one hyphen, and the hyphen must be placed between 4th and 5th digit
+    if (value.length > 9) {
+        value = value.slice(0, 9); // Limit to a max of 9 characters (e.g., 1234-1234)
+    }
+
     input.value = value;
 }
 </script>
