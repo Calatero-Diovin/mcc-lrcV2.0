@@ -9,7 +9,7 @@ if (isset($_SESSION['auth_admin']['admin_id'])) {
     $id_session = $_SESSION['auth_admin']['admin_id'];
 }
 
-$student_id = encryptor('decrypt',$_GET['student_id']);
+$student_id = encryptor('decrypt',$_GET['a']);
 
 $user_query = mysqli_query($con, "SELECT * FROM user WHERE student_id_no = '$student_id'");
 $user_row = mysqli_fetch_array($user_query);

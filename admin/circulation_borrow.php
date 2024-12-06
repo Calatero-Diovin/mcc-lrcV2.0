@@ -69,7 +69,7 @@ include('./includes/sidebar.php');
                                         {
                                              // echo $row['student_id_no'];
                                              $student_id = encryptor('encrypt', $_GET['student_id_no']);
-                                                  echo ('<script> location.href="circulation_borrowing.php?student_id='.$student_id.'";</script');
+                                                  echo ('<script> location.href="circulation_borrowing.php?a='.$student_id.'";</script');
                                              
                                         }
                                    }
