@@ -7,9 +7,6 @@ date_default_timezone_set('Asia/Manila');
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
-    $timein = new DateTime('now');
-    $timeout = new DateTime('now');
-
     // Query to select student based on student_id_no
     $student_query = "SELECT * FROM user WHERE student_id_no = '$qr_code' AND status = 'approved'";
     $student_query_run = mysqli_query($con, $student_query);
@@ -30,7 +27,7 @@ if (isset($_POST['text'])) {
 
         if (mysqli_num_rows($log_check_query_run) > 0) {
             // Update the existing log with time_out
-            $log_update_query = "UPDATE user_log SET time_out = '$timeout' WHERE student_id = '$student_id' AND date_log = '$date_log' AND time_out = ''";
+            $log_update_query = "UPDATE user_log SET time_out = NOW() WHERE student_id = '$student_id' AND date_log = '$date_log' AND time_out = ''";
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
@@ -48,7 +45,7 @@ if (isset($_POST['text'])) {
             $course = $user['course'];
             $year_level = $user['year_level'];
 
-            $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, year_level, role) VALUES ('$student_id', '$firstname', '$middlename', '$lastname', '$timein', '$date_log', '', '$course', '$year_level', 'student')";
+            $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, year_level, role) VALUES ('$student_id', '$firstname', '$middlename', '$lastname', NOW(), '$date_log', '', '$course', '$year_level', 'student')";
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
@@ -69,7 +66,7 @@ if (isset($_POST['text'])) {
 
         if (mysqli_num_rows($log_check_query_run) > 0) {
             // Update the existing log with time_out
-            $log_update_query = "UPDATE user_log SET time_out = '$timeout' WHERE student_id = '$username' AND date_log = '$date_log' AND time_out = ''";
+            $log_update_query = "UPDATE user_log SET time_out = NOW() WHERE student_id = '$username' AND date_log = '$date_log' AND time_out = ''";
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
@@ -86,7 +83,7 @@ if (isset($_POST['text'])) {
             $lastname = $user['lastname'];
             $course = $user['course'];
 
-            $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, year_level, role) VALUES ('$username', '$firstname', '$middlename', '$lastname', '$timein', '$date_log', '', '$course', 'faculty', 'faculty')";
+            $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, year_level, role) VALUES ('$username', '$firstname', '$middlename', '$lastname', NOW(), '$date_log', '', '$course', 'faculty', 'faculty')";
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
