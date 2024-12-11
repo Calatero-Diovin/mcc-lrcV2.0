@@ -110,7 +110,7 @@ if (isset($_POST['text'])) {
             $log_insert_stmt->execute();
 
             if ($log_insert_stmt->affected_rows > 0) {
-                header("Location: view.php?a=" . urlencode($username));
+                header("Location: view_faculty.php?a=" . urlencode($username));
                 exit();
             } else {
                 header("Location:qr_scanner.php");
