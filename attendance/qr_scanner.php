@@ -80,6 +80,20 @@ if (strpos($request, '.php') !== false) {
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
+                        <?php
+                        if(isset($_POST['text'])){
+                            $text = $_POST['POST'];
+
+                            $student_query = "SELECT * FROM user WHERE student_id_no = ? AND status = 'approved'";
+                            $student_query_stmt = $con->prepare($student_query);
+                            $student_query_stmt->bind_param("s", $qr_code);
+                            $student_query_stmt->execute();
+                            $student_query_result = $student_query_stmt->get_result();
+
+                            if (mysqli_num_rows($student_query_result) > 0) {
+                                $user = mysqli_fetch_assoc($student_query_result);
+                        }
+                        ?>
                         <form action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
@@ -95,6 +109,10 @@ if (strpos($request, '.php') !== false) {
                             <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
                             <p><?= htmlspecialchars($user['course']) ?></p>
                         <?php endif; ?>
+
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
