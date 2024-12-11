@@ -31,9 +31,19 @@ if (strpos($request, '.php') !== false) {
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/adapter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time').innerText = hours + ':' + minutes + ':' + seconds;
+        }
+        setInterval(updateClock, 1000);
+    </script>
 </head>
 
-<body>
+<body onload="updateClock()">
     <header id="header" class="header fixed-top d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             <a href="#" class="logo d-flex align-items-center">
@@ -42,10 +52,14 @@ if (strpos($request, '.php') !== false) {
             </a>
         </div>
         <div class="d-flex align-items-center">
-        <a href="index.php" class="btn btn-primary position-relative mx-5">
+            <span id="time" class="mx-2 text-white"></span>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="index.php" class="btn btn-primary position-relative mx-5">
                 Back
-                </a>
-</div>
+            </a>
+            <span id="time" class="mx-2 text-white"></span>
+        </div>
     </header>
 
     <main id="main" class="main">
@@ -57,15 +71,14 @@ if (strpos($request, '.php') !== false) {
                     </div>
                     <div class="col-md-6">
                         <form action="process_qr.php" method="post" class="form-horizontal">
-                        <label>SCAN QR CODE</label>
-                        <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
+                            <label>SCAN QR CODE</label>
+                            <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
                         </form>
-                        
                     </div>
                 </div>
             </div>
         </section>
-    </main>       
+    </main>
 
     <footer id="footer" class="footer">
         <div class="copyright">
