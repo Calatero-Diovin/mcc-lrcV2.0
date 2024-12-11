@@ -79,19 +79,7 @@ if (strpos($request, '.php') !== false) {
             document.getElementById('time').innerText = timeString;
         }
         setInterval(updateClock, 1000);
-
-          // Get the current time
-          var currentTime = new Date();
-          var currentHour = currentTime.getHours();
-          var cameraLink = document.getElementById('camera');
-
-          // Show camera link only between 8:00 AM and 5:00 PM
-          if (currentHour >= 8 && currentHour < 17) {
-               cameraLink.style.display = 'block'; // Show the camera link
-          } else {
-               cameraLink.style.display = 'none'; // Hide the camera link
-          }
-     </script>
+    </script>
      <style>
           .data_table {
                background: #fff;
@@ -132,7 +120,7 @@ if (strpos($request, '.php') !== false) {
           <div class="d-flex align-items-center">
                <span id="time" class="mx-2 text-black"></span>
           </div>
-          <div class="d-flex align-items-center" id="camera-container">
+          <div class="d-flex align-items-center">
                <a href="qr_scanner.php" id="camera">
                     <i class="bi bi-camera"></i>
                </a>
