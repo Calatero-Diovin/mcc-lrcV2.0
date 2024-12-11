@@ -14,6 +14,10 @@
         <br>
         <h3>Our service is available from <b>8:00 AM to 5:00 PM</b>, <b>Monday to Saturday.</b></h3>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <a href="." class="btn btn-primary">Go Back to Home</a>
     </div>
 </body>
