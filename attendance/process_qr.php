@@ -1,6 +1,9 @@
 <?php
 include('../admin/config/dbcon.php');
 
+// Set the timezone to the Philippines
+date_default_timezone_set('Asia/Manila');
+
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
@@ -87,12 +90,12 @@ if (isset($_POST['text'])) {
                 header("Location:index.php");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:qr _scanner.php");
                 exit("Failed to insert log for faculty.");
             }
         }
     } else {
-        exit("User not found");
+        exit("User  not found");
     }
 } else {
     exit("No QR code provided");
