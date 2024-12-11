@@ -106,5 +106,13 @@ $code_stmt->close();
             <strong><span>MCC</span></strong>. Learning Resource Center 2.0
         </div>
     </footer>
+
+    <!-- JavaScript to redirect after 20 seconds -->
+    <script type="text/javascript">
+        // Set a 20-second delay before redirecting to the index page
+        setTimeout(function() {
+            window.location.href = "index.php"; // Redirect to the index page
+        }, 20000); // 20000 milliseconds = 20 seconds
+    </script>
 </body>
 </html>
