@@ -45,41 +45,21 @@
         function checkCameraAvailability() {
             var now = new Date();
             var currentHour = now.getHours();
-            var currentMinutes = now.getMinutes();
-
-            // Show SweetAlert2 loading spinner
-            Swal.fire({
-                title: 'Checking Time...',
-                text: 'Please wait while we check the time...',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading(); // Show the loading spinner
-                }
-            });
 
             // Camera can only be used between 8:00 AM and 5:00 PM
-            if (currentHour >= 13 && currentHour < 1) {
-                setTimeout(() => {
-                    // Time is within the allowed range, start the camera
-                    Swal.close(); // Close the loading spinner
-                    startCamera(); // Start the camera if within time range
-                }, 1000); // Close loading spinner after 1 second delay
+            if (currentHour >= 8 && currentHour < 17) {
+                startCamera(); // Start the camera if within time range
             } else {
-                setTimeout(() => {
-                    // Time is outside the allowed range, hide the camera and show a warning
-                    document.getElementById('camera').style.display = 'none'; // Hide the camera icon
-                    Swal.close(); // Close the loading spinner
-
-                    // Show SweetAlert2 warning about unavailable camera time
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Camera Unavailable',
-                        text: 'The camera is only available between 8:00 AM and 5:00 PM.',
-                        confirmButtonText: 'OK',
-                        timer: 5000 // Auto-close after 5 seconds
-                    });
-                }, 1000); // Close loading spinner after 1 second delay
+                document.getElementById('camera').style.display = 'none'; // Hide the camera icon
+                
+                // Show SweetAlert2 modal if time is outside range
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Camera Unavailable',
+                    text: 'The camera is only available between 8:00 AM and 5:00 PM.',
+                    confirmButtonText: 'OK',
+                    timer: 5000 // Auto-close after 5 seconds
+                });
             }
         }
 
