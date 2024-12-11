@@ -51,14 +51,6 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                $_SESSION['user_info'] = [
-                    'firstname' => $user['firstname'],
-                    'middlename' => $user['middlename'],
-                    'lastname' => $user['lastname'],
-                    'course' => $user['course'],
-                    'year_level' => $user['year_level'],
-                    'profile_image' => $user['profile_image'] // Assuming the profile picture is stored in the database
-                ];
                 header("Location:index.php");
                 exit();
             } else {
@@ -98,14 +90,6 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                $_SESSION['user_info'] = [
-                    'firstname' => $user['firstname'],
-                    'middlename' => $user['middlename'],
-                    'lastname' => $user['lastname'],
-                    'course' => $user['course'],
-                    'year_level' => $user['year_level'],
-                    'profile_image' => $user['profile_image'] // Assuming the profile picture is stored in the database
-                ];
                 header("Location:index.php");
                 exit();
             } else {

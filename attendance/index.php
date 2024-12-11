@@ -25,72 +25,86 @@ if (strpos($request, '.php') !== false) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" href="../images/mcc-lrc.png">
-    <title>MCC Learning Resource Center</title>
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/css/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/alertify.min.css" />
-    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <style>
-        .data_table {
-            background: #fff;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .data_table .btn {
-            padding: 5px 10px;
-            margin: 10px 3px 10px 0;
-        }
-        #camera {
-            position: fixed;
-            right: 70px;
-            font-size: 40px;
-            color: black;
-            cursor: pointer;
-        }
-        #time {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: black;
-        }
-    </style>
-    <script>
-        <?php if (isset($_SESSION['user_info'])): ?>
-            document.addEventListener("DOMContentLoaded", function() {
-                var userInfo = <?php echo json_encode($_SESSION['user_info']); ?>;
-                document.getElementById('userProfilePicture').src = userInfo.profile_image || 'default-profile.png';
-                document.getElementById('userFullName').innerText = userInfo.firstname + ' ' + userInfo.middlename + ' ' + userInfo.lastname;
-                document.getElementById('userCourse').innerText = userInfo.course;
-                document.getElementById('userYearLevel').innerText = userInfo.year_level;
+     <meta charset="UTF-8" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta name="robots" content="noindex, nofollow" />
+     <link rel="icon" href="../images/mcc-lrc.png">
+     <title>MCC Learning Resource Center</title>
+     <link href="https://fonts.gstatic.com" rel="preconnect" />
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
+          rel="stylesheet" />
+     <!-- Bootstrap CSS -->
+     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-                // Show the modal
-                var myModal = new bootstrap.Modal(document.getElementById('userInfoModal'));
-                myModal.show();
+     <!-- Boxicons Icon -->
+     <link href="assets/css/boxicons.min.css" rel="stylesheet" />
 
-                // Auto-close the modal after 5 seconds
-                setTimeout(function() {
-                    myModal.hide();
-                }, 5000); // 5 seconds
-            });
-        <?php
-            // Clear session after showing modal
-            unset($_SESSION['user_info']);
-        ?>
-        <?php endif; ?>
+     <!-- Remixicon Icon -->
+     <link href="assets/css/remixicon.css" rel="stylesheet" />
+
+     <!-- Bootstrap Icon -->
+     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+
+     <!-- Alertify JS link -->
+     <link rel="stylesheet" href="assets/css/alertify.min.css" />
+     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+     <!-- Datatables -->
+     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+     <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
+
+     <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
+     <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
+
+     <!-- Custom CSS -->
+     <link href="assets/css/style.css" rel="stylesheet" />
+
+     <!-- Animation -->
+     <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
+     <!-- Loader -->
+     <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
+
+     <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('time').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
     </script>
+     <style>
+          .data_table {
+               background: #fff;
+               padding: 15px;
+               border-radius: 5px;
+          }
+
+          .data_table .btn {
+               padding: 5px 10px;
+               margin: 10px 3px 10px 0;
+          }
+
+          #camera {
+               position: fixed;
+               right: 70px;
+               font-size: 40px;
+               color: black;
+               cursor: pointer;
+          }
+          #time {
+               font-size: 2.5rem;
+               font-weight: bold;
+               color: black;
+          }
+     </style>
 </head>
 
 <body>
@@ -112,23 +126,6 @@ if (strpos($request, '.php') !== false) {
                </a>
           </div>
      </header>
-     <!-- User Info Modal -->
-    <div class="modal fade" id="userInfoModal" tabindex="-1" aria-labelledby="userInfoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userInfoModalLabel">User Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img id="userProfilePicture" src="default-profile.png" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 100px;">
-                    <h5 id="userFullName">Full Name</h5>
-                    <p id="userCourse">Course</p>
-                    <p id="userYearLevel">Year Level</p>
-                </div>
-            </div>
-        </div>
-    </div>
      <main id="main" class="main">
           <section class="section dashboard">
                <div class="row">
