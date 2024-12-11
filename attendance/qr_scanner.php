@@ -12,7 +12,7 @@ $end_time = '17:00';
 // Redirect if the current day is Sunday or outside the allowed time range
 if ($current_day == 0 || $current_time < $start_time || $current_time > $end_time) {
     // Redirect to a different page or show an error message
-    header("Location: 404.php"); // Or any other page, such as a 404 or maintenance page
+    header("Location: closed.php"); // Or any other page, such as a 404 or maintenance page
     exit();
 }
 
