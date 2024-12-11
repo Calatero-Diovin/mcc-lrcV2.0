@@ -112,7 +112,7 @@ $code_stmt->close();
         // Set a 20-second delay before redirecting to the index page
         setTimeout(function() {
             window.location.href = "."; // Redirect to the index page
-        }, 20000); // 20000 milliseconds = 20 seconds
+        }, 5000); // 20000 milliseconds = 20 seconds
     </script>
 </body>
 </html>
