@@ -34,10 +34,14 @@ if (strpos($request, '.php') !== false) {
     <script>
         function updateClock() {
             var now = new Date();
-            var hours = now.getHours().toString().padStart(2, '0');
+            var hours = now.getHours();
             var minutes = now.getMinutes().toString().padStart(2, '0');
             var seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('time').innerText = hours + ':' + minutes + ':' + seconds;
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('time').innerText = timeString;
         }
         setInterval(updateClock, 1000);
     </script>
