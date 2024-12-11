@@ -1,6 +1,9 @@
 <?php
 include('../admin/config/dbcon.php');
 
+// Set the timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
+
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
@@ -92,7 +95,7 @@ if (isset($_POST['text'])) {
             }
         }
     } else {
-        exit("User not found");
+        exit("User  not found");
     }
 } else {
     exit("No QR code provided");
