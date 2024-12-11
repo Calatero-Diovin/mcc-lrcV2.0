@@ -10,7 +10,7 @@ $current_day = (int) date('w');  // 0 for Sunday, 1 for Monday, etc.
 // Check if it's Sunday or if the time is outside the allowed hours (8:00 AM - 5:00 PM)
 if ($current_day == 0 || $current_hour < 8 || $current_hour > 17) {
     // Redirect to closed.php
-    header('Location: /closed.php');
+    header('Location: closed.php');
     exit; // Make sure to stop the script after the redirect
 }
 
