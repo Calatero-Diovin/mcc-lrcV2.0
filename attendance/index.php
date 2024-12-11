@@ -79,8 +79,7 @@ if (strpos($request, '.php') !== false) {
             document.getElementById('time').innerText = timeString;
         }
         setInterval(updateClock, 1000);
-    </script>
-    <script type="text/javascript">
+
           // Get the current time
           var currentTime = new Date();
           var currentHour = currentTime.getHours();
