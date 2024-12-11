@@ -9,43 +9,6 @@ if (strpos($request, '.php') !== false) {
     header("Location: $new_url", true, 301);
     exit();
 }
-
-$student_info = null;
-$faculty_info = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['text'])) {
-    $input = $_POST['text'];
-    
-    if (is_numeric($input)) {
-        $sql = "SELECT * FROM user WHERE student_id_no = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $input);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $student_info = $result->fetch_assoc();
-        } else {
-            $student_info = null;
-        }
-        
-        $stmt->close();
-    } else {
-        $sql = "SELECT * FROM faculty WHERE username = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $input);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $faculty_info = $result->fetch_assoc();
-        } else {
-            $faculty_info = null;
-        }
-
-        $stmt->close();
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -123,32 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['text'])) {
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
                         </form>
+                        <br>
+                        <div id="userInfoContainer"></div>
                     </div>
                 </div>
-                <!-- Display Student Info -->
-                <?php if ($student_info): ?>
-                    <h4>Student Information</h4>
-                    <p><strong>Profile Image:</strong> 
-                        <img src="../uploads/profile_images/<?php echo $student_info['profile_image']; ?>" alt="Profile Image" style="width: 100px; height: 100px; object-fit: cover;">
-                    </p>
-                    <p><strong>Name:</strong> <?php echo $student_info['firstname'] . ' ' . $student_info['lastname']; ?></p>
-                    <p><strong>Student ID:</strong> <?php echo $student_info['student_id_no']; ?></p>
-                    <p><strong>Course:</strong> <?php echo $faculty_info['course']; ?></p>
-                    <p><strong>Year Level:</strong> <?php echo $faculty_info['year_level']; ?></p>
-                    <!-- Add more fields for the student as needed -->
-                <?php elseif ($faculty_info): ?>
-                    <h4>Faculty Information</h4>
-                    <p><strong>Profile Image:</strong> 
-                        <img src="../uploads/profile_images/<?php echo $faculty_info['profile_image']; ?>" alt="Profile Image" style="width: 100px; height: 100px; object-fit: cover;">
-                    </p>
-                    <p><strong>Name:</strong> <?php echo $faculty_info['firstname'] . ' ' . $faculty_info['lastname']; ?></p>
-                    <p><strong>Course:</strong> <?php echo $faculty_info['course']; ?></p>
-                    <!-- Add more fields for the faculty as needed -->
-                <?php elseif ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
-                    <div class="alert alert-danger">
-                        No information found for the given input.
-                    </div>
-                <?php endif; ?>
             </div>
         </section>
     </main>
@@ -160,26 +101,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['text'])) {
     </footer>
 
     <script>
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-        Instascan.Camera.getCameras().then(function(cameras){
-            if(cameras.length > 0 ){
-                scanner.start(cameras[0]);
-            } else{
-                alert('No cameras found');
-            }
-        }).catch(function(e) {
-            console.error(e);
-        });
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+        } else {
+            alert('No cameras found');
+        }
+    }).catch(function (e) {
+        console.error(e);
+    });
 
-        // scanner.addListener('scan', function(c) {
-        //     document.getElementById('text').value = c; // Set the scanned QR code value to the input field
-            
-        //     // Set a 20 seconds delay (20000 milliseconds) before submitting the form
-        //     setTimeout(function() {
-        //         document.forms[0].submit(); // Submit the form after 20 seconds
-        //     }, 20000); // 20 seconds delay
-        // });
-    </script>
+    // Listen for QR code scan event and process the QR code
+    scanner.addListener('scan', function (content) {
+        // Automatically fill the text input with the scanned content
+        document.getElementById('text').value = content;
+
+        // Send the QR code to the server using AJAX
+        $.ajax({
+            url: 'process_qr.php',
+            type: 'POST',
+            data: { text: content },
+            success: function (response) {
+                let result = JSON.parse(response); // Parse the server response
+
+                if (result.status === 'success') {
+                    // Show success message with SweetAlert
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: result.message,
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Display the user profile image and information
+                        let user = result.user; // Get user info from response
+                        let profileImg = user.profile_image ? user.profile_image : 'default.jpg'; // Default image if none exists
+                        let fullName = user.firstname + ' ' + user.lastname;
+                        let course = user.course;
+                        let year_level = user.year_level;
+
+                        // Insert user information into the HTML
+                        let userInfoHtml = `
+                            <div class="user-info">
+                                <img src="../uploads/profile_images/${profileImg}" alt="Profile Image" class="profile-img">
+                                <h3>${fullName}</h3>
+                                <p>Course: ${course}</p>
+                                <p>Year Level: ${year_level}</p>
+                            </div>
+                        `;
+
+                        // Append the user info to a container (you need to create this container in your HTML)
+                        $('#userInfoContainer').html(userInfoHtml); // Assuming there's a div with id="userInfoContainer"
+                    });
+                } else {
+                    // Show error message with SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: result.message,
+                        confirmButtonText: 'Try Again'
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                // Handle any AJAX errors
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'An error occurred while processing your request. Please try again later.',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
