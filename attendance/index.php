@@ -66,6 +66,20 @@ if (strpos($request, '.php') !== false) {
      <!-- Loader -->
      <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
 
+     <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('time').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+    </script>
      <style>
           .data_table {
                background: #fff;
@@ -85,6 +99,11 @@ if (strpos($request, '.php') !== false) {
                color: black;
                cursor: pointer;
           }
+          #time {
+               font-size: 3.5rem;
+               font-weight: bold;
+               color: black;
+          }
      </style>
 </head>
 
@@ -97,6 +116,9 @@ if (strpos($request, '.php') !== false) {
                     <span class="d-none d-lg-block mx-2 ">MCC <span class="text-info d-block fs-6">Learning Resource
                               Center</span></span>
                </a>
+          </div>
+          <div class="d-flex align-items-center">
+               <span id="time" class="mx-2 text-black"></span>
           </div>
           <div class="d-flex align-items-center">
                <a href="qr_scanner.php" id="camera">
