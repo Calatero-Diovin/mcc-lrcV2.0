@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container text-center" style="margin-top: 30%;">
+    <div class="container text-center" style="margin-top: 10%;">
         <h1>Sorry, the page is closed.</h1>
         <p>Our service is available from 8:00 AM to 5:00 PM, Monday to Saturday.</p>
         <a href="." class="btn btn-primary">Go Back to Home</a>
