@@ -1,5 +1,6 @@
 <?php
 include('../admin/config/dbcon.php');
+include('url.php');
 
 // Set the timezone to the Philippines
 date_default_timezone_set('Asia/Manila');
@@ -64,7 +65,8 @@ if (isset($_POST['text'])) {
             $log_insert_stmt->execute();
 
             if ($log_insert_stmt->affected_rows > 0) {
-                header("Location: view.php?a=" . urlencode($student_id));
+                $encrpt_id = encryptor('encrypt', $student_id);
+                header("Location: view.php?a=" . urlencode($encrpt_id));
                 exit();
             } else {
                 header("Location:qr_scanner.php");
@@ -90,7 +92,7 @@ if (isset($_POST['text'])) {
             $log_update_stmt->execute();
 
             if ($log_update_stmt->affected_rows > 0) {
-                header("Location:index.php");
+                header("Location:.");
                 exit();
             } else {
                 header("Location:qr_scanner.php");
@@ -110,7 +112,8 @@ if (isset($_POST['text'])) {
             $log_insert_stmt->execute();
 
             if ($log_insert_stmt->affected_rows > 0) {
-                header("Location: view_faculty.php?a=" . urlencode($username));
+                $encrpt_user = encryptor('encrypt', $username);
+                header("Location: view_faculty.php?a=" . urlencode($encrpt_user));
                 exit();
             } else {
                 header("Location:qr_scanner.php");

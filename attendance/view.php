@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('url.php');
 $request = $_SERVER['REQUEST_URI'];
 
 // Redirect if '.php' is part of the URL to remove it
@@ -16,7 +17,7 @@ if (!isset($_GET['a']) || empty($_GET['a'])) {
     header("Location: 404.php");
     exit;
 }
-$id = $_GET['a'];
+$id = encryptor('decrypt', $_GET['a']);
 
 // Prepare query to fetch the verification code and its creation time
 $code_query = "SELECT * FROM user WHERE student_id_no = ?";
