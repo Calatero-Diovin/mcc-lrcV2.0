@@ -78,7 +78,7 @@ $code_stmt->close();
             <div class="container">
                 <div class="row">
                         <center>
-                                <img src="../uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" class="rounded-circle" alt="user image" width="50%" height="50%">
+                                <img src="../uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" class="rounded-circle" alt="user image" width="20%" height="20%">
                                 <p><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></p>
                                 <p><?= htmlspecialchars($row['course']) ?></p>
                                 <p><?= htmlspecialchars($row['year_level']) ?></p>
