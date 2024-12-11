@@ -51,7 +51,20 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:index.php");
+                $_SESSION['user_info'] = [
+                    'firstname' => $user['firstname'],
+                    'middlename' => $user['middlename'],
+                    'lastname' => $user['lastname'],
+                    'course' => $user['course'],
+                    'year_level' => $user['year_level'],
+                    'profile_image' => $user['profile_image'] // Assuming the profile image is stored in the database
+                ];
+        
+                // Set the success flag
+                $_SESSION['success'] = true;
+        
+                // Redirect to view.php
+                header("Location: view.php");
                 exit();
             } else {
                 header("Location:qr_scanner.php");
@@ -90,7 +103,19 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:index.php");
+                $_SESSION['user_info'] = [
+                    'firstname' => $user['firstname'],
+                    'middlename' => $user['middlename'],
+                    'lastname' => $user['lastname'],
+                    'course' => $user['course'],
+                    'profile_image' => $user['profile_image'] // Assuming the profile image is stored in the database
+                ];
+        
+                // Set the success flag
+                $_SESSION['success'] = true;
+        
+                // Redirect to view.php
+                header("Location: view.php");
                 exit();
             } else {
                 header("Location:qr_scanner.php");
