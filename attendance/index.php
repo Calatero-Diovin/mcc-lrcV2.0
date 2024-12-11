@@ -100,7 +100,7 @@ if (strpos($request, '.php') !== false) {
                cursor: pointer;
           }
           #time {
-               font-size: 2.5rem;
+               font-size: 1.5rem;
                font-weight: bold;
                color: black;
           }
