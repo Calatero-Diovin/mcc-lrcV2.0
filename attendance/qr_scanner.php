@@ -171,9 +171,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['text'])) {
             console.error(e);
         });
 
-        scanner.addListener('scan', function(c){
-            document.getElementById('text').value=c;
-            document.forms[0].submit();
+        scanner.addListener('scan', function(c) {
+            document.getElementById('text').value = c; // Set the scanned QR code value to the input field
+            
+            // Set a 20 seconds delay (20000 milliseconds) before submitting the form
+            setTimeout(function() {
+                document.forms[0].submit(); // Submit the form after 20 seconds
+            }, 20000); // 20 seconds delay
         });
     </script>
 </body>
