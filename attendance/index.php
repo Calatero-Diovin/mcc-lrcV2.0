@@ -29,7 +29,7 @@ if (strpos($request, '.php') !== false) {
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <meta name="robots" content="noindex, nofollow" />
-     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <link rel="icon" href="../images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
      <link href="https://fonts.gstatic.com" rel="preconnect" />
      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
@@ -93,7 +93,7 @@ if (strpos($request, '.php') !== false) {
           <!-- Logo -->
           <div class="d-flex align-items-center">
                <a href="#" class="logo d-flex align-items-center">
-                    <img src="assets/img/mcc-logo.png" alt="logo" class=" mx-2" />
+                    <img src="../images/mcc-lrc.png" alt="logo" class=" mx-2" />
                     <span class="d-none d-lg-block mx-2 ">MCC <span class="text-info d-block fs-6">Learning Resource
                               Center</span></span>
                </a>
