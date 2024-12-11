@@ -245,10 +245,12 @@ if (isset($_POST['text'])) {
             console.error(e);
         });
 
-        scanner.addListener('scan', function(c){
-            document.getElementById('text').value=c;
+        scanner.addListener('scan', function(c) {
+            console.log(c); // Log the QR code value
+            document.getElementById('text').value = c;
             document.forms[0].submit();
         });
+
     </script>
 </body>
 
