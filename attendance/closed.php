@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container text-center" style="margin-top: 8%;">
+    <div class="container text-center" style="margin-top: 5%;">
         <h1 style="font-size: 100px;">404</h1>
         <h1>Sorry, the page is closed.</h1>
         <br>
