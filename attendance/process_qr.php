@@ -7,8 +7,8 @@ date_default_timezone_set('Asia/Manila');
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
-    $timein = time();
-    $timeout = time();
+    $timein = new DateTime('now');
+    $timeout = new DateTime('now');
 
     // Query to select student based on student_id_no
     $student_query = "SELECT * FROM user WHERE student_id_no = '$qr_code' AND status = 'approved'";
