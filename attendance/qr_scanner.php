@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+date_default_timezone_set('Asia/Manila'); // Example for Manila, adjust if needed
+
 // Get current day and time
 $current_day = date('w'); // Day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
 $current_time = date('H:i'); // Current time in 24-hour format (e.g., 14:30)
