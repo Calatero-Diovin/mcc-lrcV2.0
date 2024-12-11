@@ -107,12 +107,10 @@ $code_stmt->close();
         </div>
     </footer>
 
-    <!-- JavaScript to redirect after 20 seconds -->
     <script type="text/javascript">
-        // Set a 20-second delay before redirecting to the index page
         setTimeout(function() {
-            window.location.href = "."; // Redirect to the index page
-        }, 5000); // 20000 milliseconds = 20 seconds
+            window.location.href = "."; 
+        }, 5000);
     </script>
 </body>
 </html>
