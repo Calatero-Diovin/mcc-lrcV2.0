@@ -11,7 +11,9 @@
 <body>
     <div class="container text-center" style="margin-top: 10%;">
         <h1>Sorry, the page is closed.</h1>
+        <br>
         <h3>Our service is available from <b>8:00 AM to 5:00 PM</b>, <b>Monday to Saturday.</b></h3>
+        <br>
         <a href="." class="btn btn-primary">Go Back to Home</a>
     </div>
 </body>
