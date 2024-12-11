@@ -21,6 +21,15 @@ if (isset($_POST['text'])) {
     if (mysqli_num_rows($student_query_run) > 0) {
         $user = mysqli_fetch_assoc($student_query_run);
 
+        $_SESSION['user_info'] = [
+            'firstname' => $user['firstname'],
+            'middlename' => $user['middlename'],
+            'lastname' => $user['lastname'],
+            'course' => $user['course'],
+            'year_level' => $user['year_level'],
+            'profile_image' => $user['profile_image'] // Assuming the profile picture is stored in the database
+        ];
+
         // Check for existing log entry for today
         $student_id = $user['student_id_no'];
         $log_check_query = "SELECT * FROM user_log WHERE student_id = '$student_id' AND date_log = '$date_log' AND time_out = ''";
@@ -60,6 +69,14 @@ if (isset($_POST['text'])) {
         }
     } elseif (mysqli_num_rows($faculty_query_run) > 0) {
         $user = mysqli_fetch_assoc($faculty_query_run);
+
+        $_SESSION['user_info'] = [
+            'firstname' => $user['firstname'],
+            'middlename' => $user['middlename'],
+            'lastname' => $user['lastname'],
+            'course' => $user['course'],
+            'profile_picture' => $user['profile_picture'] // Assuming the profile picture is stored in the database
+        ];
 
         // Check for existing log entry for today
         $username = $user['username'];
