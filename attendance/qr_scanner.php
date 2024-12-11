@@ -58,7 +58,6 @@ if (strpos($request, '.php') !== false) {
             <a href="index.php" class="btn btn-primary position-relative mx-5">
                 Back
             </a>
-            <span id="time" class="mx-2 text-white"></span>
         </div>
     </header>
 
