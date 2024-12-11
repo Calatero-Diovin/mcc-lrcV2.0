@@ -10,12 +10,11 @@
 </head>
 <body>
     <div class="container text-center" style="margin-top: 10%;">
-        <h1 style="font-size: 30px;">404</h1>
+        <h1 style="font-size: 60px;">404</h1>
         <h1>Sorry, the page is closed.</h1>
         <br>
         <br>
         <h3>Our service is available from <b>8:00 AM to 5:00 PM</b>, <b>Monday to Saturday.</b></h3>
-        <br>
         <br>
         <br>
         <br>
