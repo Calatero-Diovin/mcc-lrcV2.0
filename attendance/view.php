@@ -78,10 +78,12 @@ $code_stmt->close();
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
+                        <center>
                                 <img src="../uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" alt="user image" width="50%" height="50%">
                                 <p><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></p>
                                 <p><?= htmlspecialchars($row['course']) ?></p>
                                 <p><?= htmlspecialchars($row['year_level']) ?></p>
+                                </center>
                     </div>
                 </div>
             </div>
