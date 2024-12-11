@@ -81,6 +81,7 @@ if (strpos($request, '.php') !== false) {
                     </div>
                     <div class="col-md-6">
                         <?php
+                        include('../admin/config/dbcon.php');
                         if(isset($_POST['text'])){
                             $text = $_POST['POST'];
 
