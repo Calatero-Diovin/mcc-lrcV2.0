@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container text-center" style="margin-top: 8%;">
-        <h1 style="font-size: 60px;">404</h1>
+        <h1 style="font-size: 100px;">404</h1>
         <h1>Sorry, the page is closed.</h1>
         <br>
         <br>
