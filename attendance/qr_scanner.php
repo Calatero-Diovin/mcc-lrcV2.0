@@ -3,19 +3,15 @@ session_start();
 
 date_default_timezone_set('Asia/Manila'); // Example for Manila, adjust if needed
 
-// Get current day and time
-$current_day = date('w'); // Day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-$current_time = date('H:i'); // Current time in 24-hour format (e.g., 14:30)
+// Get the current time and day
+$current_hour = (int) date('H');
+$current_day = (int) date('w');  // 0 for Sunday, 1 for Monday, etc.
 
-// Define the allowed time range (8:00 AM to 5:00 PM)
-$start_time = '08:00';
-$end_time = '17:00';
-
-// Redirect if the current day is Sunday or outside the allowed time range
-if ($current_day == 0 || $current_time < $start_time || $current_time > $end_time) {
-    // Redirect to a different page or show an error message
-    header("Location: closed.php"); // Or any other page, such as a 404 or maintenance page
-    exit();
+// Check if it's Sunday or if the time is outside the allowed hours (8:00 AM - 5:00 PM)
+if ($current_day == 0 || $current_hour < 8 || $current_hour > 17) {
+    // Redirect to closed.php
+    header('Location: /closed.php');
+    exit; // Make sure to stop the script after the redirect
 }
 
 $request = $_SERVER['REQUEST_URI'];
