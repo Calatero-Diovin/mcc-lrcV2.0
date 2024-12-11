@@ -66,11 +66,6 @@ $code_stmt->close();
                 <span class="d-none d-lg-block mx-2">MCC <span class="text-info d-block fs-6">Learning Resource Center</span></span>
             </a>
         </div>
-        <div class="d-flex align-items-center">
-            <a href="index.php" class="btn btn-primary position-relative mx-5">
-                Back
-            </a>
-        </div>
     </header>
 
     <main id="main" class="main">
