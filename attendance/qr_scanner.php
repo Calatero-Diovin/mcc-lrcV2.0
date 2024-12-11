@@ -15,6 +15,7 @@ if ($current_day == 0 || $current_time < $start_time || $current_time > $end_tim
     header("Location: 404.php"); // Or any other page, such as a 404 or maintenance page
     exit();
 }
+
 $request = $_SERVER['REQUEST_URI'];
 
 // Redirect if '.php' is part of the URL to remove it
