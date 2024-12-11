@@ -41,6 +41,13 @@ if (strpos($request, '.php') !== false) {
         }
         setInterval(updateClock, 1000);
     </script>
+    <style>
+        #time {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
 </head>
 
 <body onload="updateClock()">
