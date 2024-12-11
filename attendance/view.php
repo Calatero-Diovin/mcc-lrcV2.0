@@ -89,8 +89,8 @@ $code_stmt->close();
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title text-center" style="font-size: 50px; font-weight: bold;"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
-                                        <p class="card-text text-center"><?= htmlspecialchars($row['course']) ?></p>
-                                        <p class="card-text text-center"><?= htmlspecialchars($row['year_level']) ?></p>
+                                        <p class="card-text text-center" style="font-size: 50px; font-weight: bold;"><?= htmlspecialchars($row['course']) ?></p>
+                                        <p class="card-text text-center" style="font-size: 50px; font-weight: bold;"><?= htmlspecialchars($row['year_level']) ?></p>
                                     </div>
                                 </div>
                             </div>
