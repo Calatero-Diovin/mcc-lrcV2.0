@@ -1,6 +1,4 @@
 <?php
-include('../admin/config/dbcon.php');
-
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {
@@ -33,12 +31,6 @@ if (strpos($request, '.php') !== false) {
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/adapter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- SweetAlert2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
-
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.js"></script>
-
     <script>
         function updateClock() {
             var now = new Date();
@@ -58,26 +50,6 @@ if (strpos($request, '.php') !== false) {
             font-size: 3.5rem;
             font-weight: bold;
             color: black;
-        }
-
-        .user-info img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .user-info {
-            margin-top: 20px;
-        }
-
-        .user-info h3 {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .user-info p {
-            font-size: 16px;
         }
     </style>
 </head>
@@ -108,12 +80,10 @@ if (strpos($request, '.php') !== false) {
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
-                        <form id="scanForm" action="process_qr.php" method="post" class="form-horizontal">
+                        <form action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
                         </form>
-                        <br>
-                        <div id="userInfoContainer"></div>
                     </div>
                 </div>
             </div>
@@ -127,81 +97,20 @@ if (strpos($request, '.php') !== false) {
     </footer>
 
     <script>
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-        Instascan.Camera.getCameras().then(function (cameras) {
-            if (cameras.length > 0) {
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
+        Instascan.Camera.getCameras().then(function(cameras){
+            if(cameras.length > 0 ){
                 scanner.start(cameras[0]);
-            } else {
+            } else{
                 alert('No cameras found');
             }
-        }).catch(function (e) {
+        }).catch(function(e) {
             console.error(e);
         });
 
-        // Listen for QR code scan event and process the QR code
-        scanner.addListener('scan', function (content) {
-            // Automatically fill the text input with the scanned content
-            document.getElementById('text').value = content;
-
-            // Automatically submit the form
-            document.getElementById('scanForm').submit();
-
-            // Send the QR code to the server using AJAX
-            $.ajax({
-                url: 'process_qr.php',
-                type: 'POST',
-                data: { text: content },
-                success: function (response) {
-                    let result = JSON.parse(response); // Parse the server response
-
-                    if (result.status === 'success') {
-                        // Show success message with SweetAlert
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: result.message,
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            // Display the user profile image and information
-                            let user = result.user; // Get user info from response
-                            let profileImg = user.profile_image ? user.profile_image : 'default.jpg'; // Default image if none exists
-                            let fullName = user.firstname + ' ' + user.lastname;
-                            let course = user.course;
-                            let year_level = user.year_level;
-
-                            // Insert user information into the HTML
-                            let userInfoHtml = `
-                                <div class="user-info">
-                                    <img src="../uploads/profile_images/${profileImg}" alt="Profile Image" class="profile-img">
-                                    <h3>${fullName}</h3>
-                                    <p>Course: ${course}</p>
-                                    <p>Year Level: ${year_level}</p>
-                                </div>
-                            `;
-
-                            // Append the user info to a container (you need to create this container in your HTML)
-                            $('#userInfoContainer').html(userInfoHtml); // Assuming there's a div with id="userInfoContainer"
-                        });
-                    } else {
-                        // Show error message with SweetAlert
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: result.message,
-                            confirmButtonText: 'Try Again'
-                        });
-                    }
-                },
-                error: function (xhr, status, error) {
-                    // Handle any AJAX errors
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Server Error',
-                        text: 'An error occurred while processing your request. Please try again later.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            });
+        scanner.addListener('scan', function(c){
+            document.getElementById('text').value=c;
+            document.forms[0].submit();
         });
     </script>
 </body>

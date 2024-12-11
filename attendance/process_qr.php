@@ -18,7 +18,6 @@ if (isset($_POST['text'])) {
     $date_log = date("Y-m-d");
     $current_time = date("Y-m-d H:i:s");
 
-    // Check if the QR code belongs to a student
     if (mysqli_num_rows($student_query_run) > 0) {
         $user = mysqli_fetch_assoc($student_query_run);
 
@@ -33,41 +32,30 @@ if (isset($_POST['text'])) {
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
-                echo json_encode(['status' => 'success', 'message' => 'Time-out recorded successfully for student']);
+                header("Location:.");
                 exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update time-out for student']);
-                exit();
+                header("Location:qr_scanner.php");
+                exit("Failed to update time out for student.");
             }
         } else {
-            // Insert student log into the user_log table
-            $student_id = $user['student_id_no'];
+            // Insert student log into user_log table
             $firstname = $user['firstname'];
             $middlename = $user['middlename'];
             $lastname = $user['lastname'];
             $course = $user['course'];
             $year_level = $user['year_level'];
-            $profile_image = $user['profile_image'];
 
             $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, year_level, role) 
                                  VALUES ('$student_id', '$firstname', '$middlename', '$lastname', '$current_time', '$date_log', '', '$course', '$year_level', 'student')";
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                echo json_encode([
-                    'status' => 'success',
-                    'message' => 'Successfully logged student in.',
-                    'user' => [
-                        'student_id_no' => $student_id,
-                        'firstname' => $firstname,
-                        'lastname' => $lastname,
-                        'profile_image' => $profile_image,
-                        'course' => $course,
-                        'year_level' => $year_level
-                    ]
-                ]);
+                header("Location:index.php");
+                exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to log student in.']);
+                header("Location:qr_scanner.php");
+                exit("Failed to insert log for student.");
             }
         }
     } elseif (mysqli_num_rows($faculty_query_run) > 0) {
@@ -84,46 +72,35 @@ if (isset($_POST['text'])) {
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
-                echo json_encode(['status' => 'success', 'message' => 'Time-out recorded successfully for faculty']);
+                header("Location:index.php");
                 exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update time-out for faculty']);
-                exit();
+                header("Location:qr_scanner.php");
+                exit("Failed to update time out for faculty.");
             }
         } else {
-            // Insert faculty log into the user_log table
-            $username = $user['username'];
+            // Insert faculty log into user_log table
             $firstname = $user['firstname'];
             $middlename = $user['middlename'];
             $lastname = $user['lastname'];
             $course = $user['course'];
-            $profile_image = $user['profile_image'];
 
             $log_insert_query = "INSERT INTO user_log (student_id, firstname, middlename, lastname, time_log, date_log, time_out, course, role) 
                                  VALUES ('$username', '$firstname', '$middlename', '$lastname', '$current_time', '$date_log', '', '$course', 'faculty')";
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                echo json_encode([
-                    'status' => 'success', 
-                    'message' => 'Successfully logged faculty in.',
-                    'user' => [
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'course' => $course,
-                    'profile_image' => $profile_image
-                ]
-                ]);
+                header("Location:index.php");
+                exit();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to log faculty in.']);
+                header("Location:qr_scanner.php");
+                exit("Failed to insert log for faculty.");
             }
         }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'User not found']);
-        exit();
+        exit("User not found");
     }
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'No QR code provided']);
-    exit();
+    exit("No QR code provided");
 }
 ?>
