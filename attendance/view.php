@@ -56,30 +56,9 @@ $code_stmt->close();
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/adapter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script>
-        function updateClock() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes().toString().padStart(2, '0');
-            var seconds = now.getSeconds().toString().padStart(2, '0');
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-            document.getElementById('time').innerText = timeString;
-        }
-        setInterval(updateClock, 1000);
-    </script>
-    <style>
-        #time {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: black;
-        }
-    </style>
 </head>
 
-<body onload="updateClock()">
+<body>
     <header id="header" class="header fixed-top d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             <a href="#" class="logo d-flex align-items-center">
@@ -99,7 +78,7 @@ $code_stmt->close();
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                                <img src="uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" alt="user image" width="50%" height="50%">
+                                <img src="../uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" alt="user image" width="50%" height="50%">
                                 <p><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></p>
                                 <p><?= htmlspecialchars($row['course']) ?></p>
                                 <p><?= htmlspecialchars($row['year_level']) ?></p>
