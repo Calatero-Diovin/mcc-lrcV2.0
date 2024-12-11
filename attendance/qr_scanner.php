@@ -1,4 +1,6 @@
 <?php
+include('../admin/config/dbcon.php');
+
 $request = $_SERVER['REQUEST_URI'];
 
 if (strpos($request, '.php') !== false) {
@@ -6,6 +8,43 @@ if (strpos($request, '.php') !== false) {
     $new_url = str_replace('.php', '', $request);
     header("Location: $new_url", true, 301);
     exit();
+}
+
+$student_info = null;
+$faculty_info = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['text'])) {
+    $input = $_POST['text'];
+    
+    if (is_numeric($input)) {
+        $sql = "SELECT * FROM user WHERE student_id_no = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $input);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $student_info = $result->fetch_assoc();
+        } else {
+            $student_info = null;
+        }
+        
+        $stmt->close();
+    } else {
+        $sql = "SELECT * FROM faculty WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $input);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $faculty_info = $result->fetch_assoc();
+        } else {
+            $faculty_info = null;
+        }
+
+        $stmt->close();
+    }
 }
 ?>
 
@@ -86,6 +125,30 @@ if (strpos($request, '.php') !== false) {
                         </form>
                     </div>
                 </div>
+                <!-- Display Student Info -->
+                <?php if ($student_info): ?>
+                    <h4>Student Information</h4>
+                    <p><strong>Profile Image:</strong> 
+                        <img src="../uploads/profile_images/<?php echo $student_info['profile_image']; ?>" alt="Profile Image" style="width: 100px; height: 100px; object-fit: cover;">
+                    </p>
+                    <p><strong>Name:</strong> <?php echo $student_info['firstname'] . ' ' . $student_info['lastname']; ?></p>
+                    <p><strong>Student ID:</strong> <?php echo $student_info['student_id_no']; ?></p>
+                    <p><strong>Course:</strong> <?php echo $faculty_info['course']; ?></p>
+                    <p><strong>Year Level:</strong> <?php echo $faculty_info['year_level']; ?></p>
+                    <!-- Add more fields for the student as needed -->
+                <?php elseif ($faculty_info): ?>
+                    <h4>Faculty Information</h4>
+                    <p><strong>Profile Image:</strong> 
+                        <img src="../uploads/profile_images/<?php echo $faculty_info['profile_image']; ?>" alt="Profile Image" style="width: 100px; height: 100px; object-fit: cover;">
+                    </p>
+                    <p><strong>Name:</strong> <?php echo $faculty_info['firstname'] . ' ' . $faculty_info['lastname']; ?></p>
+                    <p><strong>Course:</strong> <?php echo $faculty_info['course']; ?></p>
+                    <!-- Add more fields for the faculty as needed -->
+                <?php elseif ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+                    <div class="alert alert-danger">
+                        No information found for the given input.
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>
