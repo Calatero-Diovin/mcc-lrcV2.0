@@ -88,9 +88,9 @@ $code_stmt->close();
                                 <!-- Right side for user info -->
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
-                                        <p class="card-text"><?= htmlspecialchars($row['course']) ?></p>
-                                        <p class="card-text"><?= htmlspecialchars($row['year_level']) ?></p>
+                                        <h5 class="card-title text-center"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
+                                        <p class="card-text text-center"><?= htmlspecialchars($row['course']) ?></p>
+                                        <p class="card-text text-center"><?= htmlspecialchars($row['year_level']) ?></p>
                                     </div>
                                 </div>
                             </div>
