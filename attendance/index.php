@@ -2,14 +2,14 @@
 session_start();
 include('../admin/config/dbcon.php');
 
-if (isset($_POST['delete_all'])) {
-     $delete_query = "DELETE FROM user_log";
-     if (mysqli_query($con, $delete_query)) {
-         echo "<script>alert('All user logs have been deleted successfully.');</script>";
-     } else {
-         echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
-     }
- }
+// if (isset($_POST['delete_all'])) {
+//      $delete_query = "DELETE FROM user_log";
+//      if (mysqli_query($con, $delete_query)) {
+//          echo "<script>alert('All user logs have been deleted successfully.');</script>";
+//      } else {
+//          echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
+//      }
+//  }
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -161,9 +161,9 @@ if (strpos($request, '.php') !== false) {
                                                             </div>
 
                                                        </form>
-                                                       <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
+                                                       <!-- <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
                                                             <button type="submit" name="delete_all" class="btn btn-danger btn-sm">Delete All Logs</button>
-                                                       </form>
+                                                       </form> -->
 
                                                   </div>
 
