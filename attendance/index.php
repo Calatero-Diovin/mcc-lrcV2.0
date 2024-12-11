@@ -84,7 +84,7 @@ if (strpos($request, '.php') !== false) {
           // Get the current time
           var currentTime = new Date();
           var currentHour = currentTime.getHours();
-          var cameraLink = document.getElementById('camera-container');
+          var cameraLink = document.getElementById('camera');
 
           // Show camera link only between 8:00 AM and 5:00 PM
           if (currentHour >= 8 && currentHour < 17) {
