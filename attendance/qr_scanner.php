@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../admin/config/dbcon.php');
 
 $request = $_SERVER['REQUEST_URI'];
