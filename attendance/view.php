@@ -78,7 +78,7 @@ $code_stmt->close();
             <div class="container py-5">
                 <div class="row justify-content-center">
                     <!-- Card for Profile Image and Information -->
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-8 col-md-10">
                         <div class="card mb-4 shadow-lg">
                             <div class="row g-0">
                                 <!-- Left side for image -->
