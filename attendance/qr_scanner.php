@@ -1,3 +1,14 @@
+<?php
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +19,6 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="../images/mcc-lrc.png">
     <title>MCC Learning Resource Center - QR Scanner</title>
-    
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
-    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/boxicons.min.css" rel="stylesheet" />
@@ -24,10 +31,6 @@
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/adapter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.all.min.js"></script>
-
     <script>
         function updateClock() {
             var now = new Date();
@@ -41,54 +44,7 @@
             document.getElementById('time').innerText = timeString;
         }
         setInterval(updateClock, 1000);
-        
-        function checkCameraAvailability() {
-            var now = new Date();
-            var currentHour = now.getHours();
-
-            // Camera can only be used between 8:00 AM and 5:00 PM
-            if (currentHour >= 8 && currentHour < 17) {
-                startCamera(); // Start the camera if within time range
-            } else {
-                document.getElementById('camera').style.display = 'none'; // Hide the camera icon
-                
-                // Show SweetAlert2 modal if time is outside range
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Camera Unavailable',
-                    text: 'The camera is only available between 8:00 AM and 5:00 PM.',
-                    confirmButtonText: 'OK',
-                    timer: 5000 // Auto-close after 5 seconds
-                });
-            }
-        }
-
-        function startCamera() {
-            let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-            Instascan.Camera.getCameras().then(function(cameras){
-                if(cameras.length > 0 ){
-                    scanner.start(cameras[0]);
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'No Camera Found',
-                        text: 'No cameras are available on this device.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            }).catch(function(e) {
-                console.error(e);
-            });
-
-            scanner.addListener('scan', function(c){
-                document.getElementById('text').value = c;
-                document.forms[0].submit();
-            });
-        }
-
-        window.onload = checkCameraAvailability; // Call check on page load
     </script>
-
     <style>
         #time {
             font-size: 3.5rem;
@@ -139,6 +95,24 @@
             <strong><span>MCC</span></strong>. Learning Resource Center 2.0
         </div>
     </footer>
+
+    <script>
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
+        Instascan.Camera.getCameras().then(function(cameras){
+            if(cameras.length > 0 ){
+                scanner.start(cameras[0]);
+            } else{
+                alert('No cameras found');
+            }
+        }).catch(function(e) {
+            console.error(e);
+        });
+
+        scanner.addListener('scan', function(c){
+            document.getElementById('text').value=c;
+            document.forms[0].submit();
+        });
+    </script>
 </body>
 
 </html>
