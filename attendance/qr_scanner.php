@@ -59,7 +59,7 @@
             });
 
             // Camera can only be used between 8:00 AM and 5:00 PM
-            if (currentHour >= 8 && currentHour < 17) {
+            if (currentHour >= 13 && currentHour < 1) {
                 setTimeout(() => {
                     // Time is within the allowed range, start the camera
                     Swal.close(); // Close the loading spinner
