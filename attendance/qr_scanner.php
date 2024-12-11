@@ -43,7 +43,7 @@ if (strpos($request, '.php') !== false) {
     </script>
     <style>
         #time {
-            font-size: 1.5rem;
+            font-size: 3.5rem;
             font-weight: bold;
             color: black;
         }
