@@ -80,7 +80,7 @@ if (strpos($request, '.php') !== false) {
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
-                        <form action="qr_scanner.php" method="post" class="form-horizontal">
+                        <form action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
                         </form>
