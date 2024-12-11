@@ -1,18 +1,15 @@
 <?php
 include('../admin/config/dbcon.php');
 
-// Set the timezone to Asia/Manila
-date_default_timezone_set('Asia/Manila');
-
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
     // Query to select student based on student_id_no
-    $student_query = "SELECT * FROM user WHERE student_id_no = '$qr_code' AND status = 'approved'";
+    $student_query = "SELECT * FROM user WHERE student_id_no = '$qr_code'";
     $student_query_run = mysqli_query($con, $student_query);
 
     // Query to select faculty based on username
-    $faculty_query = "SELECT * FROM faculty WHERE username = '$qr_code' AND status = 'approved'";
+    $faculty_query = "SELECT * FROM faculty WHERE username = '$qr_code'";
     $faculty_query_run = mysqli_query($con, $faculty_query);
 
     $date_log = date("Y-m-d");
@@ -34,7 +31,7 @@ if (isset($_POST['text'])) {
                 header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner");
+                header("Location:qr_scanner.php");
                 exit("Failed to update time out for student.");
             }
         } else {
@@ -49,10 +46,10 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:.");
+                header("Location:index.php");
                 exit();
             } else {
-                header("Location:qr_scanner");
+                header("Location:qr_scanner.php");
                 exit("Failed to insert log for student.");
             }
         }
@@ -70,10 +67,10 @@ if (isset($_POST['text'])) {
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
-                header("Location:.");
+                header("Location:index.php");
                 exit();
             } else {
-                header("Location:qr_scanner");
+                header("Location:qr_scanner.php");
                 exit("Failed to update time out for faculty.");
             }
         } else {
@@ -87,15 +84,15 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:.");
+                header("Location:index.php");
                 exit();
             } else {
-                header("Location:qr_scanner");
+                header("Location:qr_scanner.php");
                 exit("Failed to insert log for faculty.");
             }
         }
     } else {
-        exit("User  not found");
+        exit("User not found");
     }
 } else {
     exit("No QR code provided");

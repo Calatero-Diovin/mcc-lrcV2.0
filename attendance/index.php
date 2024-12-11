@@ -1,6 +1,24 @@
 <?php
 session_start();
 include('../admin/config/dbcon.php');
+
+if (isset($_POST['delete_all'])) {
+     $delete_query = "DELETE FROM user_log";
+     if (mysqli_query($con, $delete_query)) {
+         echo "<script>alert('All user logs have been deleted successfully.');</script>";
+     } else {
+         echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
+     }
+ }
+
+$request = $_SERVER['REQUEST_URI'];
+
+if (strpos($request, '.php') !== false) {
+    // Redirect to remove .php extension
+    $new_url = str_replace('.php', '', $request);
+    header("Location: $new_url", true, 301);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +29,7 @@ include('../admin/config/dbcon.php');
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <meta name="robots" content="noindex, nofollow" />
-     <link rel="icon" href="./assets/img/mcc-logo.png">
+     <link rel="icon" href="../images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
      <link href="https://fonts.gstatic.com" rel="preconnect" />
      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
@@ -75,13 +93,13 @@ include('../admin/config/dbcon.php');
           <!-- Logo -->
           <div class="d-flex align-items-center">
                <a href="#" class="logo d-flex align-items-center">
-                    <img src="assets/img/mcc-logo.png" alt="logo" class=" mx-2" />
+                    <img src="../images/mcc-lrc.png" alt="logo" class=" mx-2" />
                     <span class="d-none d-lg-block mx-2 ">MCC <span class="text-info d-block fs-6">Learning Resource
                               Center</span></span>
                </a>
           </div>
           <div class="d-flex align-items-center">
-               <a href="qr_scanner" id="camera">
+               <a href="qr_scanner.php" id="camera">
                     <i class="bi bi-camera"></i>
                </a>
           </div>
@@ -121,6 +139,9 @@ include('../admin/config/dbcon.php');
                                                             </div>
 
                                                        </form>
+                                                       <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
+                                                            <button type="submit" name="delete_all" class="btn btn-danger btn-sm">Delete All Logs</button>
+                                                       </form>
 
                                                   </div>
 
@@ -149,7 +170,7 @@ include('../admin/config/dbcon.php');
                                                             $from_date = $_POST['from_date'];
                                                             $to_date = $_POST['to_date'];
           
-                                                            $query = "SELECT * FROM user_log WHERE date_log BETWEEN '$from_date' AND '$to_date' ORDER BY date_log DESC, time_log DESC";
+                                                            $query = "SELECT * FROM user_log WHERE date_log BETWEEN '$from_date' AND '$to_date' ORDER BY date_log DESC";
                                                             $query_run = mysqli_query($con, $query);
           
                                                             if(mysqli_num_rows($query_run) > 0 )
@@ -176,7 +197,7 @@ include('../admin/config/dbcon.php');
                                              else
                                              {
                                              
-                                                  $result= mysqli_query($con,"SELECT * FROM user_log ORDER BY date_log DESC, time_log DESC");
+                                                  $result= mysqli_query($con,"SELECT * FROM user_log ORDER BY date_log DESC");
                                                   while ($row= mysqli_fetch_array ($result) ){
                                                  
                                                   ?>
