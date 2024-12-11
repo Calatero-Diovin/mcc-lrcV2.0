@@ -183,12 +183,12 @@ if (strpos($request, '.php') !== false) {
                                                                                      
                                                                                      <td><?= $row['firstname'].' '.$row['middlename'].' '.$row['lastname']; ?>
                                                                                      </td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_log'])); ?>
+                                                                                     <td><?= $row['time_log']; ?>
                                                                                      </td>
                                                                                      <td><?= date("M d, Y", strtotime($row['date_log'])); ?>
                                                                                      </td>
                                                                                      <td><?=$row['year_level'].' - '.$row['course']; ?></td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_out'])); ?></td>
+                                                                                     <td><?= $row['time_out']; ?></td>
                                                                                 </tr>
                                                                                 <?php      }
                                                   }
