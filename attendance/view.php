@@ -72,15 +72,12 @@ $code_stmt->close();
         <section class="section dashboard">
             <div class="container py-5">
                 <div class="row justify-content-center">
-                    <!-- Card for Profile Image and Information -->
                     <div class="col-lg-8 col-md-10">
                         <div class="card mb-4 shadow-lg">
                             <div class="row g-0">
-                                <!-- Left side for image -->
                                 <div class="col-md-4">
                                     <img src="../uploads/profile_images/<?= htmlspecialchars($row['profile_image']) ?>" alt="user image" class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
                                 </div>
-                                <!-- Right side for user info -->
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title text-center" style="font-size: 50px; font-weight: bold;;"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
