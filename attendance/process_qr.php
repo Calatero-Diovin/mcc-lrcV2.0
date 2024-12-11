@@ -16,7 +16,7 @@ if (isset($_POST['text'])) {
     $faculty_query_run = mysqli_query($con, $faculty_query);
 
     $date_log = date("Y-m-d");
-    $current_time = time("g:i:s A");
+    $current_time = date("Y-m-d H:i:s");
 
     if (mysqli_num_rows($student_query_run) > 0) {
         $user = mysqli_fetch_assoc($student_query_run);
