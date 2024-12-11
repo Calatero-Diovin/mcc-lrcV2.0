@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../admin/config/dbcon.php');
 
 // Check if user_info and success session variables are set
 if (isset($_SESSION['user_info']) && isset($_SESSION['success']) && $_SESSION['success'] == true) {
