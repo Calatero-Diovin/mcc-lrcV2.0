@@ -1,9 +1,6 @@
 <?php
 include('../admin/config/dbcon.php');
 
-// Set the timezone to the Philippines
-date_default_timezone_set('Asia/Manila');
-
 if (isset($_POST['text'])) {
     $qr_code = $_POST['text'];
 
@@ -34,7 +31,7 @@ if (isset($_POST['text'])) {
                 header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:qr_scanner");
                 exit("Failed to update time out for student.");
             }
         } else {
@@ -49,10 +46,10 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:index.php");
+                header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:qr_scanner");
                 exit("Failed to insert log for student.");
             }
         }
@@ -70,10 +67,10 @@ if (isset($_POST['text'])) {
             $log_update_query_run = mysqli_query($con, $log_update_query);
 
             if ($log_update_query_run) {
-                header("Location:index.php");
+                header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:qr_scanner");
                 exit("Failed to update time out for faculty.");
             }
         } else {
@@ -87,15 +84,15 @@ if (isset($_POST['text'])) {
             $log_insert_query_run = mysqli_query($con, $log_insert_query);
 
             if ($log_insert_query_run) {
-                header("Location:index.php");
+                header("Location:.");
                 exit();
             } else {
-                header("Location:qr _scanner.php");
+                header("Location:qr_scanner");
                 exit("Failed to insert log for faculty.");
             }
         }
     } else {
-        exit("User  not found");
+        exit("User not found");
     }
 } else {
     exit("No QR code provided");

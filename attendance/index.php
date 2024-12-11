@@ -1,24 +1,6 @@
 <?php
 session_start();
 include('../admin/config/dbcon.php');
-
-if (isset($_POST['delete_all'])) {
-     $delete_query = "DELETE FROM user_log";
-     if (mysqli_query($con, $delete_query)) {
-         echo "<script>alert('All user logs have been deleted successfully.');</script>";
-     } else {
-         echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
-     }
- }
-
-$request = $_SERVER['REQUEST_URI'];
-
-if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
-    $new_url = str_replace('.php', '', $request);
-    header("Location: $new_url", true, 301);
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +11,7 @@ if (strpos($request, '.php') !== false) {
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <meta name="robots" content="noindex, nofollow" />
-     <link rel="icon" href="../images/mcc-lrc.png">
+     <link rel="icon" href="./assets/img/mcc-logo.png">
      <title>MCC Learning Resource Center</title>
      <link href="https://fonts.gstatic.com" rel="preconnect" />
      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
@@ -93,13 +75,13 @@ if (strpos($request, '.php') !== false) {
           <!-- Logo -->
           <div class="d-flex align-items-center">
                <a href="#" class="logo d-flex align-items-center">
-                    <img src="../images/mcc-lrc.png" alt="logo" class=" mx-2" />
+                    <img src="assets/img/mcc-logo.png" alt="logo" class=" mx-2" />
                     <span class="d-none d-lg-block mx-2 ">MCC <span class="text-info d-block fs-6">Learning Resource
                               Center</span></span>
                </a>
           </div>
           <div class="d-flex align-items-center">
-               <a href="qr_scanner.php" id="camera">
+               <a href="qr_scanner" id="camera">
                     <i class="bi bi-camera"></i>
                </a>
           </div>
@@ -138,9 +120,6 @@ if (strpos($request, '.php') !== false) {
                                                                       class="btn text-white fw-semibold btn-info btn-sm d-block">Filter</button>
                                                             </div>
 
-                                                       </form>
-                                                       <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
-                                                            <button type="submit" name="delete_all" class="btn btn-danger btn-sm">Delete All Logs</button>
                                                        </form>
 
                                                   </div>

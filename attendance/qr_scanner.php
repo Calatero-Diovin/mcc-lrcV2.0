@@ -1,14 +1,3 @@
-<?php
-$request = $_SERVER['REQUEST_URI'];
-
-if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
-    $new_url = str_replace('.php', '', $request);
-    header("Location: $new_url", true, 301);
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +31,7 @@ if (strpos($request, '.php') !== false) {
             </a>
         </div>
         <div class="d-flex align-items-center">
-        <a href="index.php" class="btn btn-primary position-relative mx-5">
+        <a href="." class="btn btn-primary position-relative mx-5">
                 Back
                 </a>
 </div>
