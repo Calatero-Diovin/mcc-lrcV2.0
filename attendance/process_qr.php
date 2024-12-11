@@ -86,6 +86,6 @@ if (isset($_POST['text'])) {
         exit("User  not found");
     }
 } else {
-    exit(" Invalid request. No QR code provided.");
+    exit("Invalid request. No QR code provided.");
 }
 ?>
