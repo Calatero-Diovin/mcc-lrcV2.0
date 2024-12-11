@@ -88,7 +88,7 @@ $code_stmt->close();
                                 <!-- Right side for user info -->
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center" style="font-size: 50px; font-weight: bold;margin-top:40%;"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
+                                        <h5 class="card-title text-center" style="font-size: 50px; font-weight: bold;margin-top:20%;"><?= htmlspecialchars($row['firstname']) . ' ' . htmlspecialchars($row['lastname']) ?></h5>
                                         <p class="card-text text-center" style="font-size: 30px; font-weight: bold;"><?= htmlspecialchars($row['student_id_no']) ?></p>
                                         <p class="card-text text-center" style="font-size: 30px; font-weight: bold;"><?= htmlspecialchars($row['course']). ' - ' .htmlspecialchars($row['year_level']) ?></p>
                                     </div>
