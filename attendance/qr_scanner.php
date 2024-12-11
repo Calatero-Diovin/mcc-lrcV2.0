@@ -59,6 +59,26 @@ if (strpos($request, '.php') !== false) {
             font-weight: bold;
             color: black;
         }
+
+        .user-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info {
+            margin-top: 20px;
+        }
+
+        .user-info h3 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .user-info p {
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -88,7 +108,7 @@ if (strpos($request, '.php') !== false) {
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
-                        <form action="process_qr.php" method="post" class="form-horizontal">
+                        <form id="scanForm" action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
                         </form>
@@ -107,80 +127,83 @@ if (strpos($request, '.php') !== false) {
     </footer>
 
     <script>
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-    Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            scanner.start(cameras[0]);
-        } else {
-            alert('No cameras found');
-        }
-    }).catch(function (e) {
-        console.error(e);
-    });
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                alert('No cameras found');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
 
-    // Listen for QR code scan event and process the QR code
-    scanner.addListener('scan', function (content) {
-        // Automatically fill the text input with the scanned content
-        document.getElementById('text').value = content;
+        // Listen for QR code scan event and process the QR code
+        scanner.addListener('scan', function (content) {
+            // Automatically fill the text input with the scanned content
+            document.getElementById('text').value = content;
 
-        // Send the QR code to the server using AJAX
-        $.ajax({
-            url: 'process_qr.php',
-            type: 'POST',
-            data: { text: content },
-            success: function (response) {
-                let result = JSON.parse(response); // Parse the server response
+            // Automatically submit the form
+            document.getElementById('scanForm').submit();
 
-                if (result.status === 'success') {
-                    // Show success message with SweetAlert
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: result.message,
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        // Display the user profile image and information
-                        let user = result.user; // Get user info from response
-                        let profileImg = user.profile_image ? user.profile_image : 'default.jpg'; // Default image if none exists
-                        let fullName = user.firstname + ' ' + user.lastname;
-                        let course = user.course;
-                        let year_level = user.year_level;
+            // Send the QR code to the server using AJAX
+            $.ajax({
+                url: 'process_qr.php',
+                type: 'POST',
+                data: { text: content },
+                success: function (response) {
+                    let result = JSON.parse(response); // Parse the server response
 
-                        // Insert user information into the HTML
-                        let userInfoHtml = `
-                            <div class="user-info">
-                                <img src="../uploads/profile_images/${profileImg}" alt="Profile Image" class="profile-img">
-                                <h3>${fullName}</h3>
-                                <p>Course: ${course}</p>
-                                <p>Year Level: ${year_level}</p>
-                            </div>
-                        `;
+                    if (result.status === 'success') {
+                        // Show success message with SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: result.message,
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            // Display the user profile image and information
+                            let user = result.user; // Get user info from response
+                            let profileImg = user.profile_image ? user.profile_image : 'default.jpg'; // Default image if none exists
+                            let fullName = user.firstname + ' ' + user.lastname;
+                            let course = user.course;
+                            let year_level = user.year_level;
 
-                        // Append the user info to a container (you need to create this container in your HTML)
-                        $('#userInfoContainer').html(userInfoHtml); // Assuming there's a div with id="userInfoContainer"
-                    });
-                } else {
-                    // Show error message with SweetAlert
+                            // Insert user information into the HTML
+                            let userInfoHtml = `
+                                <div class="user-info">
+                                    <img src="../uploads/profile_images/${profileImg}" alt="Profile Image" class="profile-img">
+                                    <h3>${fullName}</h3>
+                                    <p>Course: ${course}</p>
+                                    <p>Year Level: ${year_level}</p>
+                                </div>
+                            `;
+
+                            // Append the user info to a container (you need to create this container in your HTML)
+                            $('#userInfoContainer').html(userInfoHtml); // Assuming there's a div with id="userInfoContainer"
+                        });
+                    } else {
+                        // Show error message with SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.message,
+                            confirmButtonText: 'Try Again'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle any AJAX errors
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: result.message,
-                        confirmButtonText: 'Try Again'
+                        title: 'Server Error',
+                        text: 'An error occurred while processing your request. Please try again later.',
+                        confirmButtonText: 'OK'
                     });
                 }
-            },
-            error: function (xhr, status, error) {
-                // Handle any AJAX errors
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Server Error',
-                    text: 'An error occurred while processing your request. Please try again later.',
-                    confirmButtonText: 'OK'
-                });
-            }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>
