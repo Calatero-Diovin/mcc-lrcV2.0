@@ -1,17 +1,37 @@
 <?php
 $request = $_SERVER['REQUEST_URI'];
 
+// Redirect if '.php' is part of the URL to remove it
 if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
     $new_url = str_replace('.php', '', $request);
     header("Location: $new_url", true, 301);
     exit();
+}
+
+include('../admin/config/dbcon.php'); // Including database connection
+
+// Check if the form is submitted
+if (isset($_POST['text'])) {
+    $qr_code = $_POST['text']; // Get the QR code value from the form
+
+    // Query to check if the user exists with the QR code
+    $student_query = "SELECT * FROM user WHERE student_id_no = ? AND status = 'approved'";
+    $student_query_stmt = $con->prepare($student_query);
+    $student_query_stmt->bind_param("s", $qr_code);
+    $student_query_stmt->execute();
+    $student_query_result = $student_query_stmt->get_result();
+
+    // If user found
+    if ($student_query_result->num_rows > 0) {
+        $user = $student_query_result->fetch_assoc();
+    } else {
+        $user = null; // No user found with the given QR code
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -58,7 +78,7 @@ if (strpos($request, '.php') !== false) {
     <header id="header" class="header fixed-top d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             <a href="#" class="logo d-flex align-items-center">
-                <img src="../images/mcc-lrc.png" alt="logo" class=" mx-2" />
+                <img src="../images/mcc-lrc.png" alt="logo" class="mx-2" />
                 <span class="d-none d-lg-block mx-2">MCC <span class="text-info d-block fs-6">Learning Resource Center</span></span>
             </a>
         </div>
@@ -80,40 +100,27 @@ if (strpos($request, '.php') !== false) {
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
-                        <?php
-                        include('../admin/config/dbcon.php');
-                        if(isset($_POST['text'])){
-                            $text = $_POST['POST'];
-
-                            $student_query = "SELECT * FROM user WHERE student_id_no = ? AND status = 'approved'";
-                            $student_query_stmt = $con->prepare($student_query);
-                            $student_query_stmt->bind_param("s", $qr_code);
-                            $student_query_stmt->execute();
-                            $student_query_result = $student_query_stmt->get_result();
-
-                            if (mysqli_num_rows($student_query_result) > 0) {
-                                $user = mysqli_fetch_assoc($student_query_result);
-                        }
-                        ?>
                         <form action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
-                            <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
+                            <input type="text" name="text" id="text" readonly="" placeholder="scan QR code" class="form-control">
                         </form>
                         <br>
-                        <?php if ($user['role'] == 'student'): ?>
-                            <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
-                            <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
-                            <p><?= htmlspecialchars($user['course']) ?></p>
-                            <p><?= htmlspecialchars($user['year_level']) ?></p>
-                        <?php elseif ($user['role'] == 'faculty'): ?>
-                            <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
-                            <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
-                            <p><?= htmlspecialchars($user['course']) ?></p>
+
+                        <?php if (isset($user)): ?>
+                            <?php if ($user['role'] == 'student'): ?>
+                                <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
+                                <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
+                                <p><?= htmlspecialchars($user['course']) ?></p>
+                                <p><?= htmlspecialchars($user['year_level']) ?></p>
+                            <?php elseif ($user['role'] == 'faculty'): ?>
+                                <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
+                                <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
+                                <p><?= htmlspecialchars($user['course']) ?></p>
+                            <?php endif; ?>
+                        <?php elseif (isset($qr_code)): ?>
+                            <p>User not found or not approved.</p>
                         <?php endif; ?>
 
-                        <?php
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
@@ -127,22 +134,21 @@ if (strpos($request, '.php') !== false) {
     </footer>
 
     <script>
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-        Instascan.Camera.getCameras().then(function(cameras){
-            if(cameras.length > 0 ){
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        Instascan.Camera.getCameras().then(function(cameras) {
+            if (cameras.length > 0) {
                 scanner.start(cameras[0]);
-            } else{
+            } else {
                 alert('No cameras found');
             }
         }).catch(function(e) {
             console.error(e);
         });
 
-        scanner.addListener('scan', function(c){
-            document.getElementById('text').value=c;
+        scanner.addListener('scan', function(c) {
+            document.getElementById('text').value = c;
             document.forms[0].submit();
         });
     </script>
 </body>
-
 </html>
