@@ -3,10 +3,10 @@ RewriteEngine On
 # Keep the current URL rewriting rules
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [L]
+RewriteRule ^(.*)$ $indexc.php [L]
 
-# # Redirect the root to index.php
-# RewriteRule ^$ index.php [L]
+# Redirect the root to index.php
+RewriteRule ^$ index.php [L]
 
 # # Check if the request is for qr_scanner.php
 # RewriteCond %{REQUEST_URI} ^qr_scanner.php$
