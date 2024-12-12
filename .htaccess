@@ -39,6 +39,30 @@ RewriteEngine On
 
 </IfModule>
 
+# Check if the request is for qr_scanner.php
+RewriteCond %{REQUEST_URI} ^attendance/qr_scanner.php$
+
+# Check if the current day is Sunday (Sunday = 0)
+RewriteCond %{TIME_WDAY} ^0$
+
+# Check if the current time is outside of 8:00 AM to 5:00 PM (in 24-hour format)
+RewriteCond %{TIME_HOUR} <08
+RewriteRule ^.*$ attendance/closed.php [R=302,L]
+
+RewriteCond %{TIME_HOUR} >17
+RewriteRule ^.*$ attendance/closed.php [R=302,L]
+
+# Check if the time is outside the allowed period on weekdays (Monday to Saturday)
+RewriteCond %{TIME_WDAY} >0
+RewriteCond %{TIME_WDAY} <7
+
+# Check if the current time is outside of 8:00 AM to 5:00 PM
+RewriteCond %{TIME_HOUR} <08
+RewriteRule ^.*$ attendance/closed.php [R=302,L]
+
+RewriteCond %{TIME_HOUR} >17
+RewriteRule ^.*$ attendance/closed.php [R=302,L]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 
