@@ -1,6 +1,5 @@
 <?php
 session_start();
-include('../admin/config/dbcon.php');
 
 // if (isset($_POST['delete_all'])) {
 //      $delete_query = "DELETE FROM user_log";
