@@ -64,10 +64,10 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
-                $update_sql = "UPDATE admin SET logs = 1 WHERE admin_id = ?";
+                $update_sql = "UPDATE admin SET logs = 1 WHERE email = ?";
 
                 if ($stmt = mysqli_prepare($con, $update_sql)) {
-                    mysqli_stmt_bind_param($stmt, 'i', $admin_id);
+                    mysqli_stmt_bind_param($stmt, 'i', $admin_email);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_close($stmt);
                 }
