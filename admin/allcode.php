@@ -39,17 +39,8 @@ if (isset($_SESSION['auth_stud']['stud_id']))
      }
  }
  
-// Logout
+ // Logout
 if (isset($_POST['logout_btn'])) {
-    // Update the logs to 0
-    $admin_id = $_SESSION['auth_stud']['admin_id'];
-    $sql = "UPDATE admin SET logs = 0 WHERE admin_id = ?";
-    if ($stmt = mysqli_prepare($con, $sql)) {
-        mysqli_stmt_bind_param($stmt, 'i', $admin_id);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-    }
-    
     // Unset session variables
     unset($_SESSION['auth']);
     unset($_SESSION['auth_role']);

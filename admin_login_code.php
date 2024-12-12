@@ -64,17 +64,6 @@ if (isset($_POST['admin_login_btn'])) {
                     'email' => $admin_email,
                 ];
 
-                // Update logs to 1
-                $update_sql = "UPDATE admin SET logs = 1 WHERE email = ?";
-                if ($update_stmt = mysqli_prepare($con, $update_sql)) {
-                    mysqli_stmt_bind_param($update_stmt, 's', $admin_email);
-                    mysqli_stmt_execute($update_stmt);
-                    mysqli_stmt_close($update_stmt);
-                } else {
-                    $_SESSION['status'] = "Failed to update logs.";
-                    $_SESSION['status_code'] = "error";
-                }
-
                 $_SESSION['login_success'] = true;
                 header("Location: admin_login.php");
                 exit(0);
