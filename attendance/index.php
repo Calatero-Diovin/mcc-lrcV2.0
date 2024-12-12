@@ -57,12 +57,20 @@ if (strpos($request, '.php') !== false) {
           href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
      <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
+          
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/css/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/alertify.min.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="text/javascript" src="js/instascan.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/adapter.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-          <!-- Datatables -->
-     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
-     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.css">
-     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
      <!-- Custom CSS -->
      <link href="assets/css/style.css" rel="stylesheet" />
 
@@ -296,24 +304,9 @@ if (strpos($request, '.php') !== false) {
 
      <!-- Dselect JS -->
      <script src="assets/js/dselect.js"></script>
-     
-     <script src="assets/js/format_number.js"></script>
-<script src="assets/js/disable_future_date.js"></script>
-<script src="assets/js/validation.js"></script>
-<script src="assets/js/aos.js"></script>
-<script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/tooltip.js"></script>
-<script src="assets/js/jspdf.umd.min.js"></script>
-<script src="assets/js/jspdf.plugin.autotable.min.js"></script>
-<script src="assets/js/xlsx.full.min.js"></script>
-<script src="assets/js/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
 
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.js"></script>
-<script src="https://cdn.datatables.net/rowreorder/1.5.0/js/rowReorder.dataTables.js"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+
+
      <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
      <!-- <script src="assets/js/jquery-3.6.0.min.js"></script> -->
      <script src="assets/js/datatables.min.js"></script>
