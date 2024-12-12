@@ -1,19 +1,21 @@
 <?php
 session_start();
 
-date_default_timezone_set('Asia/Manila'); // Example for Manila, adjust if needed
+// Set the timezone to Manila
+date_default_timezone_set('Asia/Manila');
 
-// Get the current time and day
-$current_hour = (int) date('H');
-$current_day = (int) date('w');  // 0 for Sunday, 1 for Monday, etc.
+// Get the current hour and day
+$current_hour = (int) date('H'); // 24-hour format of the current hour
+$current_day = (int) date('N'); // Day of the week (1 = Monday, 7 = Sunday)
 
-// Check if it's Sunday or if the time is outside the allowed hours (8:00 AM - 5:00 PM)
-if ($current_day == 0 || $current_hour < 8 || $current_hour > 17) {
-    // Redirect to closed.php
-    header('Location: closed.php');
-    exit; // Make sure to stop the script after the redirect
+// Check if the current time is between 8:00 AM and 5:00 PM, and the current day is Monday to Saturday
+if ($current_hour < 8 || $current_hour > 17 || $current_day > 6) {
+    // Redirect to closed.php if the page is accessed outside the allowed hours or on Sunday
+    header("Location: closed.php");
+    exit();
 }
 
+// Your existing code to handle the QR code scanning
 $request = $_SERVER['REQUEST_URI'];
 
 // Redirect if '.php' is part of the URL to remove it
@@ -119,23 +121,6 @@ if (isset($_POST['text'])) {
                             <label>SCAN QR CODE</label>
                             <input type="text" name="text" id="text" readonly="" placeholder="scan QR code" class="form-control">
                         </form>
-                        <br>
-
-                        <?php if (isset($user)): ?>
-                            <?php if ($user['role'] == 'student'): ?>
-                                <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
-                                <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
-                                <p><?= htmlspecialchars($user['course']) ?></p>
-                                <p><?= htmlspecialchars($user['year_level']) ?></p>
-                            <?php elseif ($user['role'] == 'faculty'): ?>
-                                <img src="uploads/profile_images/<?= htmlspecialchars($user['profile_image']) ?>" alt="user image" width="50%" height="50%">
-                                <p><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
-                                <p><?= htmlspecialchars($user['course']) ?></p>
-                            <?php endif; ?>
-                        <?php elseif (isset($qr_code)): ?>
-                            <p>User not found or not approved.</p>
-                        <?php endif; ?>
-
                     </div>
                 </div>
             </div>
