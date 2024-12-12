@@ -57,19 +57,6 @@ if (strpos($request, '.php') !== false) {
           href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
      <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
-          
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/css/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/alertify.min.css" />
-    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <script type="text/javascript" src="js/instascan.min.js"></script>
-    <script type="text/javascript" src="js/vue.min.js"></script>
-    <script type="text/javascript" src="js/adapter.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
 
      <!-- Custom CSS -->
      <link href="assets/css/style.css" rel="stylesheet" />
