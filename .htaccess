@@ -56,13 +56,6 @@ RewriteRule ^.*$ attendance/closed.php [R=302,L]
 RewriteCond %{TIME_WDAY} >0
 RewriteCond %{TIME_WDAY} <7
 
-# Check if the current time is outside of 8:00 AM to 5:00 PM
-RewriteCond %{TIME_HOUR} <08
-RewriteRule ^.*$ attendance/closed.php [R=302,L]
-
-RewriteCond %{TIME_HOUR} >17
-RewriteRule ^.*$ attendance/closed.php [R=302,L]
-
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 
