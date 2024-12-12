@@ -8,6 +8,42 @@ if (strpos($request, '.php') !== false) {
     header("Location: $new_url", true, 301);
     exit();
 }
+
+if (isset($_SESSION['auth_admin']['admin_id'])) {
+     $id_session = $_SESSION['auth_admin']['admin_id'];
+ 
+     $sql = "SELECT * FROM admin WHERE admin_id = ? AND logs = 1";
+ 
+     if ($stmt = mysqli_prepare($con, $sql)) {
+         mysqli_stmt_bind_param($stmt, 'i', $id_session);
+         mysqli_stmt_execute($stmt);
+         $result = mysqli_stmt_get_result($stmt);
+ 
+         if (mysqli_num_rows($result) > 0) {
+             $data = mysqli_fetch_array($result);
+             $admin_id = $data['admin_id'];
+             $admin_name = $data['firstname'] . ' ' . $data['lastname'];
+             $admin_email = $data['email'];
+             $admin_type = $data['admin_type'];
+ 
+             // Display the admin dashboard
+             include('.');
+         } else {
+             // If the admin is not found or logs is not 1, redirect to login page
+             header("Location: admin_login.php");
+             exit(0);
+         }
+ 
+         mysqli_stmt_close($stmt);
+     } else {
+         // If the query fails, display an error message
+         echo "Error: " . mysqli_error($con);
+     }
+ } else {
+     // If the admin is not logged in, redirect to login page
+     header("Location: admin_login.php");
+     exit(0);
+ }
 ?>
 
 <!DOCTYPE html>
