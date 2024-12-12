@@ -25,7 +25,7 @@ RewriteEngine On
     Header always set Cache-Control "public, max-age=31536000, immutable"
 
     # Permissions Policy (formerly Feature Policy)
-    Header always set Permissions-Policy "geolocation=(self 'https://mcc-lrc.com'), microphone=()"
+    Header always set Permissions-Policy "geolocation=(self 'https://mcc-lrc.com/attendance'), microphone=()"
 
 
     # Optionally, you can enforce secure and HttpOnly cookie flags for sessions
