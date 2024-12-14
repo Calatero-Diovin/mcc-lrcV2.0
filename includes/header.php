@@ -47,7 +47,6 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
      <link rel="icon" href="./images/mcc-lrc.png">
      <title>MCC Learning Resource Center</title>
 
-     <!-- Start of Async Drift Code -->
      <script>
         "use strict";
 
@@ -73,9 +72,8 @@ if (basename($_SERVER['PHP_SELF']) == 'header.php') {
         }();
         drift.SNIPPET_VERSION = '0.3.1';
         drift.load('shzmapfycb4e');
-        </script>
-        <!-- End of Async Drift Code -->
-         
+     </script>
+
      <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="assets/css/bootstrap5.min.css" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" />
