@@ -175,8 +175,7 @@ include('includes/navbar.php');
     </footer>
     <!-- Chat icon -->
     <div class="chat-icon" onclick="toggleChatbox()">
-        <!-- SVG Icon (Chat Bubble) -->
-        <img src="https://w7.pngwing.com/pngs/526/156/png-transparent-massege-massage-message-mail-speech-chat-3d-icon-thumbnail.png" alt="Chat Icon" style="width: 30px; height: 30px;">
+        <i class="fa-sharp fa-regular fa-comment-dots" style="color: #0532e6;"></i>
     </div>
 
     <!-- Chatbox container -->
