@@ -14,7 +14,33 @@ include('includes/navbar.php');
             font-family: Arial, sans-serif;
         }
 
-        /* Chat icon button */
+        /* Popup overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none; /* Initially hidden */
+        }
+
+        .popup-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-container h2 {
+            margin-bottom: 20px;
+        }
+
         .chat-icon {
             position: fixed;
             bottom: 20px;
@@ -37,44 +63,36 @@ include('includes/navbar.php');
             fill: white;
         }
 
-        /* Chatbox container (hidden by default) */
+        /* Chatbox container */
         .chatbox {
             position: fixed;
-            bottom: 80px; /* Slightly above the chat icon */
+            bottom: 80px;
             right: 20px;
             width: 300px;
             max-height: 400px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             background-color: #fff;
-            display: none; /* Initially hidden */
+            display: none;
             flex-direction: column;
-            font-family: Arial, sans-serif;
             z-index: 1000;
         }
 
-        /* Chat header */
         .chatbox-header {
             background-color: #007bff;
-            color: #fff;
+            color: white;
             padding: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
             text-align: center;
-            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        /* Chat messages */
         .chatbox-messages {
             flex: 1;
             padding: 10px;
             overflow-y: auto;
-            border-top: 1px solid #ddd;
         }
 
-        /* Chat input */
         .chatbox-input {
             display: flex;
             border-top: 1px solid #ddd;
@@ -82,16 +100,16 @@ include('includes/navbar.php');
 
         .chatbox-input input {
             flex: 1;
-            border: none;
             padding: 10px;
+            border: none;
             outline: none;
         }
 
         .chatbox-input button {
             background-color: #007bff;
-            color: #fff;
-            border: none;
+            color: white;
             padding: 10px;
+            border: none;
             cursor: pointer;
         }
 
@@ -99,6 +117,8 @@ include('includes/navbar.php');
             background-color: #0056b3;
         }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 <div class="jumbotron h-50" style="background-color: #0D4C92">
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
@@ -173,8 +193,29 @@ include('includes/navbar.php');
         </div>
         <!-- Grid container -->
     </footer>
+
+    <!-- Popup for Gmail Login -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-container">
+            <h2>Sign in to Continue</h2>
+            <div id="g_id_onload"
+                data-client_id="1054153976802-q37kre8v72m2ib43mc4bp0uupvn0hsqr.apps.googleusercontent.com"
+                data-callback="onSignIn"
+                data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
+            </div>
+        </div>
+    </div>
+
     <!-- Chat icon -->
-    <div class="chat-icon" onclick="toggleChatbox()">
+    <div class="chat-icon" onclick="openPopup()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
             <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
             <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2"/>
@@ -192,13 +233,24 @@ include('includes/navbar.php');
     </div>
 
     <script>
-        // Toggle chatbox visibility
+        // Open the popup for Gmail login
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        // Close the popup after successful login
+        function onSignIn(response) {
+            console.log("User signed in:", response);
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('chatbox').style.display = 'flex'; // Show chatbox
+        }
+
         function toggleChatbox() {
             const chatbox = document.getElementById('chatbox');
             if (chatbox.style.display === 'none' || chatbox.style.display === '') {
-                chatbox.style.display = 'flex'; // Show chatbox
+                chatbox.style.display = 'flex';
             } else {
-                chatbox.style.display = 'none'; // Hide chatbox
+                chatbox.style.display = 'none';
             }
         }
 
