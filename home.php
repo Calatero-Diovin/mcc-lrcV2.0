@@ -69,7 +69,7 @@ include('includes/navbar.php');
         /* Chat messages */
         .chatbox-messages {
             flex: 1;
-            padding: 20px;
+            padding: 40px;
             overflow-y: auto;
             border-top: 1px solid #ddd;
         }
