@@ -2,6 +2,69 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
+<style>
+        /* Chatbox container */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+        }
+
+        /* Chat header */
+        .chatbox-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Chat messages */
+        .chatbox-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Chat input */
+        .chatbox-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbox-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            outline: none;
+        }
+
+        .chatbox-input button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .chatbox-input button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 <div class="jumbotron h-50" style="background-color: #0D4C92">
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
@@ -124,7 +187,7 @@ include('includes/navbar.php');
             }
         }
     </script>
-    
+
 <?php 
 include('includes/script.php');
 include('message.php'); 
