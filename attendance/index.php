@@ -1,44 +1,35 @@
 <?php
 session_start();
 
-// Set the timezone to Manila
 date_default_timezone_set('Asia/Manila');
 
-// Get the current hour and day
-$current_hour = (int) date('H'); // 24-hour format of the current hour
-$current_day = (int) date('N'); // Day of the week (1 = Monday, 7 = Sunday)
+$current_hour = (int) date('H');
+$current_day = (int) date('N');
 
-// Check if the current time is between 8:00 AM and 5:00 PM, and the current day is Monday to Saturday
 if ($current_hour < 8 || $current_hour >= 17 || $current_day > 6) {
-    // Redirect to closed.php if the page is accessed outside the allowed hours or on Sunday
     header("Location: closed.php");
     exit();
 }
 
-// Your existing code to handle the QR code scanning
 $request = $_SERVER['REQUEST_URI'];
 
-// Redirect if '.php' is part of the URL to remove it
 if (strpos($request, '.php') !== false) {
     $new_url = str_replace('.php', '', $request);
     header("Location: $new_url", true, 301);
     exit();
 }
 
-include('../admin/config/dbcon.php'); // Including database connection
+include('../admin/config/dbcon.php');
 
-// Check if the form is submitted
 if (isset($_POST['text'])) {
-    $qr_code = $_POST['text']; // Get the QR code value from the form
+    $qr_code = $_POST['text'];
 
-    // Query to check if the user exists with the QR code
     $student_query = "SELECT * FROM user WHERE student_id_no = ? AND status = 'approved'";
     $student_query_stmt = $con->prepare($student_query);
     $student_query_stmt->bind_param("s", $qr_code);
     $student_query_stmt->execute();
     $student_query_result = $student_query_stmt->get_result();
 
-    // If user found
     if ($student_query_result->num_rows > 0) {
         $user = $student_query_result->fetch_assoc();
     } else {
