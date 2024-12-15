@@ -175,7 +175,7 @@ include('includes/navbar.php');
     </footer>
     <!-- Chat icon -->
     <div class="chat-icon" onclick="toggleChatbox()">
-        <i class="fa-sharp fa-regular fa-comment-dots" style="color: #0532e6;"></i>
+    <i class="fa-sharp fa-regular fa-comment-dots" style="color: #f5f5f5;"></i>
     </div>
 
     <!-- Chatbox container -->
