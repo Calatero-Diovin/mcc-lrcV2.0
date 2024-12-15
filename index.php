@@ -145,6 +145,15 @@ if ($_SESSION['auth_role'] != "student" && $_SESSION['auth_role'] != "faculty" &
   </div>
 </div>
 
+<div class="chatbox">
+        <div class="chatbox-header" onclick="toggleChat()">Chat with us</div>
+        <div class="chatbox-messages" id="chat-messages"></div>
+        <div class="chatbox-input">
+            <input type="text" id="chat-input" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
 <script>
 function validateSearch() {
     const searchInput = document.getElementById('searchInput').value;
@@ -166,6 +175,44 @@ function validateSearch() {
     return true; // Allow form submission
 }
 </script>
+
+<script>
+        // Toggle chatbox visibility
+        function toggleChat() {
+            const messages = document.getElementById('chat-messages');
+            messages.style.display = messages.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Send a message
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+
+            if (input.value.trim() !== '') {
+                const message = document.createElement('div');
+                message.textContent = input.value;
+                message.style.marginBottom = '10px';
+                message.style.padding = '10px';
+                message.style.backgroundColor = '#f1f1f1';
+                message.style.borderRadius = '5px';
+                message.style.alignSelf = 'flex-end';
+                message.style.textAlign = 'right';
+
+                messages.appendChild(message);
+                input.value = '';
+
+                // Scroll to the bottom
+                messages.scrollTop = messages.scrollHeight;
+
+                // Optionally send the message to the server
+                fetch('process_chat.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message.textContent })
+                });
+            }
+        }
+    </script>
 
 <?php
 include('includes/footer.php');
