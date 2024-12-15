@@ -3,17 +3,51 @@ include('includes/header.php');
 include('includes/navbar.php');
 ?>
 <style>
-        /* Chatbox container */
-        .chatbox {
+        /* Common Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Chat icon button */
+        .chat-icon {
             position: fixed;
             bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .chat-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* Chatbox container (hidden by default) */
+        .chatbox {
+            position: fixed;
+            bottom: 80px; /* Slightly above the chat icon */
             right: 20px;
             width: 300px;
             max-height: 400px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             background-color: #fff;
-            display: flex;
+            display: none; /* Initially hidden */
             flex-direction: column;
             font-family: Arial, sans-serif;
             z-index: 1000;
@@ -139,22 +173,33 @@ include('includes/navbar.php');
         </div>
         <!-- Grid container -->
     </footer>
-    <div class="chatbox">
-        <div class="chatbox-header" onclick="toggleChat()">Chat with us</div>
+    <!-- Chat icon -->
+    <div class="chat-icon" onclick="toggleChatbox()">
+        <!-- SVG Icon (Chat Bubble) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 3C6.48 3 2 6.99 2 12c0 1.85.63 3.63 1.8 5.19l-1.4 3.74a1 1 0 0 0 1.37 1.26l3.9-1.56C9.09 21.84 10.51 22 12 22c5.52 0 10-3.99 10-9s-4.48-10-10-10zm0 2c4.41 0 8 3.13 8 7s-3.59 7-8 7c-1.16 0-2.3-.25-3.35-.72L6.16 20.1l.87-2.33C5.74 16.45 5 14.61 5 12c0-3.87 3.13-7 7-7zm0 2c-.55 0-1 .45-1 1v3H8c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1v-3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3V8c0-.55-.45-1-1-1z"></path>
+        </svg>
+    </div>
+
+    <!-- Chatbox container -->
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header" onclick="toggleChatbox()">Chat with us</div>
         <div class="chatbox-messages" id="chat-messages"></div>
         <div class="chatbox-input">
             <input type="text" id="chat-input" placeholder="Type a message..." />
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-</div>
-<!-- End of .container -->
 
-<script>
+    <script>
         // Toggle chatbox visibility
-        function toggleChat() {
-            const messages = document.getElementById('chat-messages');
-            messages.style.display = messages.style.display === 'none' ? 'block' : 'none';
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+                chatbox.style.display = 'flex'; // Show chatbox
+            } else {
+                chatbox.style.display = 'none'; // Hide chatbox
+            }
         }
 
         // Send a message
@@ -187,6 +232,8 @@ include('includes/navbar.php');
             }
         }
     </script>
+</div>
+<!-- End of .container -->
 
 <?php 
 include('includes/script.php');
