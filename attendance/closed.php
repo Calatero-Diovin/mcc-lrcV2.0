@@ -19,17 +19,12 @@ if (strpos($request, '.php') !== false) {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container text-center" style="margin-top: 5%;">
+    <div class="container text-center" style="margin-top: 6%;">
         <h1 style="font-size: 100px;">404</h1>
         <h1>Sorry, the page is closed.</h1>
         <br>
         <br>
         <h3>Our service is available from <b>Monday to Saturday</b> , <b>8:00 AM to 5:00 PM.</b></h3>
-        <br>
-        <br>
-        <br>
-        <br>
-        <a href="." class="btn btn-primary">Go Back to Home</a>
     </div>
 </body>
 </html>
