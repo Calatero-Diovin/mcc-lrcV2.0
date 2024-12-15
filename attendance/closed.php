@@ -14,7 +14,7 @@
         <h1>Sorry, the page is closed.</h1>
         <br>
         <br>
-        <h3>Our service is available from <b>8:00 AM to 5:00 PM</b>, <b>Monday to Saturday.</b></h3>
+        <h3>Our service is available from <b>Monday to Saturday.</b>, <b>8:00 AM to 5:00 PM</b></h3>
         <br>
         <br>
         <br>
