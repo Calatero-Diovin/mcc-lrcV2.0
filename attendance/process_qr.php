@@ -47,7 +47,7 @@ if (isset($_POST['text'])) {
                 header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:.");
                 exit("Failed to update time out for student.");
             }
         } else {
@@ -69,7 +69,7 @@ if (isset($_POST['text'])) {
                 header("Location: view.php?a=" . urlencode($encrpt_id));
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:.");
                 exit("Failed to insert log for student.");
             }
         }
@@ -95,7 +95,7 @@ if (isset($_POST['text'])) {
                 header("Location:.");
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:.");
                 exit("Failed to update time out for faculty.");
             }
         } else {
@@ -116,7 +116,7 @@ if (isset($_POST['text'])) {
                 header("Location: view_faculty.php?a=" . urlencode($encrpt_user));
                 exit();
             } else {
-                header("Location:qr_scanner.php");
+                header("Location:.");
                 exit("Failed to insert log for faculty.");
             }
         }

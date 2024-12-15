@@ -1,72 +1,76 @@
 <?php
 session_start();
-include('../admin/config/dbcon.php');
 
-// if (isset($_POST['delete_all'])) {
-//      $delete_query = "DELETE FROM user_log";
-//      if (mysqli_query($con, $delete_query)) {
-//          echo "<script>alert('All user logs have been deleted successfully.');</script>";
-//      } else {
-//          echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
-//      }
-//  }
+// Set the timezone to Manila
+date_default_timezone_set('Asia/Manila');
 
+// Get the current hour and day
+$current_hour = (int) date('H'); // 24-hour format of the current hour
+$current_day = (int) date('N'); // Day of the week (1 = Monday, 7 = Sunday)
+
+// Check if the current time is between 8:00 AM and 5:00 PM, and the current day is Monday to Saturday
+if ($current_hour < 8 || $current_hour >= 17 || $current_day > 6) {
+    // Redirect to closed.php if the page is accessed outside the allowed hours or on Sunday
+    header("Location: closed.php");
+    exit();
+}
+
+// Your existing code to handle the QR code scanning
 $request = $_SERVER['REQUEST_URI'];
 
+// Redirect if '.php' is part of the URL to remove it
 if (strpos($request, '.php') !== false) {
-    // Redirect to remove .php extension
     $new_url = str_replace('.php', '', $request);
     header("Location: $new_url", true, 301);
     exit();
+}
+
+include('../admin/config/dbcon.php'); // Including database connection
+
+// Check if the form is submitted
+if (isset($_POST['text'])) {
+    $qr_code = $_POST['text']; // Get the QR code value from the form
+
+    // Query to check if the user exists with the QR code
+    $student_query = "SELECT * FROM user WHERE student_id_no = ? AND status = 'approved'";
+    $student_query_stmt = $con->prepare($student_query);
+    $student_query_stmt->bind_param("s", $qr_code);
+    $student_query_stmt->execute();
+    $student_query_result = $student_query_stmt->get_result();
+
+    // If user found
+    if ($student_query_result->num_rows > 0) {
+        $user = $student_query_result->fetch_assoc();
+    } else {
+        $_SESSION['scan_error'] = true;
+        header("Location: .");
+        exit(0);
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8" />
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <meta name="robots" content="noindex, nofollow" />
-     <link rel="icon" href="../images/mcc-lrc.png">
-     <title>MCC Learning Resource Center</title>
-     <link href="https://fonts.gstatic.com" rel="preconnect" />
-     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
-          rel="stylesheet" />
-     <!-- Bootstrap CSS -->
-     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-
-     <!-- Boxicons Icon -->
-     <link href="assets/css/boxicons.min.css" rel="stylesheet" />
-
-     <!-- Remixicon Icon -->
-     <link href="assets/css/remixicon.css" rel="stylesheet" />
-
-     <!-- Bootstrap Icon -->
-     <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
-
-     <!-- Alertify JS link -->
-     <link rel="stylesheet" href="assets/css/alertify.min.css" />
-     <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
-     <!-- Datatables -->
-     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-     <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css">
-
-     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" />
-     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.bootstrap5.min.css" />
-
-     <!-- Custom CSS -->
-     <link href="assets/css/style.css" rel="stylesheet" />
-
-     <!-- Animation -->
-     <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
-     <!-- Loader -->
-     <link rel="stylesheet" href="https://www.cssportal.com/css-loader-generator/" />
-
-     <script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="../images/mcc-lrc.png">
+    <title>MCC Learning Resource Center - QR Scanner</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/css/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/alertify.min.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstraptheme.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="text/javascript" src="js/instascan.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/adapter.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script>
         function updateClock() {
             var now = new Date();
             var hours = now.getHours();
@@ -80,287 +84,90 @@ if (strpos($request, '.php') !== false) {
         }
         setInterval(updateClock, 1000);
     </script>
-     <style>
-          .data_table {
-               background: #fff;
-               padding: 15px;
-               border-radius: 5px;
-          }
-
-          .data_table .btn {
-               padding: 5px 10px;
-               margin: 10px 3px 10px 0;
-          }
-
-          #camera {
-               position: fixed;
-               right: 70px;
-               font-size: 40px;
-               color: black;
-               cursor: pointer;
-          }
-          #time {
-               font-size: 2.5rem;
-               font-weight: bold;
-               color: black;
-          }
-     </style>
+    <style>
+        #time {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
 </head>
 
-<body>
-     <header id="header" class="header fixed-top d-flex align-items-center justify-content-between">
-          <!-- Logo -->
-          <div class="d-flex align-items-center">
-               <a href="#" class="logo d-flex align-items-center">
-                    <img src="../images/mcc-lrc.png" alt="logo" class=" mx-2" />
-                    <span class="d-none d-lg-block mx-2 ">MCC <span class="text-info d-block fs-6">Learning Resource
-                              Center</span></span>
-               </a>
-          </div>
-          <div class="d-flex align-items-center">
-               <span id="time" class="mx-2 text-black"></span>
-          </div>
-          <div class="d-flex align-items-center">
-               <a href="qr_scanner.php" id="camera">
-                    <i class="bi bi-camera"></i>
-               </a>
-          </div>
-     </header>
-     <main id="main" class="main">
-          <section class="section dashboard">
-               <div class="row">
-                    <div class="col-lg-12">
-                         <div class="row">
-                              <div class="row">
-                                   <h1 style="text-align: center;font-weight: bold;">Attendance List</h1>
-                                   <div data-aos="fade-down" class="col-12">
-                                        <div class="card recent-sales overflow-auto  border-3 border-top border-info">
-                                             <div class="card-body">
-                                                  <div class="row d-flex justify-content-around align-items-center mt-2">
-                                                       <h5 class="card-title col-12 col-md-3 px-3 text-center">
-                                                            Students Attendance
-                                                       </h5>
-                                                       <form action="" method="POST" class="col-12 col-md-6 d-flex ">
+<body onload="updateClock()">
+    <header id="header" class="header fixed-top d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <a href="#" class="logo d-flex align-items-center">
+                <img src="../images/mcc-lrc.png" alt="logo" class="mx-2" />
+                <span class="d-none d-lg-block mx-2">MCC <span class="text-info d-block fs-6">Learning Resource Center</span></span>
+            </a>
+        </div>
+        <div class="d-flex align-items-center">
+            <span id="time" class="mx-2 text-black"></span>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="index.php" class="btn btn-primary position-relative mx-5">
+                Back
+            </a>
+        </div>
+    </header>
 
-                                                            <?php date_default_timezone_set('Asia/Manila'); ?>
-                                                            <div class="form-group form-group-sm">
-                                                                 <label for=""> <small>From Date</small></label>
-                                                                 <input type="date" name="from_date" id="disable_date"
-                                                                      class="form-control form-control-sm"></input>
-                                                            </div>
-
-                                                            <div class="form-group form-group-sm mx-2">
-                                                                 <label for=""> <small>To Date</small></label>
-                                                                 <input type="date" name="to_date" id="disable_date2"
-                                                                      class="form-control form-control-sm"></input>
-                                                            </div>
-                                                            <div class="form-group form-group-sm">
-                                                                 <label for=""> <small>Click to Filter</small></label>
-                                                                 <button type="submit" name="filter_attendance"
-                                                                      class="btn text-white fw-semibold btn-info btn-sm d-block">Filter</button>
-                                                            </div>
-
-                                                       </form>
-                                                       <!-- <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
-                                                            <button type="submit" name="delete_all" class="btn btn-danger btn-sm">Delete All Logs</button>
-                                                       </form> -->
-
-                                                  </div>
-
-                                                  <div class="container">
-                                                       <div class="row">
-                                                            <div class="col-12">
-
-                                                                 <div class="data_table">
-                                                                      <table id="example"
-                                                                           class="table table-striped table-bordered">
-                                                                           <thead>
-                                                                                <tr>
-                                                                                     <th>Date</th>
-                                                                                     <th>Time in</th>
-                                                                                     <th>Full Name</th>
-                                                                                     <th>Program</th>
-                                                                                     <th>Time out</th>
-                                                                                </tr>
-                                                                           </thead>
-                                                                           <tbody>
-                                                                                <?php
-                                 
-                                                       
-                                                       if(isset($_POST['from_date']) && isset($_POST['to_date']))
-                                                       {
-                                                            $from_date = $_POST['from_date'];
-                                                            $to_date = $_POST['to_date'];
-          
-                                                            $query = "SELECT * FROM user_log WHERE date_log BETWEEN '$from_date' AND '$to_date' ORDER BY date_log DESC, time_log DESC";
-                                                            $query_run = mysqli_query($con, $query);
-          
-                                                            if(mysqli_num_rows($query_run) > 0 )
-                                                            {
-                                                                 foreach($query_run as $row)
-                                                                 {
-                                                       ?>
-                                                                                <tr>
-                                                                                     <?php date_default_timezone_set('Asia/Manila'); ?>
-                                                                                     
-                                                                                     <td><?= $row['firstname'].' '.$row['middlename'].' '.$row['lastname']; ?>
-                                                                                     </td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_log'])); ?>
-                                                                                     </td>
-                                                                                     <td><?= date("M d, Y", strtotime($row['date_log'])); ?>
-                                                                                     </td>
-                                                                                     <td><?=$row['year_level'].' - '.$row['course']; ?></td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_out'])); ?></td>
-                                                                                </tr>
-                                                                                <?php      }
-                                                  }
-                                                  
-                                             }
-                                             else
-                                             {
-                                             
-                                                  $result= mysqli_query($con,"SELECT * FROM user_log ORDER BY date_log DESC, time_log DESC");
-                                                  while ($row= mysqli_fetch_array ($result) ){
-                                                 
-                                                  ?>
-                                                                                <tr>
-                                                                                     <?php date_default_timezone_set('Asia/Manila'); ?>
-                                                                                     <td><?= date("M d, Y", strtotime($row['date_log'])); ?>
-                                                                                     </td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_log'])); ?>
-                                                                                     </td>
-                                                                                     <td><?= $row['firstname'].' '.$row['middlename'].' '.$row['lastname']; ?>
-                                                                                     </td>
-                                                                                     <td><?=$row['year_level'].' - '.$row['course']; ?></td>
-                                                                                     <td><?= date("h:i:s a", strtotime($row['time_out'])); ?></td>
-                                                                                </tr>
-                                                                                <?php } 
-                                                       }
-                                                 
-                                                       ?>
-
-                                                                           </tbody>
-                                                                      </table>
-                                                                 </div>
-                                                            </div>
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                   </div>
-
-                              </div>
-                         </div>
-
+    <main id="main" class="main">
+        <section class="section dashboard">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <video id="preview" width="100%"></video>
                     </div>
-          </section>
-     </main>
+                    <div class="col-md-6">
+                        <form action="process_qr.php" method="post" class="form-horizontal">
+                            <label>SCAN QR CODE</label>
+                            <input type="text" name="text" id="text" readonly="" placeholder="scan QR code" class="form-control">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-     <footer id="footer" class="footer">
-          <div class="copyright">
-               <!-- &copy; Copyright <strong><span>JanDev</span></strong>. All Rights Reserved -->
-               <strong><span>MCC</span></strong>. Learning Resource Center 2.0
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            <strong><span>MCC</span></strong>. Learning Resource Center 2.0
+        </div>
+    </footer>
 
-          </div>
+    <script>
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+        Instascan.Camera.getCameras().then(function(cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                alert('No cameras found');
+            }
+        }).catch(function(e) {
+            console.error(e);
+        });
 
-     </footer>
+        scanner.addListener('scan', function(c) {
+            document.getElementById('text').value = c;
+            document.forms[0].submit();
+        });
+    </script>
+    
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-     <!-- Alertify JS link -->
-     <script src="assets/js/alertify.min.js"></script>
-
-     <!-- Format_number -->
-     <script src="assets/js/format_number.js"></script>
-
-     <!-- Future Date Disable JS -->
-     <script src="assets/js/disable_future_date.js"></script>
-
-     <!-- Bootstrap JS  -->
-     <script src="assets/js/bootstrap.bundle.min.js"></script>
-
-     <!-- JQuery JS -->
-     <script src="assets/js/jquery-3.6.1.min.js"></script>
-
-     <!-- JQuery Datatables -->
-     <script src="assets/js/jquery.dataTables.min.js"></script>
-
-     <!-- Boostrap 5 Datatables -->
-     <script src="assets/js/chart.min.js"></script>
-
-     <!-- Chart.js -->
-     <script src="assets/js/dataTables.bootstrap5.min.js"></script>
-
-     <!-- Dselect JS -->
-     <script src="assets/js/dselect.js"></script>
-
-
-
-     <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
-     <!-- <script src="assets/js/jquery-3.6.0.min.js"></script> -->
-     <script src="assets/js/datatables.min.js"></script>
-     <script src="assets/js/pdfmake.min.js"></script>
-     <script src="assets/js/vfs_fonts.js"></script>
-     <script src="assets/js/custom.js"></script>
-
-
-
-
-     <script type="text/javascript">
-          // JQuery DataTable 
-          $(document).ready(function() {
-               $('#myDataTable').DataTable({
-
-               });
-          });
-          $(document).ready(function() {
-               $('#myDataTable2').DataTable({
-
-               });
-          });
-          // $(document).ready(function() {
-          //      $('#example').DataTable({
-
-          //           dom: 'Bfrtip',
-          //           buttons: [
-          //                'copy', 'csv', 'excel', 'pdf', 'print'
-          //           ]
-
-          //      });
-          // var table = $('#example').DataTable({
-          //      buttons: [
-          //           'copy', 'csv', 'excel', 'pdf', 'print'
-          //      ]
-          // })
-
-          // table.buttons().container().appenndTo('#example_wrapper .col-md-6:eq(0)');
-          // });
-          $(document).ready(function() {
-
-               var table = $('#example').DataTable({
-
-
-               });
-
-
-               table.buttons().container()
-                    .appendTo('#example_wrapper .col-md-6:eq(0)');
-
-          });
-     </script>
-
-     <!-- Tooltip link -->
-     <script src="assets/js/tooltip.js"></script>
-     <!-- Custom JS -->
-     <script src="assets/js/main.js"></script>
-     <!-- Validate Login Form -->
-     <script src="assets/js/validation.js"></script>
-
-     <!-- Loading animation -->
-     <script src="assets/js/aos.js"></script>
-
-     <script>
-          AOS.init();
-     </script>
+    <script>
+         // Show SweetAlert if scan_error is present
+         <?php if (isset($_SESSION['scan_error']) && $_SESSION['scan_error']) { ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Scan Error',
+                text: 'QR Code not recognized or user not approved.',
+                confirmButtonText: 'OK'
+            });
+            <?php unset($_SESSION['scan_error']); ?>
+        <?php } ?>
+    </script>
 
 </body>
-
 </html>
