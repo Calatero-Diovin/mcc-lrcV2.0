@@ -12,7 +12,6 @@ if (strpos($request, '.php') !== false) {
 <html>
 <head>
 <title>404 - Page Not Found</title>  
-<meta property="og:image" content="https://nathanprinsley-files.prinsh.com/data-1/images/NathanPrinsley-AnonymousLogo-compressed.jpg"/> 
 <meta name='description' content='404 - Page Not Found'/> 
 <meta name='keywords' content='404 - Page Not Found'/>
 <meta name='author' content='404 - Page Not Found'/>
