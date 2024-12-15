@@ -9,11 +9,16 @@ $current_hour = (int) date('H'); // 24-hour format of the current hour
 $current_day = (int) date('N'); // Day of the week (1 = Monday, 7 = Sunday)
 
 // Check if the current time is between 8:00 AM and 5:00 PM, and the current day is Monday to Saturday
-if ($current_hour < 8 || $current_hour > 17 || $current_day > 6) {
+if ($current_hour < 8 || $current_hour > 17) {
     // Redirect to closed.php if the page is accessed outside the allowed hours or on Sunday
     header("Location: closed.php");
     exit();
 }
+
+// if ($current_day > 6) {
+//     header("Location: closed.php");
+//     exit();
+// }
 
 // Your existing code to handle the QR code scanning
 $request = $_SERVER['REQUEST_URI'];
