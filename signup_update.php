@@ -830,7 +830,6 @@ function showReviewModal() {
     const role = document.getElementById('role').value; // Get the role value
     const birthdate = document.getElementById('birthdate').value;
     const address = document.getElementById('address').value;
-    const profileImageFile = document.getElementById('old_profile_image').value;
     const profileImageFile = document.getElementById('profile_image').files[0];
     const profileImage = profileImageFile ? URL.createObjectURL(profileImageFile) : 'uploads/profile_images/default-image.jpg';
     const gender = document.getElementById('gender').value;
@@ -842,13 +841,6 @@ function showReviewModal() {
     const email = document.querySelector('input[name="email"]').value;
     const studentId = document.getElementById('student_id_no').value;
 
-    // If no file is selected, display the old image (from the database)
-    if (profileImageInput.files.length === 0 && oldProfileImage) {
-            currentImagePreview.src = oldProfileImage; // Set to the old image
-            currentImagePreview.style.display = 'block'; // Show the current image
-            imagePreview.innerHTML = ''; // Clear the preview area
-        }
-        
     // Define the fields based on the role
     let roleSpecificContent = '';
     let yearLevelContent = '';
