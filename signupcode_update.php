@@ -121,25 +121,6 @@ if (isset($_POST['register_btn'])) {
             }
             
             if (mysqli_stmt_execute($stmt_update)) {
-                // Generate QR Code
-                $identifier = $student_id_no; // Adjust username if needed for faculty
-                $qrdata = "$identifier"; // Example data to encode in QR code
-                $qrfile = "./qrcodes/$identifier.png"; // Path to save QR code image
-                $qrimage = "$identifier.png";
-                QRcode::png($qrdata, $qrfile); // Generate QR code
-
-                // Insert QR code path into database
-                $update_query = "";
-                if ($role_as == 'student') {
-                    $update_query = "UPDATE user SET qr_code = ? WHERE student_id_no = ?";
-                } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                    $update_query = "UPDATE faculty SET qr_code = ? WHERE username = ?";
-                }
-
-                $stmt_update = mysqli_prepare($con, $update_query);
-                mysqli_stmt_bind_param($stmt_update, 'ss', $qrimage, $student_id_no);
-                
-                if (mysqli_stmt_execute($stmt_update)) {
                     $update_verify = "UPDATE ms_account SET used = 1 WHERE username = ?";
                     $stmt_update_verify = mysqli_prepare($con, $update_verify);
                     mysqli_stmt_bind_param($stmt_update_verify, 's', $email);
@@ -155,12 +136,6 @@ if (isset($_POST['register_btn'])) {
                     header("Location: login.php");
                     exit(0);
                 }
-            } else {
-                $_SESSION['status'] = "Failed to update user";
-                $_SESSION['status_code'] = "error";
-                header("Location: login.php");
-                exit(0);
-            }
         } else {
             $_SESSION['status'] = "Link already been used.";
             $_SESSION['status_code'] = "error";
