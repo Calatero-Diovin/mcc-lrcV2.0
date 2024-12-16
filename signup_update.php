@@ -362,12 +362,12 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label">Birthdate</div>
-                        <input type="date" name="birthdate" id="birthdate" required/>
+                        <input type="date" name="birthdate" id="birthdate" value="<?php echo htmlspecialchars($code_row['birthdate']); ?>" required/>
                     </div>
 
                     <div class="field">
                         <div class="label">Address</div>
-                        <input type="text" name="address" id="address" required/>
+                        <input type="text" name="address" id="address" value="<?php echo htmlspecialchars($code_row['address']); ?>" required/>
                     </div>
 
                     <div class="field">
