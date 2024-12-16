@@ -44,7 +44,7 @@ if (isset($_POST['register_btn'])) {
 
     // Prepare the statement to avoid SQL injection
     $stmt_check = mysqli_prepare($con, $check_query);
-    mysqli_stmt_bind_param($stmt_check, 'ss', $email, $email);
+    mysqli_stmt_bind_param($stmt_check, 'ss', $email);
     mysqli_stmt_execute($stmt_check);
     mysqli_stmt_store_result($stmt_check);
 
