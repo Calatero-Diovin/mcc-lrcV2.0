@@ -455,10 +455,26 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field btns">
                         <button class="prev-3 prev">Previous</button>
-                        <button type="button" class="next-4 next" id="reviewBtn">Next</button>
+                        <button class="next-3 next">Next</button>
                     </div>
                 </div>
                 <!-- Fourth Slide Page end-->
+
+                <!-- Fifth Slide Page start-->
+                <div class="page">
+                    <div class="title">Login Details:</div>
+
+                    <div class="field">
+                        <div class="label" id="stud_idLabel">Student ID No.</div>
+                        <input type="text" name="student_id_no" id="student_id_no" oninput="formatStudentID()" required>
+                    </div>
+
+                    <div class="field btns">
+                        <button class="prev-4 prev">Previous</button>
+                        <button type="button" class="next-4 next" id="reviewBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Fifth Slide Page end-->
 
                 <div id="reviewModal" class="modal">
                     <div class="modal-content">
@@ -693,8 +709,8 @@ document.querySelector('input[name="person_cell_no"]').addEventListener('input',
   this.value = this.value.replace(/\D/g, '');
 });
 
-document.getElementById('reviewBtn').addEventListener('click', function(event) {
-    event.preventDefault();
+nextBtnFourth.addEventListener("click", async function (event) {
+  event.preventDefault();
 
   const cellphone = document.getElementById('cell_no').value;
   const contactPerson = document.getElementById('contact_person').value;
@@ -758,10 +774,53 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
   progressCheck[current - 1].classList.add("active");
   progressText[current - 1].classList.add("active");
   current += 1;
-
-  showReviewModal();
 });
 // nextBtnFourth End
+
+// submitBtn Start
+document.getElementById('reviewBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    const studentId = document.getElementById('student_id_no').value;
+    const role = document.getElementById('role').value; // Get the role value
+
+    const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
+    const xssPattern = /<[^>]*>/; // XSS tag pattern
+
+    if (!studentId) {
+        Swal.fire({
+            title: "Please fill all fields.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
+    if (role === 'student') {
+        // Validate student ID only if role is 'student'
+        if (!studentIdPattern.test(studentId)) {
+            Swal.fire({
+                title: "Please enter a valid student ID in the format 1234-5678.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+    } else if (role === 'faculty' || role === 'staff') {
+        // Check for XSS tags in studentId for faculty and staff roles
+        if (xssPattern.test(studentId)) {
+            Swal.fire({
+                title: "Don't try that or else I get your IP Address.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+    }
+
+    // If all validations pass, show the review modal
+    showReviewModal();
+});
 
 function showReviewModal() {
     // Gather form data
