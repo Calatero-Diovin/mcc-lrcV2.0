@@ -21,17 +21,6 @@ $code_result = $code_stmt->get_result();
 
 if ($code_result->num_rows > 0) {
     $code_row = $code_result->fetch_assoc();
-    $created_at = new DateTime($code_row['created_at']); // Creation time of the verification code
-    $current_time = new DateTime(); // Current time
-
-    // Check if the difference is greater than 1 hour
-    $created_at_timestamp = $created_at->getTimestamp();
-    $current_time_timestamp = $current_time->getTimestamp();
-
-    if (($current_time_timestamp - $created_at_timestamp) > 3600) { // 3600 seconds = 1 hour
-        header("Location: 404.php");
-        exit;
-    }
 } else {
     header("Location: 404.php");
     exit;
