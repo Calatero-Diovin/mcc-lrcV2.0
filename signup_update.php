@@ -372,8 +372,15 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label">Profile Image</div>
-                        <input type="file" id="profile_image" name="profile_image" accept="image/*" required>
+                        <?php if (!empty($code_row['profile_image'])): ?>
+                            <div class="current-image">
+                                <img src="<?php echo htmlspecialchars($code_row['profile_image']); ?>" alt="Profile Image" width="100" height="100">
+                                <p>Current Profile Image</p>
+                            </div>
+                        <?php endif; ?>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*">
                     </div>
+
 
                     <div class="field btns">
                         <button class="prev-1 prev">Previous</button>
