@@ -353,8 +353,8 @@ if (strpos($request, '.php') !== false) {
                 <div class="page">
                     <div class="field">
                         <div class="label" for="role">User Type</div>
-                        <select name="role" id="role" required value="<?= $code_row['lastname']; ?>">
-                            <option value="" disabled selected>--Select Type--</option>
+                        <select name="role" id="role" required>
+                            <option value="" disabled selected><?php $code_row['lastname']; ?></option>
                             <option value="student">Student</option>
                             <option value="faculty">Faculty</option>
                             <option value="staff">Staff</option>
