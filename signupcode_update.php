@@ -37,20 +37,30 @@ if (isset($_POST['register_btn'])) {
     $check_query = "";
     if ($role_as == 'student') {
         $check_query = "SELECT student_id_no FROM user WHERE email = ?";
+        $stmt_check = mysqli_prepare($con, $check_query);
+        mysqli_stmt_bind_param($stmt_check, 's', $email);  // Only bind the email parameter
+        mysqli_stmt_execute($stmt_check);
+        mysqli_stmt_store_result($stmt_check);
+
+        if (mysqli_stmt_num_rows($stmt_check) == 0) {
+            $_SESSION['status'] = "Student ID No. does not match with the provided email";
+            $_SESSION['status_code'] = "warning";
+            header("Location: login.php");
+            exit(0);
+        }
     } elseif (in_array($role_as, ['faculty', 'staff'])) {
         $check_query = "SELECT username FROM faculty WHERE email = ?";
-    }
+        $stmt_check = mysqli_prepare($con, $check_query);
+        mysqli_stmt_bind_param($stmt_check, 's', $email);  // Only bind the email parameter
+        mysqli_stmt_execute($stmt_check);
+        mysqli_stmt_store_result($stmt_check);
 
-    $stmt_check = mysqli_prepare($con, $check_query);
-    mysqli_stmt_bind_param($stmt_check, 's', $email);  // Only bind the email parameter
-    mysqli_stmt_execute($stmt_check);
-    mysqli_stmt_store_result($stmt_check);
-
-    if (mysqli_stmt_num_rows($stmt_check) == 0) {
-        $_SESSION['status'] = ($role_as == 'student') ? "Student ID No. does not match with the provided email" : "Username does not match with the provided email";
-        $_SESSION['status_code'] = "warning";
-        header("Location: login.php");
-        exit(0);
+        if (mysqli_stmt_num_rows($stmt_check) == 0) {
+            $_SESSION['status'] = "Username does not match with the provided email";
+            $_SESSION['status_code'] = "warning";
+            header("Location: login.php");
+            exit(0);
+        }
     }
 
     // Handle image upload
