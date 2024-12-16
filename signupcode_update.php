@@ -36,15 +36,15 @@ if (isset($_POST['register_btn'])) {
     // Modify the query to check if the provided email exists for the correct role
     if ($role_as == 'student') {
         // Check if the provided student_id_no matches the email
-        $check_query = "SELECT student_id_no FROM user WHERE student_id_no = ? AND email = ?";
+        $check_query = "SELECT student_id_no FROM user WHERE email = ?";
     } elseif ($role_as == 'faculty' || $role_as == 'staff') {
         // Check if the provided username matches the email
-        $check_query = "SELECT username FROM faculty WHERE username = ? AND email = ?";
+        $check_query = "SELECT username FROM faculty WHERE email = ?";
     }
 
     // Prepare the statement to avoid SQL injection
     $stmt_check = mysqli_prepare($con, $check_query);
-    mysqli_stmt_bind_param($stmt_check, 'ss', ($role_as == 'student' ? $student_id_no : $username), $email);
+    mysqli_stmt_bind_param($stmt_check, 'ss', $email, $email);
     mysqli_stmt_execute($stmt_check);
     mysqli_stmt_store_result($stmt_check);
 
