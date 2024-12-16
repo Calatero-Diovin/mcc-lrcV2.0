@@ -830,7 +830,6 @@ function showReviewModal() {
     const role = document.getElementById('role').value; // Get the role value
     const birthdate = document.getElementById('birthdate').value;
     const address = document.getElementById('address').value;
-    const profileImageFile = document.getElementById('old_profile_image').value;
     const profileImageFile = document.getElementById('profile_image').files[0];
     const profileImage = profileImageFile ? URL.createObjectURL(profileImageFile) : 'uploads/profile_images/default-image.jpg';
     const gender = document.getElementById('gender').value;
