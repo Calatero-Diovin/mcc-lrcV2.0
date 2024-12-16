@@ -466,7 +466,7 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label" id="stud_idLabel">Student ID No.</div>
-                        <input type="text" name="student_id_no" id="student_id_no" oninput="formatStudentID()" required>
+                        <input type="text" name="student_id_no" value="<?php echo htmlspecialchars($code_row['student_id_no']); ?>" id="student_id_no" oninput="formatStudentID()" required>
                     </div>
 
                     <div class="field btns">
