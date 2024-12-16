@@ -311,6 +311,13 @@ if (strpos($request, '.php') !== false) {
                 </div>
                 <div class="check fas fa-check"></div>
             </div>
+            <div class="step">
+                <p>Accounts</p>
+                <div class="bullet">
+                    <span>5</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
         </div>
 
         <!-- Multi Step Form end -->
