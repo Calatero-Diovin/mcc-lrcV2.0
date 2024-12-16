@@ -114,18 +114,18 @@ if (isset($_POST['register_btn'])) {
             // Prepare and execute UPDATE query
             $update_query = "";
             if ($role_as == 'student') {
-                $update_query = "UPDATE user SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, email = ?, year_level = ?, role_as = ?, status = 'pending', user_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE student_id_no = ?";
+                $update_query = "UPDATE user SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, year_level = ?, role_as = ?, status = 'pending', user_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ?";
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                $update_query = "UPDATE faculty SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, email = ?, role_as = ?, status = 'pending', faculty_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ?";
+                $update_query = "UPDATE faculty SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, role_as = ?, status = 'pending', faculty_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ?";
             }
 
             $stmt_update = mysqli_prepare($con, $update_query);
 
             // Bind parameters for the UPDATE query
             if ($role_as == 'student') {
-                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $role_as, $image_path, $contact_person, $person_cell_no);
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $year_level, $role_as, $image_path, $contact_person, $person_cell_no, $email);
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                mysqli_stmt_bind_param($stmt_update, 'sssssssssssssa', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $role_as, $image_path, $contact_person, $person_cell_no);
+                mysqli_stmt_bind_param($stmt_update, 'sssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $role_as, $image_path, $contact_person, $person_cell_no, $email);
             }
             
                 
