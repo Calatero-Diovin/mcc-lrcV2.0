@@ -374,7 +374,7 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label">Profile Image</div>
                         <?php if (!empty($code_row['profile_image'])): ?>
-                            <input type="hidden" name="profile_image" value="<?php echo htmlspecialchars($code_row['profile_image']); ?>">
+                            <input type="hidden" name="old_profile_image" value="<?php echo htmlspecialchars($code_row['profile_image']); ?>">
                         <?php endif; ?>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*">
                     </div>
@@ -392,20 +392,18 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label" for="gender">Gender</div>
                         <select name="gender" id="gender" required>
-                            <option value="" disabled selected>--Select Gender--</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="Male" <?php echo ($code_row['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                            <option value="Female" <?php echo ($code_row['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
                         </select>
                     </div>
 
                     <div class="field" id="year_levelField">
                         <div class="label" for="year_level">Year Level</div>
                         <select name="year_level" id="year_level">
-                            <option value="" disabled selected>--Select Year Level--</option>
-                            <option value="4th year">4th year</option>
-                            <option value="3rd year">3rd year</option>
-                            <option value="2nd year">2nd year</option>
-                            <option value="1st year">1st year</option>
+                            <option value="4th year" <?php echo ($code_row['year_level'] == '4th year') ? 'selected' : ''; ?>>4th year</option>
+                            <option value="3rd year" <?php echo ($code_row['year_level'] == '3rd year') ? 'selected' : ''; ?>>3rd year</option>
+                            <option value="2nd year" <?php echo ($code_row['year_level'] == '2nd year') ? 'selected' : ''; ?>>2nd year</option>
+                            <option value="1st year" <?php echo ($code_row['year_level'] == '1st year') ? 'selected' : ''; ?>>1st year</option>
                         </select>
                     </div>
 
@@ -413,12 +411,12 @@ if (strpos($request, '.php') !== false) {
                         <div class="label" for="course" id="courseLabel">Course</div>
                         <select name="course" id="course">
                             <option value="" id="optionLabel" disabled selected>--Select Course--</option>
-                            <option value="BSIT">BSIT</option>
-                            <option value="BSED">BSED</option>
-                            <option value="BEED">BEED</option>
-                            <option value="BSBA">BSBA</option>
-                            <option value="BSHM">BSHM</option>
-                            <option value="GENERAL EDUCATION">GENERAL EDUCATION</option>
+                            <option value="BSIT" <?php echo ($code_row['course'] == 'BSIT') ? 'selected' : ''; ?>>BSIT</option>
+                            <option value="BSED" <?php echo ($code_row['course'] == 'BSED') ? 'selected' : ''; ?>>BSED</option>
+                            <option value="BEED" <?php echo ($code_row['course'] == 'BEED') ? 'selected' : ''; ?>>BEED</option>
+                            <option value="BSBA" <?php echo ($code_row['course'] == 'BSBA') ? 'selected' : ''; ?>>BSBA</option>
+                            <option value="BSHM" <?php echo ($code_row['course'] == 'BSHM') ? 'selected' : ''; ?>>BSHM</option>
+                            <option value="GENERAL EDUCATION" <?php echo ($code_row['course'] == 'GENERAL EDUCATION') ? 'selected' : ''; ?>>GENERAL EDUCATION</option>
                         </select>
                     </div>
 
