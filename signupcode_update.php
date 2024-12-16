@@ -36,15 +36,15 @@ if (isset($_POST['register_btn'])) {
     // Modify the query to check if the provided email exists for the correct role
     if ($role_as == 'student') {
         // Check if the provided student_id_no matches the email
-        $check_query = "SELECT student_id_no FROM user WHERE email = ?";
+        $check_query = "SELECT student_id_no FROM user WHERE student_id_no = ? AND email = ?";
     } elseif ($role_as == 'faculty' || $role_as == 'staff') {
         // Check if the provided username matches the email
-        $check_query = "SELECT username FROM faculty WHERE email = ?";
+        $check_query = "SELECT username FROM faculty WHERE username = ? AND email = ?";
     }
 
     // Prepare the statement to avoid SQL injection
     $stmt_check = mysqli_prepare($con, $check_query);
-    mysqli_stmt_bind_param($stmt_check, 's', $email);
+    mysqli_stmt_bind_param($stmt_check, 'ss', ($role_as == 'student' ? $student_id_no : $username), $email);
     mysqli_stmt_execute($stmt_check);
     mysqli_stmt_store_result($stmt_check);
 
@@ -123,9 +123,9 @@ if (isset($_POST['register_btn'])) {
 
             // Bind parameters for the UPDATE query
             if ($role_as == 'student') {
-                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $role_as, $image_path, $contact_person, $person_cell_no, $student_id_no);
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $role_as, $image_path, $contact_person, $person_cell_no);
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $role_as, $image_path, $contact_person, $person_cell_no, $email);
+                mysqli_stmt_bind_param($stmt_update, 'sssssssssssssa', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $role_as, $image_path, $contact_person, $person_cell_no);
             }
             
             if (mysqli_stmt_execute($stmt_update)) {
