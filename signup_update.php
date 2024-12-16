@@ -311,13 +311,6 @@ if (strpos($request, '.php') !== false) {
                 </div>
                 <div class="check fas fa-check"></div>
             </div>
-            <div class="step">
-                <p>Accounts</p>
-                <div class="bullet">
-                    <span>5</span>
-                </div>
-                <div class="check fas fa-check"></div>
-            </div>
         </div>
 
         <!-- Multi Step Form end -->
@@ -693,8 +686,8 @@ document.querySelector('input[name="person_cell_no"]').addEventListener('input',
   this.value = this.value.replace(/\D/g, '');
 });
 
-nextBtnFourth.addEventListener("click", async function (event) {
-  event.preventDefault();
+document.getElementById('reviewBtn').addEventListener('click', function(event) {
+    event.preventDefault();
 
   const cellphone = document.getElementById('cell_no').value;
   const contactPerson = document.getElementById('contact_person').value;
@@ -758,53 +751,10 @@ nextBtnFourth.addEventListener("click", async function (event) {
   progressCheck[current - 1].classList.add("active");
   progressText[current - 1].classList.add("active");
   current += 1;
+
+  showReviewModal();
 });
 // nextBtnFourth End
-
-// submitBtn Start
-document.getElementById('reviewBtn').addEventListener('click', function(event) {
-    event.preventDefault();
-    
-    const studentId = document.getElementById('student_id_no').value;
-    const role = document.getElementById('role').value; // Get the role value
-
-    const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
-    const xssPattern = /<[^>]*>/; // XSS tag pattern
-
-    if (!studentId) {
-        Swal.fire({
-            title: "Please fill all fields.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
-    }
-
-    if (role === 'student') {
-        // Validate student ID only if role is 'student'
-        if (!studentIdPattern.test(studentId)) {
-            Swal.fire({
-                title: "Please enter a valid student ID in the format 1234-5678.",
-                icon: "error",
-                confirmButtonText: "OK"
-            });
-            return;
-        }
-    } else if (role === 'faculty' || role === 'staff') {
-        // Check for XSS tags in studentId for faculty and staff roles
-        if (xssPattern.test(studentId)) {
-            Swal.fire({
-                title: "Don't try that or else I get your IP Address.",
-                icon: "error",
-                confirmButtonText: "OK"
-            });
-            return;
-        }
-    }
-
-    // If all validations pass, show the review modal
-    showReviewModal();
-});
 
 function showReviewModal() {
     // Gather form data
