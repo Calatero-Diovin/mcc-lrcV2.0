@@ -123,9 +123,9 @@ if (isset($_POST['register_btn'])) {
 
             // Bind parameters for the UPDATE query
             if ($role_as == 'student') {
-                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $role_as, $image_path, $contact_person, $person_cell_no, $student_id_no);
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $role_as, $image_path, $contact_person, $person_cell_no, $student_id_no);
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $role_as, $image_path, $contact_person, $person_cell_no, $email);
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $role_as, $image_path, $contact_person, $person_cell_no, $email);
             }
             
             if (mysqli_stmt_execute($stmt_update)) {
