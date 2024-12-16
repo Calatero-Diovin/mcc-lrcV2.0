@@ -56,18 +56,7 @@ if (isset($_POST['register_btn'])) {
         exit(0);
     }
 
-    // Check email verification
-    $check_verify = "SELECT used FROM ms_account WHERE username = ?";
-    $stmt_verify = mysqli_prepare($con, $check_verify);
-    mysqli_stmt_bind_param($stmt_verify, 's', $email);
-    mysqli_stmt_execute($stmt_verify);
-    $result_verify = mysqli_stmt_get_result($stmt_verify);
 
-    if (mysqli_num_rows($result_verify) > 0) {
-        $row = mysqli_fetch_array($result_verify);
-        $used = $row['used'];
-
-        if ($used == 1) {
             // Handle image upload
             $image_path = "";
             if (isset($profile_image) && $profile_image['error'] == 0) {
@@ -145,18 +134,6 @@ if (isset($_POST['register_btn'])) {
                     header("Location: login.php");
                     exit(0);
                 }
-        } else {
-            $_SESSION['status'] = "Link already been used.";
-            $_SESSION['status_code'] = "error";
-            header("Location: login.php");
-            exit(0);
-        }
-    } else {
-        $_SESSION['status'] = "Email verification not found.";
-        $_SESSION['status_code'] = "error";
-        header("Location: login.php");
-        exit(0);
-    }
 } else {
     $_SESSION['status'] = "Please fill up all the fields";
     $_SESSION['status_code'] = "warning";
