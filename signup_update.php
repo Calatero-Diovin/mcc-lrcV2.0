@@ -455,26 +455,10 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field btns">
                         <button class="prev-3 prev">Previous</button>
-                        <button class="next-3 next">Next</button>
-                    </div>
-                </div>
-                <!-- Fourth Slide Page end-->
-
-                <!-- Fifth Slide Page start-->
-                <div class="page">
-                    <div class="title">Login Details:</div>
-
-                    <div class="field">
-                        <div class="label" id="stud_idLabel">Student ID No.</div>
-                        <input type="text" name="student_id_no" value="<?php echo htmlspecialchars($code_row['student_id_no']); ?>" id="student_id_no" oninput="formatStudentID()" required>
-                    </div>
-
-                    <div class="field btns">
-                        <button class="prev-4 prev">Previous</button>
                         <button type="button" class="next-4 next" id="reviewBtn">Next</button>
                     </div>
                 </div>
-                <!-- Fifth Slide Page end-->
+                <!-- Fourth Slide Page end-->
 
                 <div id="reviewModal" class="modal">
                     <div class="modal-content">
