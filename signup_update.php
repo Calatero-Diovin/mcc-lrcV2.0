@@ -311,6 +311,13 @@ if (strpos($request, '.php') !== false) {
                 </div>
                 <div class="check fas fa-check"></div>
             </div>
+            <div class="step">
+                <p>Accounts</p>
+                <div class="bullet">
+                    <span>5</span>
+                </div>
+                <div class="check fas fa-check"></div>
+            </div>
         </div>
 
         <!-- Multi Step Form end -->
@@ -448,10 +455,46 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field btns">
                         <button class="prev-3 prev">Previous</button>
-                        <button type="button" class="next-3 next" id="reviewBtn">Next</button>
+                        <button class="next-3 next">Next</button>
                     </div>
                 </div>
                 <!-- Fourth Slide Page end-->
+
+                <!-- Fifth Slide Page start-->
+                <div class="page">
+                    <div class="title">Login Details:</div>
+
+                    <div class="field">
+                        <div class="label" id="stud_idLabel">Student ID No.</div>
+                        <input type="text" name="student_id_no" id="student_id_no" oninput="formatStudentID()" required>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Password</div>
+                        <input type="password" name="password" id="passwordInput" oninput="validatePassword(this)" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('passwordInput')">
+                            <i class="fas fa-eye toggle-password-icon"></i>
+                        </span>
+                        <div id="passwordLengthFeedback" class="invalid-feedback">
+                            Password must be at least 8 characters long.
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Confirm Password</div>
+                        <input type="password" name="cpassword" id="confirmPasswordInput" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility('confirmPasswordInput')">
+                            <i class="fas fa-eye toggle-password-icon"></i>
+                        </span>
+                        <p id="error_cpassword"></p>
+                    </div>
+
+                    <div class="field btns">
+                        <button class="prev-4 prev">Previous</button>
+                        <button type="button" class="next-4 next" id="reviewBtn">Next</button>
+                    </div>
+                </div>
+                <!-- Fifth Slide Page end-->
 
                 <div id="reviewModal" class="modal">
                     <div class="modal-content">
@@ -487,6 +530,9 @@ const prevBtnThird = document.querySelector(".prev-2");
 const nextBtnThird = document.querySelector(".next-2");
 
 const prevBtnFourth = document.querySelector(".prev-3");
+const nextBtnFourth = document.querySelector(".next-3");
+
+const prevBtnFifth = document.querySelector(".prev-4");
 const reviewBtn = document.getElementById('reviewBtn');
 const reviewModal = document.getElementById('reviewModal');
 const confirmSignupBtn = document.getElementById('confirmSignupBtn');
@@ -675,86 +721,177 @@ nextBtnThird.addEventListener("click", async function (event) {
 // nextBtnThird End
 
 // nextBtnFourth Start
+document.getElementById('cell_no').addEventListener('input', function (event) {
+  this.value = this.value.replace(/\D/g, '');
+});
 
+document.querySelector('input[name="person_cell_no"]').addEventListener('input', function (event) {
+  this.value = this.value.replace(/\D/g, '');
+});
+
+nextBtnFourth.addEventListener("click", async function (event) {
+  event.preventDefault();
+
+  const cellphone = document.getElementById('cell_no').value;
+  const contactPerson = document.getElementById('contact_person').value;
+  const personCellNo = document.querySelector('input[name="person_cell_no"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+
+  const phonePattern = /^09\d{9}$/;
+  const namePattern = /^[A-Za-z\s]+$/;
+
+  const isValidName = (name) => {
+    return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
+  };
+
+  if (!cellphone || !contactPerson || !personCellNo || !email) {
+    Swal.fire({
+      title: "Please fill all the fields.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  if (!email) {
+    Swal.fire({
+      title: "Please fill in the email.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  if (!isValidName(contactPerson)) {
+    Swal.fire({
+      title: "Contact Person's name must contain only letters and spaces, and must not start with a space.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  if (!phonePattern.test(cellphone)) {
+    Swal.fire({
+      title: "Please enter a valid cellphone number starting with 09 and up to 11 digits.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  if (!phonePattern.test(personCellNo)) {
+    Swal.fire({
+      title: "Please enter a valid contact person's cellphone number starting with 09 and up to 11 digits.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+    return;
+  }
+
+  slidePage.style.marginLeft = "-100%";
+  bullet[current - 1].classList.add("active");
+  progressCheck[current - 1].classList.add("active");
+  progressText[current - 1].classList.add("active");
+  current += 1;
+});
 // nextBtnFourth End
 
 // submitBtn Start
-    
-    document.getElementById('cell_no').addEventListener('input', function (event) {
-    this.value = this.value.replace(/\D/g, '');
-    });
-
-    document.querySelector('input[name="person_cell_no"]').addEventListener('input', function (event) {
-    this.value = this.value.replace(/\D/g, '');
-    });
-
-    document.getElementById('reviewBtn').addEventListener('click', function(event) {
+document.getElementById('reviewBtn').addEventListener('click', function(event) {
     event.preventDefault();
+    
+    const studentId = document.getElementById('student_id_no').value;
+    const password = document.getElementById('passwordInput').value;
+    const confirmPassword = document.getElementById('confirmPasswordInput').value;
+    const role = document.getElementById('role').value; // Get the role value
+    const exampleCheck1 = document.getElementById('exampleCheck1');
+    const isChecked = exampleCheck1.checked;
 
-    const cellphone = document.getElementById('cell_no').value;
-    const contactPerson = document.getElementById('contact_person').value;
-    const personCellNo = document.querySelector('input[name="person_cell_no"]').value;
-    const email = document.querySelector('input[name="email"]').value;
+    const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
+    const xssPattern = /<[^>]*>/; // XSS tag pattern
 
-    const phonePattern = /^09\d{9}$/;
-    const namePattern = /^[A-Za-z\s]+$/;
-
-    const isValidName = (name) => {
-        return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
-    };
-
-    if (!cellphone || !contactPerson || !personCellNo || !email) {
+    if (!studentId || !password || !confirmPassword || !exampleCheck1) {
         Swal.fire({
-        title: "Please fill all the fields.",
-        icon: "error",
-        confirmButtonText: "OK"
+            title: "Please fill all fields.",
+            icon: "error",
+            confirmButtonText: "OK"
         });
         return;
     }
 
-    if (!email) {
+    if (!isChecked) {
         Swal.fire({
-        title: "Please fill in the email.",
-        icon: "error",
-        confirmButtonText: "OK"
+            title: "Please check the box to agree the Terms and Condition.",
+            icon: "error",
+            confirmButtonText: "OK"
         });
         return;
     }
 
-    if (!isValidName(contactPerson)) {
+    if (role === 'student') {
+        // Validate student ID only if role is 'student'
+        if (!studentIdPattern.test(studentId)) {
+            Swal.fire({
+                title: "Please enter a valid student ID in the format 1234-5678.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+    } else if (role === 'faculty' || role === 'staff') {
+        // Check for XSS tags in studentId for faculty and staff roles
+        if (xssPattern.test(studentId)) {
+            Swal.fire({
+                title: "Don't try that or else I get your IP Address.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+    }
+    
+    // Additional password validations
+    if (password.length < 8) {
         Swal.fire({
-        title: "Contact Person's name must contain only letters and spaces, and must not start with a space.",
-        icon: "error",
-        confirmButtonText: "OK"
+            title: "Password must be at least 8 characters long.",
+            icon: "error",
+            confirmButtonText: "OK"
         });
         return;
     }
 
-    if (!phonePattern.test(cellphone)) {
+    if (xssPattern.test(password)) {
         Swal.fire({
-        title: "Please enter a valid cellphone number starting with 09 and up to 11 digits.",
-        icon: "error",
-        confirmButtonText: "OK"
+            title: "Don't try that or else I get your IP Address.",
+            icon: "error",
+            confirmButtonText: "OK"
         });
         return;
     }
 
-    if (!phonePattern.test(personCellNo)) {
+    if (!passwordPattern.test(password)) {
         Swal.fire({
-        title: "Please enter a valid contact person's cellphone number starting with 09 and up to 11 digits.",
-        icon: "error",
-        confirmButtonText: "OK"
+            title: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+            icon: "error",
+            confirmButtonText: "OK"
         });
         return;
     }
 
-    slidePage.style.marginLeft = "-100%";
-    bullet[current - 1].classList.add("active");
-    progressCheck[current - 1].classList.add("active");
-    progressText[current - 1].classList.add("active");
-    current += 1;
+    if (password !== confirmPassword) {
+        Swal.fire({
+            title: "Passwords do not match.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
+    // If all validations pass, show the review modal
     showReviewModal();
-    });
+});
 
 function showReviewModal() {
     // Gather form data
@@ -773,6 +910,7 @@ function showReviewModal() {
     const contactPerson = document.getElementById('contact_person').value;
     const personCellNo = document.querySelector('input[name="person_cell_no"]').value;
     const email = document.querySelector('input[name="email"]').value;
+    const studentId = document.getElementById('student_id_no').value;
 
     // Define the fields based on the role
     let roleSpecificContent = '';
