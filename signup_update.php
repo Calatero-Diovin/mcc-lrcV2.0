@@ -329,7 +329,7 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label">Last Name</div>
-                        <input type="text" name="lastname" id="lastname" required/>
+                        <input type="text" name="lastname" id="lastname" value="<?= $code_row['lastname'];" required/>
                     </div>
 
                     <div class="field">
