@@ -354,12 +354,9 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label" for="role">User Type</div>
                         <select name="role" id="role" required>
-                            <option value="" disabled selected>
-                                <?php echo htmlspecialchars($code_row['role_as']); ?>
-                            </option>
-                            <option value="student">Student</option>
-                            <option value="faculty">Faculty</option>
-                            <option value="staff">Staff</option>
+                            <option value="student" <?php echo ($code_row['role_as'] == 'student') ? 'selected' : ''; ?>>Student</option>
+                            <option value="faculty" <?php echo ($code_row['role_as'] == 'faculty') ? 'selected' : ''; ?>>Faculty</option>
+                            <option value="staff" <?php echo ($code_row['role_as'] == 'staff') ? 'selected' : ''; ?>>Staff</option>
                         </select>
                     </div>
 
