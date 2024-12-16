@@ -17,8 +17,6 @@ if (isset($_POST['register_btn'])) {
     $year_level = mysqli_real_escape_string($con, $_POST['year_level']);
     $course = mysqli_real_escape_string($con, $_POST['course']);
     $student_id_no = mysqli_real_escape_string($con, $_POST['student_id_no']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
     $role_as = mysqli_real_escape_string($con, $_POST['role']);
     $profile_image = isset($_FILES['profile_image']) ? $_FILES['profile_image'] : null;
     $contact_person = mysqli_real_escape_string($con, $_POST['contact_person']);
@@ -76,10 +74,7 @@ if (isset($_POST['register_btn'])) {
         $row = mysqli_fetch_array($result_verify);
         $used = $row['used'];
 
-        if ($used == 0) {
-            // Hash the password
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
+        if ($used == 1) {
             // Handle image upload
             $image_path = "";
             if (isset($profile_image) && $profile_image['error'] == 0) {
@@ -123,18 +118,24 @@ if (isset($_POST['register_btn'])) {
                 }
             }
 
-            // Prepare and execute INSERT query
-            $insert_query = "";
+            // Prepare and execute UPDATE query
+            $update_query = "";
             if ($role_as == 'student') {
-                $insert_query = "INSERT INTO user (lastname, firstname, middlename, gender, course, address, cell_no, birthdate, email, year_level, student_id_no, password, role_as, status, user_added, profile_image, contact_person, person_cell_no) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW(), ?, ?, ?)";
+                $update_query = "UPDATE user SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, email = ?, year_level = ?, student_id_no = ?, role_as = ?, status = 'pending', user_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE student_id_no = ?";
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                $insert_query = "INSERT INTO faculty (lastname, firstname, middlename, gender, course, address, cell_no, birthdate, email, username, password, role_as, status, faculty_added, profile_image, contact_person, person_cell_no) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW(), ?, ?, ?)";
+                $update_query = "UPDATE faculty SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, email = ?, username = ?, role_as = ?, status = 'pending', faculty_updated = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ?";
             }
 
-            $stmt_insert = mysqli_prepare($con, $insert_query);
-            mysqli_stmt_bind_param($stmt_insert, 'ssssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $student_id_no, $hashed_password, $role_as, $image_path, $contact_person, $person_cell_no);
+            $stmt_update = mysqli_prepare($con, $update_query);
+
+            // Bind parameters for the UPDATE query
+            if ($role_as == 'student') {
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $year_level, $student_id_no, $role_as, $image_path, $contact_person, $person_cell_no, $student_id_no);
+            } elseif ($role_as == 'faculty' || $role_as == 'staff') {
+                mysqli_stmt_bind_param($stmt_update, 'ssssssssssssssss', $lastname, $firstname, $middlename, $gender, $course, $address, $cell_no, $birthdate, $email, $username, $role_as, $image_path, $contact_person, $person_cell_no, $email);
+            }
             
-            if (mysqli_stmt_execute($stmt_insert)) {
+            if (mysqli_stmt_execute($stmt_update)) {
                 // Generate QR Code
                 $identifier = $student_id_no; // Adjust username if needed for faculty
                 $qrdata = "$identifier"; // Example data to encode in QR code
@@ -159,7 +160,7 @@ if (isset($_POST['register_btn'])) {
                     mysqli_stmt_bind_param($stmt_update_verify, 's', $email);
                     mysqli_stmt_execute($stmt_update_verify);
                     
-                    $_SESSION['status'] = "Registered successfully, wait for approval.";
+                    $_SESSION['status'] = "Update Successfull, wait for the approval.";
                     $_SESSION['status_code'] = "success";
                     header("Location: login.php");
                     exit(0);
@@ -170,7 +171,7 @@ if (isset($_POST['register_btn'])) {
                     exit(0);
                 }
             } else {
-                $_SESSION['status'] = "Failed to register user";
+                $_SESSION['status'] = "Failed to update user";
                 $_SESSION['status_code'] = "error";
                 header("Location: login.php");
                 exit(0);
