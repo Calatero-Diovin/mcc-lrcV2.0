@@ -1,5 +1,6 @@
 <?php
 include('authentication.php');
+include('includes/url.php');
 use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -45,7 +46,7 @@ if (isset($_POST['deny'])) {
     $email_row = mysqli_fetch_assoc($result);
 
         if ($email_row) {
-            $student_email = $email_row['email'];
+            $student_email = encryptor('encrypt', $email_row['email']);
             
             $subject = "Account Denied Notification";
             $message = " <html>
