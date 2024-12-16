@@ -373,9 +373,6 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label">Profile Image</div>
-                        <?php if (!empty($code_row['profile_image'])): ?>
-                            <input type="hidden" id="old_profile_image" value="<?php echo htmlspecialchars($code_row['profile_image']); ?>">
-                        <?php endif; ?>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*">
                     </div>
 
