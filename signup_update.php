@@ -433,23 +433,23 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field" style="margin-top:-2px;">
                         <div class="label">Email</div>
-                        <input type="email" placeholder="MS 365 Email" name="email" value="<?=$code_row['username'];?>" readonly required/>
+                        <input type="email" placeholder="MS 365 Email" name="email" value="<?php echo htmlspecialchars($code_row['email']); ?>" readonly required/>
                     </div>
 
                     <div class="field">
                         <div class="label">Cellphone No.</div>
-                        <input type="tel" id="cell_no" name="cell_no" class="format_number" maxlength="11" placeholder="09xxxxxxxxx" oninput="validateCellphone(this)" required>
+                        <input type="tel" id="cell_no" name="cell_no" value="<?php echo htmlspecialchars($code_row['cell_no']); ?>" class="format_number" maxlength="11" placeholder="09xxxxxxxxx" oninput="validateCellphone(this)" required>
                     </div>
                     <div id="warning_message">Invalid phone number. It should start with 09 and contain 11 digits.</div>
 
                     <div class="field">
                         <div class="label">Contact Person</div>
-                        <input type="text" id="contact_person" name="contact_person" required>
+                        <input type="text" id="contact_person" name="contact_person" value="<?php echo htmlspecialchars($code_row['contact_person']); ?>" required>
                     </div>
 
                     <div class="field">
                         <div class="label">Contact Person Cellphone No.</div>
-                        <input type="tel" name="person_cell_no" class="format_number" maxlength="11" placeholder="09xxxxxxxxx" required oninput="validateNumber(this)">
+                        <input type="tel" name="person_cell_no" value="<?php echo htmlspecialchars($code_row['person_cell_no']); ?>" class="format_number" maxlength="11" placeholder="09xxxxxxxxx" required oninput="validateNumber(this)">
                     </div>
                     <div id="warning_messages">Invalid phone number. It should start with 09 and contain 11 digits.</div>
 
