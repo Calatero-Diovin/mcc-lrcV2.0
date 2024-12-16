@@ -375,7 +375,7 @@ if (strpos($request, '.php') !== false) {
                         <div class="label">Profile Image</div>
                         <?php if (!empty($code_row['profile_image'])): ?>
                             <div class="current-image">
-                                <img src="<?php echo htmlspecialchars($code_row['profile_image']); ?>" alt="Profile Image" width="100" height="100">
+                                <img src="uploads/profile_images/<?php echo htmlspecialchars($code_row['profile_image']); ?>" alt="Profile Image" width="100" height="100">
                                 <p>Current Profile Image</p>
                             </div>
                         <?php endif; ?>
