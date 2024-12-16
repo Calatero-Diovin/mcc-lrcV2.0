@@ -334,12 +334,12 @@ if (strpos($request, '.php') !== false) {
 
                     <div class="field">
                         <div class="label">First Name</div>
-                        <input type="text" name="firstname" id="firstname" required/>
+                        <input type="text" name="firstname" id="firstname" value="<?= $code_row['firstname']; ?>" required/>
                     </div>
 
                     <div class="field">
                         <div class="label">Middle Name <span style="font-weight:200;color:gray;font-size:13px;">(optional)</span></div>
-                        <input type="text" name="middlename" id="middlename" />
+                        <input type="text" name="middlename" id="middlename" value="<?= $code_row['middlename']; ?>"/>
                     </div>
 
                     <div class="field option">
