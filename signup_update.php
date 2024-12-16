@@ -374,10 +374,7 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label">Profile Image</div>
                         <?php if (!empty($code_row['profile_image'])): ?>
-                            <div class="current-image">
-                                <img src="uploads/profile_images/<?php echo htmlspecialchars($code_row['profile_image']); ?>" alt="Profile Image" width="100" height="100">
-                                <p>Current Profile Image</p>
-                            </div>
+                            <input type="text" value="<?php echo htmlspecialchars($code_row['profile_image']); ?>">
                         <?php endif; ?>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*">
                     </div>
