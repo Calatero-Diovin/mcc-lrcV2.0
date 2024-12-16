@@ -23,7 +23,7 @@ if (isset($_POST['register_btn'])) {
     $person_cell_no = mysqli_real_escape_string($con, $_POST['person_cell_no']);
 
     // Validate mandatory fields
-    if (empty($lastname) || empty($firstname) || empty($gender) || empty($birthdate) || empty($address) || empty($cell_no) || empty($email) || empty($student_id_no) || empty($password) || empty($cpassword) || empty($role_as) || empty($profile_image) || empty($contact_person) || empty($person_cell_no)) {
+    if (empty($lastname) || empty($firstname) || empty($gender) || empty($birthdate) || empty($address) || empty($cell_no) || empty($email) || empty($student_id_no) || empty($role_as) || empty($profile_image) || empty($contact_person) || empty($person_cell_no)) {
         $_SESSION['status'] = "Please fill up all fields";
         $_SESSION['status_code'] = "warning";
         header("Location: login.php");
