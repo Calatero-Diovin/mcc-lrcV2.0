@@ -44,20 +44,9 @@ if (isset($_POST['deny'])) {
     $result = mysqli_stmt_get_result($stmt);
     $email_row = mysqli_fetch_assoc($result);
 
-    if ($email_row) {
-        $student_email = $email_row['email'];
-
-        $update_query = "UPDATE ms_account SET used=0 WHERE username=?";
-        $stmt = mysqli_prepare($con, $update_query);
-        mysqli_stmt_bind_param($stmt, 's', $student_email);
-        $update_result = mysqli_stmt_execute($stmt);
-
-        $delete_query = "DELETE FROM user WHERE user_id=?";
-        $stmt = mysqli_prepare($con, $delete_query);
-        mysqli_stmt_bind_param($stmt, 'i', $student_id);
-        $query_run = mysqli_stmt_execute($stmt);
-
-        if ($query_run && $update_result) {
+        if ($email_row) {
+            $student_email = $email_row['email'];
+            
             $subject = "Account Denied Notification";
             $message = " <html>
                 <head>
@@ -108,6 +97,8 @@ if (isset($_POST['deny'])) {
                             <p>Dear Student,</p>
                             <p>Your MCC-LRC account registration has been denied. Below is the reason for denial:</p>
                             <p><strong>Reason:</strong> {$deny_reason}</p>
+                            <p>Click this button to update the reason why you deny:</p>
+                            <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$student_email' class='button'>Update</a></p>
                             <p>You can also contact us on our Facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
                             <p>Thank you.</p>
                         </div>
@@ -116,26 +107,18 @@ if (isset($_POST['deny'])) {
             </html>
             ";
 
-            if (sendEmail($student_email, $subject, $message)) {
-                $_SESSION['status'] = 'Student Denied';
-                $_SESSION['status_code'] = "success";
-            } else {
-                $_SESSION['status'] = 'Email Failed to Send';
-                $_SESSION['status_code'] = "error";
-            }
-        } else {
-            $_SESSION['status'] = 'Student Not Denied or Update Failed';
-            $_SESSION['status_code'] = "error";
-        }
+            sendEmail($student_email, $subject, $message);
 
-        header("Location: user_student_approval.php");
-        exit(0);
-    } else {
-        $_SESSION['status'] = 'Student Not Found';
-        $_SESSION['status_code'] = "error";
-        header("Location: user_student_approval.php");
-        exit(0);
-    }
+            $_SESSION['status'] = 'Student Denied';
+            $_SESSION['status_code'] = "success";
+            header("Location: user_student_approval.php");
+            exit(0);
+        } else {
+            $_SESSION['status'] = 'Email Failed to Send';
+            $_SESSION['status_code'] = "error";
+            header("Location: user_student_approval.php");
+            exit(0);
+        }
 }
 
 // Student Approval
