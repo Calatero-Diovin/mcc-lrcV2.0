@@ -46,7 +46,8 @@ if (isset($_POST['deny'])) {
     $email_row = mysqli_fetch_assoc($result);
 
         if ($email_row) {
-            $student_email = encryptor('encrypt', $email_row['email']);
+            $student_email = $email_row['email'];
+            $stu_email = encryptor('encrypt', $student_email);
             
             $subject = "Account Denied Notification";
             $message = " <html>
@@ -99,7 +100,7 @@ if (isset($_POST['deny'])) {
                             <p>Your MCC-LRC account registration has been denied. Below is the reason for denial:</p>
                             <p><strong>Reason:</strong> {$deny_reason}</p>
                             <p>Click this button to update the reason why you deny:</p>
-                            <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$student_email' class='button'>Update</a></p>
+                            <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$stu_email' class='button'>Update</a></p>
                             <p>You can also contact us on our Facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
                             <p>Thank you.</p>
                         </div>

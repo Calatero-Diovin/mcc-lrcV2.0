@@ -1,5 +1,5 @@
 <?php 
-include('signup_script.php');
+include('signup_script_update.php');
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -322,7 +322,7 @@ if (strpos($request, '.php') !== false) {
 
         <!-- Multi Step Form end -->
         <div class="form-outer">
-            <form action="signupcode.php" method="POST" enctype="multipart/form-data">
+            <form action="signupcode_update.php" method="POST" enctype="multipart/form-data">
                 <!-- First Slide Page start-->
                 <div class="page slide-page">
                     <div class="title">Personal Details:</div>
