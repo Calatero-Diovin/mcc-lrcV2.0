@@ -163,16 +163,17 @@ include('./includes/sidebar.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
-     $(document).ready(function() {
-        $('#example3').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                { extend: 'print' },
-                { extend: 'excelHtml5', autoFilter: true, sheetName: 'Exported data' },
-                { extend: 'pdfHtml5' },
-                { extend: 'copyHtml5' },
-                { extend: 'pageLength' }
-            ],
+     const initDataTable = (selector) => {
+        new DataTable(selector, {
+                topStart: {
+                    buttons: [
+                        { extend: 'print' },
+                        { extend: 'excelHtml5', autoFilter: true, sheetName: 'Exported data' },
+                        { extend: 'pdfHtml5' },
+                        { extend: 'copyHtml5' },
+                        { extend: 'pageLength' } 
+                    ]
+            },
             language: {
                 buttons: {
                     copyTitle: 'Added to clipboard',
@@ -184,7 +185,9 @@ include('./includes/sidebar.php');
                 }
             }
         });
-    });
+    };
+
+    initDataTable('#example3');
 </script>
 
 
