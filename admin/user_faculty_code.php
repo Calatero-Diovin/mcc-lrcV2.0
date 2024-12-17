@@ -462,7 +462,7 @@ if (isset($_POST['delete_faculty_id'])) {
                         </div>
                         <div class='content'>
                             <h1 style='color:#dc3545;text-align:center;'>Your Account has been Deleted!!!</h1>
-                            <p>Dear Student,</p>
+                            <p>Dear Faculty,</p>
                             <p>Your MCC-LRC account has been deleted. Below is the reason for deletion:</p>
                             <p><strong>Reason:</strong> {$delete_reason}</p>
                             <p>Click this button to update the reason why your account delete:</p>
