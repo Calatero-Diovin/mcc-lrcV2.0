@@ -148,39 +148,37 @@ if (isset($_POST['text'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['scan_error']) && $_SESSION['scan_error']): ?>
-            <?php unset($_SESSION['scan_error']); ?>
+         // Show SweetAlert if scan_error is present
+         <?php if (isset($_SESSION['scan_error']) && $_SESSION['scan_error']) { ?>
             Swal.fire({
                 icon: 'error',
                 title: 'Scan Error',
                 text: 'QR Code not recognized or user not approved.',
                 showConfirmButton: false,
                 allowOutsideClick: false,
-                timer: 1500, 
+                timer: 3000, 
             }).then(() => {
                 window.location.href = '.'; 
             });
-        <?php endif; ?>
-    });
+            <?php unset($_SESSION['scan_error']); ?>
+        <?php } ?>
     </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['timeout']) && $_SESSION['timeout']): ?>
-            <?php unset($_SESSION['timeout']); ?>
+
+    <?php if (isset($_SESSION['timeout']) && $_SESSION['timeout']) { ?>
             Swal.fire({
                 icon: 'success',
                 title: 'Time Out',
-                text: 'Thank you. Come Again.',
+                text: 'Thank You. Come Again',
                 showConfirmButton: false,
                 allowOutsideClick: false,
-                timer: 1500, 
+                timer: 3000, 
             }).then(() => {
                 window.location.href = '.'; 
             });
-        <?php endif; ?>
-    });
+            <?php unset($_SESSION['timeout']); ?>
+        <?php } ?>
 </script>
 </body>
 </html>
