@@ -1,5 +1,6 @@
 <?php
 include('authentication.php');
+include('includes/url.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
