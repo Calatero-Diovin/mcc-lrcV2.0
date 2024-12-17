@@ -2,6 +2,15 @@
 include('authentication.php');
 include('includes/header.php'); 
 include('./includes/sidebar.php'); 
+
+// if (isset($_POST['delete_all'])) {
+//      $delete_query = "DELETE FROM user_log";
+//      if (mysqli_query($con, $delete_query)) {
+//          echo "<script>alert('All user logs have been deleted successfully.');</script>";
+//      } else {
+//          echo "<script>alert('Error deleting user logs: " . mysqli_error($con) . "');</script>";
+//      }
+//  }
 ?>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
@@ -52,6 +61,10 @@ include('./includes/sidebar.php');
 
                                              </form>
 
+                                             <!-- <form action="" method="POST" class="col-12 col-md-3 d-flex justify-content-center">
+                                                            <button type="submit" name="delete_all" class="btn btn-danger btn-sm">Delete All Logs</button>
+                                                       </form> -->
+
                                         </div>
 
                                         <div class="container">
@@ -78,7 +91,7 @@ include('./includes/sidebar.php');
                                       $from_date = $_POST['from_date'];
                                       $to_date = $_POST['to_date'];
 
-                                      $query = "SELECT * FROM user_log WHERE date_log BETWEEN '$from_date' AND '$to_date' ORDER BY date_log DESC";
+                                      $query = "SELECT * FROM user_log WHERE date_log BETWEEN '$from_date' AND '$to_date' ORDER BY date_log DESC, time_log DESC";
                                       $query_run = mysqli_query($con, $query);
 
                                       if(mysqli_num_rows($query_run) > 0 )
@@ -102,7 +115,7 @@ include('./includes/sidebar.php');
                        else
                        {
                        
-                            $result= mysqli_query($con,"SELECT * FROM user_log ORDER BY date_log DESC");
+                            $result= mysqli_query($con,"SELECT * FROM user_log ORDER BY date_log DESC, time_log DESC");
                             while ($row= mysqli_fetch_array ($result) ){
                            
                                                   ?>
