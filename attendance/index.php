@@ -109,8 +109,8 @@ if (isset($_POST['text'])) {
         <section class="section dashboard">
             <div class="container">
                 <div class="row">
-                    <div style="margin:0 auto;" class="col-md-6">
-                        <video id="preview" width="100%"></video>
+                    <div class="col-md-6 d-flex justify-content-center align-items-center" style="height: 100vh;">
+                        <video id="preview" width="100%" style="max-width: 100%; max-height: 100%;"></video>
                     </div>
                     <div class="col-md-6">
                         <form action="process_qr.php" method="post" class="form-horizontal">
