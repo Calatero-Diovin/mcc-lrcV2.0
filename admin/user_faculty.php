@@ -162,7 +162,7 @@ include('./includes/sidebar.php');
       </div>
       <div class="modal-body">
         <form id="deleteFacultyForm" method="POST" action="user_faculty_code.php">
-          <input type="text" value="<?= $user['faculty_id']; ?>" name="delete_faculty_id" id="deletefacultyId">
+          <input type="hidden" value="<?= $user['faculty_id']; ?>" name="delete_faculty_id" id="deletefacultyId">
           <div class="mb-3">
           <label for="deleteReason" class="form-label">Reason for Delete</label>
           <textarea class="form-control" id="deleteReason" name="delete_reason" rows="4" required></textarea>
