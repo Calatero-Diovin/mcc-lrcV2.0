@@ -61,6 +61,9 @@ if (isset($_POST['text'])) {
     <script type="text/javascript" src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/adapter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
     <script>
         function updateClock() {
             var now = new Date();
