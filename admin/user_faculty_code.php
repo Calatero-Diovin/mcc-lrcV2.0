@@ -398,13 +398,12 @@ if(isset($_POST['unblock_faculty'])) {
 
 // Delete Action
 if (isset($_POST['delete_faculty_id'])) {
-    global $con; 
 
     $faculty_id = mysqli_real_escape_string($con, $_POST['delete_faculty_id']);
     $delete_reason = mysqli_real_escape_string($con, $_POST['delete_reason']);
 
     // Fetch the faculty's email
-    $email_query = "SELECT email FROM user WHERE user_id=?";
+    $email_query = "SELECT email FROM faculty WHERE faculty_id=?";
     $stmt = mysqli_prepare($con, $email_query);
     mysqli_stmt_bind_param($stmt, 'i', $faculty_id);
     mysqli_stmt_execute($stmt);
@@ -413,20 +412,8 @@ if (isset($_POST['delete_faculty_id'])) {
 
     if ($email_row) {
         $faculty_email = $email_row['email'];
+        $fac_email = encryptor('encrypt', $faculty_email);
 
-        // Update the MS account status
-        $used_query = "UPDATE ms_account SET used=0 WHERE username=?";
-        $stmt = mysqli_prepare($con, $used_query);
-        mysqli_stmt_bind_param($stmt, 's', $faculty_email);
-        mysqli_stmt_execute($stmt);
-
-        // Delete the user
-        $query = "DELETE FROM user WHERE user_id=?";
-        $stmt = mysqli_prepare($con, $query);
-        mysqli_stmt_bind_param($stmt, 'i', $faculty_id);
-        $query_run = mysqli_stmt_execute($stmt);
-
-        if ($query_run) {
             // Prepare and send email notification
             $subject = "Account Delete Notification";
             $message = "<html>
@@ -478,6 +465,10 @@ if (isset($_POST['delete_faculty_id'])) {
                             <p>Dear Faculty,</p>
                             <p>Your MCC-LRC account has been deleted. Below is the reason for deletion:</p>
                             <p><strong>Reason:</strong> {$delete_reason}</p>
+                            <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$fac_email' class='button'>Update</a></p>
+                            <div class='header'>
+                                <img src='https://mcc-lrc.com/images/valid.jpg' alt='Valid ID'>
+                            </div>
                             <p>Please contact the library for more details.</p>
                             <p>You can also contact us on our Facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
                             <p>Thank you.</p>
@@ -486,26 +477,23 @@ if (isset($_POST['delete_faculty_id'])) {
                 </body>
             </html>";
 
-            if (sendEmail($faculty_email, $subject, $message)) {
-                $_SESSION['status'] = 'Faculty Deleted Successfully and Email Sent';
-                $_SESSION['status_code'] = "success";
-            } else {
+            sendEmail($faculty_email, $subject, $message);
+
+                $update_query = "UPDATE faculty SET status = 'archived' WHERE faculty_id = ?";
+                $update_stmt = mysqli_prepare($con, $update_query);
+                mysqli_stmt_bind_param($update_stmt, 'i', $facultyId);
+                mysqli_stmt_execute($update_stmt);
+
                 $_SESSION['status'] = 'Faculty Deleted Successfully';
                 $_SESSION['status_code'] = "success";
+                header("Location: user_faculty.php");
+                exit(0);
+            } else {
+                $_SESSION['status'] = 'Failed to delete faculty';
+                $_SESSION['status_code'] = "success";
+                header("Location: user_faculty.php");
+                exit(0);
             }
-        } else {
-            $_SESSION['status'] = 'Faculty Deletion Failed';
-            $_SESSION['status_code'] = "error";
-        }
-
-        header("Location: user_faculty.php");
-        exit(0);
-    } else {
-        $_SESSION['status'] = 'Faculty Not Found';
-        $_SESSION['status_code'] = "error";
-        header("Location: user_faculty.php");
-        exit(0);
-    }
 }
 
 // Edit Faculty

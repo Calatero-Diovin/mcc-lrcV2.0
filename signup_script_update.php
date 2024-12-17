@@ -4,27 +4,42 @@ session_start();
 include('./admin/config/dbcon.php');
 include('includes/url.php');
 
-// Check if 'code' is provided in the URL
+// Check if 'a' parameter is provided in the URL
 if (!isset($_GET['a']) || empty($_GET['a'])) {
     header("Location: 404.php");
     exit;
 }
 
-$code = encryptor('decrypt', $_GET['a']);
+$code = encryptor('decrypt', $_GET['a']); // Decrypt the code from the URL
 
-// Prepare query to fetch the verification code and its creation time
-$code_query = "SELECT * FROM user WHERE email = ?";
-$code_stmt = $con->prepare($code_query);
-$code_stmt->bind_param("s", $code);
-$code_stmt->execute();
-$code_result = $code_stmt->get_result();
+// Check if the email exists in the faculty table
+$faculty_query = "SELECT * FROM faculty WHERE email = ?";
+$faculty_stmt = $con->prepare($faculty_query);
+$faculty_stmt->bind_param("s", $code); // Bind the decrypted email
+$faculty_stmt->execute();
+$faculty_result = $faculty_stmt->get_result();
 
-if ($code_result->num_rows > 0) {
-    $code_row = $code_result->fetch_assoc();
+// If email is found in the faculty table
+if ($faculty_result->num_rows > 0) {
+    $faculty_row = $faculty_result->fetch_assoc();
 } else {
-    header("Location: 404.php");
-    exit;
+    // If email is not found in the faculty table, check the user table
+    $user_query = "SELECT * FROM user WHERE email = ?";
+    $user_stmt = $con->prepare($user_query);
+    $user_stmt->bind_param("s", $code); // Bind the decrypted email
+    $user_stmt->execute();
+    $user_result = $user_stmt->get_result();
+
+    // If email is found in the user table
+    if ($user_result->num_rows > 0) {
+        $user_row = $user_result->fetch_assoc();
+    } else {
+        // If the email is not found in either table, show a 404 page
+        header("Location: 404.php");
+        exit;
+    }
 }
 
-$code_stmt->close();
+$faculty_stmt->close();
+$user_stmt->close();
 ?>
