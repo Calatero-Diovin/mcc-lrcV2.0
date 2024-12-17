@@ -168,22 +168,22 @@ if (isset($_POST['text'])) {
         });
     </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($_SESSION['timeout']) && $_SESSION['timeout']): ?>
-            <?php unset($_SESSION['timeout']); ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Time Out',
-                text: 'Thank you. Come Again.',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                timer: 3000, 
-            }).then(() => {
-                window.location.href = '.'; 
-            });
-        <?php endif; ?>
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($_SESSION['timeout']) && $_SESSION['timeout']): ?>
+                <?php unset($_SESSION['timeout']); ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Time Out',
+                    text: 'Thank you. Come Again.',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 3000, 
+                }).then(() => {
+                    window.location.href = '.'; 
+                });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>
