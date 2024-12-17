@@ -165,7 +165,6 @@ include('./includes/sidebar.php');
 <script>
      const initDataTable = (selector) => {
         new DataTable(selector, {
-            order: [[0, 'asc']],
             layout: {
                 topStart: {
                     buttons: [
