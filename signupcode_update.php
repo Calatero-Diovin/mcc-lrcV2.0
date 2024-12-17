@@ -44,7 +44,7 @@ if (isset($_POST['register_btn'])) {
     if (mysqli_stmt_num_rows($stmt_email_check) > 0) {
         $_SESSION['status'] = ($role_as == 'student') ? "Student ID No. not match to this email" : "Username not match to this email";
         $_SESSION['status_code'] = "warning";
-        header("Location: login.php");
+        header("Location: signup_update.php?a=$email");
         exit(0);
     }
 
