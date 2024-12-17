@@ -109,7 +109,7 @@ if (isset($_POST['text'])) {
         <section class="section dashboard">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div style="margin:0 auto;" class="col-md-6">
                         <video id="preview" width="100%"></video>
                     </div>
                     <div class="col-md-6">
