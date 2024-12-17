@@ -402,7 +402,7 @@ if (isset($_POST['delete_faculty_id'])) {
     $faculty_id = mysqli_real_escape_string($con, $_POST['delete_faculty_id']);
     $delete_reason = mysqli_real_escape_string($con, $_POST['delete_reason']);
 
-    // Fetch the faculty's email
+    // Fetch the student's email
     $email_query = "SELECT email FROM faculty WHERE faculty_id=?";
     $stmt = mysqli_prepare($con, $email_query);
     mysqli_stmt_bind_param($stmt, 'i', $faculty_id);
@@ -462,9 +462,10 @@ if (isset($_POST['delete_faculty_id'])) {
                         </div>
                         <div class='content'>
                             <h1 style='color:#dc3545;text-align:center;'>Your Account has been Deleted!!!</h1>
-                            <p>Dear Faculty,</p>
+                            <p>Dear Student,</p>
                             <p>Your MCC-LRC account has been deleted. Below is the reason for deletion:</p>
                             <p><strong>Reason:</strong> {$delete_reason}</p>
+                            <p>Click this button to update the reason why your account delete:</p>
                             <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$fac_email' class='button'>Update</a></p>
                             <div class='header'>
                                 <img src='https://mcc-lrc.com/images/valid.jpg' alt='Valid ID'>
@@ -481,7 +482,7 @@ if (isset($_POST['delete_faculty_id'])) {
 
                 $update_query = "UPDATE faculty SET status = 'archived' WHERE faculty_id = ?";
                 $update_stmt = mysqli_prepare($con, $update_query);
-                mysqli_stmt_bind_param($update_stmt, 'i', $facultyId);
+                mysqli_stmt_bind_param($update_stmt, 'i', $faculty_id);
                 mysqli_stmt_execute($update_stmt);
 
                 $_SESSION['status'] = 'Faculty Deleted Successfully';
