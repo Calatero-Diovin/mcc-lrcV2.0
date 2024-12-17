@@ -96,7 +96,7 @@ if (isset($_POST['text'])) {
             </a>
         </div>
         <div class="d-flex align-items-center">
-            <span id="time" class="mx-2 text-black"></span>
+            <span id="time" class="mx-2 text-black text-center"></span>
         </div>
     </header>
 
