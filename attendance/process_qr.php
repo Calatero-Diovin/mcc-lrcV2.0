@@ -44,6 +44,7 @@ if (isset($_POST['text'])) {
             $log_update_stmt->execute();
 
             if ($log_update_stmt->affected_rows > 0) {
+                $_SESSION['timeout'] = true;
                 header("Location:.");
                 exit();
             } else {
@@ -92,6 +93,7 @@ if (isset($_POST['text'])) {
             $log_update_stmt->execute();
 
             if ($log_update_stmt->affected_rows > 0) {
+                $_SESSION['timeout'] = true;
                 header("Location:.");
                 exit();
             } else {
