@@ -102,7 +102,7 @@ if (isset($_POST['deny'])) {
                             <p>Click this button to update the reason why you deny:</p>
                             <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$stu_email' class='button'>Update</a></p>
                             <div class='header'>
-                                <img src='https://mcc-lrc.com/images/valid_prof.jpg' alt='Valid ID'>
+                                <img src='https://mcc-lrc.com/images/valid.jpg' alt='Valid ID'>
                             </div>
                             <p>You can also contact us on our Facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
                             <p>Thank you.</p>
