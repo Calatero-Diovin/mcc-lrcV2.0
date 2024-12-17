@@ -13,7 +13,7 @@ if (!isset($_GET['a']) || empty($_GET['a'])) {
 $code = encryptor('decrypt', $_GET['a']); // Decrypt the code from the URL
 
 // Check if the email exists in the faculty table
-$faculty_query = "SELECT * FROM faculty WHERE email = ?";
+$faculty_query = "SELECT *, faculty_added FROM faculty WHERE email = ? AND status = 'archived'";
 $faculty_stmt = $con->prepare($faculty_query);
 $faculty_stmt->bind_param("s", $code); // Bind the decrypted email
 $faculty_stmt->execute();
@@ -35,7 +35,7 @@ if ($faculty_result->num_rows > 0) {
     }
 } else {
     // If email is not found in the faculty table, check the user table
-    $user_query = "SELECT * FROM user WHERE email = ?";
+    $user_query = "SELECT * FROM user WHERE email = ? AND status = 'archived'";
     $user_stmt = $con->prepare($user_query);
     $user_stmt->bind_param("s", $code); // Bind the decrypted email
     $user_stmt->execute();
