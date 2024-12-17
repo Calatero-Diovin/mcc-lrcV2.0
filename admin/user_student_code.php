@@ -114,6 +114,11 @@ if (isset($_POST['deny'])) {
 
             sendEmail($student_email, $subject, $message);
 
+            $update_query = "UPDATE user SET status = 'archived' WHERE user_id = ?";
+            $update_stmt = mysqli_prepare($con, $update_query);
+            mysqli_stmt_bind_param($update_stmt, 'i', $student_id);
+            mysqli_stmt_execute($update_stmt);
+
             $_SESSION['status'] = 'Student Denied';
             $_SESSION['status_code'] = "success";
             header("Location: user_student_approval.php");
