@@ -98,11 +98,6 @@ if (isset($_POST['text'])) {
         <div class="d-flex align-items-center">
             <span id="time" class="mx-2 text-black"></span>
         </div>
-        <div class="d-flex align-items-center">
-            <a href="index.php" class="btn btn-primary position-relative mx-5">
-                Back
-            </a>
-        </div>
     </header>
 
     <main id="main" class="main">
