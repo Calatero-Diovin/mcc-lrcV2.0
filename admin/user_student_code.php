@@ -484,7 +484,6 @@ if (isset($_POST['deny'])) {
 
 // Delete Action
 if (isset($_POST['delete_student_id'])) {
-    global $con; 
 
     $student_id = mysqli_real_escape_string($con, $_POST['delete_student_id']);
     $delete_reason = mysqli_real_escape_string($con, $_POST['delete_reason']);
@@ -566,7 +565,7 @@ if (isset($_POST['delete_student_id'])) {
             </html>";
 
             sendEmail($student_email, $subject, $message);
-            
+
                 $update_query = "UPDATE user SET status = 'archived' WHERE user_id = ?";
                 $update_stmt = mysqli_prepare($con, $update_query);
                 mysqli_stmt_bind_param($update_stmt, 'i', $student_id);
