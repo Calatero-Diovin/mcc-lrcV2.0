@@ -30,39 +30,6 @@ if (isset($_POST['register_btn'])) {
         exit(0);
     }
 
-    // Check if student ID, username, or email already exists
-    $check_query = "";
-    $email_check_query = "SELECT email FROM user WHERE email = ? UNION SELECT email FROM faculty WHERE email = ?";
-
-    if ($role_as == 'student') {
-        $check_query = "SELECT student_id_no FROM user WHERE student_id_no = ?";
-    } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-        $check_query = "SELECT username FROM faculty WHERE username = ?"; // Assuming username is used for faculty
-    }
-
-    // Prepare statements to avoid SQL injection
-    $stmt_check = mysqli_prepare($con, $check_query);
-    mysqli_stmt_bind_param($stmt_check, 's', $student_id_no);
-    mysqli_stmt_execute($stmt_check);
-    mysqli_stmt_store_result($stmt_check);
-
-    $stmt_email_check = mysqli_prepare($con, $email_check_query);
-    mysqli_stmt_bind_param($stmt_email_check, 'ss', $email, $email);
-    mysqli_stmt_execute($stmt_email_check);
-    mysqli_stmt_store_result($stmt_email_check);
-
-    if (mysqli_stmt_num_rows($stmt_check) > 0) {
-        $_SESSION['status'] = ($role_as == 'student') ? "Student ID No. already exists" : "Username already exists";
-        $_SESSION['status_code'] = "warning";
-        header("Location: login.php");
-        exit(0);
-    } elseif (mysqli_stmt_num_rows($stmt_email_check) > 0) {
-        $_SESSION['status'] = "Email already exists";
-        $_SESSION['status_code'] = "warning";
-        header("Location: login.php");
-        exit(0);
-    }
-
     // Check email verification
     $check_verify = "SELECT used FROM ms_account WHERE username = ?";
     $stmt_verify = mysqli_prepare($con, $check_verify);
