@@ -88,9 +88,9 @@ if (isset($_POST['register_btn'])) {
             // Prepare and execute UPDATE query
             $update_query = "";
             if ($role_as == 'student') {
-                $update_query = "UPDATE user SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, year_level = ?, role_as = ?, status = 'pending', user_added = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ? AND status = 'pending'";
+                $update_query = "UPDATE user SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, year_level = ?, role_as = ?, status = 'pending', user_added = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ? AND status = 'archived'";
             } elseif ($role_as == 'faculty' || $role_as == 'staff') {
-                $update_query = "UPDATE faculty SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, role_as = ?, status = 'pending', faculty_added = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ? AND status = 'pending'";
+                $update_query = "UPDATE faculty SET lastname = ?, firstname = ?, middlename = ?, gender = ?, course = ?, address = ?, cell_no = ?, birthdate = ?, role_as = ?, status = 'pending', faculty_added = NOW(), profile_image = ?, contact_person = ?, person_cell_no = ? WHERE email = ? AND status = 'archived'";
             }
 
             $stmt_update = mysqli_prepare($con, $update_query);
