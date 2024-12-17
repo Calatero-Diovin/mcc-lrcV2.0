@@ -115,7 +115,7 @@ if (isset($_POST['text'])) {
                     <div class="col-md-6">
                         <form action="process_qr.php" method="post" class="form-horizontal">
                             <label>SCAN QR CODE</label>
-                            <input type="text" name="text" id="text" readonly="" placeholder="scan QR code" class="form-control">
+                            <!-- <input type="text" name="text" id="text" readonly="" placeholder="scan QR code" class="form-control"> -->
                         </form>
                     </div>
                 </div>
