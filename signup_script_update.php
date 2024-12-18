@@ -13,11 +13,17 @@ if (!isset($_GET['a']) || empty($_GET['a'])) {
 $code = encryptor('decrypt', $_GET['a']);
 
 // Prepare query to fetch the verification code and its creation time
-$code_query = "SELECT * FROM user WHERE email = ?";
+$code_query = "SELECT * FROM user WHERE email = ? AND status = 'archived'";
 $code_stmt = $con->prepare($code_query);
 $code_stmt->bind_param("s", $code);
 $code_stmt->execute();
 $code_result = $code_stmt->get_result();
+
+$faculty_query = "SELECT * FROM faculty WHERE email = ? AND status = 'archived'";
+$faculty_stmt = $con->prepare($faculty_query);
+$faculty_stmt->bind_param("s", $code);
+$faculty_stmt->execute();
+$faculty_result = $faculty_stmt->get_result();
 
 if ($code_result->num_rows > 0) {
     $code_row = $code_result->fetch_assoc();
@@ -32,10 +38,13 @@ if ($code_result->num_rows > 0) {
     //     header("Location: 404.php");
     //     exit;
     // }
+} elseif ($faculty_result->num_rows > 0) {
+    $faculty_row = $faculty_result->fetch_assoc();
 } else {
     header("Location: 404.php");
     exit;
 }
 
 $code_stmt->close();
+$faculty_stmt->close();
 ?>
