@@ -34,34 +34,10 @@ if ($user_result->num_rows > 0) {
     //     exit;
     // }
 } else {
-    // If email is not found in the faculty table, check the faculty table
-    $faculty_query = "SELECT * FROM faculty WHERE email = ? AND status = 'archived'";
-    $faculty_stmt = $con->prepare($faculty_query);
-    $faculty_stmt->bind_param("s", $code); // Bind the decrypted email
-    $faculty_stmt->execute();
-    $faculty_result = $faculty_stmt->get_result();
-
-    // If email is found in the faculty table
-    if ($faculty_result->num_rows > 0) {
-        $faculty_row = $faculty_result->fetch_assoc();
-        // $user_added = new DateTime($user_row['user_added']); // Creation time of the verification code
-        // $current_time = new DateTime(); // Current time
-
-        // // Check if the difference is greater than 1 hour
-        // $created_at_timestamp = $user_added->getTimestamp();
-        // $current_time_timestamp = $current_time->getTimestamp();
-
-        // if (($current_time_timestamp - $created_at_timestamp) > 3600) { // 3600 seconds = 1 hour
-        //     header("Location: 404.php");
-        //     exit;
-        // }
-    } else {
-        // If the email is not found in either table, show a 404 page
-        header("Location: 404.php");
-        exit;
-    }
+    // If the email is not found in either table, show a 404 page
+    header("Location: 404.php");
+    exit;
 }
 
-$faculty_stmt->close();
 $user_stmt->close();
 ?>
