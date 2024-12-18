@@ -12,16 +12,16 @@ if (!isset($_GET['a']) || empty($_GET['a'])) {
 
 $code = encryptor('decrypt', $_GET['a']); // Decrypt the code from the URL
 
-// Check if the email exists in the faculty table
-$faculty_query = "SELECT * FROM faculty WHERE email = ? AND status = 'archived'";
-$faculty_stmt = $con->prepare($faculty_query);
-$faculty_stmt->bind_param("s", $code); // Bind the decrypted email
-$faculty_stmt->execute();
-$faculty_result = $faculty_stmt->get_result();
+// Check if the email exists in the user table
+$user_query = "SELECT * FROM user WHERE email = ? AND status = 'archived'";
+$user_stmt = $con->prepare($user_query);
+$user_stmt->bind_param("s", $code); // Bind the decrypted email
+$user_stmt->execute();
+$user_result = $user_stmt->get_result();
 
-// If email is found in the faculty table
-if ($faculty_result->num_rows > 0) {
-    $faculty_row = $faculty_result->fetch_assoc();
+// If email is found in the user table
+if ($user_result->num_rows > 0) {
+    $user_row = $user_result->fetch_assoc();
     // $faculty_added = new DateTime($faculty_row['faculty_added']); // Creation time of the verification code
     // $current_time = new DateTime(); // Current time
 
@@ -34,16 +34,16 @@ if ($faculty_result->num_rows > 0) {
     //     exit;
     // }
 } else {
-    // If email is not found in the faculty table, check the user table
-    $user_query = "SELECT * FROM user WHERE email = ? AND status = 'archived'";
-    $user_stmt = $con->prepare($user_query);
-    $user_stmt->bind_param("s", $code); // Bind the decrypted email
-    $user_stmt->execute();
-    $user_result = $user_stmt->get_result();
+    // If email is not found in the faculty table, check the faculty table
+    $faculty_query = "SELECT * FROM faculty WHERE email = ? AND status = 'archived'";
+    $faculty_stmt = $con->prepare($faculty_query);
+    $faculty_stmt->bind_param("s", $code); // Bind the decrypted email
+    $faculty_stmt->execute();
+    $faculty_result = $faculty_stmt->get_result();
 
-    // If email is found in the user table
-    if ($user_result->num_rows > 0) {
-        $user_row = $user_result->fetch_assoc();
+    // If email is found in the faculty table
+    if ($faculty_result->num_rows > 0) {
+        $faculty_row = $faculty_result->fetch_assoc();
         // $user_added = new DateTime($user_row['user_added']); // Creation time of the verification code
         // $current_time = new DateTime(); // Current time
 
