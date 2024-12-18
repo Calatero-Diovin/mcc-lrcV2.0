@@ -13,7 +13,7 @@ if (!isset($_GET['a']) || empty($_GET['a'])) {
 $code = encryptor('decrypt', $_GET['a']); // Decrypt the code from the URL
 
 // Check if the email exists in the user table
-$user_query = "SELECT * FROM user WHERE email = ? AND status = 'archived'";
+$user_query = "SELECT * FROM user WHERE email = ?";
 $user_stmt = $con->prepare($user_query);
 $user_stmt->bind_param("s", $code); // Bind the decrypted email
 $user_stmt->execute();
