@@ -266,6 +266,41 @@ if (strpos($request, '.php') !== false) {
   background-color: #c82333;
 }
 
+
+.modals {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-contents {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    .closes {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .closes:hover,
+    .closes:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
     </style>
 </head>
 
@@ -372,8 +407,19 @@ if (strpos($request, '.php') !== false) {
                     </div>
 
                     <div class="field">
-                        <div class="label">Profile Image</div>
+                        <div class="label">
+                            Profile Image
+                            <span id="profile-image-sample" style="display: inline-block; margin-left: 10px; cursor: pointer; color: blue;">Profile Image Sample</span>
+                        </div>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*" required>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="imageModal" class="modals">
+                        <div class="modal-contents">
+                            <span class="closes">&times;</span>
+                            <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
+                        </div>
                     </div>
 
                     <div class="field btns">
@@ -1218,6 +1264,41 @@ prevBtnFifth.addEventListener("click", function (event) {
     openModalLink.addEventListener("click", function(){
         modal.style.display = "block";
     });
+
+    var modal = document.getElementById("imageModal");
+    var modalImage = document.getElementById("modalImage");
+    var closeBtn = document.getElementsByClassName("close")[0];
+    var profileImageSample = document.getElementById("profile-image-sample");
+    var fileInput = document.getElementById("profile_image");
+
+    // When the user clicks on the "Profile Image Sample" text
+    profileImageSample.onclick = function() {
+        // Check if a file has been uploaded
+        if (fileInput.files.length > 0) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                modalImage.src = e.target.result; // Set the image source to the uploaded file
+                modal.style.display = "block"; // Show the modal
+            };
+            reader.readAsDataURL(fileInput.files[0]); // Read the uploaded file as a data URL
+        } else {
+            // If no file is uploaded, show a default image (you can change this URL to any image you'd like)
+            modalImage.src = 'https://via.placeholder.com/500'; // Placeholder image
+            modal.style.display = "block"; // Show the modal
+        }
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // Close the modal if clicked outside the modal content
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
     </script>
 
     <?php
