@@ -728,6 +728,15 @@ nextBtnSec.addEventListener("click", function (event) {
         return;
     }
 
+    if (!profileImage) {
+        Swal.fire({
+            title: "Please upload image.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
     if (!addressPattern.test(address)) {
         Swal.fire({
             title: "Address must be in the format: Brgy, Municipality, Province.",
