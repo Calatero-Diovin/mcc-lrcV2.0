@@ -409,7 +409,7 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label">
                             Profile Image
-                            <span id="profile-image-sample" style="display: inline-block; margin-left: 10px; cursor: pointer; color: blue;">Profile Image Sample</span>
+                            <a href="#" id="imageModalLink" data-bs-toggle="modal" data-bs-target="#imageModal">Sample Profile Image</a>
                         </div>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*" required>
                     </div>
@@ -417,8 +417,8 @@ if (strpos($request, '.php') !== false) {
                     <!-- Modal -->
                     <div id="imageModal" class="modals">
                         <div class="modal-contents">
-                            <span class="closes">&times;</span>
-                            <img id="modalImage" src="./images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
+                            <span class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</span>
+                            <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
                         </div>
                     </div>
 
@@ -1246,59 +1246,38 @@ prevBtnFifth.addEventListener("click", function (event) {
 
 
         // Access the modal and the close button
-    const modal = document.getElementById("myModal");
-    const openModalLink = document.getElementById("openModalLink");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const closeModalBtnFooter = document.getElementById("closeModalBtnFooter");
+        const modal = document.getElementById("myModal");
+        const openModalLink = document.getElementById("openModalLink");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const closeModalBtnFooter = document.getElementById("closeModalBtnFooter");
 
-    // Add event listener for the close button in the header
-    closeModalBtn.addEventListener("click", function() {
-        modal.style.display = "none"; // Hide the modal
-    });
+        // Add event listener for the close button in the header
+        closeModalBtn.addEventListener("click", function() {
+            modal.style.display = "none"; // Hide the modal
+        });
 
-    // Add event listener for the close button in the footer
-    closeModalBtnFooter.addEventListener("click", function() {
-        modal.style.display = "none"; // Hide the modal
-    });
+        // Add event listener for the close button in the footer
+        closeModalBtnFooter.addEventListener("click", function() {
+            modal.style.display = "none"; // Hide the modal
+        });
 
-    openModalLink.addEventListener("click", function(){
-        modal.style.display = "block";
-    });
+        openModalLink.addEventListener("click", function(){
+            modal.style.display = "block";
+        });
 
-    var modal = document.getElementById("imageModal");
-    var modalImage = document.getElementById("modalImage");
-    var closeBtn = document.getElementsByClassName("closes")[0];
-    var profileImageSample = document.getElementById("profile-image-sample");
-    var fileInput = document.getElementById("profile_image");
+        // Access the modal and the close button
+        const imageModal = document.getElementById("imageModal");
+        const imageModalLink = document.getElementById("imageModalLink");
+        const closeModalBtn = document.getElementById("closeImageModal");
 
-    // When the user clicks on the "Profile Image Sample" text
-    profileImageSample.onclick = function() {
-        // Check if a file has been uploaded
-        if (fileInput.files.length > 0) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                modalImage.src = e.target.result; // Set the image source to the uploaded file
-                modal.style.display = "block"; // Show the modal
-            };
-            reader.readAsDataURL(fileInput.files[0]); // Read the uploaded file as a data URL
-        } else {
-            // If no file is uploaded, show a default image (you can change this URL to any image you'd like)
-            modalImage.src = 'https://via.placeholder.com/500'; // Placeholder image
-            modal.style.display = "block"; // Show the modal
-        }
-    };
+        // Add event listener for the close button in the header
+        closeModalBtn.addEventListener("click", function() {
+            imageModal.style.display = "none"; // Hide the modal
+        });
 
-    // When the user clicks on <span> (x), close the modal
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // Close the modal if clicked outside the modal content
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
+        imageModalLink.addEventListener("click", function(){
+            imageModal.style.display = "block";
+        });
     </script>
 
     <?php
