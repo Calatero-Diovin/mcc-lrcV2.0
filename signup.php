@@ -417,7 +417,7 @@ if (strpos($request, '.php') !== false) {
                     <!-- Modal -->
                     <div id="imageModal" class="modals">
                         <div class="modal-contents">
-                            <span class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</span>
+                            <button type="button" class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</button>
                             <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
                         </div>
                     </div>
