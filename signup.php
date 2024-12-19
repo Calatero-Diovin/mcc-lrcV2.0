@@ -418,7 +418,7 @@ if (strpos($request, '.php') !== false) {
                     <div id="imageModal" class="modals">
                         <div class="modal-contents">
                             <span class="closes">&times;</span>
-                            <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
+                            <img id="modalImage" src="./images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
                         </div>
                     </div>
 
@@ -1267,7 +1267,7 @@ prevBtnFifth.addEventListener("click", function (event) {
 
     var modal = document.getElementById("imageModal");
     var modalImage = document.getElementById("modalImage");
-    var closeBtn = document.getElementsByClassName("close")[0];
+    var closeBtn = document.getElementsByClassName("closes")[0];
     var profileImageSample = document.getElementById("profile-image-sample");
     var fileInput = document.getElementById("profile_image");
 
