@@ -701,7 +701,7 @@ nextBtnSec.addEventListener("click", function (event) {
     const profileImageInput = document.getElementById('profile_image');
     const profileImage = profileImageInput.files[0];
 
-    const addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+$/;
+    const addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s]+,\s[a-zA-ZñÑ\s]+$/;
 
     if (!role) {
         Swal.fire({
