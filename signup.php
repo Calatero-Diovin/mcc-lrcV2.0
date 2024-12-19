@@ -647,7 +647,7 @@ nextBtnFirst.addEventListener("click", function (event) {
     const middlename = document.getElementById('middlename').value;
 
     // Regular expression to check for alphabetic characters only
-    const nameRegex = /^[A-Za-z\s]*$/;
+    const nameRegex = /^[A-Za-zñÑ.\s]+$/;
 
     // Check if the fields contain only letters and spaces and no leading or only spaces
     const isValidName = (name) => {
