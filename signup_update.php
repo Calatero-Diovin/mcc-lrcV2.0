@@ -372,8 +372,19 @@ if (strpos($request, '.php') !== false) {
                     </div>
 
                     <div class="field">
-                        <div class="label">Profile Image</div>
-                        <input type="file" id="profile_image" name="profile_image" accept="image/*">
+                        <div class="label">
+                            Profile Image
+                            <a href="#" id="imageModalLink" style="margin-left:30px;text-decoration:none" data-bs-toggle="modal" data-bs-target="#imageModal">Sample Profile Image</a>
+                        </div>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*" required>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="imageModal" class="modals">
+                        <div class="modal-contents">
+                            <button type="button"  class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</button>
+                            <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
+                        </div>
                     </div>
 
 
@@ -1060,6 +1071,20 @@ prevBtnFifth.addEventListener("click", function (event) {
     openModalLink.addEventListener("click", function(){
         modal.style.display = "block";
     });
+
+    // Access the modal and the close button
+    const imageModal = document.getElementById("imageModal");
+        const imageModalLink = document.getElementById("imageModalLink");
+        const closeImageModal = document.getElementById("closeImageModal");
+
+        // Add event listener for the close button in the header
+        closeImageModal.addEventListener("click", function() {
+            imageModal.style.display = "none"; // Hide the modal
+        });
+
+        imageModalLink.addEventListener("click", function(){
+            imageModal.style.display = "block";
+        });
     </script>
 
     <?php
