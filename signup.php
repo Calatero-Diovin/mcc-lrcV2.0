@@ -833,7 +833,7 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
-  const nameRegex = /^[A-Za-zñÑ.\s]+$/;
+  const nameRegex = /^[A-Za-zñÑ\s]*$/;
 
   const isValidName = (name) => {
     return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
