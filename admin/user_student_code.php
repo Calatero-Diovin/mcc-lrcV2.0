@@ -98,7 +98,7 @@ if (isset($_POST['deny'])) {
                             <h1 style='color:#dc3545;text-align:center;'>Your Account has been Denied!!!</h1>
                             <p>Dear Student,</p>
                             <p>Your MCC-LRC account registration has been denied. Below is the reason for denial:</p>
-                            <p><strong>Reason:</strong> {$deny_reason}</p>
+                            <p><strong>Reason:</strong> <b>{$deny_reason}</b></p>
                             <p>Click this button to update the reason why you deny:</p>
                             <p><a style='color: white;' href='https://mcc-lrc.com/signup_update.php?a=$stu_email' class='button'>Update</a></p>
                             <div class='header'>
