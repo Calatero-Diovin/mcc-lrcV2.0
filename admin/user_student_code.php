@@ -464,7 +464,7 @@ if (isset($_POST['delete_student_id'])) {
                             <h1 style='color:#dc3545;text-align:center;'>Your Account has been Deleted!!!</h1>
                             <p>Dear Student,</p>
                             <p>Your MCC-LRC account has been deleted. Below is the reason for deletion:</p>
-                            <p><strong>Reason:</strong> <b>{$delete_reason}<b></p>
+                            <p><strong>Reason:</strong> <b>{$delete_reason}</b></p>
                             <p>Please contact the library for more details.</p>
                             <p>You can also contact us on our Facebook page <a href='https://www.facebook.com/MCCLRC' target='_blank'>Madridejos Community College - Learning Resource Center</a>.</p>
                             <p>Thank you.</p>
