@@ -136,6 +136,28 @@ if (!isset($_SESSION['email_for_reset'])) {
                 isValid = false;
             }
 
+            // Regular expression for strong password
+            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s])[A-Za-z\d^\w\d\s]{8,}$/;
+
+            if (!strongPasswordPattern.test(password)) {
+                swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
+                isValid = false;
+            }
+
+            if (password.length < 8) {
+                document.getElementById("passwordLengthFeedback").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordLengthFeedback").style.display = "none";
+            }
+
+            if (password !== cpassword) {
+                document.getElementById("passwordMatchFeedback").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordMatchFeedback").style.display = "none";
+            }
+
             return isValid;
         }
 

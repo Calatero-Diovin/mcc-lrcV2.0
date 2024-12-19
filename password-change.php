@@ -171,7 +171,7 @@ if ($result->num_rows > 0) {
             }
 
             // Regular expression for strong password
-            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s])[A-Za-z\d^\w\d\s]{8,}$/;
 
             if (!strongPasswordPattern.test(password)) {
                 swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
