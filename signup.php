@@ -412,7 +412,7 @@ if (strpos($request, '.php') !== false) {
                     <div class="field">
                         <div class="label">
                             Profile Image
-                            <a href="#" id="imageModalLink" style="margin-left:20px" data-bs-toggle="modal" data-bs-target="#imageModal">Sample Profile Image</a>
+                            <a href="#" id="imageModalLink" style="margin-left:30px" data-bs-toggle="modal" data-bs-target="#imageModal">Sample Profile Image</a>
                         </div>
                         <input type="file" id="profile_image" name="profile_image" accept="image/*" required>
                     </div>
