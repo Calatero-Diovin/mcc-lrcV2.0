@@ -291,14 +291,17 @@ if (strpos($request, '.php') !== false) {
     .closes {
         color: #aaa;
         float: right;
-        font-size: 28px;
+        font-size: 30px;
         font-weight: bold;
+        border: none;
+        background: transparent;
+        cursor: pointer;
     }
 
     .closes:hover,
     .closes:focus {
-        color: black;
-        text-decoration: none;
+        color: #000;
+  text-decoration: none;
         cursor: pointer;
     }
     </style>
@@ -417,7 +420,7 @@ if (strpos($request, '.php') !== false) {
                     <!-- Modal -->
                     <div id="imageModal" class="modals">
                         <div class="modal-contents">
-                            <button type="button" class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</button>
+                            <button type="button"  class="closes" data-bs-dismiss="modal" id="closeImageModal">&times;</button>
                             <img id="modalImage" src="images/valid.jpg" alt="Profile Image" style="width: 100%; max-width: 500px;">
                         </div>
                     </div>
