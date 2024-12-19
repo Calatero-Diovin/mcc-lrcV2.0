@@ -1268,10 +1268,10 @@ prevBtnFifth.addEventListener("click", function (event) {
         // Access the modal and the close button
         const imageModal = document.getElementById("imageModal");
         const imageModalLink = document.getElementById("imageModalLink");
-        const closeModalBtn = document.getElementById("closeImageModal");
+        const closeImageModal = document.getElementById("closeImageModal");
 
         // Add event listener for the close button in the header
-        closeModalBtn.addEventListener("click", function() {
+        closeImageModal.addEventListener("click", function() {
             imageModal.style.display = "none"; // Hide the modal
         });
 
