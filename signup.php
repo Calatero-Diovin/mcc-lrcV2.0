@@ -912,6 +912,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/; // Password complexity pattern
+    const xssPattern = /<[^>]*>/;
 
     if (!studentId || !password || !confirmPassword || !exampleCheck1) {
         Swal.fire({
@@ -945,7 +946,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
         // Check for XSS tags in studentId for faculty and staff roles
         if (xssPattern.test(studentId)) {
             Swal.fire({
-                title: "Don't try that or else I get your IP Address.",
+                title: "HTML tags not allowed!",
                 icon: "error",
                 confirmButtonText: "OK"
             });

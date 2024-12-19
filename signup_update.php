@@ -529,7 +529,7 @@ nextBtnFirst.addEventListener("click", function (event) {
     const middlename = document.getElementById('middlename').value;
 
     // Regular expression to check for alphabetic characters only
-    const nameRegex = /^[A-Za-z\s]*$/;
+    const nameRegex = /^[A-Za-zñÑ.\s]+$/;
 
     // Check if the fields contain only letters and spaces and no leading or only spaces
     const isValidName = (name) => {
@@ -583,7 +583,7 @@ nextBtnSec.addEventListener("click", function (event) {
     const profileImageInput = document.getElementById('profile_image');
     const profileImage = profileImageInput.files[0];
 
-    const addressPattern = /^[a-zA-Z\s]+,\s[a-zA-Z\s]+,\s[a-zA-Z\s]+$/;
+    const addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s]+,\s[a-zA-ZñÑ\s]+$/;
 
     if (!role) {
         Swal.fire({
@@ -724,7 +724,7 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
-  const namePattern = /^[A-Za-z\s]+$/;
+  const namePattern = /^[A-Za-zñÑ.\s]+$/;
 
   const isValidName = (name) => {
     return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
@@ -816,7 +816,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
         // Check for XSS tags in studentId for faculty and staff roles
         if (xssPattern.test(studentId)) {
             Swal.fire({
-                title: "Don't try that or else I get your IP Address.",
+                title: "HTML tags not allowed!",
                 icon: "error",
                 confirmButtonText: "OK"
             });
