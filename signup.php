@@ -732,7 +732,7 @@ nextBtnSec.addEventListener("click", function (event) {
 
     if (!addressPattern.test(address)) {
         Swal.fire({
-            title: "Address must be in the format: Brgy, Municipality, Province.",
+            title: "Address must be in the format: Bunakan, Madridejos, Cebu.",
             icon: "error",
             confirmButtonText: "OK"
         });
