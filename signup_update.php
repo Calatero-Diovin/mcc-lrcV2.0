@@ -529,7 +529,7 @@ nextBtnFirst.addEventListener("click", function (event) {
     const middlename = document.getElementById('middlename').value;
 
     // Regular expression to check for alphabetic characters only
-    const nameRegex = /^[A-Za-zñÑ.\s]+$/;
+    const nameRegex = /^[A-Za-z\s]*$/;
 
     // Check if the fields contain only letters and spaces and no leading or only spaces
     const isValidName = (name) => {
@@ -583,7 +583,7 @@ nextBtnSec.addEventListener("click", function (event) {
     const profileImageInput = document.getElementById('profile_image');
     const profileImage = profileImageInput.files[0];
 
-    const addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+$/;
+    const addressPattern = /^[a-zA-Z\s]+,\s[a-zA-Z\s]+,\s[a-zA-Z\s]+$/;
 
     if (!role) {
         Swal.fire({
@@ -724,7 +724,7 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
-  const nameRegex = /^[A-Za-zñÑ.\s]+$/;
+  const namePattern = /^[A-Za-z\s]+$/;
 
   const isValidName = (name) => {
     return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
