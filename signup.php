@@ -642,46 +642,24 @@ let current = 1;
 nextBtnFirst.addEventListener("click", function (event) {
     event.preventDefault();
 
-    const lastname = document.getElementById('lastname').value;
-    const firstname = document.getElementById('firstname').value;
-    const middlename = document.getElementById('middlename').value;
-
-    // Regular expression to check for alphabetic characters only
-    const nameRegex = /^[A-Za-z\s]*$/;
-
-    // Check if the fields contain only letters and spaces and no leading or only spaces
-    const isValidName = (name) => {
-        return name.trim() !== "" && nameRegex.test(name) && !/^\s/.test(name); // checks for leading spaces
-    };
-
-    if (!lastname || !isValidName(lastname)) {
-        Swal.fire({
-            title: "Please fill lastname field with letters only, no space first or space only",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
-    }
-    if (!firstname || !isValidName(firstname)) {
-        Swal.fire({
-            title: "Please fill firstname field with letters only, no space first or space only",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
-    }
-    if (middlename && !isValidName(middlename)) {
-        Swal.fire({
-            title: "Please fill middlename field with letters only, no space first or space only",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
-    }
-
-    document.getElementById('firstname').value = firstname;
-    document.getElementById('lastname').value = lastname;
-    document.getElementById('middlename').value = middlename;
+    document.getElementById('lastname').addEventListener('input', function () {
+          var nameInput = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== nameInput) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(nameInput)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(nameInput) && this.value === nameInput; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
 
     slidePage.style.marginLeft = "-25%";
     bullet[current - 1].classList.add("active");
