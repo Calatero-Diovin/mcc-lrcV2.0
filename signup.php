@@ -911,8 +911,7 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const isChecked = exampleCheck1.checked;
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
-    const xssPattern = /<[^>]*>/; // XSS tag pattern
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/; // Password complexity pattern
 
     if (!studentId || !password || !confirmPassword || !exampleCheck1) {
         Swal.fire({
@@ -958,15 +957,6 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     if (password.length < 8) {
         Swal.fire({
             title: "Password must be at least 8 characters long.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
-    }
-
-    if (xssPattern.test(password)) {
-        Swal.fire({
-            title: "Don't try that or else I get your IP Address.",
             icon: "error",
             confirmButtonText: "OK"
         });
