@@ -739,6 +739,15 @@ nextBtnSec.addEventListener("click", function (event) {
         return;
     }
 
+    if (!profileImage) {
+        Swal.fire({
+            title: "Please upload your profile image.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
     if (profileImage) {
         const allowedExtensions = ['jpg', 'jpeg', 'png'];
         const fileExtension = profileImage.name.split('.').pop().toLowerCase();
