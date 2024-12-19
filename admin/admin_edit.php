@@ -145,7 +145,7 @@ include('./includes/sidebar.php');
  document.getElementById('firstname').addEventListener('input', function () {
           var nameInput = this.value.trim(); // Remove any leading or trailing spaces
           
-          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
           // Check if input starts with a space
           if (this.value !== nameInput) {
@@ -164,7 +164,7 @@ include('./includes/sidebar.php');
      document.getElementById('middlename').addEventListener('input', function () {
           var mnInput = this.value.trim(); // Remove any leading or trailing spaces
           
-          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
           // Check if input starts with a space
           if (this.value !== mnInput) {
@@ -183,7 +183,7 @@ include('./includes/sidebar.php');
      document.getElementById('lastname').addEventListener('input', function () {
           var lnInput = this.value.trim(); // Remove any leading or trailing spaces
           
-          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
           // Check if input starts with a space
           if (this.value !== lnInput) {
@@ -232,7 +232,7 @@ include('./includes/sidebar.php');
      document.getElementById('address').addEventListener('input', function () {
      var addressInput = this.value.trim();
      
-     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+     var addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+$/;
 
      if (addressPattern.test(addressInput)) {
           this.setCustomValidity('');
