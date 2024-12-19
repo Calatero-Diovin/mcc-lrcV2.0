@@ -189,7 +189,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('firstname').addEventListener('input', function () {
      var nameInput = this.value.trim();
      
-     var alphabetPattern = /^[A-Za-z\s]+$/;
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/;
      
      if (alphabetPattern.test(nameInput)) {
           this.setCustomValidity(''); 
@@ -204,7 +204,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('middlename').addEventListener('input', function () {
      var mnInput = this.value.trim();
      
-     var alphabetPattern = /^[A-Za-z\s]+$/;
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/;
      
      if (alphabetPattern.test(mnInput)) {
           this.setCustomValidity(''); 
@@ -219,7 +219,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('lastname').addEventListener('input', function () {
      var lnInput = this.value.trim();
      
-     var alphabetPattern = /^[A-Za-z\s]+$/;
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/;
      
      if (alphabetPattern.test(lnInput)) {
           this.setCustomValidity(''); 
@@ -234,7 +234,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('cp').addEventListener('input', function () {
      var cpInput = this.value.trim();
      
-     var alphabetPattern = /^[A-Za-z\s]+$/;
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/;
      
      if (alphabetPattern.test(cpInput)) {
           this.setCustomValidity(''); 
