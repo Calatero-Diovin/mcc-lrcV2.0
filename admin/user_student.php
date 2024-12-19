@@ -238,7 +238,7 @@ function loadStudentData(userId) {
 document.getElementById('editLName').addEventListener('input', function () {
      var editLName = this.value.trim(); // Remove any leading or trailing spaces
           
-     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
      // Check if input starts with a space
      if (this.value !== editLName) {
@@ -257,7 +257,7 @@ document.getElementById('editLName').addEventListener('input', function () {
 document.getElementById('editFName').addEventListener('input', function () {
      var editFName = this.value.trim(); // Remove any leading or trailing spaces
           
-     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
      // Check if input starts with a space
      if (this.value !== editFName) {
@@ -276,7 +276,7 @@ document.getElementById('editFName').addEventListener('input', function () {
 document.getElementById('editMName').addEventListener('input', function () {
      var editMName = this.value.trim(); // Remove any leading or trailing spaces
           
-     var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+     var alphabetPattern = /^[A-Za-zñÑ.\s]+$/; // Pattern for alphabet and spaces only
           
      // Check if input starts with a space
      if (this.value !== editMName) {
