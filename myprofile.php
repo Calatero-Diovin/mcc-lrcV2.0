@@ -249,7 +249,7 @@ $table = $_SESSION['auth_role'] == "student" ? "user" : "faculty";
      document.getElementById('Address').addEventListener('input', function () {
      var addressInput = this.value.trim();
      
-     var addressPattern = /^[A-Za-z\s]+,\s[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+     var addressPattern = /^[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+,\s[a-zA-ZñÑ\s-]+$/;
 
      if (addressPattern.test(addressInput)) {
           this.setCustomValidity('');
