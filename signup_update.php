@@ -540,7 +540,7 @@ nextBtnFirst.addEventListener("click", function (event) {
     const middlename = document.getElementById('middlename').value;
 
     // Regular expression to check for alphabetic characters only
-    const nameRegex = /^[A-Za-zñÑ.\s]+$/;
+    const nameRegex = /^[A-Za-zñÑ.\s-]+$/;
 
     // Check if the fields contain only letters and spaces and no leading or only spaces
     const isValidName = (name) => {
@@ -735,7 +735,7 @@ nextBtnFourth.addEventListener("click", async function (event) {
   const email = document.querySelector('input[name="email"]').value;
 
   const phonePattern = /^09\d{9}$/;
-  const namePattern = /^[A-Za-zñÑ.\s]+$/;
+  const namePattern = /^[A-Za-zñÑ.\s-]+$/;
 
   const isValidName = (name) => {
     return name.trim() !== "" && namePattern.test(name) && name.trim().length > 0 && !/^\s/.test(name);
