@@ -174,9 +174,6 @@ include('includes/navbar.php');
                  data-adapt-container-width="true" 
                  data-hide-cover="false" 
                  data-show-facepile="true">
-                <blockquote cite="https://www.facebook.com/MCCLRC/" class="fb-xfbml-parse-ignore">
-                    <a href="https://www.facebook.com/MCCLRC/">Madridejos Community College - Learning Resource Center </a>
-                </blockquote>
             </div>
         </div>
     </div>
