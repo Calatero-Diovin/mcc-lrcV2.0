@@ -162,7 +162,6 @@ include('includes/navbar.php');
             </div>
         </div>
     </div>
-    <div class="fb-page" data-href="https://facebook.com/MCCLRC" data-tabs="timeline,events,messages" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://web.facebook.com/MCCLRC" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/MCCLRC">Madridejos Community College - Learning Resource Center</a></blockquote></div>
 </div>
 
 <!-- Footer -->
@@ -285,9 +284,6 @@ include('includes/navbar.php');
             }
         }
     </script>
-
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0"></script>
 </div>
 <!-- End of .container -->
 
