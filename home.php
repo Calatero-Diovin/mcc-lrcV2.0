@@ -162,7 +162,7 @@ include('includes/navbar.php');
             </div>
         </div>
     </div>
-    <div class="fb-page" data-href="https://web.facebook.com/MCCLRC" data-tabs="timeline,events,messages" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://web.facebook.com/MCCLRC" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/MCCLRC">Madridejos Community College - Learning Resource Center</a></blockquote></div>
+    <div class="fb-page" data-href="https://facebook.com/MCCLRC" data-tabs="timeline,events,messages" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://web.facebook.com/MCCLRC" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/MCCLRC">Madridejos Community College - Learning Resource Center</a></blockquote></div>
 </div>
 
 <!-- Footer -->
