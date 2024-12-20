@@ -42,7 +42,6 @@ include('includes/navbar.php');
         margin-bottom: 20px;
     }
 
-    /* Chat icon */
     .chat-icon {
         position: fixed;
         bottom: 20px;
@@ -119,27 +118,22 @@ include('includes/navbar.php');
         background-color: #0056b3;
     }
 
-    /* Responsive iframe container */
-    .iframe-container {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        margin-top: 2rem;
-        overflow: hidden;
-        background: #f0f0f0; /* Optional: background for iframe area */
-    }
-
-    .iframe-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
     /* Services Section */
+    .services-container {
+        margin-top: 3rem;
+        background-color: #fff;
+    }
+
+    .services-container h3 {
+        font-size: 1.8rem;
+    }
+
+    .services-container h4 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
     .services-row {
         display: flex;
         flex-wrap: wrap;
@@ -148,40 +142,57 @@ include('includes/navbar.php');
 
     .services-col {
         width: 48%;
-        margin-bottom: 1rem;
+        padding: 2rem;
+        box-sizing: border-box;
+        text-align: left;
     }
 
     .services-col img {
         width: 100%;
+        max-width: 100%;
         height: auto;
+        margin-top: 1rem;
     }
 
-    /* Footer Section */
-    footer {
-        background-color: #0D4C92;
-        padding: 20px;
-        color: white;
-        text-align: center;
+    /* Iframe Responsiveness */
+    .iframe-container {
+        margin-top: 2rem;
     }
 
-    footer .btn {
-        margin: 5px;
+    .iframe-container iframe {
+        width: 100%;
+        height: 500px;
+        border: none;
     }
 
-    /* Media Queries for Mobile Responsiveness */
+    /* Mobile responsiveness */
     @media (max-width: 768px) {
         .services-col {
-            width: 100%; /* Stacking columns on smaller screens */
+            width: 100%;
+            padding: 1rem;
         }
 
-        .iframe-container {
-            padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio for tablets */
+        .iframe-container iframe {
+            height: 400px;
         }
     }
 
     @media (max-width: 576px) {
-        .iframe-container {
-            padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio for smaller screens */
+        .services-col {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .services-container h3 {
+            font-size: 1.5rem;
+        }
+
+        .services-container h4 {
+            font-size: 1.6rem;
+        }
+
+        .chatbox {
+            width: 260px;
         }
     }
 </style>
@@ -216,13 +227,13 @@ include('includes/navbar.php');
 </div>
 
 <!-- Services Section -->
-<div class="container bg-white mt-3">
-    <h3 class="fs-3"><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
-    <h4 class="text-center fs-2">MCCLRC OPENING DAY AND TIME</h4>
+<div class="container services-container">
+    <h3><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
+    <h4>MCCLRC OPENING DAY AND TIME</h4>
     <div class="services-row">
         <div class="services-col">
-            <h4 class="fs-1">Monday - Saturdays:</h4>
-            <h4 class="fs-3">8:00 AM 5:00 PM (No Noon Break)</h4>
+            <h4>Monday - Saturdays:</h4>
+            <h4>8:00 AM - 5:00 PM (No Noon Break)</h4>
         </div>
         <div class="services-col">
             <img src="assets/img/A.gif" class="img-fluid" alt="Responsive GIF">
@@ -230,14 +241,7 @@ include('includes/navbar.php');
     </div>
 </div>
 
-<!-- Facebook Iframe Section -->
-<div class="iframe-container">
-    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMCCLRC%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-            width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-    </iframe>
-</div>
-
-<!-- Footer Section -->
+<!-- Footer -->
 <div class="jumbotron">
     <footer class="text-center text-lg-start text-white" style="background-color: #0D4C92">
         <div class="jumbotron p-4 pb-0">
@@ -279,7 +283,7 @@ include('includes/navbar.php');
     </div>
 </div>
 
-<!-- Chat Icon -->
+<!-- Chat icon -->
 <div class="chat-icon" onclick="openPopup()">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
         <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
@@ -287,7 +291,7 @@ include('includes/navbar.php');
     </svg>
 </div>
 
-<!-- Chatbox -->
+<!-- Chatbox container -->
 <div class="chatbox" id="chatbox">
     <div class="chatbox-header" onclick="toggleChatbox()">Chat with us</div>
     <div class="chatbox-messages" id="chat-messages"></div>
