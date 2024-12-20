@@ -149,6 +149,7 @@ include('includes/navbar.php');
 
 
     <!-- Services -->
+    <div class="d-flex align-items-center justify-content-betweem">
     <div class="container bg-white mt-3">
         <h3 class="fs-3"><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
         <h4 class="text-center fs-2">MCCLRC OPENING DAY AND TIME</h4>
@@ -161,10 +162,11 @@ include('includes/navbar.php');
                 <img src="assets/img/A.gif" class="img-fluid" alt="Responsive GIF">
             </div>
         </div>
-
-        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMCCLRC%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </div>
-</div>
+
+    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMCCLRC%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+    </div>
 
 <!-- Footer -->
 <div class="jumbotron">
