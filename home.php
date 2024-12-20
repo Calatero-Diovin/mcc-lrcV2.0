@@ -149,19 +149,39 @@ include('includes/navbar.php');
 
 
     <!-- Services -->
-    <div class="container bg-white mt-3">
-        <h3 class="fs-3"><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
-        <h4 class="text-center fs-2">MCCLRC OPENING DAY AND TIME</h4>
-        <div class="row">
-            <div class="col-md-6 p-5">
-                <h4 class="fs-1">Monday - Saturdays:</h4>
-                <h4 class="fs-3">8:00 AM 5:00 PM (No Noon Break)</h4>
-            </div>
-            <div class="col-md-6">
-                <img src="assets/img/A.gif" class="img-fluid" alt="Responsive GIF">
+<div class="container bg-white mt-3">
+    <h3 class="fs-3"><a href="services.php" class="text-black text-decoration-none">Services</a></h3>
+    <h4 class="text-center fs-2">MCCLRC OPENING DAY AND TIME</h4>
+    <div class="row d-flex justify-content-between">
+        <!-- Services Section with Text and GIF -->
+        <div class="col-md-5 p-5">
+            <h4 class="fs-1">Monday - Saturdays:</h4>
+            <h4 class="fs-3">8:00 AM - 5:00 PM (No Noon Break)</h4>
+        </div>
+        <div class="col-md-5">
+            <img src="assets/img/A.gif" class="img-fluid" alt="Responsive GIF">
+        </div>
+
+        <!-- Facebook Embed Section -->
+        <div class="col-md-5 mt-4">
+            <!-- Embed Facebook Page -->
+            <div class="fb-page" 
+                 data-href="https://www.facebook.com/MCCLRC/" 
+                 data-tabs="timeline" 
+                 data-width="500" 
+                 data-height="500" 
+                 data-small-header="false" 
+                 data-adapt-container-width="true" 
+                 data-hide-cover="false" 
+                 data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/MCCLRC/" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/MCCLRC/">Madridejos Community College - Learning Resource Center </a>
+                </blockquote>
             </div>
         </div>
     </div>
+</div>
+
 </div>
 
 <!-- Footer -->
