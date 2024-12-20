@@ -166,7 +166,7 @@ include('includes/navbar.php');
         <div class="col-md-5 mt-4">
             <!-- Embed Facebook Page -->
             <div class="fb-page" 
-                 data-href="https://www.facebook.com/MCCLRC/" 
+                 data-href="https://www.facebook.com/MCCLRC/"
                  data-tabs="timeline" 
                  data-width="500" 
                  data-height="500" 
