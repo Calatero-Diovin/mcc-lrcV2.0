@@ -33,6 +33,18 @@ if (strpos($request, '.php') !== false) {
     <path id="id1_1" d="M688.33 232.67h-37.1V149.7H520.39c-2.64 0-5.1-.5-7.36-1.49-2.27-.99-4.23-2.31-5.88-3.96-1.65-1.65-2.95-3.61-3.89-5.88s-1.42-4.67-1.42-7.22V29.62h36.82v82.98h112.57V29.62h37.1v203.05z"/>  
   </g>  
 </svg>  
+  
+<svg>  
+  <defs>  
+    <filter id="glow">  
+      <fegaussianblur class="blur" result="coloredBlur" stddeviation="4"></fegaussianblur>  
+      <femerge>  
+        <femergenode in="coloredBlur"></femergenode>  
+        <femergenode in="SourceGraphic"></femergenode>  
+      </femerge>  
+    </filter>  
+  </defs>  
+</svg>  
  <h2 style="text-align: center;margin-top:170px;">Oops! Your link is expired; <br>Send a registration link again. Thank you!</h2>
 </body>
 </html>
