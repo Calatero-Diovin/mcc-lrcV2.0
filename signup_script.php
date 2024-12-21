@@ -29,7 +29,7 @@ if ($code_result->num_rows > 0) {
     $current_time_timestamp = $current_time->getTimestamp();
 
     if (($current_time_timestamp - $created_at_timestamp) > 3600) { // 3600 seconds = 1 hour
-        header("Location: 404.php");
+        header("Location: expire.php");
         exit;
     }
 } else {
