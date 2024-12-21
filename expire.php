@@ -45,6 +45,6 @@ if (strpos($request, '.php') !== false) {
     </filter>  
   </defs>  
 </svg>  
- <h2 style="text-align: center;margin-top:100px;">Oops! Your link is expired; <br>Send a registration link again. Thank you!</h2>
+ <h2 style="text-align: center;margin-top:150px;">Oops! Your link is expired; <br>Send a registration link again. Thank you!</h2>
 </body>
 </html>
