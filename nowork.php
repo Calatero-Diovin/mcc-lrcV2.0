@@ -23,7 +23,7 @@ if (strpos($request, '.php') !== false) {
             background-color: #f4f4f9;
             color: #333;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             margin: 0;
         }
 
@@ -33,19 +33,20 @@ if (strpos($request, '.php') !== false) {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 900px;
-            margin: 0 auto;
+            margin: 20px auto;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 2.2rem;
             color: #e74c3c;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 18px;
+            font-size: 1rem;
             color: #555;
             font-weight: bold;
+            margin: 10px 0;
         }
 
         .btn {
@@ -55,19 +56,55 @@ if (strpos($request, '.php') !== false) {
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
-            font-size: 16px;
+            font-size: 1rem;
             transition: background-color 0.3s;
+            display: inline-block;
         }
 
         .btn:hover {
             background-color: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <p style="font-size: 50px;font-weight:bold">MCC <br> LEARNING RESOURCE CENTER</p>
+    <p style="font-size: 2rem; font-weight: bold; line-height: 1.4;">MCC <br> LEARNING RESOURCE CENTER</p>
     <h1>No Work Today</h1>
     <p>Sorry, it's Sunday and we're taking a break today. Please try again on a weekday.</p>
     <p>If you'd like to return to the home page, click the button below.</p><br>
