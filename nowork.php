@@ -69,7 +69,7 @@ if (strpos($request, '.php') !== false) {
     <p style="font-size: 50px;font-weight:bold">MCC <br> LEARNING RESOURCE CENTER</p>
     <h1>No Work Today</h1>
     <p>Sorry, it's Sunday and we're taking a break today. Please try again on a weekday.</p>
-    <p>If you'd like to return to the home page, click the button below.</p>
+    <p>If you'd like to return to the home page, click the button below.</p><br>
     <a href="." class="btn">Go to Home</a>
 </div>
 
