@@ -32,7 +32,7 @@ if (strpos($request, '.php') !== false) {
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
