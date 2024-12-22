@@ -45,6 +45,7 @@ if (strpos($request, '.php') !== false) {
         p {
             font-size: 18px;
             color: #555;
+            font-weight: bold;
         }
 
         .btn {
