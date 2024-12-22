@@ -3,11 +3,11 @@ ini_set('session.cookie_httponly', 1);
 session_start();
 include('admin/config/dbcon.php');
 
-// // Check if today is Sunday (0 = Sunday)
-// if (date('w') == 0) {
-//     header("Location: nowork.php"); // Redirect to nowork.php if it's Sunday
-//     exit(0);
-// }
+// Check if today is Sunday (0 = Sunday)
+if (date('w') == 0) {
+    header("Location: nowork.php"); // Redirect to nowork.php if it's Sunday
+    exit(0);
+}
 
 $request = $_SERVER['REQUEST_URI'];
 
