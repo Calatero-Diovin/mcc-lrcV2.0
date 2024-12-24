@@ -269,16 +269,12 @@ include('includes/navbar.php');
 
                          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                               <h6 class="text-uppercase text-center mb-4 fw-bold">
-                                   VISION
+                                   MISSION
                               </h6>
                               <p class="text-justify">
-                                   The Madridejos Community College dream to mold (a) Professionally Competitive, (
-                                   b)
-                                   Service Oriented (c) Productive, and (d), Value- laden citizens, through quality
-                                   education and integral formation, Inspired by its four-fold function of effective (e)
-                                   Instruction (f) Personal Enhancement (g) Research and production it shall become a
-                                   deeply rooted foundation of the town's socio- economic upliftment and a prime mover
-                                   for nation building.
+                              Madridejos Community College is a safe, accessible and affordable learning environment that aims to foster academic and career success through development of critical thinking, creativity, informed research and social responsibility.
+
+                              Our mission is to deliver academic programs that are timely, appropriate, and transformative in response to the demands of local , national, and international communities in a highly dynamic world.
                               </p>
                          </div>
                          <!-- Grid column -->
@@ -286,16 +282,20 @@ include('includes/navbar.php');
 
                          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                               <h6 class="text-uppercase text-center mb-4 fw-bold">
-                                   VISION
+                                   GOALS
                               </h6>
                               <p class="text-justify">
-                                   The Madridejos Community College dream to mold (a) Professionally Competitive, (
-                                   b)
-                                   Service Oriented (c) Productive, and (d), Value- laden citizens, through quality
-                                   education and integral formation, Inspired by its four-fold function of effective (e)
-                                   Instruction (f) Personal Enhancement (g) Research and production it shall become a
-                                   deeply rooted foundation of the town's socio- economic upliftment and a prime mover
-                                   for nation building.
+                              Develop globally competitive,value-laden professional capable of making a positive social, environmental, and economic impact through research and community service.
+
+                              Learning Enhancement and Support. Foster student learning and support by leveraging student strengths and meeting their specific needs through targeted success pathways.
+
+                              Adaptive to change through innovation. Create an environment that encourages learners to be more innovative and resilient in order to adapt to today's highly dynamic world.
+
+                              Well-grounded in research. Conduct extensive research based on facts and sound reasoning to expand the learner's knowledge, promote effective learning, comprehend different concerns and trends , seek the truth, and identify opportunities that lie ahead.
+
+                              Inculcate moral values. Instill positive attitudes and high moral virtues towards daily activities in and outside the school campus.
+
+                              Social Responsibility. Ensure the relevance, alignment, and support of the community and businesses by providing outreach,bridge programs and community-focused facilities.
                               </p>
                          </div>
                          <!-- Grid column -->
