@@ -267,7 +267,7 @@ include('includes/navbar.php');
                         <!-- Facebook -->
                         <a href="https://www.facebook.com/MCCLRC" class="btn btn-outline-light btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
                         <!-- Youtube -->
-                        <a href="https://www.youtube.com/watch?v=bIzChSbj0OU" class="btn btn-outline-light btn-floating m-1" role="button"> <i class="bi bi-youtube"></i></a>
+                        <a href="https://www.youtube.com/watch?v=bIzChSbj0OU" class="btn btn-outline-light btn-floating m-1" role="button"><i class="bi bi-youtube"></i></a>
                     </div>
                     <!-- Grid column -->
                 </div>
