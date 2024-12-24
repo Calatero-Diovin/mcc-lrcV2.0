@@ -257,13 +257,7 @@ include('includes/navbar.php');
                                    VISION
                               </h6>
                               <p class="text-justify">
-                                   The Madridejos Community College dream to mold (a) Professionally Competitive, (
-                                   b)
-                                   Service Oriented (c) Productive, and (d), Value- laden citizens, through quality
-                                   education and integral formation, Inspired by its four-fold function of effective (e)
-                                   Instruction (f) Personal Enhancement (g) Research and production it shall become a
-                                   deeply rooted foundation of the town's socio- economic upliftment and a prime mover
-                                   for nation building.
+                                   The Madridejos Community College envision a society comprised of fully competent individuals with benevolent character, innovative, service-oriented, and exceed challenges as proactive participants in shaping our world's future.
                               </p>
                          </div>
 
