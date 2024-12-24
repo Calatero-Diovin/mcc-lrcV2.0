@@ -6,7 +6,7 @@ include('includes/navbar.php');
     <div class="container">
         <div class="clearfix p-3">
             <p class="text-center text-white p-1 fs-3 fw-bold">ABOUT</p>
-            <img src="assets/img/mcc-front2.jpg" class="img-fluid w-100 h-100" alt="...">
+            <img src="assets/img/mcc-front2.jpg" class="img-fluid d-block w-100 h-100" alt="...">
             <p class="text-center text-white p-1 fs-5 fw-semibold">History of the School</p>
             <p class="text-white p-1">
                 Madridejos Community College (MCC) was founded and created by virtue of Municipal Ordinance No. 006,
