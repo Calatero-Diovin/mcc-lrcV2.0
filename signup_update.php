@@ -266,6 +266,44 @@ if (strpos($request, '.php') !== false) {
   background-color: #c82333;
 }
 
+.modals {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-contents {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    .closes {
+        color: #aaa;
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .closes:hover,
+    .closes:focus {
+        color: #000;
+  text-decoration: none;
+        cursor: pointer;
+    }
+
     </style>
 </head>
 
