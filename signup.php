@@ -952,9 +952,9 @@ nextBtnFourth.addEventListener("click", async function (event) {
 document.getElementById('reviewBtn').addEventListener('click', function(event) {
     event.preventDefault();
     
-    const studentId = document.getElementById('student_id_no');
-    const password = document.getElementById('passwordInput');
-    const confirmPassword = document.getElementById('confirmPasswordInput');
+    const studentId = document.getElementById('student_id_no').value;
+    const password = document.getElementById('passwordInput').value;
+    const confirmPassword = document.getElementById('confirmPasswordInput').value;
     const role = document.getElementById('role').value; // Get the role value
     const exampleCheck1 = document.getElementById('exampleCheck1');
     const isChecked = exampleCheck1.checked;
@@ -963,96 +963,76 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
     const xssPattern = /<[^>]*>/;
 
-    let isValid = true; // Flag to track overall form validity
-
-    // Check if all fields are filled
-    if (!studentId.value.trim() || !password.value.trim() || !confirmPassword.value.trim() || !exampleCheck1.checked) {
-        isValid = false;
-        studentId.setCustomValidity("Please fill all fields.");
-        password.setCustomValidity("Please fill all fields.");
-        confirmPassword.setCustomValidity("Please fill all fields.");
-        exampleCheck1.setCustomValidity("Please agree to the Terms and Conditions.");
-    } else {
-        // Reset custom validity messages
-        studentId.setCustomValidity('');
-        password.setCustomValidity('');
-        confirmPassword.setCustomValidity('');
-        exampleCheck1.setCustomValidity('');
+    if (!studentId || !password || !confirmPassword || !exampleCheck1) {
+        Swal.fire({
+            title: "Please fill all fields.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
     }
 
-    // Validate the checkbox
     if (!isChecked) {
-        isValid = false;
-        exampleCheck1.setCustomValidity("Please check the box to agree to the Terms and Conditions.");
-    } else {
-        exampleCheck1.setCustomValidity('');
+        Swal.fire({
+            title: "Please check the box to agree the Terms and Condition.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
     }
 
-    // Validate student ID based on role
     if (role === 'student') {
-        if (!studentIdPattern.test(studentId.value)) {
-            isValid = false;
-            studentId.setCustomValidity("Please enter a valid student ID in the format 1234-5678.");
-        } else {
-            studentId.setCustomValidity('');
+        // Validate student ID only if role is 'student'
+        if (!studentIdPattern.test(studentId)) {
+            Swal.fire({
+                title: "Please enter a valid student ID in the format 1234-5678.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
         }
     } else if (role === 'faculty' || role === 'staff') {
-        if (xssPattern.test(studentId.value)) {
-            isValid = false;
-            studentId.setCustomValidity("HTML tags are not allowed!");
-        } else {
-            studentId.setCustomValidity('');
+        // Check for XSS tags in studentId for faculty and staff roles
+        if (xssPattern.test(studentId)) {
+            Swal.fire({
+                title: "HTML tags not allowed!",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
         }
     }
-
-    // Validate password
-    if (password.value.length < 8) {
-        isValid = false;
-        password.setCustomValidity("Password must be at least 8 characters long.");
-    } else if (!passwordPattern.test(password.value)) {
-        isValid = false;
-        password.setCustomValidity("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.");
-    } else {
-        password.setCustomValidity('');
+    
+    // Additional password validations
+    if (password.length < 8) {
+        Swal.fire({
+            title: "Password must be at least 8 characters long.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
     }
 
-    // Validate confirm password
-    if (password.value !== confirmPassword.value) {
-        isValid = false;
-        confirmPassword.setCustomValidity("Passwords do not match.");
-    } else {
-        confirmPassword.setCustomValidity('');
+    if (!passwordPattern.test(password)) {
+        Swal.fire({
+            title: "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
     }
 
-    // If the form is valid, show the review modal
-    if (isValid) {
-        showReviewModal();
-    } else {
-        // Optionally, highlight invalid fields
-        if (!studentId.checkValidity()) {
-            studentId.classList.add('is-invalid');
-        } else {
-            studentId.classList.remove('is-invalid');
-        }
-
-        if (!password.checkValidity()) {
-            password.classList.add('is-invalid');
-        } else {
-            password.classList.remove('is-invalid');
-        }
-
-        if (!confirmPassword.checkValidity()) {
-            confirmPassword.classList.add('is-invalid');
-        } else {
-            confirmPassword.classList.remove('is-invalid');
-        }
-
-        if (!exampleCheck1.checkValidity()) {
-            exampleCheck1.classList.add('is-invalid');
-        } else {
-            exampleCheck1.classList.remove('is-invalid');
-        }
+    if (password !== confirmPassword) {
+        Swal.fire({
+            title: "Passwords do not match.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
     }
+
+    // If all validations pass, show the review modal
+    showReviewModal();
 });
 
 function showReviewModal() {
