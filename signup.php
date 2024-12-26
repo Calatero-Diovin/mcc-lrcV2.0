@@ -960,74 +960,55 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const isChecked = exampleCheck1.checked;
 
     const studentIdPattern = /^\d{4}-\d{4}$/; // Pattern for student ID
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/; // Password complexity pattern
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
     const xssPattern = /<[^>]*>/;
 
+    let isValid = true; // Flag to track the validity
+
+    // Check if any field is empty
     if (!studentId || !password || !confirmPassword || !exampleCheck1) {
-        Swal.fire({
-            title: "Please fill all fields.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
+        console.error("Please fill all fields.");
+        isValid = false;
     }
 
+    // Check if the checkbox is checked
     if (!isChecked) {
-        Swal.fire({
-            title: "Please check the box to agree the Terms and Condition.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
+        console.error("Please check the box to agree to the Terms and Conditions.");
+        isValid = false;
     }
 
+    // Validate student ID for student role
     if (role === 'student') {
-        // Validate student ID only if role is 'student'
         if (!studentIdPattern.test(studentId)) {
-            Swal.fire({
-                title: "Please enter a valid student ID in the format 1234-5678.",
-                icon: "error",
-                confirmButtonText: "OK"
-            });
-            return;
+            console.error("Please enter a valid student ID in the format 1234-5678.");
+            isValid = false;
         }
     } else if (role === 'faculty' || role === 'staff') {
         // Check for XSS tags in studentId for faculty and staff roles
         if (xssPattern.test(studentId)) {
-            Swal.fire({
-                title: "HTML tags not allowed!",
-                icon: "error",
-                confirmButtonText: "OK"
-            });
-            return;
+            console.error("HTML tags are not allowed!");
+            isValid = false;
         }
     }
     
     // Additional password validations
     if (password.length < 8) {
-        Swal.fire({
-            title: "Password must be at least 8 characters long.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
+        console.error("Password must be at least 8 characters long.");
+        isValid = false;
     }
 
     if (!passwordPattern.test(password)) {
-        Swal.fire({
-            title: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
-        return;
+        console.error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        isValid = false;
     }
 
     if (password !== confirmPassword) {
-        Swal.fire({
-            title: "Passwords do not match.",
-            icon: "error",
-            confirmButtonText: "OK"
-        });
+        console.error("Passwords do not match.");
+        isValid = false;
+    }
+
+    // If any validation failed, stop the function here
+    if (!isValid) {
         return;
     }
 
