@@ -133,7 +133,7 @@ if (!isset($_SESSION['email_for_reset'])) {
             var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
             if (!strongPasswordPattern.test(password)) {
-                swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
+                swal("Weak Password", "Password must be at least 8 characters long, and include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.", "error");
                 isValid = false;
             }
 
