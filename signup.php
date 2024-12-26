@@ -952,9 +952,9 @@ nextBtnFourth.addEventListener("click", async function (event) {
 document.getElementById('reviewBtn').addEventListener('click', function(event) {
     event.preventDefault();
     
-    const studentId = document.getElementById('student_id_no').value;
-    const password = document.getElementById('passwordInput').value;
-    const confirmPassword = document.getElementById('confirmPasswordInput').value;
+    const studentId = document.getElementById('student_id_no');
+    const password = document.getElementById('passwordInput');
+    const confirmPassword = document.getElementById('confirmPasswordInput');
     const role = document.getElementById('role').value; // Get the role value
     const exampleCheck1 = document.getElementById('exampleCheck1');
     const isChecked = exampleCheck1.checked;
@@ -963,57 +963,96 @@ document.getElementById('reviewBtn').addEventListener('click', function(event) {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password complexity pattern
     const xssPattern = /<[^>]*>/;
 
-    let isValid = true; // Flag to track the validity
+    let isValid = true; // Flag to track overall form validity
 
-    // Check if any field is empty
-    if (!studentId || !password || !confirmPassword || !exampleCheck1) {
-        console.error("Please fill all fields.");
+    // Check if all fields are filled
+    if (!studentId.value.trim() || !password.value.trim() || !confirmPassword.value.trim() || !exampleCheck1.checked) {
         isValid = false;
+        studentId.setCustomValidity("Please fill all fields.");
+        password.setCustomValidity("Please fill all fields.");
+        confirmPassword.setCustomValidity("Please fill all fields.");
+        exampleCheck1.setCustomValidity("Please agree to the Terms and Conditions.");
+    } else {
+        // Reset custom validity messages
+        studentId.setCustomValidity('');
+        password.setCustomValidity('');
+        confirmPassword.setCustomValidity('');
+        exampleCheck1.setCustomValidity('');
     }
 
-    // Check if the checkbox is checked
+    // Validate the checkbox
     if (!isChecked) {
-        console.error("Please check the box to agree to the Terms and Conditions.");
         isValid = false;
+        exampleCheck1.setCustomValidity("Please check the box to agree to the Terms and Conditions.");
+    } else {
+        exampleCheck1.setCustomValidity('');
     }
 
-    // Validate student ID for student role
+    // Validate student ID based on role
     if (role === 'student') {
-        if (!studentIdPattern.test(studentId)) {
-            console.error("Please enter a valid student ID in the format 1234-5678.");
+        if (!studentIdPattern.test(studentId.value)) {
             isValid = false;
+            studentId.setCustomValidity("Please enter a valid student ID in the format 1234-5678.");
+        } else {
+            studentId.setCustomValidity('');
         }
     } else if (role === 'faculty' || role === 'staff') {
-        // Check for XSS tags in studentId for faculty and staff roles
-        if (xssPattern.test(studentId)) {
-            console.error("HTML tags are not allowed!");
+        if (xssPattern.test(studentId.value)) {
             isValid = false;
+            studentId.setCustomValidity("HTML tags are not allowed!");
+        } else {
+            studentId.setCustomValidity('');
         }
     }
-    
-    // Additional password validations
-    if (password.length < 8) {
-        console.error("Password must be at least 8 characters long.");
+
+    // Validate password
+    if (password.value.length < 8) {
         isValid = false;
-    }
-
-    if (!passwordPattern.test(password)) {
-        console.error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        password.setCustomValidity("Password must be at least 8 characters long.");
+    } else if (!passwordPattern.test(password.value)) {
         isValid = false;
+        password.setCustomValidity("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.");
+    } else {
+        password.setCustomValidity('');
     }
 
-    if (password !== confirmPassword) {
-        console.error("Passwords do not match.");
+    // Validate confirm password
+    if (password.value !== confirmPassword.value) {
         isValid = false;
+        confirmPassword.setCustomValidity("Passwords do not match.");
+    } else {
+        confirmPassword.setCustomValidity('');
     }
 
-    // If any validation failed, stop the function here
-    if (!isValid) {
-        return;
-    }
+    // If the form is valid, show the review modal
+    if (isValid) {
+        showReviewModal();
+    } else {
+        // Optionally, highlight invalid fields
+        if (!studentId.checkValidity()) {
+            studentId.classList.add('is-invalid');
+        } else {
+            studentId.classList.remove('is-invalid');
+        }
 
-    // If all validations pass, show the review modal
-    showReviewModal();
+        if (!password.checkValidity()) {
+            password.classList.add('is-invalid');
+        } else {
+            password.classList.remove('is-invalid');
+        }
+
+        if (!confirmPassword.checkValidity()) {
+            confirmPassword.classList.add('is-invalid');
+        } else {
+            confirmPassword.classList.remove('is-invalid');
+        }
+
+        if (!exampleCheck1.checkValidity()) {
+            exampleCheck1.classList.add('is-invalid');
+        } else {
+            exampleCheck1.classList.remove('is-invalid');
+        }
+    }
 });
 
 function showReviewModal() {
