@@ -163,15 +163,8 @@ if ($result->num_rows > 0) {
             var cpassword = document.getElementById("confirmPasswordInput").value;
             var isValid = true;
 
-            // Check for XSS in password fields
-            var xssPattern = /<[^>]*>/; // Simple pattern to detect HTML tags
-            if (xssPattern.test(password) || xssPattern.test(cpassword)) {
-                swal("Invalid Input", "I got your IP Address.", "error");
-                isValid = false;
-            }
-
             // Regular expression for strong password
-            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s])[A-Za-z\d^\w\d\s]{8,}$/;
+            var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
             if (!strongPasswordPattern.test(password)) {
                 swal("Weak Password", "Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.", "error");
