@@ -768,6 +768,22 @@ nextBtnSec.addEventListener("click", function (event) {
         return;
     }
 
+    // Birthdate validation: Check if the selected date is in the future
+    const selectedDate = new Date(birthdate);
+    const currentDate = new Date();
+    
+    // Reset time to 00:00:00 to only compare the date part (ignoring time)
+    currentDate.setHours(0, 0, 0, 0);
+    
+    if (selectedDate > currentDate) {
+        Swal.fire({
+            title: "Birthdate cannot be in the future.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+        return;
+    }
+
     if (!address) {
         Swal.fire({
             title: "Please fill your address.",
