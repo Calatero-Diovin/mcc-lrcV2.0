@@ -59,7 +59,10 @@ include('./includes/sidebar.php');
                                                                     <td>{$row['lastname']}</td>
                                                                     <td>{$row['username']}</td>
                                                                     <td>
-                                                                        <form action='delete_account.php' method='post' class='delete-form' style='display:inline;'>
+                                                                        <button class='btn btn-warning btn-sm edit-btn' data-id='{$row['ms_id']}' data-username='{$row['username']}'>
+                                                                            <i class='bi bi-pencil'></i> Edit
+                                                                        </button>
+                                                                        <form action='delete_account.php' method='post' class='delete-form d-inline'>
                                                                             <input type='hidden' name='ms_id' value='{$row['ms_id']}'>
                                                                             <button type='submit' class='btn btn-danger btn-sm delete-btn'>
                                                                                 <i class='bi bi-trash'></i> Delete
@@ -88,6 +91,31 @@ include('./includes/sidebar.php');
     </section>
 </main>
 
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="edit_account.php" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Username</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="ms_id" id="edit-ms-id">
+                    <div class="mb-3">
+                        <label for="edit-username" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="edit-username" name="username" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="edit_account" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -103,6 +131,18 @@ document.addEventListener('DOMContentLoaded', function () {
         rowReorder: {
             selector: 'td:nth-child(2)'
         }
+    });
+
+    // Edit Button Click
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const msId = this.getAttribute('data-id');
+            const username = this.getAttribute('data-username');
+            document.getElementById('edit-ms-id').value = msId;
+            document.getElementById('edit-username').value = username;
+            const modal = new bootstrap.Modal(document.getElementById('editModal'));
+            modal.show();
+        });
     });
 
     // SweetAlert2 Confirmation for Delete
