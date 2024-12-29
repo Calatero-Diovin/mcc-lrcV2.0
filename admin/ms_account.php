@@ -49,7 +49,6 @@ include('./includes/sidebar.php');
                                                                            <th>Firstname</th>
                                                                            <th>Lastname</th>
                                                                            <th>Email</th>
-                                                                           <!--<th>Actions</th>-->
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
