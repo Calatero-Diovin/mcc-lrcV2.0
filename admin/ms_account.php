@@ -64,17 +64,6 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['firstname']}</td>
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
-                                                                                     // <td>
-                                                                                     //      <button class='btn btn-warning btn-sm' 
-                                                                                     //              data-bs-toggle='modal' 
-                                                                                     //              data-bs-target='#editAccountModal' 
-                                                                                     //              data-id='{$row['ms_id']}' 
-                                                                                     //              data-firstname='{$row['firstname']}' 
-                                                                                     //              data-lastname='{$row['lastname']}' 
-                                                                                     //              data-username='{$row['username']}'>
-                                                                                     //          Edit
-                                                                                     //      </button>
-                                                                                     // </td>
                                                                                 </tr>";
                                                                            }
                                                                            $stmt->close();
@@ -194,3 +183,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+
+
+<!-- <td>
+<button class='btn btn-warning btn-sm' 
+data-bs-toggle='modal' 
+data-bs-target='#editAccountModal' 
+data-id='{$row['ms_id']}' 
+data-firstname='{$row['firstname']}' 
+data-lastname='{$row['lastname']}' 
+data-username='{$row['username']}'>
+Edit
+</button>
+</td> -->
