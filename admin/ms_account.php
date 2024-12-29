@@ -59,7 +59,7 @@ include('./includes/sidebar.php');
                                                                     <td>{$row['lastname']}</td>
                                                                     <td>{$row['username']}</td>
                                                                     <td>
-                                                                        <button class='btn btn-warning btn-sm edit-btn' data-id='{$row['ms_id']}' data-username='{$row['username']}'>
+                                                                        <button class='btn btn-warning btn-sm edit-btn' data-id='{$row['ms_id']}'>
                                                                             <i class='bi bi-pencil'></i> Edit
                                                                         </button>
                                                                         <form action='delete_account.php' method='post' class='delete-form d-inline'>
@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function () {
             const msId = this.getAttribute('data-id');
-            const username = this.getAttribute('data-username');
             document.getElementById('edit-ms-id').value = msId;
             document.getElementById('edit-username').value = username;
             const modal = new bootstrap.Modal(document.getElementById('editModal'));
