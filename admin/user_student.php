@@ -53,7 +53,6 @@ include('./includes/sidebar.php');
                                         <thead>
                                              <tr>
                                                   <th><center>Full Name</center></th>
-                                                  <th style="display:none;"></th>
                                                   <th><center>Image</center></th>
                                                   <th><center>Student No</center></th>
                                                   <th><center>Gender</center></th>
@@ -72,7 +71,6 @@ include('./includes/sidebar.php');
                                                        ?>
                                                        <tr>
                                                             <td style="text-transform:capitalize;"><center><?=$user['lastname'].',  '.$user['firstname'].' '.$user['middlename'];?></center></td>
-                                                            <td class="hidden"><?=$user['email'];?></td>
                                                             <td>
                                                                  <center>
                                                                       <?php if($user['profile_image'] != ""): ?>
