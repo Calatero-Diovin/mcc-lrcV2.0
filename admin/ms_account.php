@@ -46,6 +46,7 @@ include('./includes/sidebar.php');
                                                                  <thead>
                                                                       <tr>
                                                                            <th>Firstname</th>
+                                                                           <th class="hidden"></th>
                                                                            <th>Lastname</th>
                                                                            <th>Email</th>
                                                                            <th>Actions</th>
@@ -60,6 +61,7 @@ include('./includes/sidebar.php');
                                                                            while ($row = $result->fetch_assoc()) {
                                                                                 echo "<tr>
                                                                                      <td>{$row['firstname']}</td>
+                                                                                     <td>{$row['ms_id']}</td>
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
                                                                                      <td>
