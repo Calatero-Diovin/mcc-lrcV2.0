@@ -49,7 +49,7 @@ include('./includes/sidebar.php');
                                                                  </thead>
                                                                  <tbody>
                                                                       <?php
-                                                                      $query = "SELECT * FROM ms_account";
+                                                                      $query = "SELECT * FROM ms_account WHERE username='jeanne.escala@mcclawis.edu.ph'";
                                                                       if ($stmt = $con->prepare($query)) {
                                                                            $stmt->execute();
                                                                            $result = $stmt->get_result();
