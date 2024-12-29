@@ -45,8 +45,8 @@ include('./includes/sidebar.php');
                                                                  <br>
                                                                  <thead>
                                                                       <tr>
+                                                                           <th class="d-none">MS ID</th>
                                                                            <th>Firstname</th>
-                                                                           <th class="hidden"></th>
                                                                            <th>Lastname</th>
                                                                            <th>Email</th>
                                                                            <th>Actions</th>
@@ -60,8 +60,8 @@ include('./includes/sidebar.php');
                                                                            $result = $stmt->get_result();
                                                                            while ($row = $result->fetch_assoc()) {
                                                                                 echo "<tr>
+                                                                                     <td class='d-none'>{$row['ms_id']}</td>
                                                                                      <td>{$row['firstname']}</td>
-                                                                                     <td class='hidden'>{$row['ms_id']}</td>
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
                                                                                      <td>
