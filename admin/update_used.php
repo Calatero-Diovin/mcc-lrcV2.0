@@ -5,7 +5,7 @@ if (isset($_POST['id']) && isset($_POST['used'])) {
     $id = intval($_POST['id']);
     $used = intval($_POST['used']);
 
-    $query = "UPDATE ms_account SET used = ? WHERE id = ?";
+    $query = "UPDATE ms_account SET used = ? WHERE ms_id = ?";
     if ($stmt = $con->prepare($query)) {
         $stmt->bind_param('ii', $used, $id);
         if ($stmt->execute()) {

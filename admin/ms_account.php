@@ -60,7 +60,7 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['username']}</td>
                                                                                      <td>{$row['used']}</td>
                                                                                      <td>
-                                                                                         <button class='btn btn-sm btn-primary edit-btn' data-id='{$row['id']}' data-used='{$row['used']}'>Edit</button>
+                                                                                         <button class='btn btn-sm btn-primary edit-btn' data-id='{$row['ms_id']}' data-used='{$row['used']}'>Edit</button>
                                                                                      </td>
                                                                                 </tr>";
                                                                            }
