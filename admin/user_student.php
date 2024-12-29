@@ -72,7 +72,7 @@ include('./includes/sidebar.php');
                                                        ?>
                                                        <tr>
                                                             <td style="text-transform:capitalize;"><center><?=$user['lastname'].',  '.$user['firstname'].' '.$user['middlename'];?></center></td>
-                                                            <td style="display: none;"><?=$user['email'];?></td>
+                                                            <td class="hidden"><?=$user['email'];?></td>
                                                             <td>
                                                                  <center>
                                                                       <?php if($user['profile_image'] != ""): ?>
