@@ -52,8 +52,8 @@ include('./includes/sidebar.php');
                               <table id="example" class="display nowrap" style="width:100%">
                                         <thead>
                                              <tr>
-                                                  <th style="display:none;"><center></center></th>
                                                   <th><center>Full Name</center></th>
+                                                  <th style="display:none;"></th>
                                                   <th><center>Image</center></th>
                                                   <th><center>Student No</center></th>
                                                   <th><center>Gender</center></th>
@@ -71,8 +71,8 @@ include('./includes/sidebar.php');
                                                   foreach($query_run as $user) {
                                                        ?>
                                                        <tr>
-                                                            <td style="display:none;"><?=$user['email'];?></td>
                                                             <td style="text-transform:capitalize;"><center><?=$user['lastname'].',  '.$user['firstname'].' '.$user['middlename'];?></center></td>
+                                                            <td style="display: none;"><?=$user['email'];?></td>
                                                             <td>
                                                                  <center>
                                                                       <?php if($user['profile_image'] != ""): ?>
