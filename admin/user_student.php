@@ -52,7 +52,7 @@ include('./includes/sidebar.php');
                               <table id="example" class="display nowrap" style="width:100%">
                                         <thead>
                                              <tr>
-                                                  <th style="display:none;"><center></center></th>
+                                                  <th style="visibilty:hidden;"><center></center></th>
                                                   <th><center>Full Name</center></th>
                                                   <th><center>Image</center></th>
                                                   <th><center>Student No</center></th>
