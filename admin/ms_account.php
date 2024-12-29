@@ -60,7 +60,7 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['username']}</td>
                                                                                      <td>{$row['used']}</td>
                                                                                      <td>
-                                                                                         <button class='btn btn-sm btn-primary edit-btn' data-id='{$row['ms_id']}' data-used='{$row['used']}'>Edit</button>
+                                                                                         <button class='btn btn-sm btn-primary edit-btn' data-ms_id='{$row['ms_id']}' data-used='{$row['used']}'>Edit</button>
                                                                                      </td>
                                                                                 </tr>";
                                                                            }
@@ -94,7 +94,7 @@ include('./includes/sidebar.php');
                </div>
                <form action="update_used.php" method="POST">
                     <div class="modal-body">
-                         <input type="hidden" name="id" id="edit-id">
+                         <input type="hidden" name="ms_id" id="edit-ms_id">
                          <div class="mb-3">
                               <label for="edit-used" class="form-label">Used</label>
                               <input type="number" class="form-control" id="edit-used" name="used" required>
@@ -129,9 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
      // Handle Edit Button Click
      document.querySelectorAll('.edit-btn').forEach(button => {
           button.addEventListener('click', function () {
-               const id = this.dataset.id;
+               const ms_id = this.dataset.ms_id;
                const used = this.dataset.used;
-               document.getElementById('edit-id').value = id;
+               document.getElementById('edit-ms_id').value = ms_id;
                document.getElementById('edit-used').value = used;
                new bootstrap.Modal(document.getElementById('editModal')).show();
           });
