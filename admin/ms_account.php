@@ -33,8 +33,8 @@ include('./includes/sidebar.php');
                                              <!-- <div class="text-end">
                                                   <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                                        <b>Add New Account</b>
-                                                  </button> -->
-                                             </div>
+                                                  </button>
+                                             </div> -->
                                         </div>
                                         <br>
                                         <div class="container">
