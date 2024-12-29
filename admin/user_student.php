@@ -71,7 +71,7 @@ include('./includes/sidebar.php');
                                                   foreach($query_run as $user) {
                                                        ?>
                                                        <tr>
-                                                            <td style="display:none;"><?=$user['email'];?></td>
+                                                            <td style="visibility:hidden;"><?=$user['email'];?></td>
                                                             <td style="text-transform:capitalize;"><center><?=$user['lastname'].',  '.$user['firstname'].' '.$user['middlename'];?></center></td>
                                                             <td>
                                                                  <center>
