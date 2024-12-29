@@ -30,10 +30,10 @@ include('./includes/sidebar.php');
                                                        </button>
                                                   </form>
                                              </div>
-                                             <div class="text-end">
+                                             <!-- <div class="text-end">
                                                   <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                                        <b>Add New Account</b>
-                                                  </button>
+                                                  </button> -->
                                              </div>
                                         </div>
                                         <br>
@@ -49,7 +49,7 @@ include('./includes/sidebar.php');
                                                                            <th>Firstname</th>
                                                                            <th>Lastname</th>
                                                                            <th>Email</th>
-                                                                           <th>Actions</th>
+                                                                           <!--<th>Actions</th>-->
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
@@ -64,7 +64,7 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['firstname']}</td>
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
-                                                                                     <td>
+                                                                                     <!--<td>
                                                                                           <button class='btn btn-warning btn-sm' 
                                                                                                   data-bs-toggle='modal' 
                                                                                                   data-bs-target='#editAccountModal' 
@@ -74,7 +74,7 @@ include('./includes/sidebar.php');
                                                                                                   data-username='{$row['username']}'>
                                                                                               Edit
                                                                                           </button>
-                                                                                     </td>
+                                                                                     </td>-->
                                                                                 </tr>";
                                                                            }
                                                                            $stmt->close();
