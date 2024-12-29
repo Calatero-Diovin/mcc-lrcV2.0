@@ -18,24 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Execute query
                 if ($stmt->execute()) {
-                    $_SESSION['message'] = "Account updated successfully!";
-                    $_SESSION['message_type'] = "success";
+                    $_SESSION['status'] = "Account updated successfully!";
+                    $_SESSION['status_code'] = "success";
                 } else {
-                    $_SESSION['message'] = "Error updating account: " . $stmt->error;
-                    $_SESSION['message_type'] = "danger";
+                    $_SESSION['status'] = "Error updating account: " . $stmt->error;
+                    $_SESSION['status_code'] = "danger";
                 }
                 $stmt->close();
             } else {
-                $_SESSION['message'] = "Error preparing statement: " . $con->error;
-                $_SESSION['message_type'] = "danger";
+                $_SESSION['status'] = "Error preparing statement: " . $con->error;
+                $_SESSION['status_code'] = "danger";
             }
         } else {
-            $_SESSION['message'] = "All fields are required.";
-            $_SESSION['message_type'] = "warning";
+            $_SESSION['status'] = "All fields are required.";
+            $_SESSION['status_code'] = "warning";
         }
 
         // Redirect back to main page
-        header('Location: ms365_account.php');
+        header('Location: ms_account.php');
         exit();
     } elseif (isset($_POST['add_account'])) {
         // Add account logic
@@ -49,27 +49,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param('sss', $firstname, $lastname, $username);
 
                 if ($stmt->execute()) {
-                    $_SESSION['message'] = "Account added successfully!";
-                    $_SESSION['message_type'] = "success";
+                    $_SESSION['status'] = "Account added successfully!";
+                    $_SESSION['status_code'] = "success";
                 } else {
-                    $_SESSION['message'] = "Error adding account: " . $stmt->error;
-                    $_SESSION['message_type'] = "danger";
+                    $_SESSION['status'] = "Error adding account: " . $stmt->error;
+                    $_SESSION['status_code'] = "danger";
                 }
                 $stmt->close();
             } else {
-                $_SESSION['message'] = "Error preparing statement: " . $con->error;
-                $_SESSION['message_type'] = "danger";
+                $_SESSION['status'] = "Error preparing statement: " . $con->error;
+                $_SESSION['status_code'] = "danger";
             }
         } else {
-            $_SESSION['message'] = "All fields are required.";
-            $_SESSION['message_type'] = "warning";
+            $_SESSION['status'] = "All fields are required.";
+            $_SESSION['status_code'] = "warning";
         }
 
-        header('Location: ms365_account.php');
+        header('Location: ms_account.php');
         exit();
     }
 } else {
-    header('Location: ms365_account.php');
+    header('Location: ms_account.php');
     exit();
 }
 ?>
