@@ -9,11 +9,11 @@ if (isset($_POST['username']) && isset($_POST['used'])) {
     if ($stmt = $con->prepare($query)) {
         $stmt->bind_param('is', $used, $username);
         if ($stmt->execute()) {
-            $_SESSION['message'] = "Used value updated successfully.";
-            $_SESSION['msg_type'] = "success";
+            $_SESSION['status'] = "Used value updated successfully.";
+            $_SESSION['status_code'] = "success";
         } else {
-            $_SESSION['message'] = "Error updating used value.";
-            $_SESSION['msg_type'] = "danger";
+            $_SESSION['status'] = "Error updating used value.";
+            $_SESSION['status_code'] = "danger";
         }
         $stmt->close();
     }
