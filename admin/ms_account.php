@@ -30,6 +30,11 @@ include('./includes/sidebar.php');
                                                        </button>
                                                   </form>
                                              </div>
+                                             <div class="text-end">
+                                                  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAccountModal">
+                                                       <b>Add New Account</b>
+                                                  </button>
+                                             </div>
                                         </div>
                                         <br>
                                         <div class="container">
@@ -77,6 +82,38 @@ include('./includes/sidebar.php');
           </div>
      </section>
 </main>
+
+<!-- Add Account Modal -->
+<div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header">
+                    <h5 class="modal-title" id="addAccountModalLabel">Add New MS 365 Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <form action="add_account.php" method="post">
+                    <div class="modal-body">
+                         <div class="mb-3">
+                              <label for="firstname" class="form-label">Firstname</label>
+                              <input type="text" class="form-control" id="firstname" name="firstname" required>
+                         </div>
+                         <div class="mb-3">
+                              <label for="lastname" class="form-label">Lastname</label>
+                              <input type="text" class="form-control" id="lastname" name="lastname" required>
+                         </div>
+                         <div class="mb-3">
+                              <label for="username" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="username" name="username" required>
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                         <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+               </form>
+          </div>
+     </div>
+</div>
 
 <?php 
 include('./includes/footer.php');
