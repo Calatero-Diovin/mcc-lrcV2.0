@@ -59,7 +59,10 @@ include('./includes/sidebar.php');
                                                                     <td>{$row['lastname']}</td>
                                                                     <td>{$row['username']}</td>
                                                                     <td>
-                                                                        <button class='btn btn-warning btn-sm edit-btn' data-id='{$row['ms_id']}' data-username='{$row['username']}'>
+                                                                        <button 
+                                                                            class='btn btn-warning btn-sm edit-btn' 
+                                                                            data-id='{$row['ms_id']}' 
+                                                                            data-username='{$row['username']}'>
                                                                             <i class='bi bi-pencil'></i> Edit
                                                                         </button>
                                                                         <form action='delete_account.php' method='post' class='delete-form d-inline'>
@@ -133,16 +136,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Edit Button Click
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const msId = this.getAttribute('data-id');
-            const username = this.getAttribute('data-username');
+    // Event delegation for dynamically generated edit buttons
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('edit-btn')) {
+            const button = e.target; // The clicked button
+            const msId = button.getAttribute('data-id');
+            const username = button.getAttribute('data-username');
+            
+            // Populate the modal inputs with data
             document.getElementById('edit-ms-id').value = msId;
             document.getElementById('edit-username').value = username;
+
+            // Show the modal
             const modal = new bootstrap.Modal(document.getElementById('editModal'));
             modal.show();
-        });
+        }
     });
 
     // SweetAlert2 Confirmation for Delete
