@@ -1,13 +1,13 @@
 <?php
 include('authentication.php');
 
-if (isset($_POST['ms_id']) && isset($_POST['used'])) {
-    $ms_id = intval($_POST['ms_id']);
+if (isset($_POST['username']) && isset($_POST['used'])) {
+    $username = $_POST['username'];
     $used = intval($_POST['used']);
 
-    $query = "UPDATE ms_account SET used = ? WHERE ms_id = ?";
+    $query = "UPDATE ms_account SET used = ? WHERE username = ?";
     if ($stmt = $con->prepare($query)) {
-        $stmt->bind_param('ii', $used, $ms_id);
+        $stmt->bind_param('is', $used, $username);
         if ($stmt->execute()) {
             $_SESSION['message'] = "Used value updated successfully.";
             $_SESSION['msg_type'] = "success";
