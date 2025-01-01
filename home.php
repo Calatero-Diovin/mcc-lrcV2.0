@@ -78,6 +78,14 @@ include('includes/navbar.php');
     </footer>
 </div>
 <!-- End of .container -->
+
+<!-- Chat Icon -->
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="chat.php" class="btn btn-primary btn-lg rounded-circle" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+        <i class="bi bi-chat-dots" style="font-size: 24px;"></i>
+    </a>
+</div>
+
 <?php 
 include('includes/script.php');
 include('message.php'); 
