@@ -2,34 +2,34 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
-<div class="jumbotron h-50" style="background-color: #0D4C92">
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
-            <img src="assets/img/mccfront.jpg" class="d-block w-100 h-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="assets/img/slide2.jpg" class="d-block w-100 h-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="assets/img/slide3.jpg" class="d-block w-100 h-100" alt="...">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
 
+<div class="jumbotron h-50" style="background-color: #0D4C92">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="assets/img/mccfront.jpg" class="d-block w-100 h-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/slide2.jpg" class="d-block w-100 h-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/slide3.jpg" class="d-block w-100 h-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
     <!-- Services -->
     <div class="container bg-white mt-3">
@@ -77,14 +77,61 @@ include('includes/navbar.php');
         <!-- Grid container -->
     </footer>
 </div>
-<!-- End of .container -->
 
-<!-- Chat Icon -->
-<div style="position: fixed; bottom: 20px; right: 20px;">
-    <a href="chat.php" class="btn btn-primary btn-lg rounded-circle" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-        <i class="bi bi-chat-dots" style="font-size: 24px;"></i>
-    </a>
+<!-- Chatbox Icon -->
+<div id="chat-icon" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
+    <img src="assets/img/chat-icon.png" alt="Chat Icon" style="width: 60px; height: 60px;">
 </div>
+
+<!-- Chatbox Modal -->
+<div id="chatbox-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chatbox</h5>
+                <span id="user-email" class="ms-auto text-muted"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="login-section">
+                    <button id="google-signin" class="btn btn-primary w-100">Sign in with Google</button>
+                </div>
+                <div id="chat-section" style="display: none;">
+                    <p>Welcome to the chatbox!</p>
+                    <!-- Add chat functionality here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Open chatbox
+document.getElementById('chat-icon').addEventListener('click', function () {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+        document.getElementById('user-email').textContent = email;
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('chat-section').style.display = 'block';
+    } else {
+        document.getElementById('login-section').style.display = 'block';
+        document.getElementById('chat-section').style.display = 'none';
+    }
+    new bootstrap.Modal(document.getElementById('chatbox-modal')).show();
+});
+
+// Simulate Google Sign-In
+document.getElementById('google-signin').addEventListener('click', function () {
+    // Replace with actual Google API sign-in logic
+    const simulatedEmail = prompt('Enter your email for Google Sign-In simulation:', 'user@example.com');
+    if (simulatedEmail) {
+        localStorage.setItem('userEmail', simulatedEmail);
+        document.getElementById('user-email').textContent = simulatedEmail;
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('chat-section').style.display = 'block';
+    }
+});
+</script>
 
 <?php 
 include('includes/script.php');
