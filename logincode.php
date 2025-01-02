@@ -104,10 +104,12 @@ if (isset($_POST['login_btn'])) {
             } else {
                 // Increment login attempts on failure
                 $_SESSION['login_attempts']++;
+                $remaining_attempts = 3 - $_SESSION['login_attempts'];
+                
                 if ($_SESSION['login_attempts'] >= 3) {
                     $_SESSION['lockout_times'] = time() + 300; // Lock out for 5 minutes
                 } else {
-                    $_SESSION['status'] = "Incorrect ID no. or Password";
+                    $_SESSION['status'] = "Incorrect ID no. or Password. You have $remaining_attempts attempt(s) left.";
                 }
                 $_SESSION['status_code'] = "error";
             }
@@ -117,7 +119,7 @@ if (isset($_POST['login_btn'])) {
             if ($_SESSION['login_attempts'] >= 3) {
                 $_SESSION['lockout_times'] = time() + 300; // Lock out for 5 minutes
             } else {
-                $_SESSION['status'] = "Incorrect ID no. or Password";
+                $_SESSION['status'] = "Incorrect ID no. or Password. You have $remaining_attempts attempt(s) left.";
             }
             $_SESSION['status_code'] = "error";
         }
