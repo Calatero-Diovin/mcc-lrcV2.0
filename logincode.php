@@ -16,6 +16,7 @@ if (!isset($_SESSION['login_attempts'])) {
 // Check if user is locked out
 if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+    $minutes_remaining = ceil($lockout_time_remaining / 60);
     header("Location: login.php");
     exit(0);
 }
