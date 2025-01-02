@@ -16,8 +16,6 @@ if (!isset($_SESSION['login_attempts'])) {
 // Check if user is locked out
 if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']) {
     $lockout_time_remaining = $_SESSION['lockout_time'] - time();
-    $_SESSION['status'] = "Too many login attempts. Please try again in " . ceil($lockout_time_remaining / 60) . " minute(s).";
-    $_SESSION['status_code'] = "warning";
     header("Location: login.php");
     exit(0);
 }
