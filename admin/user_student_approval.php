@@ -24,16 +24,7 @@ include('./includes/sidebar.php');
                     <div class="card">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="m-0 text-dark fw-semibold">Students Approval</h5>
-                              <div>
-                                   <div>
-                                        <?php if (isset($_GET['view']) && $_GET['view'] == 'archived'): ?>
-                                             <a href="user_student.php" class="btn btn-primary">Pending</a>
-                                        <?php else: ?>
-                                             <a href="user_student.php?view=archived" class="btn btn-primary">Archived</a>
-                                        <?php endif; ?>
-                                   </div>
-                                   <a href="user_student.php" class="btn btn-primary">Back</a>
-                              </div>
+                              <a href="user_student.php" class="btn btn-primary">Back</a>
                          </div>
                          <div class="card-body">
                               <div class="table-responsive mt-3">
@@ -49,9 +40,7 @@ include('./includes/sidebar.php');
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $status_filter = isset($_GET['view']) && $_GET['view'] == 'archived' ? 'archived' : 'pending';
-
-                                             $query = "SELECT * FROM user WHERE status = '$status_filter' ORDER BY user_id ASC";
+                                             $query = "SELECT * FROM user WHERE status = 'pending' ORDER BY user_id ASC";
                                              $query_run = mysqli_query($con, $query);
                                              
                                              if(mysqli_num_rows($query_run))
