@@ -94,6 +94,9 @@ if (isset($_POST['login_btn'])) {
                 } elseif ($status == 'blocked') {
                     $_SESSION['status'] = "Your account has been blocked!";
                     $_SESSION['status_code'] = "warning";
+                } elseif ($status == 'archived') {
+                    $_SESSION['status'] = "Check your outlook inbox or junk mail; Your account has been denied.";
+                    $_SESSION['status_code'] = "error";
                 } else {
                     $_SESSION['status'] = "Your account is inactive or disabled";
                     $_SESSION['status_code'] = "error";
