@@ -98,7 +98,7 @@ if (isset($_POST['login_btn'])) {
                     $_SESSION['status'] = "Check your outlook inbox or junk mail; Your account has been denied.";
                     $_SESSION['status_code'] = "error";
                 } else {
-                    $_SESSION['status'] = "Your account is inactive or disabled";
+                    $_SESSION['status'] = "You don't have an account, sign up first.";
                     $_SESSION['status_code'] = "error";
                 }
             } else {
