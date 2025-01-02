@@ -120,7 +120,6 @@ function handleFailedLogin() {
     $_SESSION['login_attempts']++;
     if ($_SESSION['login_attempts'] >= MAX_LOGIN_ATTEMPTS) {
         $_SESSION['lockout_time'] = time() + LOCKOUT_DURATION;
-        $_SESSION['status'] = "Too many login attempts. Your account is locked for 5 minutes.";
     } else {
         $remaining_attempts = MAX_LOGIN_ATTEMPTS - $_SESSION['login_attempts'];
         $_SESSION['status'] = "Incorrect ID no. or Password. You have $remaining_attempts attempt(s) left.";
