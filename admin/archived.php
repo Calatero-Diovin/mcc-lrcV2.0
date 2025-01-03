@@ -78,7 +78,6 @@ include('./includes/sidebar.php');
                                                        <center>
                                                        <form action="user_student_code.php" method="POST">
                                                             <input type="hidden" name="user_id" value="<?= $user['user_id']; ?>">
-                                                            <input type="submit" name="approved" value="Approve" class="btn btn-success">
                                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#denyReasonModal" onclick="setUserId(<?= $user['user_id']; ?>)">Deny</button>
                                                        </form>
                                                        </center>
