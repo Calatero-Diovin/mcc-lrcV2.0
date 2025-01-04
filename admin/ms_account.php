@@ -65,7 +65,7 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
                                                                                      <td>
-                                                                                          <li><a href='#' class='dropdown-item text-success' data-bs-toggle='tooltip' data-bs-placement='bottom' title='Edit Student' onclick='loadStudentData({$row['ms_id']})'>
+                                                                                          <li><a href='#' class='dropdown-item text-success btn btn-success' data-bs-toggle='tooltip' data-bs-placement='bottom' title='Edit Student' onclick='loadStudentData({$row['ms_id']})'>
                                                                                           <i class='bi bi-pencil-fill'></i> Edit
                                                                                           </a></li>
                                                                                      </td>
