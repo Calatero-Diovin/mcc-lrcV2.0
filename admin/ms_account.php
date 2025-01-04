@@ -30,11 +30,11 @@ include('./includes/sidebar.php');
                                                        </button>
                                                   </form>
                                              </div>
-                                             <div class="text-end">
+                                             <!-- <div class="text-end">
                                                   <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                                                        <b>Add New Account</b>
                                                   </button>
-                                             </div>
+                                             </div> -->
                                         </div>
                                         <br>
                                         <div class="container">
@@ -49,7 +49,6 @@ include('./includes/sidebar.php');
                                                                            <th>Firstname</th>
                                                                            <th>Lastname</th>
                                                                            <th>Email</th>
-                                                                           <th>Action</th>
                                                                       </tr>
                                                                  </thead>
                                                                  <tbody>
@@ -64,11 +63,6 @@ include('./includes/sidebar.php');
                                                                                      <td>{$row['firstname']}</td>
                                                                                      <td>{$row['lastname']}</td>
                                                                                      <td>{$row['username']}</td>
-                                                                                     <td>
-                                                                                          <li><a href='#' class='dropdown-item text-success btn btn-success' data-bs-toggle='tooltip' data-bs-placement='bottom' title='Edit Student' onclick='loadStudentData({$row['ms_id']})'>
-                                                                                          <i class='bi bi-pencil-fill'></i> Edit
-                                                                                          </a></li>
-                                                                                     </td>
                                                                                 </tr>";
                                                                            }
                                                                            $stmt->close();
@@ -123,38 +117,6 @@ include('./includes/sidebar.php');
      </div>
 </div>
 
-<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editStudentModalLabel">Edit Student</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="editStudentForm" method="POST" action="edit_account.php">
-          <input type="hidden" name="edit_student_id" id="editStudentId">
-          <div class="mb-3">
-            <label for="editLName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="editLName" name="edit_last_name" style="text-transform:capitalize;" required>
-          </div>
-          <div class="mb-3">
-            <label for="editFName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="editFName" name="edit_first_name" style="text-transform:capitalize;" required>
-          </div>
-          <div class="mb-3">
-            <label for="editEmail" class="form-label">Email</label>
-            <input type="text" class="form-control" id="editEmail" name="edit_email" style="text-transform:capitalize;">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <?php 
 include('./includes/footer.php');
 include('./includes/script.php');
@@ -172,23 +134,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-
-function loadStudentData(userId) {
-    fetch('edit_account.php?id=' + userId)
-        .then(response => response.json())
-        .then(data => {
-            // Sanitize data to remove any potential XSS tags
-            document.getElementById('editStudentId').value = sanitizeInput(data.ms_id);
-            document.getElementById('editLName').value = sanitizeInput(data.lastname);
-            document.getElementById('editFName').value = sanitizeInput(data.firstname);
-            document.getElementById('editEmail').value = sanitizeInput(data.username);
-
-            var myModal = new bootstrap.Modal(document.getElementById('editStudentModal'));
-            myModal.show();
-        })
-        .catch(error => {
-            console.error('Error fetching student data:', error);
-        });
-}
 </script>
