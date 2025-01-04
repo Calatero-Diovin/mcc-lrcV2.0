@@ -1,32 +1,35 @@
 <?php
 include('authentication.php');
 
-if (isset($_POST['edit_account'])) {
-    $ms_id = $_POST['ms_id'];
-    $username = $_POST['username'];
+// Edit Student
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['edit_student_id'])) {
+        $studentId = mysqli_real_escape_string($con, $_POST['edit_student_id']);
+        $lName = mysqli_real_escape_string($con, $_POST['edit_last_name']);
+        $fName = mysqli_real_escape_string($con, $_POST['edit_first_name']);
+        $email = mysqli_real_escape_string($con, $_POST['edit_email']);
 
-    $query = "UPDATE ms_account SET username = ? WHERE ms_id = ?";
-    if ($stmt = $con->prepare($query)) {
-        $stmt->bind_param("si", $username, $ms_id);
-        if ($stmt->execute()) {
-            $_SESSION['status'] = "Username updated successfully.";
+        $sql = "UPDATE ms_account SET firstname='$fName', lastname='$lName', username='$email' WHERE ms_id='$studentId'";
+        if (mysqli_query($con, $sql)) {
+            $_SESSION['status'] = "Updated MS Account successfully.";
             $_SESSION['status_code'] = "success";
+            header('Location: ms_account.php');
+            exit();
         } else {
-            $_SESSION['status'] = "Error updating username.";
-            $_SESSION['status_code'] = "danger";
+            echo "Error updating record: " . mysqli_error($con);
         }
-        $stmt->close();
-    } else {
-        $_SESSION['status'] = "Error preparing statement.";
-        $_SESSION['status_code'] = "danger";
     }
+}
 
-    header("Location: ms_account.php");
-    exit();
-} else {
-    $_SESSION['status'] = "Invalid request.";
-    $_SESSION['status_code'] = "danger";
-    header("Location: ms_account.php");
-    exit();
+if (isset($_GET['id'])) {
+    $userId = $_GET['id'];
+    $sql = "SELECT * FROM ms_account WHERE ms_id = '$userId'";
+    $result = mysqli_query($con, $sql);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        echo json_encode($row);
+    } else {
+        echo json_encode(['error' => 'Student MS Account not found']);
+    }
 }
 ?>
